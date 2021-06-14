@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+   >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Authentication.Success_screen">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/background">
+            <ImageView
+                android:id="@+id/sucess"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sucess_img"
+                android:layout_marginTop="40dp"/>
+
+            <TextView
+                android:id="@+id/create_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Account is created"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_below="@id/sucess"
+                android:textColor="@color/text_color"
+                />
+            <TextView
+                android:id="@+id/successfully"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Successfully"
+                android:layout_below="@id/create_account"
+                android:textSize="50dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/btn_color"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_sucess_back"/>
+    </RelativeLayout>
+
+</layout>

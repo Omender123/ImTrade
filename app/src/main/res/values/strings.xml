@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ImTrade</string>
+
+    <string name="facebook_app_id">308588354244134</string>
+    <string name="fb_login_protocol_scheme">fb308588354244134</string>
+
+
+</resources>

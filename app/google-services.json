@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "441766030786",
+    "project_id": "imsmart-d689e",
+    "storage_bucket": "imsmart-d689e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441766030786:android:e225b2e3593ca28d013a5b",
+        "android_client_info": {
+          "package_name": "com.trade.imtrade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441766030786-pvu2eiuducdb6k823n0qvp0am0gm5enk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trade.imtrade",
+            "certificate_hash": "82cbd60107c8f97026dfeb149a2734162e6a43ef"
+          }
+        },
+        {
+          "client_id": "441766030786-t8cgp4nkl2uhg265jq04okaeuk092pum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOf8Y_MNhrhpobyOXfrc2pe0OTXEUBgNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441766030786-t8cgp4nkl2uhg265jq04okaeuk092pum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
