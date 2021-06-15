@@ -4,9 +4,11 @@ package com.trade.imtrade.api;
 
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
+import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.request.LoginBody;
 import com.trade.imtrade.Model.request.SendOtpBody;
 import com.trade.imtrade.Model.request.SignUpBody;
+import com.trade.imtrade.Model.request.SocialLoginBody;
 import com.trade.imtrade.Model.request.VerifyOTP_Body;
 
 import okhttp3.MultipartBody;
@@ -39,6 +41,8 @@ public interface ApiService {
     @POST("user/emailVerify")
     Call<ResponseBody>VerifyOtp(@Body VerifyOTP_Body verifyOTP_body);
 
+    @POST("user/social")
+    Call<SocialLoginResponse>SocialLogin(@Body SocialLoginBody socialLoginBody);
 
 
 }

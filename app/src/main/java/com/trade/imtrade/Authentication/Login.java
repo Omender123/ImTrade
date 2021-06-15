@@ -34,7 +34,9 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
+import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.request.LoginBody;
+import com.trade.imtrade.Model.request.SocialLoginBody;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
 import com.trade.imtrade.SharedPrefernce.User_Data;
@@ -62,7 +64,7 @@ ActivityLoginBinding binding;
     private static int RC_SIGN_IN = 100;
     private CallbackManager callbackManager;
     private AccessToken mAccessToken;
-    String email;
+    private static final String EMAIL = "email";
 
 
     @Override
@@ -176,6 +178,29 @@ ActivityLoginBinding binding;
     }
 
     @Override
+    public void onSocialLoginSuccess(SocialLoginResponse response, String message) {
+        if (message.equalsIgnoreCase("ok")){
+            User_Data user_data = new User_Data(response.getResult().getId(),
+                    response.getResult().getFirstName(),
+                    response.getResult().getLastName(),
+                    response.getResult().getEmail(),
+                    null,
+                    null,
+                    response.getToken(),
+                    response.getResult().getMyReferalcode());
+            // SharedPrefManager.getInstance(this).SetLoginData(user_data);
+
+
+            Sneaker.with(this)
+                    .setTitle(response.getMessage())
+                    .setMessage(response.getResult().getEmail())
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+        }
+    }
+
+    @Override
     public void onLoginFailure(Throwable t) {
         Sneaker.with(this)
                 .setTitle(t.getLocalizedMessage())
@@ -200,7 +225,7 @@ ActivityLoginBinding binding;
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         callbackManager = CallbackManager.Factory.create();
 
-        binding.loginButton.setReadPermissions(Arrays.asList("email","user_birthday"));
+        binding.loginButton.setReadPermissions(Arrays.asList(EMAIL));
         callbackManager = CallbackManager.Factory.create();
 
 
@@ -209,7 +234,7 @@ ActivityLoginBinding binding;
             @Override
             public void onSuccess(LoginResult loginResult) {
                 mAccessToken = loginResult.getAccessToken();
-              //  getUserProfile(mAccessToken);
+               getUserProfile(mAccessToken);
 
                 // Toast.makeText(Login_signup.this, "mAccessToken" +mAccessToken, Toast.LENGTH_SHORT).show();
 
@@ -218,8 +243,13 @@ ActivityLoginBinding binding;
             @Override
             public void onCancel() {
 
-                Toast.makeText(Login.this, "Cancelled", Toast.LENGTH_SHORT).show();
-
+             //   Toast.makeText(Login.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                Sneaker.with(Login.this)
+                        .setTitle("Cancelled")
+                        .setMessage("")
+                        .setCornerRadius(4)
+                        .setDuration(1500)
+                        .sneakError();
 
             }
 
@@ -227,23 +257,19 @@ ActivityLoginBinding binding;
             @Override
             public void onError(FacebookException error) {
                 Log.d("coder",""+error);
+                Sneaker.with(Login.this)
+                        .setTitle(error.getLocalizedMessage())
+                        .setMessage("")
+                        .setCornerRadius(4)
+                        .setDuration(1500)
+                        .sneakError();
 
-                Toast.makeText(Login.this, ""+error, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(Login.this, ""+error, Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        AccessTokenTracker tracker  = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
 
-                if (currentAccessToken==null){
-                    Toast.makeText(context, "logout", Toast.LENGTH_SHORT).show();
-                }else{
-                    getUserProfile(currentAccessToken);
-                }
-            }
-        };
 
     }
 
@@ -284,8 +310,9 @@ ActivityLoginBinding binding;
                 personPhoto = acct.getPhotoUrl();
 
 
-                Toast.makeText(this, personEmail+ "", Toast.LENGTH_SHORT).show();
-            }
+                SocialLoginBody socialLoginBody = new SocialLoginBody(personName,personEmail,true,false,personId);
+              presenter.SocialLogin(socialLoginBody);
+           }
 
           //  Intent in = new Intent(LoginAcitivity.this, MainActivity.class);
 
@@ -301,7 +328,13 @@ ActivityLoginBinding binding;
     }
 
     public void go_to_fb(View view) {
-        binding.loginButton.performClick();
+        //binding.loginButton.performClick();
+        Sneaker.with(Login.this)
+                .setTitle("Coming Soon.........")
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakSuccess();
     }
 
     private void getUserProfile(AccessToken currentAccessToken) {
@@ -310,7 +343,7 @@ ActivityLoginBinding binding;
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.d("resp", object.toString());
-                      /*  try {
+                        try {
                             String first_name = object.getString("first_name");
                             String last_name = object.getString("last_name");
 
@@ -324,9 +357,8 @@ ActivityLoginBinding binding;
                                     Log.d("exception", "onCompleted: ");
                                 } else {
                                     email = object.getString("email");
-                                    Toast.makeText(context, ""+email, Toast.LENGTH_SHORT).show();
-                                  //  social_login("" + id, "" + email, "" + first_name + " " + last_name, "" + image_url);
-
+                                 //    SocialLoginBody socialLoginBody = new SocialLoginBody(first_name+" "+last_name,email,false,true,id);
+                                   // presenter.SocialLogin(socialLoginBody);
                                 }
 
                             }catch (Exception e){
@@ -346,28 +378,13 @@ ActivityLoginBinding binding;
                             snack("Your FB account doesn't  belong to any email");
 
                             Log.d("exception", "onCompleted: " + e);
-                        }*/
-
-                        if (object!=null){
-                            try {
-                                String email = object.getString("email");
-                                String id = object.getString("id");
-
-                                Toast.makeText(context, ""+email, Toast.LENGTH_SHORT).show();
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                LoginManager.getInstance().logOut();
-                                //  Toast.makeText(Login_signup.this, "exception" +e, Toast.LENGTH_SHORT).show();
-                                snack("Your FB account doesn't  belong to any email");
-
-                            }
                         }
-                    }
+
+                          }
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "email,id");
+        parameters.putString("fields", "first_name,last_name,email,id");
         request.setParameters(parameters);
         request.executeAsync();
 

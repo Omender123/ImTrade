@@ -137,6 +137,22 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <soup.neumorphism.NeumorphImageView
+                android:id="@+id/do_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="go_to_google"
+                android:src="@drawable/ic_google"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/dark_shadow"
+                app:neumorph_shadowColorLight="@color/LIGHT_sadow"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
+                app:neumorph_shapeType="flat" />
+
+
+
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
@@ -160,6 +176,7 @@
                 app:neumorph_shadowElevation="6dp"
                 app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
                 app:neumorph_shapeType="flat" />
+<!--
 
             <soup.neumorphism.NeumorphImageView
                 android:id="@+id/do_insta"
@@ -173,20 +190,8 @@
                 app:neumorph_shadowElevation="6dp"
                 app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
                 app:neumorph_shapeType="flat" />
+-->
 
-            <soup.neumorphism.NeumorphImageView
-                android:id="@+id/do_google"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:onClick="go_to_google"
-                android:src="@drawable/ic_google"
-                app:neumorph_lightSource="leftTop"
-                app:neumorph_shadowColorDark="@color/dark_shadow"
-                app:neumorph_shadowColorLight="@color/LIGHT_sadow"
-                app:neumorph_shadowElevation="6dp"
-                app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
-                app:neumorph_shapeType="flat" />
 
         </LinearLayout>
 
