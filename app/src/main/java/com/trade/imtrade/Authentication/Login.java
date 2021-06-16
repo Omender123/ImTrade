@@ -19,8 +19,10 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -55,7 +57,7 @@ import de.mateware.snacky.Snacky;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener, LoginPresenter.LoginView {
-ActivityLoginBinding binding;
+    ActivityLoginBinding binding;
     private Context context;
     private Dialog dialog;
     private LoginPresenter presenter;
@@ -64,14 +66,17 @@ ActivityLoginBinding binding;
     private static int RC_SIGN_IN = 100;
     private CallbackManager callbackManager;
     private AccessToken mAccessToken;
-    private static final String EMAIL = "email";
+    AccessTokenTracker accessTokenTracker;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_login);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
+
+        // Passing Login in Facebook SDK.
+        FacebookSdk.sdkInitialize(Login.this);
         view = binding.getRoot();
         context = Login.this;
         presenter = new LoginPresenter(this);
@@ -79,6 +84,7 @@ ActivityLoginBinding binding;
 
         binding.cardLogin.setOnClickListener(this);
         binding.textSignUp1.setOnClickListener(this);
+        binding.forgot.setOnClickListener(this);
 
         AppUtils.FullScreen(this);
 
@@ -87,26 +93,28 @@ ActivityLoginBinding binding;
     }
 
 
-
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.card_Login:
 
                 doLogin();
                 break;
 
             case R.id.text_sign_up1:
-                startActivity(new Intent(getApplicationContext(),Referral_Code_Srceen.class));
+                startActivity(new Intent(getApplicationContext(), Referral_Code_Srceen.class));
+                break;
+            case R.id.forgot:
+                startActivity(new Intent(getApplicationContext(), ForgetPassword.class));
                 break;
         }
     }
 
     private void doLogin() {
-        String Email= binding.email.getText().toString();
+        String Email = binding.email.getText().toString();
         String password = binding.password.getText().toString();
-        if(Email.isEmpty()){
+        if (Email.isEmpty()) {
             binding.email.requestFocus();
             Snacky.builder()
                     .setActivity(Login.this)
@@ -115,7 +123,7 @@ ActivityLoginBinding binding;
                     .warning()
                     .show();
 
-        }else if(password.isEmpty()){
+        } else if (password.isEmpty()) {
             binding.password.requestFocus();
             Snacky.builder()
                     .setActivity(Login.this)
@@ -123,11 +131,10 @@ ActivityLoginBinding binding;
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        }
-        else {
+        } else {
             AppUtils.FullScreen(this);
 
-            LoginBody user = new LoginBody(Email,password);
+            LoginBody user = new LoginBody(Email, password);
             presenter.loginUser(user);
         }
 
@@ -135,9 +142,9 @@ ActivityLoginBinding binding;
 
     @Override
     public void showHideLoginProgress(boolean isShow) {
-        if (isShow){
+        if (isShow) {
             dialog.show();
-        }else{
+        } else {
             dialog.dismiss();
         }
     }
@@ -154,7 +161,7 @@ ActivityLoginBinding binding;
 
     @Override
     public void onLoginSuccess(LoginResponse response, String message) {
-        if (message.equalsIgnoreCase("ok")){
+        if (message.equalsIgnoreCase("ok")) {
             User_Data user_data = new User_Data(response.getResult().getId(),
                     response.getResult().getFirstName(),
                     response.getResult().getLastName(),
@@ -163,7 +170,7 @@ ActivityLoginBinding binding;
                     response.getResult().getCountryCode(),
                     response.getToken(),
                     response.getResult().getMyReferalcode());
-           // SharedPrefManager.getInstance(this).SetLoginData(user_data);
+            // SharedPrefManager.getInstance(this).SetLoginData(user_data);
 
 
             Sneaker.with(this)
@@ -179,7 +186,7 @@ ActivityLoginBinding binding;
 
     @Override
     public void onSocialLoginSuccess(SocialLoginResponse response, String message) {
-        if (message.equalsIgnoreCase("ok")){
+        if (message.equalsIgnoreCase("ok")) {
             User_Data user_data = new User_Data(response.getResult().getId(),
                     response.getResult().getFirstName(),
                     response.getResult().getLastName(),
@@ -214,6 +221,7 @@ ActivityLoginBinding binding;
     protected void onResume() {
         super.onResume();
         AppUtils.FullScreen(this);
+        AppEventsLogger.activateApp(Login.this);
     }
 
     private void initview() {
@@ -225,25 +233,48 @@ ActivityLoginBinding binding;
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         callbackManager = CallbackManager.Factory.create();
 
-        binding.loginButton.setReadPermissions(Arrays.asList(EMAIL));
-        callbackManager = CallbackManager.Factory.create();
+        binding.loginButton.setReadPermissions(Arrays.asList("email","public_profile"));
+
+// Checking the Access Token.
+        if (AccessToken.getCurrentAccessToken() != null) {
+
+            getUserProfile(AccessToken.getCurrentAccessToken());
+
+            // If already login in then show the Toast.
+          /*  Sneaker.with(Login.this)
+                    .setTitle("Already logged in")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakError();
+*/
+        } else {
+
+            // If not login in then show the Toast.
+           /* Sneaker.with(Login.this)
+                    .setTitle("User not logged in")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakError();*/
 
 
+        }
 
         binding.loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                mAccessToken = loginResult.getAccessToken();
-               getUserProfile(mAccessToken);
+                //  mAccessToken = loginResult.getAccessToken();
+                getUserProfile(loginResult.getAccessToken());
 
-                // Toast.makeText(Login_signup.this, "mAccessToken" +mAccessToken, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(Login.this, "mAccessToken" +loginResult.getAccessToken(), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onCancel() {
 
-             //   Toast.makeText(Login.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(Login.this, "Cancelled", Toast.LENGTH_SHORT).show();
                 Sneaker.with(Login.this)
                         .setTitle("Cancelled")
                         .setMessage("")
@@ -256,26 +287,45 @@ ActivityLoginBinding binding;
 
             @Override
             public void onError(FacebookException error) {
-                Log.d("coder",""+error);
+                Log.d("coder", "" + error);
                 Sneaker.with(Login.this)
-                        .setTitle(error.getLocalizedMessage())
+                        .setTitle(error.getMessage())
                         .setMessage("")
                         .setCornerRadius(4)
                         .setDuration(1500)
                         .sneakError();
 
-             //   Toast.makeText(Login.this, ""+error, Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(Login.this, ""+error, Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
+        // Detect user is login or not. If logout then clear the TextView and delete all the user info from TextView.
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken2) {
+                if (accessToken2 == null) {
+
+                    // Clear the TextView after logout.
+                    Sneaker.with(Login.this)
+                            .setTitle("all Data are Removed")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakSuccess();
+
+
+                }
+            }
+        };
 
     }
 
     public void go_to_google(View view) {
         signIn();
     }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -299,7 +349,7 @@ ActivityLoginBinding binding;
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-            String personName = "", personGivenName = "", personFamilyName = "", personEmail = "", personId = "",personMobile="";
+            String personName = "", personGivenName = "", personFamilyName = "", personEmail = "", personId = "", personMobile = "";
             Uri personPhoto = null;
             if (acct != null) {
                 personName = acct.getDisplayName();
@@ -310,31 +360,26 @@ ActivityLoginBinding binding;
                 personPhoto = acct.getPhotoUrl();
 
 
-                SocialLoginBody socialLoginBody = new SocialLoginBody(personName,personEmail,true,false,personId);
-              presenter.SocialLogin(socialLoginBody);
-           }
+                SocialLoginBody socialLoginBody = new SocialLoginBody(personName, personEmail, true, false, personId);
+                presenter.SocialLogin(socialLoginBody);
+            }
 
-          //  Intent in = new Intent(LoginAcitivity.this, MainActivity.class);
+            //  Intent in = new Intent(LoginAcitivity.this, MainActivity.class);
 
             //startActivity(in);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("TAG", "signInResult:failed code=" + e.getStatusCode());
-            Log.d("coder",""+e.getLocalizedMessage());
+            Log.d("coder", "" + e.getLocalizedMessage());
 
             // updateUI(null);
         }
     }
 
     public void go_to_fb(View view) {
-        //binding.loginButton.performClick();
-        Sneaker.with(Login.this)
-                .setTitle("Coming Soon.........")
-                .setMessage("")
-                .setCornerRadius(4)
-                .setDuration(1500)
-                .sneakSuccess();
+       binding.loginButton.performClick();
+
     }
 
     private void getUserProfile(AccessToken currentAccessToken) {
@@ -342,49 +387,30 @@ ActivityLoginBinding binding;
                 currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        Log.d("resp", object.toString());
-                        try {
-                            String first_name = object.getString("first_name");
-                            String last_name = object.getString("last_name");
+                    try {
 
-                            String id = object.getString("id");
-                            String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                        if (response.getJSONObject().getString("email").isEmpty()){
 
-
-                            String email = "";
-                            try {
-                                if (object.getString("email").equals("")) {
-                                    Log.d("exception", "onCompleted: ");
-                                } else {
-                                    email = object.getString("email");
-                                 //    SocialLoginBody socialLoginBody = new SocialLoginBody(first_name+" "+last_name,email,false,true,id);
-                                   // presenter.SocialLogin(socialLoginBody);
-                                }
-
-                            }catch (Exception e){
-                                Snackbar.make(view, "Your FB account is registered on phone number...Please try other available options to Register!", BaseTransientBottomBar.LENGTH_LONG).show();
-
+                            }else{
+                                 SocialLoginBody socialLoginBody = new SocialLoginBody(response.getJSONObject().getString("name"),
+                                         response.getJSONObject().getString("email")
+                                         ,false,true,response.getJSONObject().getString("id"));
+                                 presenter.SocialLogin(socialLoginBody);
                             }
-
-
-
-
-
-
-                        } catch (JSONException e) {
+                              }
+                        catch (JSONException e) {
                             e.printStackTrace();
-                            LoginManager.getInstance().logOut();
-                            //  Toast.makeText(Login_signup.this, "exception" +e, Toast.LENGTH_SHORT).show();
-                            snack("Your FB account doesn't  belong to any email");
+                          Toast.makeText(context, "Your FB account is registered on phone number...Please try other available options to Register!", Toast.LENGTH_SHORT).show();
+                          //  Snackbar.make(view, "Your FB account is registered on phone number...Please try other available options to Register!", Snackbar.LENGTH_LONG).show();
 
-                            Log.d("exception", "onCompleted: " + e);
                         }
 
-                          }
+                    }
                 });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "first_name,last_name,email,id");
+
+        parameters.putString("fields", "id,name,email,last_name,first_name");
         request.setParameters(parameters);
         request.executeAsync();
 
@@ -394,6 +420,16 @@ ActivityLoginBinding binding;
 
         Snackbar.make(view, "" + msg, Snackbar.LENGTH_SHORT)
                 .show();
+
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.deactivateApp(Login.this);
+
 
     }
 }

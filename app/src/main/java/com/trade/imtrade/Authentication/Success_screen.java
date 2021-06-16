@@ -16,6 +16,7 @@ import com.trade.imtrade.utils.AppUtils;
 
 public class Success_screen extends AppCompatActivity {
 ActivitySuccessScreenBinding binding;
+String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,13 @@ ActivitySuccessScreenBinding binding;
         binding = DataBindingUtil.setContentView(this,R.layout.activity_success_screen);
        // FullScreen();
         AppUtils.FullScreen(this);
+        type = MyPreferences.getInstance(Success_screen.this).getString(PrefConf.TYPE,"");
+
+        if (type.equals("Change_password")){
+            binding.createAccount.setText("Password Changed");
+        }else{
+            binding.createAccount.setText("Account is created");
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -5,6 +5,7 @@ package com.trade.imtrade.api;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
+import com.trade.imtrade.Model.request.ChangePasswordBody;
 import com.trade.imtrade.Model.request.LoginBody;
 import com.trade.imtrade.Model.request.SendOtpBody;
 import com.trade.imtrade.Model.request.SignUpBody;
@@ -44,5 +45,7 @@ public interface ApiService {
     @POST("user/social")
     Call<SocialLoginResponse>SocialLogin(@Body SocialLoginBody socialLoginBody);
 
+    @POST("user/forget-password/update")
+    Call<ResponseBody>ChangePassword(@Body ChangePasswordBody passwordBody);
 
 }

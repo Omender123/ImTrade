@@ -110,6 +110,7 @@ ActivityEmailVerifyBinding binding;
     @Override
     public void onSuccess(String message) {
         if (message.equalsIgnoreCase("ok")){
+            MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.TYPE,"SignUP");
             startActivity(new Intent(getApplicationContext(),Success_screen.class));
         }
 
