@@ -35,6 +35,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.irozon.sneaker.Sneaker;
+import com.trade.imtrade.Lunch_screen.Splash_Screen;
+import com.trade.imtrade.MainActivity;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.request.LoginBody;
@@ -170,15 +172,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                     response.getResult().getCountryCode(),
                     response.getToken(),
                     response.getResult().getMyReferalcode());
-            // SharedPrefManager.getInstance(this).SetLoginData(user_data);
+             SharedPrefManager.getInstance(this).SetLoginData(user_data);
+            startActivity(new Intent(Login.this, MainActivity.class));
+            finish();
 
-
-            Sneaker.with(this)
-                    .setTitle(response.getMessage())
-                    .setMessage(response.getResult().getEmail())
-                    .setCornerRadius(4)
-                    .setDuration(1500)
-                    .sneakSuccess();
+            Toast.makeText(context, ""+response.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -195,15 +193,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                     null,
                     response.getToken(),
                     response.getResult().getMyReferalcode());
-            // SharedPrefManager.getInstance(this).SetLoginData(user_data);
+             SharedPrefManager.getInstance(this).SetLoginData(user_data);
+            startActivity(new Intent(Login.this, MainActivity.class));
+            finish();
 
 
-            Sneaker.with(this)
-                    .setTitle(response.getMessage())
-                    .setMessage(response.getResult().getEmail())
-                    .setCornerRadius(4)
-                    .setDuration(1500)
-                    .sneakSuccess();
+            Toast.makeText(context, ""+response.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

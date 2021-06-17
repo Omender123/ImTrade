@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.trade.imtrade.Authentication.Login;
+import com.trade.imtrade.MainActivity;
 import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
 
 public class Splash_Screen extends AppCompatActivity {
 
@@ -26,8 +28,16 @@ public class Splash_Screen extends AppCompatActivity {
                 new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(getApplicationContext(), Login.class));
-                        finish();
+                        if (SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn()) {
+                            startActivity(new Intent(Splash_Screen.this, MainActivity.class));
+                            finish();
+
+                        }else{
+                            startActivity(new Intent(Splash_Screen.this, Login.class));
+                            finish();
+                        }
+                      //  startActivity(new Intent(getApplicationContext(), Login.class));
+                      //  finish();
                     }
                 }, 1500);
 

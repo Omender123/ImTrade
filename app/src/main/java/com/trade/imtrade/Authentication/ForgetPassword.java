@@ -23,7 +23,8 @@ import com.trade.imtrade.view_presenter.VerifyOtp_Presenter;
 
 import de.mateware.snacky.Snacky;
 
-public class ForgetPassword extends AppCompatActivity implements View.OnClickListener, Send_OTP_Presenter.OTP_SendView {
+public class
+ForgetPassword extends AppCompatActivity implements View.OnClickListener, Send_OTP_Presenter.OTP_SendView {
 ActivityForgetPasswordBinding  binding;
     private Context context;
     private Dialog dialog;
@@ -55,7 +56,7 @@ ActivityForgetPasswordBinding  binding;
                 AppUtils.FullScreen(this);
                 AppUtils.hideKeyboard(v,getApplicationContext());
                // startActivity(new Intent(getApplicationContext(),Change_Password.class));
-               SendOTP();
+              SendOTP();
                 break;
         }
     }

@@ -115,8 +115,16 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
 
         AppUtils.FullScreen(this);
         AppUtils.hideKeyboard(view,getApplicationContext());
+        Sneaker.with(this)
+                .setTitle("coming Soon")
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakSuccess();
+
+
         SendOtpBody sendOtpBody = new SendOtpBody(Email);
-        presenter1.SendOTP(sendOtpBody);
+       presenter1.SendOTP(sendOtpBody);
     }
 
     @Override

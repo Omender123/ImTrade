@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+        android:id="@+id/home_Fragment"
+        android:icon="@drawable/ic_home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/categories"
+        android:icon="@drawable/ic_categories"
+        android:title="Categories"/>
+    <item
+        android:id="@+id/explorer"
+        android:icon="@drawable/ic_explore"
+        android:title="Explorer" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile"/>
+
+
+
+  </group>
+   <!--  <item
+       android:title="@string/other">
+       <menu>
+           <group
+
+               android:checkableBehavior="single">
+              &lt;!&ndash; <item
+                   android:id="@+id/customer"
+                   android:icon="@drawable/ic_customer_support"
+                   android:title="@string/customer_support" />
+           &ndash;&gt;    <item
+                   android:checkable="false"
+                   android:checked="false"
+                   android:id="@+id/langauge"
+                   android:icon="@drawable/ic_translate"
+                   android:title="@string/language" />
+               <item
+                   android:checkable="false"
+                   android:checked="false"
+                   android:id="@+id/share"
+                   android:icon="@drawable/ic_share"
+                   android:title="@string/share" />
+               <item
+                   android:checkable="false"
+                   android:checked="false"
+                   android:id="@+id/logout"
+                   android:icon="@drawable/ic_logout"
+                   android:title="@string/logout" />
+
+
+           </group>
+       </menu>
+    </item>-->
+
+
+
+</menu>

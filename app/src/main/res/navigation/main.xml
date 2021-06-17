@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/home_Fragment">
+
+    <fragment
+        android:id="@+id/home_Fragment"
+        android:name="com.trade.imtrade.Fragment.Home_Fragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_" >
+    </fragment>
+    <fragment
+        android:id="@+id/categories"
+        android:name="com.trade.imtrade.Fragment.Categories_Fragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_categories_" />
+    <fragment
+        android:id="@+id/explorer"
+        android:name="com.trade.imtrade.Fragment.Explorer_Fragment"
+        android:label="Explorer"
+        tools:layout="@layout/fragment_explorer_" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.trade.imtrade.Fragment.Profile_Fragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
