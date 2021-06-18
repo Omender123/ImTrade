@@ -16,6 +16,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -38,26 +40,37 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         changeStatusBarColor();
-        init();
+        SetBottomBarNavigationView();
 
-       NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-       NavigationUI.setupWithNavController(navigationView, navController);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+
+    //   NavigationUI.setupWithNavController(navigationView, navController);
+
 
 
 
 
     }
 
-    private void init() {
+    private void SetBottomBarNavigationView() {
         drawer = findViewById(R.id.drawer);
 
-        navigationView = findViewById(R.id.navigationView);
+       navigationView = findViewById(R.id.navigationView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.main);
         appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.categories, R.id.explorer, R.id.profile})
                 .setDrawerLayout(drawer)
                 .build();
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(toolbar,navController,drawer);
+
+
+
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
+        toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+       NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
 
     }
@@ -65,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
         return NavigationUI.navigateUp(navController, appBarConfiguration);
     }
 
@@ -72,9 +86,10 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
         } else {
             super.onBackPressed();
-
+            toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
         }
     }
 

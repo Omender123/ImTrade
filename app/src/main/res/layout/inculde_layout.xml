@@ -6,15 +6,58 @@
     android:background="@color/background">
 
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="56dp"
         android:background="@color/bottom_bar"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/linear"
+            android:background="@color/bottom_bar"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            tools:ignore="RtlCompat" />
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:background="@color/bottom_bar"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_discount"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_discount"
+                android:layout_marginRight="10dp"/>
+            <ImageView
+                android:id="@+id/img_cart"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_shopping_cart"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
 
 
 
@@ -27,10 +70,10 @@
         android:layout_height="wrap_content"
         app:defaultNavHost="true"
         app:navGraph="@navigation/main"
-        android:layout_above="@+id/appBar"
-        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/coordinator"
+        android:layout_below="@+id/relative"
         />
-
+<!--
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -63,8 +106,46 @@
             app:itemIconTint="@color/nav"
             app:itemTextColor="@color/nav"
             app:menu="@menu/main" />
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
 
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true">
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fabCradleMargin="08dp"
+            android:backgroundTint="#99000000"
+            app:fabCradleVerticalOffset="10dp"
+            android:layout_marginLeft="-12dp"
+            app:fabCradleRoundedCornerRadius="25dp"
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                app:itemIconTint="@color/nav"
+                app:itemTextColor="@color/nav"
+                app:menu="@menu/main" />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_location_on_24"
+            app:backgroundTint="@color/select"
+            app:layout_anchor="@id/bottomAppBar" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>

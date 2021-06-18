@@ -192,11 +192,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                     null,
                     null,
                     response.getToken(),
-                    response.getResult().getMyReferalcode());
-             SharedPrefManager.getInstance(this).SetLoginData(user_data);
+                response.getResult().getMyReferalcode());
+           SharedPrefManager.getInstance(this).SetLoginData(user_data);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
-
 
             Toast.makeText(context, ""+response.getMessage(), Toast.LENGTH_SHORT).show();
         }
