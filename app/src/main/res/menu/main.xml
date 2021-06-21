@@ -8,9 +8,9 @@
         android:title="Home"
         android:menuCategory="secondary"/>
     <item
-        android:id="@id/categories"
-        android:icon="@drawable/ic_categories"
-        android:title="Categories"
+        android:id="@id/Wish_List"
+        android:icon="@drawable/ic_my_wish_list"
+        android:title="My Wish List"
         android:menuCategory="secondary"/>
     <item
         android:id="@id/explorer"

@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home_" >
     </fragment>
     <fragment
-        android:id="@+id/categories"
-        android:name="com.trade.imtrade.Fragment.Categories_Fragment"
-        android:label="Categories"
-        tools:layout="@layout/fragment_categories_" />
+        android:id="@+id/Wish_List"
+        android:name="com.trade.imtrade.Fragment.MyWishList_Fragment"
+        android:label="My Wish List"
+        tools:layout="@layout/fragment_mywishlist" />
     <fragment
         android:id="@+id/explorer"
         android:name="com.trade.imtrade.Fragment.Explorer_Fragment"
@@ -26,4 +26,11 @@
         android:name="com.trade.imtrade.Fragment.Profile_Fragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment android:id="@+id/fab"
+        android:name="com.trade.imtrade.Fragment.Near_By_Me"
+        android:label="Near By Me"
+        tools:layout="@layout/fragment_near__by__me"
+        />
+
 </navigation>

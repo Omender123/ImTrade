@@ -24,7 +24,10 @@
         app:headerLayout="@layout/header_layout"
         app:itemIconTint="@color/drawer_icon"
         app:itemTextColor="@color/drawer_tittle"
-        app:menu="@menu/drawer_manu">
+        app:itemIconPadding="15dp"
+        app:itemIconSize="18sp"
+        app:menu="@menu/drawer_manu"
+        android:theme="@style/Theme.ImTrade.NavigationView">
 
     </com.google.android.material.navigation.NavigationView>
 

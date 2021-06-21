@@ -23,10 +23,13 @@
     <color name="select">#ffc51a</color>
     <color name="un_select">#5a5d60</color>
     <color name="bottom_bar">#22272b</color>
+    <color name="text_color1">#99D8D8D8</color>
 
-    <color name="drawer_background">#F8F8F8</color>
-    <color name="drawer_icon">#1F2641</color>
-    <color name="drawer_tittle">#1F2641</color>
+    <color name="drawer_background">#2e343b</color>
+    <color name="drawer_icon">#d8d8d8</color>
+    <color name="drawer_tittle">#d8d8d8</color>
 
+
+    <color name="card_background">#282c31</color>
 
 </resources>

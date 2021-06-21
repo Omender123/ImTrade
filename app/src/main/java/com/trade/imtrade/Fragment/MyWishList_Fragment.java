@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import com.trade.imtrade.R;
 
 
-public class Categories_Fragment extends Fragment {
+public class MyWishList_Fragment extends Fragment {
 
 
-    public Categories_Fragment() {
+    public MyWishList_Fragment() {
         // Required empty public constructor
     }
 
@@ -22,6 +22,6 @@ public class Categories_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories_, container, false);
+        return inflater.inflate(R.layout.fragment_mywishlist, container, false);
     }
 }

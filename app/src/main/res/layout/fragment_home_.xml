@@ -106,7 +106,7 @@
                     app:delay="1000"
                     android:id="@+id/slider"
                     app:period="2000"
-                    app:error_image="@mipmap/slider_image"
+                    app:error_image="@mipmap/splash_screens"
                     app:placeholder="@mipmap/slider_image"
                     app:corner_radius="15"
                     />

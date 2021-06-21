@@ -121,11 +121,11 @@
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fabCradleMargin="08dp"
+            app:fabCradleMargin="06dp"
             android:backgroundTint="#99000000"
             app:fabCradleVerticalOffset="10dp"
-            android:layout_marginLeft="-12dp"
-            app:fabCradleRoundedCornerRadius="25dp"
+            app:fabCradleRoundedCornerRadius="12dp"
+            android:layout_marginLeft="-5dp"
             android:layout_gravity="bottom">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -135,6 +135,7 @@
                 android:background="@android:color/transparent"
                 app:itemIconTint="@color/nav"
                 app:itemTextColor="@color/nav"
+
                 app:menu="@menu/main" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
@@ -143,7 +144,7 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_location_on_24"
+            android:src="@drawable/ic_icon_location"
             app:backgroundTint="@color/select"
             app:layout_anchor="@id/bottomAppBar" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
