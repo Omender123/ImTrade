@@ -1,9 +1,11 @@
 package com.trade.imtrade;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,6 +29,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     FloatingActionButton floatingActionButton ;
+    CoordinatorLayout coordinatorLayout;
+    ImageView img_discount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbar);
+        floatingActionButton = findViewById(R.id.fab);
+        coordinatorLayout =(CoordinatorLayout) findViewById(R.id.coordinator);
+        img_discount = (ImageView) findViewById(R.id.img_discount);
+
         setSupportActionBar(toolbar);
         changeStatusBarColor();
         SetBottomBarNavigationView();
-        floatingActionButton = findViewById(R.id.fab);
 
 
 
@@ -85,6 +94,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
+       navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+           @Override
+           public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+               if(destination.getId() == R.id.My_address || destination.getId() == R.id.address ) {
+                   img_discount.setVisibility(View.GONE);
+                   coordinatorLayout.setVisibility(View.GONE);
+               } else {
+                  img_discount.setVisibility(View.VISIBLE);
+                  coordinatorLayout.setVisibility(View.VISIBLE);
+               }
+           }
+       });
 
     }
 

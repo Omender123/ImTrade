@@ -25,12 +25,42 @@
         android:id="@+id/profile"
         android:name="com.trade.imtrade.Fragment.Profile_Fragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_My_address"
+            app:destination="@id/My_address"
+            app:popUpTo="@id/My_address"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment android:id="@+id/fab"
         android:name="com.trade.imtrade.Fragment.Near_By_Me"
         android:label="Near By Me"
         tools:layout="@layout/fragment_near__by__me"
         />
+    <fragment android:id="@+id/My_address"
+        android:name="com.trade.imtrade.Fragment.My_Address"
+        android:label="My Address"
+        tools:layout="@layout/fragment_my__address"
+        >
+        <action
+            android:id="@+id/action_My_address_to_address"
+            app:destination="@id/address"
+            app:popUpTo="@id/My_address"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/address"
+        android:name="com.trade.imtrade.Fragment.Fragment_Address"
+        android:label="Address"
+        tools:layout="@layout/fragment__address" />
 
 </navigation>
