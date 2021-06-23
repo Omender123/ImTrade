@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.trade.imtrade.R;
+import com.trade.imtrade.databinding.CustomRecomandedBinding;
 
-public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapter.myViewHolder>  {
+public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapter.RecommendedViewHolder>  {
     Context context;
     String[] amount;
 
@@ -29,16 +30,17 @@ public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapte
 
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_recomanded, parent, false);
+    public RecommendedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        CustomRecomandedBinding binding = CustomRecomandedBinding.inflate(inflater,parent,false);
 
-        return new myViewHolder(view);
+        return new RecommendedViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.product_name.setText(amount[position]);
-        Glide.with(context).load("https://picsum.photos/id/896/300/200").into(holder.product_Image);
+    public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
+        holder.binding.cateName.setText(amount[position]);
+        Glide.with(context).load("https://picsum.photos/id/896/300/200").into(holder.binding.cateImg);
     }
 
     @Override
@@ -46,19 +48,12 @@ public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapte
         return amount.length;
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder {
-        TextView product_name,product_price;
-        ImageView product_Image;
-        CheckBox checkBox;
+    public class RecommendedViewHolder extends RecyclerView.ViewHolder {
+      CustomRecomandedBinding binding;
+        public RecommendedViewHolder(CustomRecomandedBinding binding) {
+            super(binding.getRoot());
 
-        public myViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            product_name = itemView.findViewById(R.id.cate_name);
-            product_price = itemView.findViewById(R.id.cate_price);
-            product_Image = itemView.findViewById(R.id.cate_img);
-            checkBox = itemView.findViewById(R.id.checkbox);
-
+          this.binding = binding;
 
 
         }

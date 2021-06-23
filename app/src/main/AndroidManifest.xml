@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.trade.imtrade">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ImTrade"
+        tools:replace="android:icon"
         android:usesCleartextTraffic="true">
         <activity android:name=".Authentication.Change_Password"
             android:theme="@style/Theme.ImTrade.NoActionBar"></activity>

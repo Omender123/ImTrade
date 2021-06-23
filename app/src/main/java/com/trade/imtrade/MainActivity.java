@@ -19,11 +19,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,8 +39,13 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.trade.imtrade.Fragment.Home_Fragment;
-import com.trade.imtrade.Fragment.Near_By_Me;
+import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
+import com.trade.imtrade.utils.AppUtils;
+
+import java.io.File;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     NavController navController;
@@ -72,7 +81,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         floatingActionButton.setOnClickListener(this);
 
+
+        moreNavigationOptions();
     }
+
+
 
     private void SetBottomBarNavigationView() {
         drawer = findViewById(R.id.drawer);
@@ -120,11 +133,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-          //  toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
-        } else {
-            super.onBackPressed();
-          //  toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
-        }
+          } else {
+            if (bottomNavigationView.getSelectedItemId()==R.id.home_Fragment){
+                new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(getResources().getString(R.string.app_name))
+                        .setContentText("Are you sure you want to close App?")
+                        .setCancelText("Cancel")
+                        .setConfirmText("Exit")
+                        .showCancelButton(true)
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                Intent a = new Intent(Intent.ACTION_MAIN);
+                                a.addCategory(Intent.CATEGORY_HOME);
+                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(a);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                    finishAffinity();
+                                }
+                                finish();
+                                sweetAlertDialog.dismissWithAnimation();
+                            }
+                        })
+                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                              //  sDialog.cancel();
+                                sDialog.dismissWithAnimation();
+                            }
+                        })
+                        .show();
+            }else {
+                super.onBackPressed();
+            }
+           }
     }
 
     private void changeStatusBarColor() {
@@ -152,5 +194,98 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return NavigationUI.onNavDestinationSelected(item,navController)||super.onOptionsItemSelected(item);
+    }
+
+    private void moreNavigationOptions() {
+        Menu menu = navigationView.getMenu();
+
+        MenuItem logout = menu.findItem(R.id.nav_logout);
+
+        logout.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                drawer.closeDrawer(GravityCompat.START);
+                LogoutAlertBox();
+                return true;
+            }
+        });
+
+        MenuItem share = menu.findItem(R.id.nav_Share_us);
+
+        share.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                drawer.closeDrawer(GravityCompat.START);
+                AppUtils.shareApp(MainActivity.this);
+                return true;
+            }
+        });
+    }
+
+    private void LogoutAlertBox() {
+        //Logout
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+
+        // set title
+        alertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
+
+        // set dialog message
+        alertDialogBuilder.setIcon(R.mipmap.ic_launcher_round);
+        alertDialogBuilder
+                .setMessage("Are you sure to Logout !!!!!")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SharedPrefManager.getInstance(getApplicationContext()).logout();
+                        clearApplicationData();
+                        Toast.makeText(MainActivity.this, "Logout Successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+        // show it
+        alertDialog.show();
+
+
+    }
+    @SuppressLint("LongLogTag")
+    public void clearApplicationData() {
+        File cache = getCacheDir();
+        File appDir = new File(cache.getParent());
+        if (appDir.exists()) {
+            String[] children = appDir.list();
+            for (String s : children) {
+                if (!s.equals("lib")) {
+                    deleteDir(new File(appDir, s));
+                    Log.i("EEEEEERRRRRRROOOOOOORRRR", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+                }
+            }
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
     }
 }

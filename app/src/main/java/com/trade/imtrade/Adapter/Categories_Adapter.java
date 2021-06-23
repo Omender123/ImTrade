@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.trade.imtrade.R;
+import com.trade.imtrade.databinding.CategoriesLayoutBinding;
 
-public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.myViewHolder>  {
+public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.CategoriesViewHolder>  {
 
     Context context;
     String[] amount;
@@ -28,15 +30,17 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
 
     @NonNull
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_layout, parent, false);
+    public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        CategoriesLayoutBinding binding = CategoriesLayoutBinding.inflate(layoutInflater, parent, false);
+        //  View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_layout, parent, false);
 
-        return new myViewHolder(view);
+        return new CategoriesViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        holder.product_name.setText(amount[position]);
+    public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
+        holder.binding.productName.setText(amount[position]);
 
     }
 
@@ -45,15 +49,12 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
         return amount.length;
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder {
-        TextView product_name;
-        ImageView product_Image;
+    public class CategoriesViewHolder extends RecyclerView.ViewHolder {
+       CategoriesLayoutBinding binding;
 
-        public myViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            product_name = itemView.findViewById(R.id.product_name);
-            product_Image = itemView.findViewById(R.id.product_img);
+        public CategoriesViewHolder( CategoriesLayoutBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
 
 
         }

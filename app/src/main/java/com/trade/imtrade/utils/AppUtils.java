@@ -299,7 +299,7 @@ public static String getDateTime(String timeStamp){
         try {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
-            String sAux = "Hey,\n Its amazing install ImSmart form "+ context.getResources().getString(R.string.app_name) + "\n";
+            String sAux = "Hey,\n Its amazing install ImTrade form "+ context.getResources().getString(R.string.app_name) + "\n";
 
             sAux = sAux + "https://play.google.com/store/apps/details?id=" + context.getPackageName() + "\n";
             i.putExtra(Intent.EXTRA_TEXT, sAux);
