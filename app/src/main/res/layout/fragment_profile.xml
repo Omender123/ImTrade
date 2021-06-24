@@ -59,12 +59,15 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/img_upload"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:layout_marginStart="73dp"
                             android:layout_marginTop="70dp"
                             android:layout_marginEnd="9dp"
-                            android:src="@drawable/ic_edit_profile"
+                            android:background="@drawable/circlr_shape"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_camra"
                             app:layout_constraintEnd_toEndOf="@+id/image_profile"
                             app:layout_constraintStart_toStartOf="@+id/image_profile"
                             app:layout_constraintTop_toTopOf="@+id/image_profile" />
@@ -107,6 +110,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_Update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -133,7 +137,7 @@
                         android:layout_alignParentTop="true"
                         
                         android:layout_toEndOf="@+id/image_view"
-                        android:text="Account Setting"
+                        android:text="Update Profile"
                         android:textColor="@color/text_color"
                         android:textSize="18sp"
                         android:fontFamily="@font/montserrat"
@@ -145,7 +149,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_below="@+id/text"
                         android:layout_toEndOf="@+id/image_view"
-                        android:text="Account Setting"
+                        android:text="Update Profile"
                         android:textColor="@color/text_color1"
                         android:textSize="12sp"
                         android:fontFamily="@font/montserrat"

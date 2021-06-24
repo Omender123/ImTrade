@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_discount = (ImageView) findViewById(R.id.img_discount);
 
         setSupportActionBar(toolbar);
+        toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         changeStatusBarColor();
         SetBottomBarNavigationView();
 
@@ -80,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         floatingActionButton.setOnClickListener(this);
-
 
         moreNavigationOptions();
     }
@@ -110,10 +110,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
            @Override
            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-               if(destination.getId() == R.id.My_address || destination.getId() == R.id.address ) {
+               if(destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile ) {
                    img_discount.setVisibility(View.GONE);
                    coordinatorLayout.setVisibility(View.GONE);
-               } else {
+               }else if (destination.getId()==R.id.Search_nearBy){
+                   coordinatorLayout.setVisibility(View.GONE);
+               }
+               else {
                   img_discount.setVisibility(View.VISIBLE);
                   coordinatorLayout.setVisibility(View.VISIBLE);
                }
@@ -183,7 +186,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.fab:
                 navController.navigate(R.id.fab);
+
               ///navController.popBackStack();
+
                 break;
         }
     }

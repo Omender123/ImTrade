@@ -43,6 +43,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener {
         dialog = AppUtils.hideShowProgress(getContext());
 
         binding.cardMyAddress.setOnClickListener(this);
+        binding.cardUpdate.setOnClickListener(this);
 
         return binding.getRoot();
 
@@ -63,6 +64,10 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.card_MyAddress:
                 navController.navigate(R.id.action_profile_to_My_address);
+                break;
+
+            case R.id.card_Update:
+                navController.navigate(R.id.action_profile_to_update_profile);
                 break;
         }
     }

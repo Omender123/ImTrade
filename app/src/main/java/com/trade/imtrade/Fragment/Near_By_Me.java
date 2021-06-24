@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.trade.imtrade.Adapter.My_Address_Adapter;
 import com.trade.imtrade.Adapter.NearByMeAdapter;
@@ -24,7 +26,7 @@ import com.trade.imtrade.databinding.FragmentMyAddressBinding;
 import com.trade.imtrade.databinding.FragmentNearByMeBinding;
 import com.trade.imtrade.utils.AppUtils;
 
-public class Near_By_Me extends Fragment {
+public class Near_By_Me extends Fragment implements NearByMeAdapter.OnOrderItemListener {
     FragmentNearByMeBinding binding;
     private View view;
     private Dialog dialog;
@@ -46,7 +48,6 @@ public class Near_By_Me extends Fragment {
         view = binding.getRoot();
         dialog = AppUtils.hideShowProgress(getContext());
 
-
         getNearbyPlace();
 
 
@@ -62,13 +63,33 @@ public class Near_By_Me extends Fragment {
 
         navController = Navigation.findNavController(view);
 
+
+
     }
     private void getNearbyPlace() {
 
-        NearByMeAdapter nearByMeAdapter = new NearByMeAdapter(getContext(),price);
+        NearByMeAdapter nearByMeAdapter = new NearByMeAdapter(getContext(),price,Near_By_Me.this::onItemClickListener);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL ,false);
         binding.RecyclerView.setLayoutManager(mLayoutManager1);
         binding.RecyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.RecyclerView.setAdapter(nearByMeAdapter);
+    }
+
+    @Override
+    public void onItemClickListener(int position) {
+
+       String name = price[position];
+        Bundle bundle = new Bundle();
+        bundle.putString("amount", name);
+
+
+
+        Near_By_MeDirections.ActionFabToSearchNearBy actionFabToSearchNearBy = Near_By_MeDirections.actionFabToSearchNearBy();
+        actionFabToSearchNearBy.setMyTitle(name);
+        Navigation.findNavController(view).navigate(actionFabToSearchNearBy);
+
+
+
+
     }
 }

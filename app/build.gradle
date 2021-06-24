@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'androidx.navigation.safeargs'
+
+
 }
 
 android {
@@ -85,6 +88,7 @@ dependencies {
     // alert box library
    // implementation 'com.github.thomper:sweet-alert-dialog:1.4.0'
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

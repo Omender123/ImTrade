@@ -79,6 +79,7 @@ FragmentMyAddressBinding binding;
 
             case R.id.text_add:
                 navController.navigate(R.id.address);
+
                 break;
         }
 

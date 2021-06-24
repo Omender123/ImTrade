@@ -35,13 +35,32 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profile_to_update_profile"
+            app:destination="@id/update_profile"
+            app:popUpTo="@id/update_profile"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment android:id="@+id/fab"
         android:name="com.trade.imtrade.Fragment.Near_By_Me"
         android:label="Near By Me"
         tools:layout="@layout/fragment_near__by__me"
-        />
+        >
+        <action
+            android:id="@+id/action_fab_to_Search_nearBy"
+            app:destination="@id/Search_nearBy"
+            app:popUpTo="@id/Search_nearBy"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment android:id="@+id/My_address"
         android:name="com.trade.imtrade.Fragment.My_Address"
         android:label="My Address"
@@ -63,6 +82,21 @@
         android:label="Address"
         tools:layout="@layout/fragment__address" />
 
+    <fragment android:id="@+id/update_profile"
+        android:label="Update Profile"
+        android:name="com.trade.imtrade.Fragment.Update_Profile"
+        tools:layout="@layout/fragment_update__profile"/>
+
+    <fragment android:id="@+id/Search_nearBy"
+        android:label="{myTitle}"
+        android:name="com.trade.imtrade.Fragment.Search_NearBy"
+        tools:layout="@layout/fragment_search__near_by">
+
+        <argument
+            android:name="myTitle"
+            app:argType="string"
+            android:defaultValue="defaultValue" />
+    </fragment>
 
 
 </navigation>
