@@ -71,10 +71,8 @@ ActivityEmailVerifyBinding binding;
                 AppUtils.FullScreen(this);
                 AppUtils.hideKeyboard(v,getApplicationContext());
 
-              //  VerifyOtp();
-                MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.TYPE,"SignUP");
-                startActivity(new Intent(getApplicationContext(),Success_screen.class));
-                break;
+               VerifyOtp();
+                 break;
         }
     }
 

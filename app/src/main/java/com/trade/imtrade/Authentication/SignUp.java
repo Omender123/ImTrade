@@ -128,10 +128,10 @@ ActivitySignUpBinding binding;
                    .show();
        }else {
             AppUtils.FullScreen(this);
-          // SignUpBody user = new SignUpBody(Email,referral_code,password);
-            //  presenter.createSignUp_User(user);
+           SignUpBody user = new SignUpBody(Email,referral_code,password);
+             presenter.createSignUp_User(user);
 
-           startActivity(new Intent(getApplicationContext(),Email_Verify.class));
+         //  startActivity(new Intent(getApplicationContext(),Email_Verify.class));
 
        }
 
