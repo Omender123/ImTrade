@@ -7,7 +7,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Model.request.SendOtpBody;
@@ -21,6 +23,8 @@ import com.trade.imtrade.view_presenter.Send_OTP_Presenter;
 import com.trade.imtrade.view_presenter.SignUpPresenter;
 import com.trade.imtrade.view_presenter.VerifyOtp_Presenter;
 
+import java.util.concurrent.TimeUnit;
+
 import de.mateware.snacky.Snacky;
 
 public class Email_Verify extends AppCompatActivity implements View.OnClickListener, VerifyOtp_Presenter.OTP_VerifyView, Send_OTP_Presenter.OTP_SendView {
@@ -29,8 +33,19 @@ ActivityEmailVerifyBinding binding;
     private Dialog dialog;
     private VerifyOtp_Presenter presenter;
     private Send_OTP_Presenter presenter1;
-
     private View view;
+    private long timeCountInMilliSeconds = 1 * 60000;
+
+    private enum TimerStatus {
+        STARTED,
+        STOPPED
+    }
+
+    private TimerStatus timerStatus = TimerStatus.STOPPED;
+
+
+    Boolean click=false;
+    private static CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +61,7 @@ ActivityEmailVerifyBinding binding;
 
 
         binding.cardDone.setOnClickListener(this);
+        startCountDownTimer();
     }
 
     @Override
@@ -55,8 +71,9 @@ ActivityEmailVerifyBinding binding;
                 AppUtils.FullScreen(this);
                 AppUtils.hideKeyboard(v,getApplicationContext());
 
-                VerifyOtp();
-
+              //  VerifyOtp();
+                MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.TYPE,"SignUP");
+                startActivity(new Intent(getApplicationContext(),Success_screen.class));
                 break;
         }
     }
@@ -156,6 +173,8 @@ ActivityEmailVerifyBinding binding;
                     .setCornerRadius(4)
                     .setDuration(1500)
                     .sneakSuccess();
+
+            reset();
         }
     }
 
@@ -173,4 +192,58 @@ ActivityEmailVerifyBinding binding;
         super.onResume();
         AppUtils.FullScreen(this);
     }
+    private void reset() {
+        stopCountDownTimer();
+        startCountDownTimer();
+
+    }
+
+    private void startCountDownTimer() {
+
+        countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+               binding.resend.setVisibility(View.GONE);
+               binding.timer.setVisibility(View.VISIBLE);
+                binding.timer.setText("Time left "+hmsTimeFormatter(millisUntilFinished)+"s");
+
+
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                binding.timer.setText("Time left 60s");
+                timerStatus = TimerStatus.STOPPED;
+                binding.resend.setVisibility(View.VISIBLE);
+                binding.timer.setVisibility(View.GONE);
+
+
+                binding.resend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Resend_OTP(v);
+                    }
+                });
+            }
+
+        }.start();
+        countDownTimer.start();
+    }
+
+    private void stopCountDownTimer() {
+        countDownTimer.cancel();
+    }
+
+
+    private String hmsTimeFormatter(long milliSeconds) {
+
+        String hms = String.format("%02d",  TimeUnit.MILLISECONDS.toSeconds(milliSeconds) );
+        return hms;
+
+
+    }
+
+
 }

@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     FloatingActionButton floatingActionButton ;
     CoordinatorLayout coordinatorLayout;
-    ImageView img_discount;
+    ImageView img_discount,img_cart;
+    Boolean backhome =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         floatingActionButton = findViewById(R.id.fab);
         coordinatorLayout =(CoordinatorLayout) findViewById(R.id.coordinator);
         img_discount = (ImageView) findViewById(R.id.img_discount);
+        img_cart = (ImageView) findViewById(R.id.img_cart);
 
         setSupportActionBar(toolbar);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        navigationView = findViewById(R.id.navigationView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.main);
-        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile})
+        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile,R.id.nav_Referral})
                 .setDrawerLayout(drawer)
                 .build();
       NavigationUI.setupWithNavController(navigationView, navController);
@@ -115,6 +117,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    coordinatorLayout.setVisibility(View.GONE);
                }else if (destination.getId()==R.id.Search_nearBy){
                    coordinatorLayout.setVisibility(View.GONE);
+               }else if (destination.getId()==R.id.nav_Referral){
+                   coordinatorLayout.setVisibility(View.GONE);
+                   img_discount.setVisibility(View.GONE);
+                   img_cart.setVisibility(View.GONE);
+
+                   NavigationUI.setupWithNavController(toolbar,navController,drawer);
+                   backhome =true;
+                  //  navController.popBackStack();
                }
                else {
                   img_discount.setVisibility(View.VISIBLE);
@@ -122,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                }
            }
        });
+
+
 
     }
 
@@ -138,35 +150,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawer(GravityCompat.START);
           } else {
             if (bottomNavigationView.getSelectedItemId()==R.id.home_Fragment){
-                new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText(getResources().getString(R.string.app_name))
-                        .setContentText("Are you sure you want to close App?")
-                        .setCancelText("Cancel")
-                        .setConfirmText("Exit")
-                        .showCancelButton(true)
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                Intent a = new Intent(Intent.ACTION_MAIN);
-                                a.addCategory(Intent.CATEGORY_HOME);
-                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(a);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                    finishAffinity();
+                if (backhome ==true ){
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                    backhome =false;
+                }else{
+                    new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(getResources().getString(R.string.app_name))
+                            .setContentText("Are you sure you want to close App?")
+                            .setCancelText("Cancel")
+                            .setConfirmText("Exit")
+                            .showCancelButton(true)
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    Intent a = new Intent(Intent.ACTION_MAIN);
+                                    a.addCategory(Intent.CATEGORY_HOME);
+                                    a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(a);
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                        finishAffinity();
+                                    }
+                                    finish();
+                                    sweetAlertDialog.dismissWithAnimation();
                                 }
-                                finish();
-                                sweetAlertDialog.dismissWithAnimation();
-                            }
-                        })
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                              //  sDialog.cancel();
-                                sDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
-            }else {
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    //  sDialog.cancel();
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+
+                }
+              }else {
                 super.onBackPressed();
             }
            }
@@ -186,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.fab:
                 navController.navigate(R.id.fab);
-
+                backhome =true;
               ///navController.popBackStack();
 
                 break;
@@ -215,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        MenuItem share = menu.findItem(R.id.nav_Share_us);
+      /*  MenuItem share = menu.findItem(R.id.nav_Share_us);
 
         share.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -224,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AppUtils.shareApp(MainActivity.this);
                 return true;
             }
-        });
+        });*/
     }
 
     private void LogoutAlertBox() {

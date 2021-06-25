@@ -65,4 +65,9 @@ ActivityReferralCodeSrceenBinding binding;
         super.onResume();
         AppUtils.FullScreen(this);
     }
+
+    public void Go_Login(View view) {
+        startActivity(new Intent(getApplicationContext(),Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        finish();
+    }
 }

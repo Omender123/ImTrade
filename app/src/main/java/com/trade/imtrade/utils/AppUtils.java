@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPrefernce.User_Data;
 import com.trade.imtrade.api.ApiManager;
 import com.trade.imtrade.api.ApiService;
 
@@ -294,14 +295,13 @@ public static String getDateTime(String timeStamp){
     }*/
 
 
-    public static void shareApp(Context context) {
+    public static void shareApp(Context context,String myReferral_code) {
 
         try {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
-            String sAux = "Hey,\n Its amazing install ImTrade form "+ context.getResources().getString(R.string.app_name) + "\n";
-
-            sAux = sAux + "https://play.google.com/store/apps/details?id=" + context.getPackageName() + "\n";
+            String sAux = "Hey,\n \n" + "Its amazing install imtrade   \n Referral code : " + myReferral_code + "\n Download " + context.getResources().getString(R.string.app_name) + "\n" +"Available for Android & iPhone " + "\n" ;
+            sAux = sAux + "For Android : https://play.google.com/store/apps/details?id=" + context.getPackageName() + "\n" /*+"For iPhone : https://apps.apple.com/be/app/imx/id1558636368"+"\n"*/;
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             context.startActivity(Intent.createChooser(i, "choose one"));
         } catch (Exception e) {

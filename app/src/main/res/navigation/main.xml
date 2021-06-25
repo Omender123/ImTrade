@@ -9,8 +9,7 @@
         android:id="@+id/home_Fragment"
         android:name="com.trade.imtrade.Fragment.Home_Fragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home_" >
-    </fragment>
+        tools:layout="@layout/fragment_home_"></fragment>
     <fragment
         android:id="@+id/Wish_List"
         android:name="com.trade.imtrade.Fragment.MyWishList_Fragment"
@@ -25,78 +24,87 @@
         android:id="@+id/profile"
         android:name="com.trade.imtrade.Fragment.Profile_Fragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_My_address"
             app:destination="@id/My_address"
-            app:popUpTo="@id/My_address"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/My_address"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profile_to_update_profile"
             app:destination="@id/update_profile"
-            app:popUpTo="@id/update_profile"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/update_profile"
+            app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment android:id="@+id/fab"
+    <fragment
+        android:id="@+id/fab"
         android:name="com.trade.imtrade.Fragment.Near_By_Me"
         android:label="Near By Me"
-        tools:layout="@layout/fragment_near__by__me"
-        >
+        tools:layout="@layout/fragment_near__by__me">
         <action
             android:id="@+id/action_fab_to_Search_nearBy"
             app:destination="@id/Search_nearBy"
-            app:popUpTo="@id/Search_nearBy"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/Search_nearBy"
+            app:popUpToInclusive="true" />
     </fragment>
-    <fragment android:id="@+id/My_address"
+    <fragment
+        android:id="@+id/My_address"
         android:name="com.trade.imtrade.Fragment.My_Address"
         android:label="My Address"
-        tools:layout="@layout/fragment_my__address"
-        >
+        tools:layout="@layout/fragment_my__address">
         <action
             android:id="@+id/action_My_address_to_address"
             app:destination="@id/address"
-            app:popUpTo="@id/My_address"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/My_address"
+            app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment android:id="@+id/address"
+    <fragment
+        android:id="@+id/address"
         android:name="com.trade.imtrade.Fragment.Fragment_Address"
         android:label="Address"
         tools:layout="@layout/fragment__address" />
 
-    <fragment android:id="@+id/update_profile"
-        android:label="Update Profile"
+    <fragment
+        android:id="@+id/update_profile"
         android:name="com.trade.imtrade.Fragment.Update_Profile"
-        tools:layout="@layout/fragment_update__profile"/>
+        android:label="Update Profile"
+        tools:layout="@layout/fragment_update__profile" />
 
-    <fragment android:id="@+id/Search_nearBy"
-        android:label="{myTitle}"
+    <fragment
+        android:id="@+id/Search_nearBy"
         android:name="com.trade.imtrade.Fragment.Search_NearBy"
+        android:label="{myTitle}"
         tools:layout="@layout/fragment_search__near_by">
 
         <argument
             android:name="myTitle"
-            app:argType="string"
-            android:defaultValue="defaultValue" />
+            android:defaultValue="defaultValue"
+            app:argType="string" />
     </fragment>
 
+
+    <fragment
+        android:id="@+id/nav_Referral"
+        android:name="com.trade.imtrade.Fragment.Referral_code"
+        android:label="Referral Code"
+        tools:layout="@layout/fragment_referral_code" />
 
 </navigation>

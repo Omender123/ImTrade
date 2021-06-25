@@ -10,12 +10,14 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+      <!--  <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
+        <item name="android:colorPrimaryDark">@color/bottom_bar</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="Theme.ImTrade.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="statusBarBackground">@color/bottom_bar</item>
     </style>
 
     <style name="NeumorphismImageLarge">

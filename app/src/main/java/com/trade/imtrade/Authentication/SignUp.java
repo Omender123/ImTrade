@@ -82,31 +82,11 @@ ActivitySignUpBinding binding;
     }
 
     private void doRegister() {
-        String firstName = binding.firstName.getText().toString();
-        String lastName = binding.lastName.getText().toString();
-        String phone_no = binding.phoneNo.getText().toString();
         String Email= binding.email.getText().toString();
         String password = binding.password.getText().toString();
+        String C_password = binding.CPassword.getText().toString();
 
-        if(firstName.isEmpty()){
-            binding.firstName.requestFocus();
-            Snacky.builder()
-                    .setActivity(SignUp.this)
-                    .setText("Please enter First Name!")
-                    .setTextColor(getResources().getColor(R.color.white))
-                    .warning()
-                    .show();
-
-        }else if(lastName.isEmpty()){
-            binding.lastName.requestFocus();
-            Snacky.builder()
-                    .setActivity(SignUp.this)
-                    .setText("Please enter First Name!")
-                    .setTextColor(getResources().getColor(R.color.white))
-                    .warning()
-                    .show();
-
-        }else if(Email.isEmpty()){
+       if(Email.isEmpty()){
             binding.email.requestFocus();
             Snacky.builder()
                     .setActivity(SignUp.this)
@@ -123,22 +103,6 @@ ActivitySignUpBinding binding;
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        } else if(phone_no.isEmpty()){
-            binding.phoneNo.requestFocus();
-            Snacky.builder()
-                    .setActivity(SignUp.this)
-                    .setText("Please enter Phone No. !")
-                    .setTextColor(getResources().getColor(R.color.white))
-                    .warning()
-                    .show();
-        }else if(!Validation.isValidPhoneNumber(phone_no)){
-            binding.phoneNo.requestFocus();
-            Snacky.builder()
-                    .setActivity(SignUp.this)
-                    .setText("Phone number not valid!")
-                    .setTextColor(getResources().getColor(R.color.white))
-                    .warning()
-                    .show();
         }else if(password.isEmpty()){
             binding.password.requestFocus();
             Snacky.builder()
@@ -147,12 +111,29 @@ ActivitySignUpBinding binding;
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        }
-        else {
+        }else if(C_password.isEmpty()){
+           binding.CPassword.requestFocus();
+           Snacky.builder()
+                   .setActivity(SignUp.this)
+                   .setText("Please enter Confirm Password !")
+                   .setTextColor(getResources().getColor(R.color.white))
+                   .warning()
+                   .show();
+       }else if(!C_password.equals(password)){
+           Snacky.builder()
+                   .setActivity(SignUp.this)
+                   .setText("Password not Match !!!!!!!!!")
+                   .setTextColor(getResources().getColor(R.color.white))
+                   .warning()
+                   .show();
+       }else {
             AppUtils.FullScreen(this);
-            SignUpBody user = new SignUpBody(firstName,lastName,Email,referral_code,password,codeName,phone_no);
-           presenter.createSignUp_User(user);
-        }
+          // SignUpBody user = new SignUpBody(Email,referral_code,password);
+            //  presenter.createSignUp_User(user);
+
+           startActivity(new Intent(getApplicationContext(),Email_Verify.class));
+
+       }
 
     }
 
@@ -180,8 +161,6 @@ ActivitySignUpBinding binding;
     public void onSignUpSuccess(SignUpResponse response, String message) {
         MyPreferences.getInstance(SignUp.this).putString(PrefConf.User_ID,response.getResult().getId());
         MyPreferences.getInstance(SignUp.this).putString(PrefConf.EMAIL,response.getResult().getEmail());
-        MyPreferences.getInstance(SignUp.this).putString(PrefConf.PHONE_NO,response.getResult().getPhone());
-
         if (message.equalsIgnoreCase("ok")){
             SendOtpBody sendOtpBody = new SendOtpBody(response.getResult().getEmail());
            presenter1.SendOTP(sendOtpBody);
@@ -216,11 +195,11 @@ ActivitySignUpBinding binding;
             }
 
             ArrayAdapter<String> adp = new ArrayAdapter<String>(SignUp.this, R.layout.spinner_list, code);
-            binding.countryCode.setAdapter(adp);
+          //  binding.countryCode.setAdapter(adp);
 
             //  adp.setDropDownViewResource(R.layout.spinner_list);
 
-            binding.countryCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           /* binding.countryCode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     codeName = parent.getItemAtPosition(position).toString();
@@ -231,7 +210,7 @@ ActivitySignUpBinding binding;
                 public void onNothingSelected(AdapterView<?> parent) {
 
                 }
-            });
+            });*/
         }
 
     }
