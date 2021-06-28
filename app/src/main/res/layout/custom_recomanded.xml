@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="Audemars Pluguet Watch"
         android:textSize="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/product_name"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat"/>
     <TextView
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:text="4500Rs"
         android:textSize="12dp"
-        android:textColor="@color/purple_200"
+        android:textColor="@color/product_Price"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat"/>
 

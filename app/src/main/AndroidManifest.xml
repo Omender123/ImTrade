@@ -9,6 +9,18 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
 
     <application
         android:allowBackup="true"
@@ -17,12 +29,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ImTrade"
-        tools:replace="android:icon"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Authentication.Change_Password"
-            android:theme="@style/Theme.ImTrade.NoActionBar"></activity>
-        <activity android:name=".Authentication.ForgetPassword"
-            android:theme="@style/Theme.ImTrade.NoActionBar"/>
+        android:usesCleartextTraffic="true"
+        tools:replace="android:icon">
+        <activity android:name=".Authentication.Scan_Referral_code"
+            android:theme="@style/Theme.ImTrade.NoActionBar" ></activity>
+        <activity
+            android:name=".Authentication.Change_Password"
+            android:theme="@style/Theme.ImTrade.NoActionBar" />
+        <activity
+            android:name=".Authentication.ForgetPassword"
+            android:theme="@style/Theme.ImTrade.NoActionBar" />
         <activity
             android:name=".Authentication.Email_Verify"
             android:theme="@style/Theme.ImTrade.NoActionBar" />
@@ -47,8 +63,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.ImTrade.NoActionBar"/>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.ImTrade.NoActionBar" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

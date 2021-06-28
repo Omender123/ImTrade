@@ -87,6 +87,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
         binding.cardLogin.setOnClickListener(this);
         binding.textSignUp1.setOnClickListener(this);
         binding.forgot.setOnClickListener(this);
+        binding.Skip.setOnClickListener(this);
 
         AppUtils.FullScreen(this);
 
@@ -109,6 +110,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                 break;
             case R.id.forgot:
                 startActivity(new Intent(getApplicationContext(), ForgetPassword.class));
+                break;
+
+            case R.id.Skip:
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
         }
     }
@@ -165,18 +170,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
     public void onLoginSuccess(LoginResponse response, String message) {
         if (message.equalsIgnoreCase("ok")) {
             User_Data user_data = new User_Data(response.getResult().getId(),
-                    response.getResult().getFirstName(),
-                    response.getResult().getLastName(),
                     response.getResult().getEmail(),
-                    response.getResult().getPhone(),
-                    response.getResult().getCountryCode(),
                     response.getToken(),
                     response.getResult().getMyReferalcode());
-             SharedPrefManager.getInstance(this).SetLoginData(user_data);
+            SharedPrefManager.getInstance(this).SetLoginData(user_data);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
 
-            Toast.makeText(context, ""+response.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "" + response.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -186,18 +187,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
     public void onSocialLoginSuccess(SocialLoginResponse response, String message) {
         if (message.equalsIgnoreCase("ok")) {
             User_Data user_data = new User_Data(response.getResult().getId(),
-                    response.getResult().getFirstName(),
-                    response.getResult().getLastName(),
                     response.getResult().getEmail(),
-                    null,
-                    null,
                     response.getToken(),
-                response.getResult().getMyReferalcode());
-           SharedPrefManager.getInstance(this).SetLoginData(user_data);
+                    response.getResult().getMyReferalcode());
+            SharedPrefManager.getInstance(this).SetLoginData(user_data);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
 
-            Toast.makeText(context, ""+response.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "" + response.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -227,7 +224,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         callbackManager = CallbackManager.Factory.create();
 
-        binding.loginButton.setReadPermissions(Arrays.asList("email","public_profile"));
+        binding.loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
 
 // Checking the Access Token.
         if (AccessToken.getCurrentAccessToken() != null) {
@@ -261,7 +258,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                 //  mAccessToken = loginResult.getAccessToken();
                 getUserProfile(loginResult.getAccessToken());
 
-              //  Toast.makeText(Login.this, "mAccessToken" +loginResult.getAccessToken(), Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(Login.this, "mAccessToken" +loginResult.getAccessToken(), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -372,7 +369,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
     }
 
     public void go_to_fb(View view) {
-       binding.loginButton.performClick();
+        binding.loginButton.performClick();
 
     }
 
@@ -381,21 +378,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                 currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                    try {
+                        try {
 
-                        if (response.getJSONObject().getString("email").isEmpty()){
+                            if (response.getJSONObject().getString("email").isEmpty()) {
 
-                            }else{
-                                 SocialLoginBody socialLoginBody = new SocialLoginBody(response.getJSONObject().getString("name"),
-                                         response.getJSONObject().getString("email")
-                                         ,false,true,response.getJSONObject().getString("id"));
-                                 presenter.SocialLogin(socialLoginBody);
+                            } else {
+                                SocialLoginBody socialLoginBody = new SocialLoginBody(response.getJSONObject().getString("name"),
+                                        response.getJSONObject().getString("email")
+                                        , false, true, response.getJSONObject().getString("id"));
+                                presenter.SocialLogin(socialLoginBody);
                             }
-                              }
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                          Toast.makeText(context, "Your FB account is registered on phone number...Please try other available options to Register!", Toast.LENGTH_SHORT).show();
-                          //  Snackbar.make(view, "Your FB account is registered on phone number...Please try other available options to Register!", Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(context, "Your FB account is registered on phone number...Please try other available options to Register!", Toast.LENGTH_SHORT).show();
+                            //  Snackbar.make(view, "Your FB account is registered on phone number...Please try other available options to Register!", Snackbar.LENGTH_LONG).show();
 
                         }
 
@@ -416,7 +412,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                 .show();
 
     }
-
 
 
     @Override

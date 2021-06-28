@@ -22,58 +22,47 @@ import com.trade.imtrade.view_presenter.Send_OTP_Presenter;
 
 import de.mateware.snacky.Snacky;
 
-public class Change_Password extends AppCompatActivity implements View.OnClickListener, Send_OTP_Presenter.OTP_SendView, Change_Password_Presenter.Change_PasswordView {
+public class Change_Password extends AppCompatActivity implements View.OnClickListener, Change_Password_Presenter.Change_PasswordView {
     ActivityChangePasswordBinding binding;
     private Context context;
     private Dialog dialog;
     private View view;
     private Change_Password_Presenter presenter;
-    private Send_OTP_Presenter presenter1;
-    String Email;
+    String Email, Otp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_change__password);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_change__password);
+        // setContentView(R.layout.activity_change__password);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_change__password);
         AppUtils.FullScreen(this);
         view = binding.getRoot();
         context = Change_Password.this;
         dialog = AppUtils.hideShowProgress(context);
 
         presenter = new Change_Password_Presenter(this);
-        presenter1 = new Send_OTP_Presenter(this);
 
-         Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL,"");
-
+        Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL, "");
+        Otp = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.OTP, "");
         binding.cardDone.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.card_Done:
                 AppUtils.FullScreen(this);
-                AppUtils.hideKeyboard(v,getApplicationContext());
+                AppUtils.hideKeyboard(v, getApplicationContext());
                 change_password();
                 break;
         }
     }
 
     private void change_password() {
-        String otp = binding.edOtp.getText().toString();
         String new_pass = binding.newPassword.getText().toString();
         String c_pass = binding.cPassword.getText().toString();
-
-        if (otp.isEmpty()){
-            binding.edOtp.requestFocus();
-            Snacky.builder()
-                    .setActivity(Change_Password.this)
-                    .setText("Please enter Otp !")
-                    .setTextColor(getResources().getColor(R.color.white))
-                    .warning()
-                    .show();
-        }else if(new_pass.isEmpty()){
+        if (new_pass.isEmpty()) {
             binding.newPassword.requestFocus();
             Snacky.builder()
                     .setActivity(Change_Password.this)
@@ -81,7 +70,7 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        }else if(c_pass.isEmpty()){
+        } else if (c_pass.isEmpty()) {
             binding.cPassword.requestFocus();
             Snacky.builder()
                     .setActivity(Change_Password.this)
@@ -89,16 +78,16 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        }else if(!c_pass.equals(new_pass)){
+        } else if (!c_pass.equals(new_pass)) {
             Snacky.builder()
                     .setActivity(Change_Password.this)
                     .setText("Password Not Match !")
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        }else {
+        } else {
 
-            ChangePasswordBody changePasswordBody = new ChangePasswordBody(Email,otp,new_pass);
+            ChangePasswordBody changePasswordBody = new ChangePasswordBody(Email, Otp, new_pass);
             presenter.ChangedPassword(changePasswordBody);
         }
 
@@ -110,73 +99,11 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
         AppUtils.FullScreen(this);
     }
 
-    public void Resend_OTP(View view) {
-
-
-        AppUtils.FullScreen(this);
-        AppUtils.hideKeyboard(view,getApplicationContext());
-        Sneaker.with(this)
-                .setTitle("coming Soon")
-                .setMessage("")
-                .setCornerRadius(4)
-                .setDuration(1500)
-                .sneakSuccess();
-
-
-        SendOtpBody sendOtpBody = new SendOtpBody(Email);
-       presenter1.SendOTP(sendOtpBody);
-    }
-
-    @Override
-    public void showOTPHideProgress(boolean isShow) {
-        if (isShow){
-            dialog.show();
-        }else{
-            dialog.dismiss();
-        }
-    }
-
-    @Override
-    public void onOTPError(String message) {
-        Sneaker.with(this)
-                .setTitle(message)
-                .setMessage("")
-                .setCornerRadius(4)
-                .setDuration(1500)
-                .sneakError();
-
-
-    }
-
-    @Override
-    public void onOTPSuccess(String message) {
-        if (message.equalsIgnoreCase("ok")){
-            Sneaker.with(this)
-                    .setTitle("OTP Resend in Your Email")
-                    .setMessage("")
-                    .setCornerRadius(4)
-                    .setDuration(1500)
-                    .sneakSuccess();
-        }
-
-    }
-
-    @Override
-    public void onOTPFailure(Throwable t) {
-        Sneaker.with(this)
-                .setTitle(t.getLocalizedMessage())
-                .setMessage("")
-                .setCornerRadius(4)
-                .setDuration(1500)
-                .sneakError();
-
-    }
-
     @Override
     public void showHideProgress(boolean isShow) {
-        if (isShow){
+        if (isShow) {
             dialog.show();
-        }else{
+        } else {
             dialog.dismiss();
         }
     }
@@ -195,9 +122,9 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onSuccess(String message) {
 
-        if (message.equalsIgnoreCase("ok")){
-            MyPreferences.getInstance(Change_Password.this).putString(PrefConf.TYPE,"Change_password");
-            startActivity(new Intent(getApplicationContext(),Success_screen.class));
+        if (message.equalsIgnoreCase("ok")) {
+            MyPreferences.getInstance(Change_Password.this).putString(PrefConf.TYPE, "Change_password");
+            startActivity(new Intent(getApplicationContext(), Success_screen.class));
 
         }
     }

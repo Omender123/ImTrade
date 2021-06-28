@@ -10,11 +10,7 @@ import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "Prebhat";
     private static final String KEY_ID = "keyid";
-    private static final String KEY_FIRST_NAME = "KEY_FIRST_NAME";
-    private static final String KEY_LAST_NAME = "KEY_LAST_NAME";
     private static final String KEY_EMAIL = "keyemail";
-    private static final String KEY_MOBILE = "keyMobile";
-    private static final String KEY_COUNTRY_CODE = "KEY_COUNTRY_CODE";
     private static final String KEY_TOKEN = "KEY_TOKEN";
     private static final String KEY_REFERRAL_CODE = "KEY_REFERRAL_CODE";
     private static SharedPrefManager mInstance;
@@ -39,11 +35,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_ID, user.getId());
-        editor.putString(KEY_FIRST_NAME, user.getFirstName());
-        editor.putString(KEY_LAST_NAME, user.getLastName());
-        editor.putString(KEY_EMAIL, user.getEmail());
-        editor.putString(KEY_MOBILE, user.getPhone());
-        editor.putString(KEY_COUNTRY_CODE, user.getCountryCode());
+         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_TOKEN, user.getToken());
         editor.putString(KEY_REFERRAL_CODE, user.getReferral_code());
         editor.apply();
@@ -60,11 +52,7 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User_Data(
                 sharedPreferences.getString(KEY_ID, null),
-                sharedPreferences.getString(KEY_FIRST_NAME, null),
-                sharedPreferences.getString(KEY_LAST_NAME, null),
-                sharedPreferences.getString(KEY_EMAIL, null),
-                sharedPreferences.getString(KEY_MOBILE, null),
-                sharedPreferences.getString(KEY_COUNTRY_CODE, null),
+                 sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_TOKEN, null),
                 sharedPreferences.getString(KEY_REFERRAL_CODE, null)
 

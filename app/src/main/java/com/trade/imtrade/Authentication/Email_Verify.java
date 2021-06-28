@@ -35,6 +35,7 @@ ActivityEmailVerifyBinding binding;
     private Send_OTP_Presenter presenter1;
     private View view;
     private long timeCountInMilliSeconds = 1 * 60000;
+    String Type;
 
     private enum TimerStatus {
         STARTED,
@@ -59,6 +60,13 @@ ActivityEmailVerifyBinding binding;
         presenter1 = new Send_OTP_Presenter(this);
         dialog = AppUtils.hideShowProgress(context);
 
+        Type = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.TYPE1,"");
+
+        if (Type.equals("SignUp")){
+            binding.textSignup.setText(Type);
+        }else{
+            binding.textSignup.setText(Type);
+        }
 
         binding.cardDone.setOnClickListener(this);
         startCountDownTimer();
@@ -70,9 +78,14 @@ ActivityEmailVerifyBinding binding;
             case R.id.card_done:
                 AppUtils.FullScreen(this);
                 AppUtils.hideKeyboard(v,getApplicationContext());
+                if (Type.equals("SignUp")){
+                    VerifyOtp();
+                 }else{
+                    startActivity(new Intent(getApplicationContext(),Change_Password.class));
+                    MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.OTP,binding.enterOtp.getText().toString());
 
-               VerifyOtp();
-                 break;
+                }
+                break;
         }
     }
 

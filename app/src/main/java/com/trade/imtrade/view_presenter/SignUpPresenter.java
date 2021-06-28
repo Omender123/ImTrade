@@ -37,7 +37,7 @@ public class SignUpPresenter {
                     try {
                         String  errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("body");
+                        String err_msg  = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {

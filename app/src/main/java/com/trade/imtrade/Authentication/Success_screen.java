@@ -36,7 +36,7 @@ String type;
             public void run() {
                 MyPreferences.getInstance(Success_screen.this).deletePreference(PrefConf.User_ID);
                 MyPreferences.getInstance(Success_screen.this).deletePreference(PrefConf.EMAIL);
-              //  MyPreferences.getInstance(Success_screen.this).deletePreference(PrefConf.PHONE_NO);
+              MyPreferences.getInstance(Success_screen.this).deletePreference(PrefConf.OTP);
                 MyPreferences.getInstance(Success_screen.this).deletePreference(PrefConf.REFERRAL_CODE);
 
                 startActivity(new Intent(getApplicationContext(),Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK));

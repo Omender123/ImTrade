@@ -14,7 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-
             android:gravity="center"
             android:text="Login"
             android:textColor="@color/white"
@@ -214,7 +213,7 @@
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/bottom"
+            android:layout_above="@id/Skip"
             android:layout_marginBottom="-20dp"
             android:gravity="start"
             android:orientation="horizontal"
@@ -240,7 +239,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/bottom"
+            android:id="@+id/Skip"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="-3dp"

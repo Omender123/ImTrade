@@ -24,6 +24,7 @@ ActivityReferralCodeSrceenBinding binding;
         binding = DataBindingUtil.setContentView(this,R.layout.activity_referral__code__srceen);
 
         binding.cardReady.setOnClickListener(this);
+        binding.scan.setOnClickListener(this);
         AppUtils.FullScreen(this);
 
     }
@@ -57,6 +58,12 @@ ActivityReferralCodeSrceenBinding binding;
                 }
 
                 break;
+
+            case R.id.scan:
+                startActivity(new Intent(getApplicationContext(),Scan_Referral_code.class));
+                break;
+
+
         }
     }
 

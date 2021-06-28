@@ -16,7 +16,13 @@ import android.widget.Toast;
 
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.trade.imtrade.Adapter.BrandsAdapter;
 import com.trade.imtrade.Adapter.Categories_Adapter;
+import com.trade.imtrade.Adapter.DealOfTheDayAdapter;
+import com.trade.imtrade.Adapter.DiscountByBrandsAdapter;
+import com.trade.imtrade.Adapter.GameAdapter;
+import com.trade.imtrade.Adapter.MostPopularProductAdapter;
+import com.trade.imtrade.Adapter.ProductToSeasonAdapter;
 import com.trade.imtrade.Adapter.Recommended_Adapter;
 import com.trade.imtrade.R;
 import com.trade.imtrade.databinding.FragmentHomeBinding;
@@ -31,6 +37,8 @@ public class Home_Fragment extends Fragment {
     private Dialog dialog;
 
     String [] price = {"Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles","Mobiles"};
+    String [] price1= {"Nike","Puma","Nike","Puma","Nike","Puma","Nike","Puma","Nike","Puma","Nike","Puma"};
+    Integer [] Image= {R.mipmap.game1,R.mipmap.game2,R.mipmap.game3};
 
 
     public Home_Fragment() {
@@ -51,7 +59,13 @@ public class Home_Fragment extends Fragment {
         SetImageSlider();
         getAllprouctCategories();
         getAllprouctRecommended();
-        
+        getDealOfTheDay();
+        getDiscountByBrands();
+        getMostPopularProduct();
+        getProductToSeason();
+        getAllBrands();
+        getAllGame();
+
         return binding.getRoot();
     }
 
@@ -89,4 +103,56 @@ public class Home_Fragment extends Fragment {
         binding.recommendedRcycler.setAdapter(recommended_adapter);
 
     }
+    private void getDiscountByBrands() {
+        DiscountByBrandsAdapter discountByBrandsAdapter = new DiscountByBrandsAdapter(getContext(),price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL ,false);
+        binding.DiscountByBrandsRecyclerView.setLayoutManager(mLayoutManager1);
+        binding.DiscountByBrandsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        binding.DiscountByBrandsRecyclerView.setAdapter(discountByBrandsAdapter);
+
+    }
+    private void getDealOfTheDay() {
+        DealOfTheDayAdapter dealOfTheDayAdapter = new DealOfTheDayAdapter(getContext(),price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL ,false);
+        binding.DealRcycler.setLayoutManager(mLayoutManager1);
+        binding.DealRcycler.setItemAnimator(new DefaultItemAnimator());
+        binding.DealRcycler.setAdapter(dealOfTheDayAdapter);
+
+    }
+    private void getMostPopularProduct() {
+        MostPopularProductAdapter mostPopularProductAdapter = new MostPopularProductAdapter(getContext(),price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL ,false);
+        binding.PopularProductRcycler.setLayoutManager(mLayoutManager1);
+        binding.PopularProductRcycler.setItemAnimator(new DefaultItemAnimator());
+        binding.PopularProductRcycler.setAdapter(mostPopularProductAdapter);
+
+    }
+    private void getProductToSeason() {
+        ProductToSeasonAdapter productToSeasonAdapter = new ProductToSeasonAdapter(getContext(),price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL ,false);
+        binding.SeasonRcycler.setLayoutManager(mLayoutManager1);
+        binding.SeasonRcycler.setItemAnimator(new DefaultItemAnimator());
+        binding.SeasonRcycler.setAdapter(productToSeasonAdapter);
+
+    }
+
+
+    private void getAllBrands() {
+        BrandsAdapter brandsAdapter = new BrandsAdapter(getContext(),price1);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL ,false);
+        binding.RecyclerViewBrands.setLayoutManager(mLayoutManager1);
+        binding.RecyclerViewBrands.setItemAnimator(new DefaultItemAnimator());
+        binding.RecyclerViewBrands.setAdapter(brandsAdapter);
+
+    }
+
+    private void getAllGame() {
+        GameAdapter gameAdapter = new GameAdapter(getContext(),Image);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL ,false);
+        binding.gameRcycler.setLayoutManager(mLayoutManager1);
+        binding.gameRcycler.setItemAnimator(new DefaultItemAnimator());
+        binding.gameRcycler.setAdapter(gameAdapter);
+
+    }
+
 }

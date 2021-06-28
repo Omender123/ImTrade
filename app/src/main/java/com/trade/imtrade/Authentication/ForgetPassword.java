@@ -110,7 +110,9 @@ ActivityForgetPasswordBinding  binding;
     public void onOTPSuccess(String message) {
         if (message.equalsIgnoreCase("ok")){
             MyPreferences.getInstance(ForgetPassword.this).putString(PrefConf.EMAIL,Email);
-            startActivity(new Intent(getApplicationContext(),Change_Password.class));
+            MyPreferences.getInstance(ForgetPassword.this).putString(PrefConf.TYPE1,"Forget Password");
+
+            startActivity(new Intent(getApplicationContext(),Email_Verify.class));
             Toast.makeText(context, "Otp send in Your Email", Toast.LENGTH_SHORT).show();
         }
     }

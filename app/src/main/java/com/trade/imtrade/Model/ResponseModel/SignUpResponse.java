@@ -14,15 +14,6 @@ public class SignUpResponse {
     @Expose
     private String message;
 
-    public SignUpResponse() {
-    }
-
-    public SignUpResponse(Result result, String message) {
-        super();
-        this.result = result;
-        this.message = message;
-    }
-
     public Result getResult() {
         return result;
     }
@@ -44,6 +35,9 @@ public class SignUpResponse {
         @SerializedName("prime")
         @Expose
         private Prime prime;
+        @SerializedName("otp")
+        @Expose
+        private String otp;
         @SerializedName("isPhoneVerified")
         @Expose
         private Boolean isPhoneVerified;
@@ -89,24 +83,12 @@ public class SignUpResponse {
         @SerializedName("_id")
         @Expose
         private String id;
-        @SerializedName("firstName")
-        @Expose
-        private String firstName;
-        @SerializedName("lastName")
-        @Expose
-        private String lastName;
         @SerializedName("email")
         @Expose
         private String email;
         @SerializedName("password")
         @Expose
         private String password;
-        @SerializedName("countryCode")
-        @Expose
-        private String countryCode;
-        @SerializedName("phone")
-        @Expose
-        private String phone;
         @SerializedName("myReferalcode")
         @Expose
         private String myReferalcode;
@@ -123,47 +105,20 @@ public class SignUpResponse {
         @Expose
         private String updatedAt;
 
-        public Result() {
-        }
-
-
-        public Result(Prime prime, Boolean isPhoneVerified, List<Object> recommendedProducts, List<Object> childrenUsers, Boolean active, String role, Integer roleId, Boolean newsLetter, List<Object> wishlist, List<Object> cart, String category, Integer orderNo, Integer savedImxToken, Integer shoppingTillNow, Integer savingTillNow, String id, String firstName, String lastName, String email, String password, String countryCode, String phone, String myReferalcode, String parentReferalcode, List<Object> address, String createdAt, String updatedAt) {
-            super();
-            this.prime = prime;
-            this.isPhoneVerified = isPhoneVerified;
-            this.recommendedProducts = recommendedProducts;
-            this.childrenUsers = childrenUsers;
-            this.active = active;
-            this.role = role;
-            this.roleId = roleId;
-            this.newsLetter = newsLetter;
-            this.wishlist = wishlist;
-            this.cart = cart;
-            this.category = category;
-            this.orderNo = orderNo;
-            this.savedImxToken = savedImxToken;
-            this.shoppingTillNow = shoppingTillNow;
-            this.savingTillNow = savingTillNow;
-            this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-            this.password = password;
-            this.countryCode = countryCode;
-            this.phone = phone;
-            this.myReferalcode = myReferalcode;
-            this.parentReferalcode = parentReferalcode;
-            this.address = address;
-            this.createdAt = createdAt;
-            this.updatedAt = updatedAt;
-        }
-
         public Prime getPrime() {
             return prime;
         }
 
         public void setPrime(Prime prime) {
             this.prime = prime;
+        }
+
+        public String getOtp() {
+            return otp;
+        }
+
+        public void setOtp(String otp) {
+            this.otp = otp;
         }
 
         public Boolean getIsPhoneVerified() {
@@ -286,22 +241,6 @@ public class SignUpResponse {
             this.id = id;
         }
 
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
         public String getEmail() {
             return email;
         }
@@ -316,22 +255,6 @@ public class SignUpResponse {
 
         public void setPassword(String password) {
             this.password = password;
-        }
-
-        public String getCountryCode() {
-            return countryCode;
-        }
-
-        public void setCountryCode(String countryCode) {
-            this.countryCode = countryCode;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
         }
 
         public String getMyReferalcode() {
@@ -380,15 +303,6 @@ public class SignUpResponse {
             @Expose
             private Boolean active;
 
-
-            public Prime() {
-            }
-
-            public Prime(Boolean active) {
-                super();
-                this.active = active;
-            }
-
             public Boolean getActive() {
                 return active;
             }
@@ -400,4 +314,5 @@ public class SignUpResponse {
         }
     }
 }
+
 

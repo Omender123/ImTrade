@@ -247,7 +247,10 @@ ActivitySignUpBinding binding;
     @Override
     public void onOTPSuccess(String message) {
         if (message.equalsIgnoreCase("ok")){
+            MyPreferences.getInstance(SignUp.this).putString(PrefConf.TYPE1,"SignUp");
+
             startActivity(new Intent(getApplicationContext(),Email_Verify.class));
+
 
             Toast.makeText(context, "OTP send in Email", Toast.LENGTH_SHORT).show();
         }

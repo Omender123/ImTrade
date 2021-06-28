@@ -2,11 +2,7 @@ package com.trade.imtrade.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,33 +11,33 @@ import com.bumptech.glide.Glide;
 import com.trade.imtrade.R;
 import com.trade.imtrade.databinding.CustomRecomandedBinding;
 
-public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapter.RecommendedViewHolder>  {
+public class DiscountByBrandsAdapter extends RecyclerView.Adapter<DiscountByBrandsAdapter.DiscountViewHolder>  {
     Context context;
     String[] amount;
 
-    public Recommended_Adapter(Context context, String[] amount) {
+    public DiscountByBrandsAdapter(Context context, String[] amount) {
         this.context = context;
         this.amount = amount;
     }
 
-    public Recommended_Adapter() {
+    public DiscountByBrandsAdapter() {
     }
 
 
     @NonNull
     @Override
-    public RecommendedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DiscountViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CustomRecomandedBinding binding = CustomRecomandedBinding.inflate(inflater,parent,false);
 
-        return new RecommendedViewHolder(binding);
+        return new DiscountViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DiscountViewHolder holder, int position) {
         holder.binding.cateName.setText(amount[position]);
       //  Glide.with(context).load("https://picsum.photos/id/896/300/200").into(holder.binding.cateImg);
-        holder.binding.cateImg.setImageDrawable(context.getResources().getDrawable(R.mipmap.recom));
+        holder.binding.cateImg.setImageDrawable(context.getResources().getDrawable(R.mipmap.discount));
     }
 
     @Override
@@ -49,12 +45,12 @@ public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapte
         return amount.length;
     }
 
-    public class RecommendedViewHolder extends RecyclerView.ViewHolder {
-      CustomRecomandedBinding binding;
-        public RecommendedViewHolder(CustomRecomandedBinding binding) {
+    public class DiscountViewHolder extends RecyclerView.ViewHolder {
+        CustomRecomandedBinding binding;
+        public DiscountViewHolder(CustomRecomandedBinding binding) {
             super(binding.getRoot());
 
-          this.binding = binding;
+            this.binding = binding;
 
 
         }

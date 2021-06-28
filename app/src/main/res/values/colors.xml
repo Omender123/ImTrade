@@ -17,6 +17,7 @@
     <color name="text_login">#8a8d91</color>
     <color name="LIGHT_sadow">#40FFFFFF</color>
     <color name="dark_shadow">#40000000</color>
+    <color name="hinding_color">#CCFFFFFF</color>
 
     <color name="gray_opacity">#B5474242</color>
     <color name="colorPrimaryDark">#0F161F</color>
@@ -32,4 +33,7 @@
 
     <color name="card_background">#282c31</color>
 
+    <color name="text_tittle">#80D8D8D8</color>
+    <color name="product_name">#CCD8D8D8</color>
+    <color name="product_Price">#D8D8D8</color>
 </resources>
