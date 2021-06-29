@@ -9,7 +9,18 @@
         android:id="@+id/home_Fragment"
         android:name="com.trade.imtrade.Fragment.Home_Fragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home_"></fragment>
+        tools:layout="@layout/fragment_home_">
+        <action
+            android:id="@+id/action_home_Fragment_to_categories"
+            app:destination="@id/categories"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/categories"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
     <fragment
         android:id="@+id/Wish_List"
         android:name="com.trade.imtrade.Fragment.MyWishList_Fragment"
@@ -106,5 +117,12 @@
         android:name="com.trade.imtrade.Fragment.Referral_code"
         android:label="Referral Code"
         tools:layout="@layout/fragment_referral_code" />
+
+    <fragment
+        android:id="@+id/categories"
+        android:name="com.trade.imtrade.Fragment.Categories_Fragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_categories" />
+
 
 </navigation>

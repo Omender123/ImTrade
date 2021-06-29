@@ -15,11 +15,11 @@
             app:cardBackgroundColor="@color/background">
             <ImageView
                 android:id="@+id/product_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="center"
-                android:src="@drawable/ic_baseline_phone_android_24" />
+                android:src="@mipmap/laptop" />
         </androidx.cardview.widget.CardView>
 
         <TextView

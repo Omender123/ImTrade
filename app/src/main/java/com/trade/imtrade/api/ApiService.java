@@ -2,6 +2,7 @@ package com.trade.imtrade.api;
 
 
 
+import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
@@ -11,6 +12,8 @@ import com.trade.imtrade.Model.request.SendOtpBody;
 import com.trade.imtrade.Model.request.SignUpBody;
 import com.trade.imtrade.Model.request.SocialLoginBody;
 import com.trade.imtrade.Model.request.VerifyOTP_Body;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,5 +50,8 @@ public interface ApiService {
 
     @POST("user/forget-password/update")
     Call<ResponseBody>ChangePassword(@Body ChangePasswordBody passwordBody);
+
+    @GET("banner")
+    Call<List<BannerResponse>>getBanner();
 
 }

@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                if(destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile ) {
                    img_discount.setVisibility(View.GONE);
                    coordinatorLayout.setVisibility(View.GONE);
-               }else if (destination.getId()==R.id.Search_nearBy){
+               }else if (destination.getId()==R.id.Search_nearBy || destination.getId()==R.id.categories ){
+                   backhome =true;
                    coordinatorLayout.setVisibility(View.GONE);
                }else if (destination.getId()==R.id.nav_Referral){
                    coordinatorLayout.setVisibility(View.GONE);
@@ -148,7 +149,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-          } else {
+          }
+        /*else {
             if (bottomNavigationView.getSelectedItemId()==R.id.home_Fragment){
                 if (backhome ==true ){
                     startActivity(new Intent(this, MainActivity.class));
@@ -185,11 +187,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             .show();
 
                 }
-              }else {
+              }*/
+        else {
                 super.onBackPressed();
             }
            }
-    }
+
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
