@@ -200,7 +200,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
             if (bannerResponses != null) {
                 for (int i = 0; i < bannerResponses.size(); i++) {
                     BannerResponse banner = bannerResponses.get(i);
-                    BannerImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage()/*bannerImage[i]*/, ScaleTypes.CENTER_CROP));
+                    BannerImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage()/*bannerImage[i]*/, ScaleTypes.FIT));
 
                     ProductId.add(banner.getProductId());
                 }

@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Fragment.Categories_Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:background="@color/background"
+       tools:context=".Fragment.Categories_Fragment">
 
-</FrameLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/background_design"
+           android:paddingBottom="5dp"
+           android:orientation="vertical">
+
+           <androidx.cardview.widget.CardView
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:layout_margin="15dp"
+               app:cardCornerRadius="8dp">
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="center">
+
+                   <TextView
+                       android:id="@+id/search_text"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentTop="true"
+                       android:layout_alignParentBottom="true"
+                       android:layout_toStartOf="@+id/microphone"
+                       android:drawableLeft="@drawable/ic_icon_search"
+                       android:drawablePadding="10dp"
+                       android:gravity="center_vertical"
+                       android:paddingStart="10dp"
+                       android:text="Search for Product" />
+
+                   <ImageView
+                       android:id="@+id/microphone"
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:layout_alignParentTop="true"
+                       android:layout_alignParentEnd="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_alignParentBottom="true"
+                       android:layout_marginEnd="10dp"
+                       android:src="@drawable/ic_icon_microphone" />
+
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+       </LinearLayout>
+
+
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/RecyclerView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginTop="15dp"
+           android:layout_marginBottom="15dp"
+           tools:itemCount="12"
+           app:spanCount="3"
+           android:layout_marginLeft="5dp"
+           app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+           tools:listitem="@layout/custom_categorieslayoutfragment"/>
+
+
+   </LinearLayout>
+
+</layout>
