@@ -36,4 +36,6 @@
     <color name="text_tittle">#80D8D8D8</color>
     <color name="product_name">#CCD8D8D8</color>
     <color name="product_Price">#D8D8D8</color>
+    <color name="green">#019624</color>
+    <color name="review_color">#585858</color>
 </resources>

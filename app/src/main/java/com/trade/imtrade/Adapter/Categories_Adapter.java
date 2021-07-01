@@ -19,10 +19,11 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
 
     Context context;
     String[] amount;
-
-    public Categories_Adapter(Context context, String[] amount) {
+    private OnCategoriesItemListener onCategoriesItemListener;
+    public Categories_Adapter(Context context, String[] amount,OnCategoriesItemListener onCategoriesItemListener) {
         this.context = context;
         this.amount = amount;
+        this.onCategoriesItemListener = onCategoriesItemListener;
     }
 
     public Categories_Adapter() {
@@ -41,6 +42,12 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
     @Override
     public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
         holder.binding.productName.setText(amount[position]);
+        holder.binding.click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCategoriesItemListener.onCategoriesItemClickListener(position);
+            }
+        });
 
     }
 
@@ -58,5 +65,9 @@ public class Categories_Adapter extends RecyclerView.Adapter<Categories_Adapter.
 
 
         }
+    }
+
+    public interface OnCategoriesItemListener {
+        void onCategoriesItemClickListener(/*List<GetNewCoinRespinse> data,*/ int position);
     }
 }

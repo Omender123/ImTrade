@@ -14,11 +14,11 @@ public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_
 
     Context context;
     String[] amount;
-    private  OnCategoriesItemListener onCategoriesItemListener;
-    public All_Categories_Adapter(Context context, String[] amount,OnCategoriesItemListener onCategoriesItemListener) {
+    private  OnAllCategoriesItemListener onAllCategoriesItemListener;
+    public All_Categories_Adapter(Context context, String[] amount,OnAllCategoriesItemListener onAllCategoriesItemListener) {
         this.context = context;
         this.amount = amount;
-        this.onCategoriesItemListener = onCategoriesItemListener;
+        this.onAllCategoriesItemListener = onAllCategoriesItemListener;
     }
 
     public All_Categories_Adapter() {
@@ -41,7 +41,7 @@ public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_
         holder.binding.categories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCategoriesItemListener.onCategoriesItemClickListener(position);
+                onAllCategoriesItemListener.onAllCategoriesItemClickListener(position);
             }
         });
 
@@ -63,8 +63,8 @@ public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_
         }
     }
 
-    public interface OnCategoriesItemListener {
-        void onCategoriesItemClickListener(/*List<GetNewCoinRespinse> data,*/ int position);
+    public interface OnAllCategoriesItemListener {
+        void onAllCategoriesItemClickListener(/*List<GetNewCoinRespinse> data,*/ int position);
     }
 
 }

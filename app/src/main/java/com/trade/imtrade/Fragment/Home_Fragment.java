@@ -44,13 +44,13 @@ import com.trade.imtrade.view_presenter.Home_Presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener {
+public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener,Categories_Adapter.OnCategoriesItemListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
     private Dialog dialog;
 
-    String[] price = {"Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles", "Mobiles"};
+    String[] price = {"Mobiles", "Laptops", "Television", "Shose", "Fashion", "Women's", "Men's", "Furniture", "Headphone", "Appliances", "Grocery", "Sports", "Baby Toys"};
     String[] price1 = {"Nike", "Puma", "Nike", "Puma", "Nike", "Puma", "Nike", "Puma", "Nike", "Puma", "Nike", "Puma"};
     String[] bannerImage = {"https://image.shutterstock.com/image-vector/flash-sale-promotion-media-banner-260nw-1557251186.jpg",
             "https://img.freepik.com/free-vector/sale-banner-with-product-description_1361-1333.jpg?size=626&ext=jpg",
@@ -101,7 +101,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
 
     private void getAllprouctCategories() {
-        Categories_Adapter categories_adapter = new Categories_Adapter(getContext(), price);
+        Categories_Adapter categories_adapter = new Categories_Adapter(getContext(), price,this::onCategoriesItemClickListener);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.categoriesRecycler.setLayoutManager(mLayoutManager1);
         binding.categoriesRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -236,6 +236,20 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
                 navController.navigate(R.id.action_home_Fragment_to_categories);
                 break;
         }
+
+    }
+
+    @Override
+    public void onCategoriesItemClickListener(int position) {
+        String categories = price[position];
+        Bundle bundle = new Bundle();
+        bundle.putString("categories", categories);
+
+        Home_FragmentDirections.ActionHomeFragmentToProductFragemet homeFragmentToProductFragemet = Home_FragmentDirections.actionHomeFragmentToProductFragemet();
+        homeFragmentToProductFragemet.setCategoriesTitle(categories);
+        Navigation.findNavController(view).navigate(homeFragmentToProductFragemet);
+
+
 
     }
 }

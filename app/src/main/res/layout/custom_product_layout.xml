@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:background="@color/background">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#252428"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="30dp">
+
+            <ImageView
+                android:id="@+id/product_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/product2"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="38dp"
+            android:layout_toEndOf="@+id/card"
+            android:fontFamily="@font/montserrat"
+            android:justificationMode="inter_word"
+            android:text="Product Full Name and model 123ev 8th"
+            android:textColor="@color/product_Price"
+            android:textSize="13sp"
+            android:textStyle="normal" />
+
+
+        <ImageView
+            android:id="@+id/image_unselect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_unslected"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"/>
+        <ImageView
+            android:id="@+id/image_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_selected"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/text_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_name"
+            android:layout_marginStart="10dp"
+            android:drawableLeft="@drawable/ic_baseline_star_24"
+            android:drawableTint="@color/product_Price"
+            android:text="4.5"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/product_Price"
+            android:textSize="10dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingBottom="3dp"
+            android:drawablePadding="5dp"
+            android:background="@drawable/curved_border"
+            android:backgroundTint="@color/green"
+            android:layout_toEndOf="@id/card"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/text_rating"
+            android:layout_below="@id/product_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:text="49876 rating"
+            android:textStyle="normal"
+            android:fontFamily="@font/montserrat"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            android:textColor="#4DD8D8D8"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_price"
+            android:layout_toEndOf="@id/card"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
+            android:text="8,499 Rs"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            android:textSize="18sp"
+            android:textColor="@color/product_Price"
+            android:layout_below="@id/text_rating"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_worng_price"
+            android:fontFamily="@font/montserrat"
+            android:layout_toEndOf="@id/product_price"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="10dp"
+            android:text="8,499 Rs"
+            android:background="@drawable/striking_text"
+            android:foreground="@drawable/striking_text"
+            android:textSelectHandle="@color/green"
+            android:textStyle="normal"
+            android:textSize="15sp"
+            android:textColor="@color/review_color"
+            android:layout_below="@id/text_rating"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_Off_price"
+            android:layout_toEndOf="@id/product_worng_price"
+            android:layout_marginTop="19dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat"
+            android:text="22%off"
+            android:textStyle="normal"
+            android:textSize="13sp"
+            android:textColor="@color/green"
+            android:layout_below="@id/text_rating"/>
+
+    </RelativeLayout>
+
+</layout>

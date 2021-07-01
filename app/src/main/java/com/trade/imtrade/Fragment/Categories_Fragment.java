@@ -25,7 +25,7 @@ import com.trade.imtrade.databinding.FragmentCategoriesBinding;
 import com.trade.imtrade.utils.AppUtils;
 import com.trade.imtrade.view_presenter.Home_Presenter;
 
-public class Categories_Fragment extends Fragment implements All_Categories_Adapter.OnCategoriesItemListener {
+public class Categories_Fragment extends Fragment implements All_Categories_Adapter.OnAllCategoriesItemListener {
     FragmentCategoriesBinding binding;
     private View view;
     private Dialog dialog;
@@ -66,7 +66,7 @@ public class Categories_Fragment extends Fragment implements All_Categories_Adap
     private void getAllCategories() {
 
 
-        All_Categories_Adapter all_categories_adapter = new All_Categories_Adapter(getContext(), price, this::onCategoriesItemClickListener);
+        All_Categories_Adapter all_categories_adapter = new All_Categories_Adapter(getContext(), price, this::onAllCategoriesItemClickListener);
         RecyclerView.LayoutManager mLayoutManager1 = new GridLayoutManager(getContext(), 3, RecyclerView.VERTICAL, false);
         binding.RecyclerView.setLayoutManager(mLayoutManager1);
         binding.RecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -74,7 +74,7 @@ public class Categories_Fragment extends Fragment implements All_Categories_Adap
     }
 
     @Override
-    public void onCategoriesItemClickListener(int position) {
+    public void onAllCategoriesItemClickListener(int position) {
 
         String categories = price[position];
         Bundle bundle = new Bundle();
