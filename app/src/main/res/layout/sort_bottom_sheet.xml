@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:paddingBottom="40dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/montserrat"
+        android:text="Sort By"
+        android:textColor="@color/text_tittle"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_tittle" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15sp"
+        android:layout_marginTop="08dp"
+        android:layout_marginRight="15sp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_Relevance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:bufferType="normal"
+            android:fontFamily="@font/montserrat"
+            android:layoutDirection="rtl"
+            android:text="Relevance"
+            android:buttonTint="@color/purple_200"
+            android:textAlignment="textStart"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <RadioButton
+            android:id="@+id/radio_Popularity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:bufferType="normal"
+            android:fontFamily="@font/montserrat"
+            android:layoutDirection="rtl"
+            android:text="Popularity"
+            android:buttonTint="@color/purple_200"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <RadioButton
+            android:id="@+id/radio_LtoH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:bufferType="normal"
+            android:fontFamily="@font/montserrat"
+            android:buttonTint="@color/purple_200"
+            android:layoutDirection="rtl"
+            android:text="Price- Low to High"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <RadioButton
+            android:id="@+id/radio_HtoL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:bufferType="normal"
+            android:fontFamily="@font/montserrat"
+            android:layoutDirection="rtl"
+            android:text="Price- High to Low"
+            android:buttonTint="@color/purple_200"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <RadioButton
+            android:id="@+id/radio_First"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:bufferType="normal"
+            android:fontFamily="@font/montserrat"
+            android:buttonTint="@color/purple_200"
+            android:layoutDirection="rtl"
+            android:text="Newest First"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+    </RadioGroup>
+
+
+</LinearLayout>
+
+

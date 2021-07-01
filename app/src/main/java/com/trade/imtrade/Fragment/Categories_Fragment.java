@@ -43,6 +43,7 @@ public class Categories_Fragment extends Fragment implements All_Categories_Adap
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_categories, container, false);
 
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories, container, false);
 
         view = binding.getRoot();
