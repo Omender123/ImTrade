@@ -52,6 +52,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener {
         view = binding.getRoot();
         dialog = AppUtils.hideShowProgress(getContext());
         binding.imgShort.setOnClickListener(this);
+        binding.textFilter.setOnClickListener(this);
 
         getAllProduct();
 
@@ -82,6 +83,10 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.img_short:
                 showBottomSheetDialog();
+                break;
+
+            case R.id.text_filter:
+              navController.navigate(R.id.action_product_Fragemet_to_filter_Fragment);
                 break;
         }
 

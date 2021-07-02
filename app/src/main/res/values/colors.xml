@@ -38,4 +38,9 @@
     <color name="product_Price">#D8D8D8</color>
     <color name="green">#019624</color>
     <color name="review_color">#585858</color>
+
+    <color name="toggleOnColor">#FF4081</color>
+    <color name="toggleOffColor">@android:color/transparent</color>
+    <color name="uncheckedTextColor">#333</color>
+    <color name="CheckedTextColor">@android:color/white</color>
 </resources>

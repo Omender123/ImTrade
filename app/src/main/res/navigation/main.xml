@@ -151,8 +151,22 @@
             android:name="CategoriesTitle"
             android:defaultValue="defaultValue"
             app:argType="string" />
+        <action
+            android:id="@+id/action_product_Fragemet_to_filter_Fragment"
+            app:destination="@id/filter_Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/filter_Fragment"
+            app:popUpToInclusive="true"/>
 
     </fragment>
+    <fragment
+        android:id="@+id/filter_Fragment"
+        android:name="com.trade.imtrade.Fragment.Filter_Fragment"
+        android:label="Filters"
+        tools:layout="@layout/fragment_filter" />
 
 
 </navigation>

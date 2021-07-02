@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                if(destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile ) {
                    img_discount.setVisibility(View.GONE);
                    coordinatorLayout.setVisibility(View.GONE);
-               }else if (destination.getId()==R.id.Search_nearBy || destination.getId()==R.id.categories || destination.getId()==R.id.product_Fragemet ){
+               }else if (destination.getId()==R.id.Search_nearBy || destination.getId()==R.id.categories || destination.getId()==R.id.product_Fragemet || destination.getId()==R.id.filter_Fragment ){
                    backhome =true;
                    coordinatorLayout.setVisibility(View.GONE);
                }else if (destination.getId()==R.id.nav_Referral){
