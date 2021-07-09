@@ -94,7 +94,6 @@ public class AppUtils {
 
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(isBackEnable);
              activity.getSupportActionBar().setDisplayShowHomeEnabled(isBackEnable);
-
              toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {

@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                }else if (destination.getId()==R.id.Search_nearBy || destination.getId()==R.id.categories || destination.getId()==R.id.product_Fragemet || destination.getId()==R.id.filter_Fragment ){
                    backhome =true;
                    coordinatorLayout.setVisibility(View.GONE);
-               }else if (destination.getId()==R.id.nav_Referral){
+               }/*else if (destination.getId()==R.id.nav_Referral){
                    coordinatorLayout.setVisibility(View.GONE);
                    img_discount.setVisibility(View.GONE);
                    img_cart.setVisibility(View.GONE);
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    NavigationUI.setupWithNavController(toolbar,navController,drawer);
                    backhome =true;
                   //  navController.popBackStack();
-               }
+               }*/
                else {
                   img_discount.setVisibility(View.VISIBLE);
                   coordinatorLayout.setVisibility(View.VISIBLE);

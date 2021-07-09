@@ -33,6 +33,7 @@ import com.trade.imtrade.Adapter.ProductToSeasonAdapter;
 import com.trade.imtrade.Adapter.Recommended_Adapter;
 import com.trade.imtrade.Authentication.Change_Password;
 import com.trade.imtrade.Authentication.Success_screen;
+import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
@@ -74,10 +75,9 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         dialog = AppUtils.hideShowProgress(getContext());
 
         presenter.GetBanner(getContext());
+        presenter.GetAllCategories(getContext());
         binding.cateAll.setOnClickListener(this);
-        // SetImageSlider();
-        getAllprouctCategories();
-        getAllprouctRecommended();
+          getAllprouctRecommended();
         getDealOfTheDay();
         getDiscountByBrands();
         getMostPopularProduct();
@@ -100,13 +100,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
 
-    private void getAllprouctCategories() {
-        Categories_Adapter categories_adapter = new Categories_Adapter(getContext(), price,this::onCategoriesItemClickListener);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.categoriesRecycler.setLayoutManager(mLayoutManager1);
-        binding.categoriesRecycler.setItemAnimator(new DefaultItemAnimator());
-        binding.categoriesRecycler.setAdapter(categories_adapter);
-    }
 
     private void getAllprouctRecommended() {
         Recommended_Adapter recommended_adapter = new Recommended_Adapter(getContext(), price);
@@ -219,6 +212,19 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
+    public void onAllCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            Categories_Adapter categories_adapter = new Categories_Adapter(getContext(), allCategoriesResponses,this::onCategoriesItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.categoriesRecycler.setLayoutManager(mLayoutManager1);
+            binding.categoriesRecycler.setItemAnimator(new DefaultItemAnimator());
+            binding.categoriesRecycler.setAdapter(categories_adapter);
+        }
+
+
+    }
+
+    @Override
     public void onFailure(Throwable t) {
         Sneaker.with(this)
                 .setTitle(t.getLocalizedMessage())
@@ -240,15 +246,17 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
-    public void onCategoriesItemClickListener(int position) {
-        String categories = price[position];
+    public void onCategoriesItemClickListener(List<AllCategoriesResponse> data,int position) {
+        String categories = data.get(position).getName();
+        String categoriesId = data.get(position).getId();
         Bundle bundle = new Bundle();
         bundle.putString("categories", categories);
+        bundle.putString("categoriesId", categoriesId);
 
         Home_FragmentDirections.ActionHomeFragmentToProductFragemet homeFragmentToProductFragemet = Home_FragmentDirections.actionHomeFragmentToProductFragemet();
         homeFragmentToProductFragemet.setCategoriesTitle(categories);
+        homeFragmentToProductFragemet.setCategoriesId(categoriesId);
         Navigation.findNavController(view).navigate(homeFragmentToProductFragemet);
-
 
 
     }

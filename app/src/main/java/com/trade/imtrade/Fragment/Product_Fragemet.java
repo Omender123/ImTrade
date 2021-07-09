@@ -34,6 +34,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener {
     private View view;
     private Dialog dialog;
     NavController navController;
+    String categoriesId;
     String[] price = {"8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs"};
 
     public Product_Fragemet() {
@@ -53,6 +54,10 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener {
         dialog = AppUtils.hideShowProgress(getContext());
         binding.imgShort.setOnClickListener(this);
         binding.textFilter.setOnClickListener(this);
+
+        categoriesId = Product_FragemetArgs.fromBundle(getArguments()).getCategoriesId();
+
+        Toast.makeText(getContext(), ""+categoriesId, Toast.LENGTH_SHORT).show();
 
         getAllProduct();
 

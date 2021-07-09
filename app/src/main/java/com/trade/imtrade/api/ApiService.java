@@ -2,6 +2,7 @@ package com.trade.imtrade.api;
 
 
 
+import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
@@ -53,5 +54,8 @@ public interface ApiService {
 
     @GET("banner")
     Call<List<BannerResponse>>getBanner();
+
+    @GET("categories/all")
+    Call<List<AllCategoriesResponse>>getAllCategories();
 
 }

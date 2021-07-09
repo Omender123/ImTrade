@@ -8,16 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomCategorieslayoutfragmentBinding;
+
+import java.util.List;
 
 public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_Adapter.AllCategoriesViewHolder>  {
 
     Context context;
-    String[] amount;
+   List<AllCategoriesResponse>allCategoriesResponses;
     private  OnAllCategoriesItemListener onAllCategoriesItemListener;
-    public All_Categories_Adapter(Context context, String[] amount,OnAllCategoriesItemListener onAllCategoriesItemListener) {
+    public All_Categories_Adapter(Context context, List<AllCategoriesResponse>allCategoriesResponses,OnAllCategoriesItemListener onAllCategoriesItemListener) {
         this.context = context;
-        this.amount = amount;
+        this.allCategoriesResponses = allCategoriesResponses;
         this.onAllCategoriesItemListener = onAllCategoriesItemListener;
     }
 
@@ -36,12 +41,13 @@ public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_
 
     @Override
     public void onBindViewHolder(@NonNull AllCategoriesViewHolder holder, int position) {
-        holder.binding.productName.setText(amount[position]);
+        holder.binding.productName.setText(allCategoriesResponses.get(position).getName());
+        Glide.with(context).load(PrefConf.IMAGE_URL+allCategoriesResponses.get(position).getImage()).into(holder.binding.productImg);
 
         holder.binding.categories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAllCategoriesItemListener.onAllCategoriesItemClickListener(position);
+                onAllCategoriesItemListener.onAllCategoriesItemClickListener(allCategoriesResponses,position);
             }
         });
 
@@ -49,7 +55,7 @@ public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_
 
     @Override
     public int getItemCount() {
-        return amount.length;
+        return allCategoriesResponses.size();
     }
 
     public class AllCategoriesViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +70,7 @@ public class All_Categories_Adapter extends RecyclerView.Adapter<All_Categories_
     }
 
     public interface OnAllCategoriesItemListener {
-        void onAllCategoriesItemClickListener(/*List<GetNewCoinRespinse> data,*/ int position);
+        void onAllCategoriesItemClickListener(List<AllCategoriesResponse> data, int position);
     }
 
 }

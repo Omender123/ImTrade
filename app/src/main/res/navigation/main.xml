@@ -121,11 +121,6 @@
     </fragment>
 
 
-    <fragment
-        android:id="@+id/nav_Referral"
-        android:name="com.trade.imtrade.Fragment.Referral_code"
-        android:label="Referral Code"
-        tools:layout="@layout/fragment_referral_code" />
 
     <fragment
         android:id="@+id/categories"
@@ -151,6 +146,10 @@
             android:name="CategoriesTitle"
             android:defaultValue="defaultValue"
             app:argType="string" />
+        <argument
+            android:name="CategoriesId"
+            android:defaultValue="defaultValue"
+            app:argType="string" />
         <action
             android:id="@+id/action_product_Fragemet_to_filter_Fragment"
             app:destination="@id/filter_Fragment"
@@ -168,5 +167,11 @@
         android:label="Filters"
         tools:layout="@layout/fragment_filter" />
 
+
+    <activity
+        android:id="@+id/nav_Referral"
+        android:name="com.trade.imtrade.Activity.Referral_Code"
+        android:label="Referral Code"
+        tools:layout="@layout/activity_referral__code" />
 
 </navigation>
