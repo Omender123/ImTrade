@@ -18,11 +18,13 @@ import com.trade.imtrade.databinding.CustomProductLayoutBinding;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>  {
     Context context;
     String[] amount;
+    private  ProductClickListener productClickListener;
     boolean Check=false;
 
-    public ProductAdapter(Context context, String[] amount) {
+    public ProductAdapter(Context context, String[] amount,ProductClickListener productClickListener) {
         this.context = context;
         this.amount = amount;
+        this.productClickListener = productClickListener;
     }
 
     public ProductAdapter() {
@@ -61,6 +63,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
 
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productClickListener.ProductOnClickListener(position);
+            }
+        });
           }
 
     @Override
@@ -79,4 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
+    public interface ProductClickListener{
+        void ProductOnClickListener(int Position);
+    }
 }

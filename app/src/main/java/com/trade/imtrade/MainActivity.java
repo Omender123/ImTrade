@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CoordinatorLayout coordinatorLayout;
     ImageView img_discount,img_cart;
     Boolean backhome =false;
+    RelativeLayout relative;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         coordinatorLayout =(CoordinatorLayout) findViewById(R.id.coordinator);
         img_discount = (ImageView) findViewById(R.id.img_discount);
         img_cart = (ImageView) findViewById(R.id.img_cart);
+        relative = (RelativeLayout) findViewById(R.id.relative);
 
         setSupportActionBar(toolbar);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        navigationView = findViewById(R.id.navigationView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.main);
-        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile,R.id.nav_Referral})
+        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile,R.id.nav_Referral,R.id.product_Details})
                 .setDrawerLayout(drawer)
                 .build();
       NavigationUI.setupWithNavController(navigationView, navController);
@@ -107,15 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                }else if (destination.getId()==R.id.Search_nearBy || destination.getId()==R.id.categories || destination.getId()==R.id.product_Fragemet || destination.getId()==R.id.filter_Fragment ){
                    backhome =true;
                    coordinatorLayout.setVisibility(View.GONE);
-               }/*else if (destination.getId()==R.id.nav_Referral){
-                   coordinatorLayout.setVisibility(View.GONE);
-                   img_discount.setVisibility(View.GONE);
-                   img_cart.setVisibility(View.GONE);
-
-                   NavigationUI.setupWithNavController(toolbar,navController,drawer);
-                   backhome =true;
-                  //  navController.popBackStack();
-               }*/
+               }
                else {
                   img_discount.setVisibility(View.VISIBLE);
                   coordinatorLayout.setVisibility(View.VISIBLE);

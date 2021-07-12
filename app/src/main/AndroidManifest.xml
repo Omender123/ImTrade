@@ -30,8 +30,11 @@
         android:theme="@style/Theme.ImTrade"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".Activity.Referral_Code"
-            android:theme="@style/Theme.ImTrade.NoActionBar"></activity>
+        <activity android:name=".Activity.Product_Details"
+            android:theme="@style/Theme.ImTrade.NoActionBar" ></activity>
+        <activity
+            android:name=".Activity.Referral_Code"
+            android:theme="@style/Theme.ImTrade.NoActionBar" />
         <activity
             android:name=".Authentication.Scan_Referral_code"
             android:theme="@style/Theme.ImTrade.NoActionBar" />

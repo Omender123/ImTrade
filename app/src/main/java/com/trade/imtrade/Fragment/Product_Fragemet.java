@@ -29,7 +29,7 @@ import com.trade.imtrade.databinding.FragmentProductBinding;
 import com.trade.imtrade.utils.AppUtils;
 
 
-public class Product_Fragemet extends Fragment implements View.OnClickListener {
+public class Product_Fragemet extends Fragment implements View.OnClickListener,ProductAdapter.ProductClickListener {
     FragmentProductBinding binding;
     private View view;
     private Dialog dialog;
@@ -76,7 +76,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener {
 
     private void getAllProduct() {
 
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), price);
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), price,this::ProductOnClickListener);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         binding.RecyclerView.setLayoutManager(mLayoutManager1);
         binding.RecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -134,5 +134,10 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener {
         });
 
         bottomSheetDialog.show();
+    }
+
+    @Override
+    public void ProductOnClickListener(int Position) {
+        navController.navigate(R.id.action_product_Fragemet_to_product_Details);
     }
 }
