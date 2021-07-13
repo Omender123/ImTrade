@@ -82,6 +82,7 @@
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
             android:paddingBottom="3dp"
+            android:fontFamily="@font/montserrat"
             android:drawablePadding="5dp"
             android:background="@drawable/curved_border"
             android:backgroundTint="@color/green"

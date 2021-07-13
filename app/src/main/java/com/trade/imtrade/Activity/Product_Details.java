@@ -20,6 +20,10 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.trade.imtrade.Adapter.BrandsToggleAdapter;
 import com.trade.imtrade.Adapter.ColorAdapter;
+import com.trade.imtrade.Adapter.DetailsAdapter;
+import com.trade.imtrade.Adapter.ProductToSeasonAdapter;
+import com.trade.imtrade.Adapter.ReviewAdapter;
+import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -44,13 +48,19 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
         binding.HideMore.setOnClickListener(this);
         binding.showMore1.setOnClickListener(this);
         binding.HideMore1.setOnClickListener(this);
+        binding.showDetails.setOnClickListener(this);
+        binding.HideDetails.setOnClickListener(this);
+
 
 
         getProductBanner();
         CheckBoxList();
         changeStatusBarColor();
+        getReviewList();
         getColorList();
         getStorageList();
+        getAllReview_Product();
+        getDelatilsList(false);
 
     }
 
@@ -131,6 +141,16 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
                 binding.HideMore1.setVisibility(View.GONE);
                 binding.storageRecyclerView.setVisibility(View.GONE);
                 break;
+            case R.id.showDetails:
+                binding.showDetails.setVisibility(View.GONE);
+                binding.HideDetails.setVisibility(View.VISIBLE);
+                getDelatilsList(true);
+                break;
+            case R.id.HideDetails:
+                binding.showDetails.setVisibility(View.VISIBLE);
+                binding.HideDetails.setVisibility(View.GONE);
+                getDelatilsList(false);
+                break;
         }
     }
 
@@ -171,6 +191,49 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onToggleItemClickListener(int position, boolean Checked) {
+
+    }
+
+    private void getDelatilsList(Boolean count) {
+        String DetailsType[]={"Brands Name","OS","RAM","ROM","FRONT CAMERA","BACK CAMERA","BATTERY"};
+       String Details[]={"VIVO","ANDROID","8 GB","512 GB","64 MP","128 MP","5000 MH"};
+
+
+        if (count==true){
+            DetailsAdapter detailsAdapter = new DetailsAdapter(getApplicationContext(),DetailsType,Details,true);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL ,false);
+            binding.detailsRecyclerView.setLayoutManager(mLayoutManager1);
+            binding.detailsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            binding.detailsRecyclerView.setAdapter(detailsAdapter);
+        }else {
+            DetailsAdapter detailsAdapter = new DetailsAdapter(getApplicationContext(),DetailsType,Details,false);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL ,false);
+            binding.detailsRecyclerView.setLayoutManager(mLayoutManager1);
+            binding.detailsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            binding.detailsRecyclerView.setAdapter(detailsAdapter);
+        }
+
+    }
+
+    private void getReviewList() {
+        String [] price = {"Full Name","Full Name"};
+
+
+        ReviewAdapter reviewAdapter = new ReviewAdapter(getApplicationContext(),price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL ,false);
+        binding.ReviewRecyclerView.setLayoutManager(mLayoutManager1);
+        binding.ReviewRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        binding.ReviewRecyclerView.setAdapter(reviewAdapter);
+
+    }
+
+    private void getAllReview_Product() {
+        String price[]={"7999","8999","10000","7999","8999","10000"};
+        Review_product_Adapter review_product_adapter = new Review_product_Adapter(this, price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        binding.reviewProducRcycler.setLayoutManager(mLayoutManager1);
+        binding.reviewProducRcycler.setItemAnimator(new DefaultItemAnimator());
+        binding.reviewProducRcycler.setAdapter(review_product_adapter);
 
     }
 }
