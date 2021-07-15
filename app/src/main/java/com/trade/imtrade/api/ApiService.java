@@ -5,6 +5,7 @@ package com.trade.imtrade.api;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
+import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.request.ChangePasswordBody;
@@ -27,6 +28,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -57,5 +59,8 @@ public interface ApiService {
 
     @GET("categories/all")
     Call<List<AllCategoriesResponse>>getAllCategories();
+
+    @GET("products/list")
+    Call<ProductResponse>getAllProductDetails(@Query("category") String categoryName);
 
 }

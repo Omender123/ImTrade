@@ -21,22 +21,26 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.All_Categories_Adapter;
 import com.trade.imtrade.Adapter.ProductAdapter;
 import com.trade.imtrade.MainActivity;
+import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.databinding.FragmentProductBinding;
 import com.trade.imtrade.utils.AppUtils;
+import com.trade.imtrade.view_presenter.AllProductPresenter;
+import com.trade.imtrade.view_presenter.Home_Presenter;
 
 
-public class Product_Fragemet extends Fragment implements View.OnClickListener,ProductAdapter.ProductClickListener {
+public class Product_Fragemet extends Fragment implements View.OnClickListener, ProductAdapter.ProductClickListener, AllProductPresenter.GetAllProductView {
     FragmentProductBinding binding;
     private View view;
     private Dialog dialog;
     NavController navController;
-    String categoriesId;
-    String[] price = {"8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs", "8,999 Rs"};
+    String categoriesName;
 
+    AllProductPresenter presenter;
     public Product_Fragemet() {
         // Required empty public constructor
     }
@@ -51,15 +55,15 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener,P
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false);
 
         view = binding.getRoot();
+        presenter = new AllProductPresenter(this);
+
         dialog = AppUtils.hideShowProgress(getContext());
         binding.imgShort.setOnClickListener(this);
         binding.textFilter.setOnClickListener(this);
 
-        categoriesId = Product_FragemetArgs.fromBundle(getArguments()).getCategoriesId();
+        categoriesName = Product_FragemetArgs.fromBundle(getArguments()).getCategoriesTitle();
 
-        Toast.makeText(getContext(), ""+categoriesId, Toast.LENGTH_SHORT).show();
-
-        getAllProduct();
+        presenter.GetAllProduct(getContext(),categoriesName);
 
         return binding.getRoot();
     }
@@ -74,14 +78,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener,P
 
     }
 
-    private void getAllProduct() {
 
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), price,this::ProductOnClickListener);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        binding.RecyclerView.setLayoutManager(mLayoutManager1);
-        binding.RecyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.RecyclerView.setAdapter(productAdapter);
-    }
 
     @Override
     public void onClick(View v) {
@@ -139,5 +136,45 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener,P
     @Override
     public void ProductOnClickListener(int Position) {
         navController.navigate(R.id.action_product_Fragemet_to_product_Details);
+    }
+
+    @Override
+    public void showHideProgress(boolean isShow) {
+        if (isShow) {
+            dialog.show();
+        } else {
+            dialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onError(String message) {
+        Sneaker.with(this)
+                .setTitle(message)
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakError();
+    }
+
+    @Override
+    public void onAllProductSuccess(ProductResponse productResponse, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            ProductAdapter productAdapter = new ProductAdapter(getContext(),productResponse ,this::ProductOnClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+            binding.RecyclerView.setLayoutManager(mLayoutManager1);
+            binding.RecyclerView.setItemAnimator(new DefaultItemAnimator());
+            binding.RecyclerView.setAdapter(productAdapter);
+        }
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        Sneaker.with(this)
+                .setTitle(t.getLocalizedMessage())
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakError();
     }
 }

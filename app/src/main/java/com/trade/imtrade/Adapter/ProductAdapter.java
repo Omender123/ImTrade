@@ -11,19 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomProductLayoutBinding;
 import com.trade.imtrade.databinding.CustomProductLayoutBinding;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>  {
     Context context;
-    String[] amount;
+    ProductResponse productResponse;
     private  ProductClickListener productClickListener;
     boolean Check=false;
 
-    public ProductAdapter(Context context, String[] amount,ProductClickListener productClickListener) {
+    public ProductAdapter(Context context, ProductResponse productResponse,ProductClickListener productClickListener) {
         this.context = context;
-        this.amount = amount;
+        this.productResponse = productResponse;
         this.productClickListener = productClickListener;
     }
 
@@ -42,7 +44,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.binding.productPrice.setText(amount[position]);
+        holder.binding.productName.setText(productResponse.getResponse().get(position).getName());
+        holder.binding.textRating.setText(productResponse.getResponse().get(position).getAverageRating());
+      Glide.with(context).load(PrefConf.IMAGE_URL+productResponse.getResponse().get(position).getImages().get(0)).into(holder.binding.productImg);
+
+      //  Toast.makeText(context, ""+productResponse.getResponse().get(position).getImages().get(0), Toast.LENGTH_SHORT).show();
+        holder.binding.productPrice.setText(productResponse.getResponse().get(position).getDiscount()+" Rs");
+        holder.binding.productOffPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMargin()+" %off");
+        holder.binding.productWorngPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMrp()+" Rs");
 
         holder.binding.imageUnselect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public int getItemCount() {
-        return amount.length;
+        return productResponse.getResponse().size();
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {

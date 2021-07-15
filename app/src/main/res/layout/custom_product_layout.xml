@@ -19,12 +19,15 @@
             android:layout_marginBottom="10dp"
             app:cardBackgroundColor="#252428"
             app:cardCornerRadius="10dp"
+            android:padding="15dp"
             app:cardElevation="30dp">
 
             <ImageView
                 android:id="@+id/product_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="15dp"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/product2"/>
         </androidx.cardview.widget.CardView>
 
@@ -113,7 +116,6 @@
             android:layout_toEndOf="@id/card"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
-            android:text="8,499 Rs"
             android:textStyle="bold"
             android:fontFamily="@font/montserrat"
             android:textSize="18sp"
@@ -127,7 +129,6 @@
             android:layout_toEndOf="@id/product_price"
             android:layout_marginTop="18dp"
             android:layout_marginStart="10dp"
-            android:text="8,499 Rs"
             android:background="@drawable/striking_text"
             android:foreground="@drawable/striking_text"
             android:textSelectHandle="@color/green"
@@ -143,7 +144,6 @@
             android:layout_marginTop="19dp"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat"
-            android:text="22%off"
             android:textStyle="normal"
             android:textSize="13sp"
             android:textColor="@color/green"
