@@ -76,7 +76,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productClickListener.ProductOnClickListener(position);
+                productClickListener.ProductOnClickListener(productResponse,position);
             }
         });
           }
@@ -98,6 +98,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public interface ProductClickListener{
-        void ProductOnClickListener(int Position);
+        void ProductOnClickListener(ProductResponse productResponse,int Position);
     }
 }

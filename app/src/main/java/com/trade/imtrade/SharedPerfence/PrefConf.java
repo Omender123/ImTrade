@@ -10,6 +10,7 @@ public class PrefConf {
     public static final String OTP = "OTP";
     public static final String TYPE = "TYPE";
     public static final String TYPE1 = "TYPE1";
+    public static final String ROUTEID = "ROUTEID";
 
 
 }

@@ -5,6 +5,7 @@ package com.trade.imtrade.api;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
+import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
@@ -31,7 +32,6 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface ApiService {
-
 
     @POST("user/register")
     Call<SignUpResponse> createUser(@Body SignUpBody signUpBody);
@@ -62,5 +62,8 @@ public interface ApiService {
 
     @GET("products/list")
     Call<ProductResponse>getAllProductDetails(@Query("category") String categoryName);
+
+    @GET("products/route")
+    Call<ProductDetailsResponse>getProductFullDetails(@Query("route") String Route);
 
 }

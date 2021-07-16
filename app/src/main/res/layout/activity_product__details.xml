@@ -256,6 +256,7 @@
                         android:textStyle="normal" />
 
                     <TextView
+                        android:id="@+id/text_color"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -337,6 +338,7 @@
                         android:textStyle="normal" />
 
                     <TextView
+                        android:id="@+id/text_Storage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

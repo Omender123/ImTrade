@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     FloatingActionButton floatingActionButton ;
     CoordinatorLayout coordinatorLayout;
-    ImageView img_discount,img_cart;
+    ImageView img_discount;
     Boolean backhome =false;
-    RelativeLayout relative;
+    RelativeLayout relative,img_cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         floatingActionButton = findViewById(R.id.fab);
         coordinatorLayout =(CoordinatorLayout) findViewById(R.id.coordinator);
         img_discount = (ImageView) findViewById(R.id.img_discount);
-        img_cart = (ImageView) findViewById(R.id.img_cart);
+        img_cart = (RelativeLayout) findViewById(R.id.relative_cart);
         relative = (RelativeLayout) findViewById(R.id.relative);
 
         setSupportActionBar(toolbar);

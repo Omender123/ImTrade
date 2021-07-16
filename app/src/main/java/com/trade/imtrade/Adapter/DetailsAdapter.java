@@ -9,20 +9,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.databinding.DetailsLayoutBinding;
 import com.trade.imtrade.databinding.DetailsLayoutBinding;
 
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder>  {
     Context context;
-    String[] detailsType;
-    String[] details;
+  ProductDetailsResponse productDetailsResponse;
     Boolean count;
 
-    public DetailsAdapter(Context context,String[] detailsType,String[] details,Boolean count) {
+    public DetailsAdapter(Context context, ProductDetailsResponse productDetailsResponse,Boolean count) {
         this.context = context;
-        this.detailsType = detailsType;
-        this.details = details;
+        this.productDetailsResponse = productDetailsResponse;
         this.count = count;
     }
 
@@ -41,8 +40,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
 
     @Override
     public void onBindViewHolder(@NonNull DetailsViewHolder holder, int position) {
-        holder.binding.detailsType.setText(detailsType[position]);
-        holder.binding.details.setText(details[position]);
+        holder.binding.details.setText(productDetailsResponse.getDetails().get(position).getDetail());
 
      }
 
@@ -51,9 +49,9 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
         int size =0;
         if (count==true){
 
-            size= details.length;
+            size= productDetailsResponse.getDetails().size();
         }else{
-           size =4;
+           size =3;
         }
         return size;
     }

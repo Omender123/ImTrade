@@ -41,38 +41,53 @@
 
             <ImageView
                 android:id="@+id/img_discount"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:src="@drawable/ic_discount"
                 android:layout_marginRight="10dp"/>
-            <ImageView
+         <!--   <ImageView
                 android:id="@+id/img_cart"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_shopping_cart"/>
+                android:src="@drawable/ic_shopping_cart"/>-->
+            <RelativeLayout
+                android:id="@+id/relative_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:src="@drawable/ic_shopping_cart" />
+
+                <TextView
+                    android:id="@+id/text_cart_Count"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/ic_history"
+                    android:backgroundTint="@color/purple_200"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="center"
+                    android:text="1"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="5dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </RelativeLayout>
 
 
-
-
-
-
-    <fragment
-        android:background="@color/background"
-        android:id="@+id/main"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/main"
-        android:layout_above="@+id/coordinator"
-        android:layout_below="@+id/relative"
-        />
-<!--
+    <!--
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -107,6 +122,17 @@
             app:menu="@menu/main" />
     </com.google.android.material.appbar.AppBarLayout>-->
 
+
+    <fragment
+        android:id="@+id/main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/coordinator"
+        android:layout_below="@+id/relative"
+        android:background="@color/background"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"

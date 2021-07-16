@@ -30,13 +30,12 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             app:cardCornerRadius="8dp"
-            android:alpha="0.8"
             app:cardBackgroundColor="#384450">
             <CheckBox
                 android:id="@+id/checkbox"
-                android:layout_width="24dp"
+                android:layout_width="15dp"
                 android:layout_gravity="center"
-                android:layout_height="24dp"
+                android:layout_height="15dp"
                 style="@style/CustomCheckbox" />
 
         </androidx.cardview.widget.CardView>
@@ -47,19 +46,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Audemars Pluguet Watch"
-        android:textSize="10dp"
+        android:textSize="12dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
         android:textColor="@color/product_name"
-        android:textStyle="bold"
-        android:fontFamily="@font/montserrat"/>
+        android:textStyle="normal"
+        android:fontFamily="@font/poppins"/>
     <TextView
         android:id="@+id/cate_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="4500Rs"
-        android:textSize="12dp"
+        android:layout_marginLeft="2dp"
+        android:textSize="13dp"
         android:textColor="@color/product_Price"
         android:textStyle="bold"
-        android:fontFamily="@font/montserrat"/>
+        android:fontFamily="@font/poppins"/>
 
     </LinearLayout>
 </layout>

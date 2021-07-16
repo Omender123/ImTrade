@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
+import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomColorLayoutBinding;
@@ -23,13 +24,11 @@ import java.util.List;
 
 public class ColorAdapter  extends RecyclerView.Adapter<ColorAdapter.ColorViewHolder> {
     Context context;
-    ArrayList<String>color;
-    String  colorName[];
+    ProductDetailsResponse productDetailsResponse;
     private OnColorItemListener onColorItemListener;
-    public ColorAdapter(Context context,   ArrayList<String>color,String  colorName[],OnColorItemListener onColorItemListener) {
+    public ColorAdapter(Context context, ProductDetailsResponse productDetailsResponse,OnColorItemListener onColorItemListener) {
         this.context = context;
-        this.color = color;
-        this.colorName =colorName;
+        this.productDetailsResponse = productDetailsResponse;
         this.onColorItemListener = onColorItemListener;
     }
 
@@ -50,13 +49,13 @@ public class ColorAdapter  extends RecyclerView.Adapter<ColorAdapter.ColorViewHo
     @Override
     public void onBindViewHolder(@NonNull ColorViewHolder holder, int position) {
       //  String color ="#000000";
-      holder.binding.cardColor.setCardBackgroundColor(Color.parseColor(color.get(position).toString()));
-        holder.binding.colorName.setText(colorName[position]);
+      holder.binding.cardColor.setCardBackgroundColor(Color.parseColor(productDetailsResponse.getColor().get(position).getCode()));
+        holder.binding.colorName.setText(productDetailsResponse.getColor().get(position).getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onColorItemListener.onOnColorClickListener(position);
+                onColorItemListener.onOnColorClickListener(productDetailsResponse,position);
             }
         });
 
@@ -65,7 +64,7 @@ public class ColorAdapter  extends RecyclerView.Adapter<ColorAdapter.ColorViewHo
 
     @Override
     public int getItemCount() {
-        return colorName.length;
+        return productDetailsResponse.getColor().size();
     }
 
     public class ColorViewHolder extends RecyclerView.ViewHolder {
@@ -80,7 +79,7 @@ public class ColorAdapter  extends RecyclerView.Adapter<ColorAdapter.ColorViewHo
     }
 
     public interface OnColorItemListener {
-        void onOnColorClickListener( int position);
+        void onOnColorClickListener(ProductDetailsResponse productDetailsResponse, int position);
     }
 
 }

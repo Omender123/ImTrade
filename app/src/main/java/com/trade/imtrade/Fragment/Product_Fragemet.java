@@ -27,6 +27,8 @@ import com.trade.imtrade.Adapter.ProductAdapter;
 import com.trade.imtrade.MainActivity;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPerfence.MyPreferences;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.FragmentProductBinding;
 import com.trade.imtrade.utils.AppUtils;
 import com.trade.imtrade.view_presenter.AllProductPresenter;
@@ -134,7 +136,12 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void ProductOnClickListener(int Position) {
+    public void ProductOnClickListener(ProductResponse productResponse,int Position) {
+        String roleId = productResponse.getResponse().get(Position).getRoute();
+
+        MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID,roleId);
+
+
         navController.navigate(R.id.action_product_Fragemet_to_product_Details);
     }
 
