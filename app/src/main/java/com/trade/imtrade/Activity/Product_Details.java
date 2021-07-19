@@ -306,7 +306,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
     }
     @Override
-    public void onToggleItemClickListener(ProductDetailsResponse productDetailsResponse,int position, boolean Checked) {
+    public void onToggleItemClickListener(ProductDetailsResponse productDetailsResponse,int position) {
 
             binding.textStorage.setText(productDetailsResponse.getStorage().get(position).getSize());
 

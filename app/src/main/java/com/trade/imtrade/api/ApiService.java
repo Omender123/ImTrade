@@ -4,7 +4,9 @@ package com.trade.imtrade.api;
 
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
+import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
+import com.trade.imtrade.Model.ResponseModel.PopularProductsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
@@ -66,4 +68,9 @@ public interface ApiService {
     @GET("products/route")
     Call<ProductDetailsResponse>getProductFullDetails(@Query("route") String Route);
 
+    @GET("brand/header")
+    Call<List<BrandsResponse>>getAllBrands();
+
+    @GET("products/popularProducts")
+    Call<List<PopularProductsResponse>>getAllPopularProduct();
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,13 @@ import com.trade.imtrade.Authentication.Change_Password;
 import com.trade.imtrade.Authentication.Success_screen;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
+import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.PopularProductsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
+import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
+import com.trade.imtrade.SharedPrefernce.User_Data;
 import com.trade.imtrade.databinding.FragmentHomeBinding;
 import com.trade.imtrade.utils.AppUtils;
 import com.trade.imtrade.view_presenter.Home_Presenter;
@@ -45,14 +50,13 @@ import com.trade.imtrade.view_presenter.Home_Presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener,Categories_Adapter.OnCategoriesItemListener {
+public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
     private Dialog dialog;
 
     String[] price = {"Mobiles", "Laptops", "Television", "Shose", "Fashion", "Women's", "Men's", "Furniture", "Headphone", "Appliances", "Grocery", "Sports", "Baby Toys"};
-    String[] price1 = {"Nike", "Puma", "Nike", "Puma", "Nike", "Puma", "Nike", "Puma", "Nike", "Puma", "Nike", "Puma"};
     String[] bannerImage = {"https://image.shutterstock.com/image-vector/flash-sale-promotion-media-banner-260nw-1557251186.jpg",
             "https://img.freepik.com/free-vector/sale-banner-with-product-description_1361-1333.jpg?size=626&ext=jpg",
             "https://i.pinimg.com/736x/ce/19/1f/ce191f137fdb797b99a1c2930b61c57c.jpg"};
@@ -76,13 +80,14 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
         presenter.GetBanner(getContext());
         presenter.GetAllCategories(getContext());
+        presenter.GetAllBrands(getContext());
+        presenter.GetAllPopularProduct(getContext());
         binding.cateAll.setOnClickListener(this);
-          getAllprouctRecommended();
+        getAllprouctRecommended();
         getDealOfTheDay();
         getDiscountByBrands();
-        getMostPopularProduct();
         getProductToSeason();
-        getAllBrands();
+       // getAllBrands();
         getAllGame();
 
 
@@ -98,7 +103,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
 
     }
-
 
 
     private void getAllprouctRecommended() {
@@ -128,15 +132,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
     }
 
-    private void getMostPopularProduct() {
-        MostPopularProductAdapter mostPopularProductAdapter = new MostPopularProductAdapter(getContext(), price);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.PopularProductRcycler.setLayoutManager(mLayoutManager1);
-        binding.PopularProductRcycler.setItemAnimator(new DefaultItemAnimator());
-        binding.PopularProductRcycler.setAdapter(mostPopularProductAdapter);
-
-    }
-
     private void getProductToSeason() {
         ProductToSeasonAdapter productToSeasonAdapter = new ProductToSeasonAdapter(getContext(), price);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -147,14 +142,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
 
-    private void getAllBrands() {
-        BrandsAdapter brandsAdapter = new BrandsAdapter(getContext(), price1);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.RecyclerViewBrands.setLayoutManager(mLayoutManager1);
-        binding.RecyclerViewBrands.setItemAnimator(new DefaultItemAnimator());
-        binding.RecyclerViewBrands.setAdapter(brandsAdapter);
-
-    }
 
     private void getAllGame() {
         GameAdapter gameAdapter = new GameAdapter(getContext(), Image);
@@ -214,7 +201,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onAllCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            Categories_Adapter categories_adapter = new Categories_Adapter(getContext(), allCategoriesResponses,this::onCategoriesItemClickListener);
+            Categories_Adapter categories_adapter = new Categories_Adapter(getContext(), allCategoriesResponses, this::onCategoriesItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.categoriesRecycler.setLayoutManager(mLayoutManager1);
             binding.categoriesRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -222,6 +209,31 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         }
 
 
+    }
+
+    @Override
+    public void onAllBrandsSuccess(List<BrandsResponse> brandsResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            BrandsAdapter brandsAdapter = new BrandsAdapter(getContext(), brandsResponses);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.RecyclerViewBrands.setLayoutManager(mLayoutManager1);
+            binding.RecyclerViewBrands.setItemAnimator(new DefaultItemAnimator());
+            binding.RecyclerViewBrands.setAdapter(brandsAdapter);
+
+        }
+    }
+
+    @Override
+    public void onAllPopularProductSuccess(List<PopularProductsResponse> popularProductsResponses, String message) {
+
+        if (message.equalsIgnoreCase("ok")) {
+            MostPopularProductAdapter mostPopularProductAdapter = new MostPopularProductAdapter(getContext(), popularProductsResponses);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.PopularProductRcycler.setLayoutManager(mLayoutManager1);
+            binding.PopularProductRcycler.setItemAnimator(new DefaultItemAnimator());
+            binding.PopularProductRcycler.setAdapter(mostPopularProductAdapter);
+
+        }
     }
 
     @Override
@@ -246,7 +258,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
-    public void onCategoriesItemClickListener(List<AllCategoriesResponse> data,int position) {
+    public void onCategoriesItemClickListener(List<AllCategoriesResponse> data, int position) {
         String categories = data.get(position).getName();
         String categoriesId = data.get(position).getId();
         Bundle bundle = new Bundle();
@@ -260,4 +272,5 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
 
     }
+
 }

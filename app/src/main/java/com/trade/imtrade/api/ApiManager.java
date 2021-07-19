@@ -3,6 +3,8 @@ package com.trade.imtrade.api;
 import android.content.Context;
 
 
+import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
+import com.trade.imtrade.SharedPrefernce.User_Data;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,9 +22,12 @@ public class ApiManager {
     private static OkHttpClient okHttpClient;
     private static int REQUEST_TIMEOUT = 30;
     private static String token;
+    private static User_Data user_data;
 
     public static Retrofit getRetrofit(Context context) {
       //  token = MyPreferences.getInstance(context).getString(PrefConf.KEY_LOGIN_TOKEN, "");
+        user_data = SharedPrefManager.getInstance(context).getLoginDATA();
+        token = user_data.getToken();
         if (okHttpClient == null)
             initOkHttp(context);
 

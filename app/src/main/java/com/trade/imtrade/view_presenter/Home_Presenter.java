@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
+import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.PopularProductsResponse;
 import com.trade.imtrade.Model.request.VerifyOTP_Body;
 import com.trade.imtrade.utils.AppUtils;
 
@@ -85,13 +87,75 @@ private HomeView view;
         });
 
     }
+    public void GetAllBrands(Context context){
+        view.showHideProgress(true);
+        Call<List<BrandsResponse>> userCall = AppUtils.getApi(context).getAllBrands();
+        userCall.enqueue(new Callback<List<BrandsResponse>>() {
+            @Override
+            public void onResponse(Call<List<BrandsResponse>> call, Response<List<BrandsResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onAllBrandsSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("body");
+                        view.onError(err_msg);
 
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<BrandsResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+    public void GetAllPopularProduct(Context context){
+        view.showHideProgress(true);
+        Call<List<PopularProductsResponse>> userCall = AppUtils.getApi(context).getAllPopularProduct();
+        userCall.enqueue(new Callback<List<PopularProductsResponse>>() {
+            @Override
+            public void onResponse(Call<List<PopularProductsResponse>> call, Response<List<PopularProductsResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onAllPopularProductSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PopularProductsResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
 
     public interface HomeView{
         void showHideProgress(boolean isShow);
         void onError(String message);
         void onBannerSuccess(List<BannerResponse>bannerResponses,String message);
         void onAllCategoriesSuccess(List<AllCategoriesResponse>allCategoriesResponses,String message);
+        void onAllBrandsSuccess(List<BrandsResponse>brandsResponses,String message);
+        void onAllPopularProductSuccess(List<PopularProductsResponse>popularProductsResponses, String message);
+
         void onFailure(Throwable t);
     }
 }

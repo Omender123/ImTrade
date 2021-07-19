@@ -9,17 +9,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;
 import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;
+
+import java.util.List;
 
 public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsViewHolder>  {
     Context context;
-    String[] amount;
+    List<BrandsResponse>brandsResponses;
 
-    public BrandsAdapter(Context context, String[] amount) {
+    public BrandsAdapter(Context context,List<BrandsResponse>brandsResponses) {
         this.context = context;
-        this.amount = amount;
+        this.brandsResponses = brandsResponses;
     }
 
     public BrandsAdapter() {
@@ -37,13 +41,14 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
 
     @Override
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
-        holder.binding.brandsName.setText(amount[position]);
-       Glide.with(context).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9TpFjWFwDHIQSxfrSoGEGQRkjSvSWwBgKtA&usqp=CAU").apply(new RequestOptions().circleCrop()).placeholder(R.mipmap.profile1).into(holder.binding.brandsImage);
+        holder.binding.brandsName.setText(brandsResponses.get(position).getName());
+
+     Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.mipmap.profile1).into(holder.binding.brandsImage);
     }
 
     @Override
     public int getItemCount() {
-        return amount.length;
+        return brandsResponses.size();
     }
 
     public class BrandsViewHolder extends RecyclerView.ViewHolder {
