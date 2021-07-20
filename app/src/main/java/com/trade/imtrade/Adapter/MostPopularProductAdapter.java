@@ -2,12 +2,14 @@ package com.trade.imtrade.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.trade.imtrade.Model.ResponseModel.DealOfTheDayResponse;
 import com.trade.imtrade.Model.ResponseModel.PopularProductsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -18,10 +20,13 @@ import java.util.List;
 public class MostPopularProductAdapter extends RecyclerView.Adapter<MostPopularProductAdapter.MostPopularViewHolder> {
     Context context;
     List<PopularProductsResponse> popularProductsResponses;
+    MostPopularProductClickListener mostPopularProductClickListener;
 
-    public MostPopularProductAdapter(Context context,List<PopularProductsResponse> popularProductsResponses) {
+    public MostPopularProductAdapter(Context context,List<PopularProductsResponse> popularProductsResponses, MostPopularProductClickListener mostPopularProductClickListener) {
         this.context = context;
         this.popularProductsResponses = popularProductsResponses;
+        this.mostPopularProductClickListener = mostPopularProductClickListener;
+
     }
 
     public MostPopularProductAdapter() {
@@ -40,9 +45,27 @@ public class MostPopularProductAdapter extends RecyclerView.Adapter<MostPopularP
     @Override
     public void onBindViewHolder(@NonNull MostPopularViewHolder holder, int position) {
         holder.binding.cateName.setText(popularProductsResponses.get(position).getName());
-        holder.binding.catePrice.setText(popularProductsResponses.get(position).getDiscount());
-      Glide.with(context).load(PrefConf.IMAGE_URL+popularProductsResponses.get(position).getImages().get(0)).into(holder.binding.cateImg);
-       // holder.binding.cateImg.setImageDrawable(context.getResources().getDrawable(R.mipmap.most));
+       Glide.with(context).load(PrefConf.IMAGE_URL+popularProductsResponses.get(position).getImages().get(0)).into(holder.binding.cateImg);
+
+      if (popularProductsResponses.get(position).getDiscount()!=null){
+          holder.binding.catePrice.setText(popularProductsResponses.get(position).getDiscount()+" Rs");
+          holder.binding.productOffPrice.setText(popularProductsResponses.get(position).getVariables().get(0).getPrice().getMargin()+" %OFF");
+          holder.binding.productWorngPrice.setText(popularProductsResponses.get(position).getVariables().get(0).getPrice().getMrp()+" Rs");
+      }else{
+          holder.binding.catePrice.setText(popularProductsResponses.get(position).getVariables().get(0).getPrice().getMrp()+" Rs");
+          holder.binding.productOffPrice.setVisibility(View.GONE);
+          holder.binding.productWorngPrice.setVisibility(View.GONE);
+
+      }
+
+      // holder.binding.cateImg.setImageDrawable(context.getResources().getDrawable(R.mipmap.most));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostPopularProductClickListener.onMostPopularProductItemClickListener(popularProductsResponses,position);
+            }
+        });
     }
 
     @Override
@@ -60,5 +83,9 @@ public class MostPopularProductAdapter extends RecyclerView.Adapter<MostPopularP
 
 
         }
+    }
+
+    public interface MostPopularProductClickListener{
+        void onMostPopularProductItemClickListener(List<PopularProductsResponse> data, int position);
     }
 }

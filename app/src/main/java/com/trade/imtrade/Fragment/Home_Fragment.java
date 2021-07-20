@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.BrandsAdapter;
 import com.trade.imtrade.Adapter.Categories_Adapter;
@@ -37,6 +38,7 @@ import com.trade.imtrade.Authentication.Success_screen;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.DealOfTheDayResponse;
 import com.trade.imtrade.Model.ResponseModel.PopularProductsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
@@ -50,7 +52,8 @@ import com.trade.imtrade.view_presenter.Home_Presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener {
+public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener, MostPopularProductAdapter.MostPopularProductClickListener, DealOfTheDayAdapter.DealOfTheDayClickListener
+        , DiscountByBrandsAdapter.DiscountForYouClickListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
@@ -82,12 +85,11 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         presenter.GetAllCategories(getContext());
         presenter.GetAllBrands(getContext());
         presenter.GetAllPopularProduct(getContext());
+        presenter.GetDealOfTheDay(getContext());
+        presenter.GetDiscountForYou(getContext());
         binding.cateAll.setOnClickListener(this);
         getAllprouctRecommended();
-        getDealOfTheDay();
-        getDiscountByBrands();
         getProductToSeason();
-       // getAllBrands();
         getAllGame();
 
 
@@ -114,23 +116,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
     }
 
-    private void getDiscountByBrands() {
-        DiscountByBrandsAdapter discountByBrandsAdapter = new DiscountByBrandsAdapter(getContext(), price);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.DiscountByBrandsRecyclerView.setLayoutManager(mLayoutManager1);
-        binding.DiscountByBrandsRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.DiscountByBrandsRecyclerView.setAdapter(discountByBrandsAdapter);
-
-    }
-
-    private void getDealOfTheDay() {
-        DealOfTheDayAdapter dealOfTheDayAdapter = new DealOfTheDayAdapter(getContext(), price);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.DealRcycler.setLayoutManager(mLayoutManager1);
-        binding.DealRcycler.setItemAnimator(new DefaultItemAnimator());
-        binding.DealRcycler.setAdapter(dealOfTheDayAdapter);
-
-    }
 
     private void getProductToSeason() {
         ProductToSeasonAdapter productToSeasonAdapter = new ProductToSeasonAdapter(getContext(), price);
@@ -140,7 +125,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         binding.SeasonRcycler.setAdapter(productToSeasonAdapter);
 
     }
-
 
 
     private void getAllGame() {
@@ -164,12 +148,13 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
     @Override
     public void onError(String message) {
-        Sneaker.with(this)
+        Sneaker.with(getActivity())
                 .setTitle(message)
                 .setMessage("")
                 .setCornerRadius(4)
-                .setDuration(1500)
+                .setDuration(2000)
                 .sneakError();
+
     }
 
     @Override
@@ -227,7 +212,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     public void onAllPopularProductSuccess(List<PopularProductsResponse> popularProductsResponses, String message) {
 
         if (message.equalsIgnoreCase("ok")) {
-            MostPopularProductAdapter mostPopularProductAdapter = new MostPopularProductAdapter(getContext(), popularProductsResponses);
+            MostPopularProductAdapter mostPopularProductAdapter = new MostPopularProductAdapter(getContext(), popularProductsResponses, this::onMostPopularProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.PopularProductRcycler.setLayoutManager(mLayoutManager1);
             binding.PopularProductRcycler.setItemAnimator(new DefaultItemAnimator());
@@ -237,12 +222,35 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
+    public void onDealOfTheDaySuccess(List<DealOfTheDayResponse> dealOfTheDayResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            DealOfTheDayAdapter dealOfTheDayAdapter = new DealOfTheDayAdapter(getContext(), dealOfTheDayResponses, this::onDealOfTheDayItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.DealRcycler.setLayoutManager(mLayoutManager1);
+            binding.DealRcycler.setItemAnimator(new DefaultItemAnimator());
+            binding.DealRcycler.setAdapter(dealOfTheDayAdapter);
+        }
+    }
+
+    @Override
+    public void onDiscountForYouSuccess(List<DealOfTheDayResponse> dealOfTheDayResponses, String message) {
+
+        if (message.equalsIgnoreCase("ok")) {
+            DiscountByBrandsAdapter discountByBrandsAdapter = new DiscountByBrandsAdapter(getContext(), dealOfTheDayResponses, this::onDiscountForYouItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.DiscountByBrandsRecyclerView.setLayoutManager(mLayoutManager1);
+            binding.DiscountByBrandsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            binding.DiscountByBrandsRecyclerView.setAdapter(discountByBrandsAdapter);
+        }
+    }
+
+    @Override
     public void onFailure(Throwable t) {
-        Sneaker.with(this)
+        Sneaker.with(getActivity())
                 .setTitle(t.getLocalizedMessage())
                 .setMessage("")
                 .setCornerRadius(4)
-                .setDuration(1500)
+                .setDuration(2000)
                 .sneakError();
     }
 
@@ -273,4 +281,19 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
     }
 
+    @Override
+    public void onMostPopularProductItemClickListener(List<PopularProductsResponse> data, int position) {
+        Toast.makeText(getContext(), "" + data.get(position).getRoute(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDealOfTheDayItemClickListener(List<DealOfTheDayResponse> data, int position) {
+        Toast.makeText(getContext(), "" + data.get(position).getRoute(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDiscountForYouItemClickListener(List<DealOfTheDayResponse> data, int position) {
+        Toast.makeText(getContext(), "" + data.get(position).getRoute(), Toast.LENGTH_SHORT).show();
+
+    }
 }

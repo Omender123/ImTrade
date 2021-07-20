@@ -5,6 +5,7 @@ package com.trade.imtrade.api;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.DealOfTheDayResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.PopularProductsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
@@ -73,4 +74,11 @@ public interface ApiService {
 
     @GET("products/popularProducts")
     Call<List<PopularProductsResponse>>getAllPopularProduct();
+
+    @GET("products/DealOfTheDay")
+    Call<List<DealOfTheDayResponse>>getAllDealOfTheDay();
+
+    @GET("products/discountForYou")
+    Call<List<DealOfTheDayResponse>>getDiscountForYou();
+
 }

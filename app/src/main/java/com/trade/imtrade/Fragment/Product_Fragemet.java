@@ -156,7 +156,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onError(String message) {
-        Sneaker.with(this)
+        Sneaker.with(getActivity())
                 .setTitle(message)
                 .setMessage("")
                 .setCornerRadius(4)
@@ -177,7 +177,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onFailure(Throwable t) {
-        Sneaker.with(this)
+        Sneaker.with(getActivity())
                 .setTitle(t.getLocalizedMessage())
                 .setMessage("")
                 .setCornerRadius(4)

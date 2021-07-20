@@ -236,7 +236,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_toStartOf="@id/disByBrands_More"
                     android:fontFamily="@font/poppins"
-                    android:text="Discount By Brands"
+                    android:text="Discount For You"
                     android:textColor="@color/text_tittle"
                     android:textSize="15sp"
                     android:textStyle="bold" />

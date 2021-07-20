@@ -50,7 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
       //  Toast.makeText(context, ""+productResponse.getResponse().get(position).getImages().get(0), Toast.LENGTH_SHORT).show();
         holder.binding.productPrice.setText(productResponse.getResponse().get(position).getDiscount()+" Rs");
-        holder.binding.productOffPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMargin()+" %off");
+        holder.binding.productOffPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMargin()+" %OFF");
         holder.binding.productWorngPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMrp()+" Rs");
 
         holder.binding.imageUnselect.setOnClickListener(new View.OnClickListener() {
