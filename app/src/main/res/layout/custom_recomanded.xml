@@ -14,13 +14,17 @@
         android:layout_width="125dp"
         android:layout_height="150dp"
         app:cardCornerRadius="15dp"
+        android:padding="15dp"
+        app:cardBackgroundColor="#252428"
         app:cardElevation="5dp">
 
         <ImageView
             android:id="@+id/cate_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/slider_image"
+            android:src="@mipmap/product2"
+            android:background="#252428"
+            android:padding="15dp"
             android:scaleType="fitXY"/>
 
         <androidx.cardview.widget.CardView

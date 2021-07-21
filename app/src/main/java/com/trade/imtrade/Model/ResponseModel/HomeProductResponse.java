@@ -1,10 +1,11 @@
 package com.trade.imtrade.Model.ResponseModel;
 
 import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class DealOfTheDayResponse {
+
+
+public class HomeProductResponse {
 
     @SerializedName("_id")
     @Expose
@@ -136,8 +137,10 @@ public class DealOfTheDayResponse {
 
         }
 
-
     }
 
 
 }
+
+
+

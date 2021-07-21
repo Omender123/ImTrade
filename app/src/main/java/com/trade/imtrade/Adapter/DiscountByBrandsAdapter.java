@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.trade.imtrade.Model.ResponseModel.DealOfTheDayResponse;
-import com.trade.imtrade.R;
+import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomRecomandedBinding;
 
@@ -18,14 +17,14 @@ import java.util.List;
 
 public class DiscountByBrandsAdapter extends RecyclerView.Adapter<DiscountByBrandsAdapter.DiscountViewHolder> {
     Context context;
-    List<DealOfTheDayResponse> DiscountForYouResponses;
-    DiscountForYouClickListener DiscountForYouClickListener;
+    List<HomeProductResponse> DiscountForYouResponses;
+    HomeProductClickListener homeProductClickListener;
 
 
-    public DiscountByBrandsAdapter(Context context, List<DealOfTheDayResponse> DiscountForYouResponses, DiscountForYouClickListener DiscountForYouClickListener) {
+    public DiscountByBrandsAdapter(Context context, List<HomeProductResponse> DiscountForYouResponses, HomeProductClickListener homeProductClickListener) {
         this.context = context;
         this.DiscountForYouResponses = DiscountForYouResponses;
-        this.DiscountForYouClickListener = DiscountForYouClickListener;
+        this.homeProductClickListener = homeProductClickListener;
 
     }
 
@@ -65,7 +64,7 @@ public class DiscountByBrandsAdapter extends RecyclerView.Adapter<DiscountByBran
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DiscountForYouClickListener.onDiscountForYouItemClickListener(DiscountForYouResponses,position);
+                homeProductClickListener.onHomeProductItemClickListener(DiscountForYouResponses,position);
             }
         });
     }
@@ -87,7 +86,7 @@ public class DiscountByBrandsAdapter extends RecyclerView.Adapter<DiscountByBran
         }
     }
 
-    public interface DiscountForYouClickListener{
-        void onDiscountForYouItemClickListener(List<DealOfTheDayResponse> data, int position);
+    public interface HomeProductClickListener{
+        void onHomeProductItemClickListener(List<HomeProductResponse> data, int position);
     }
 }

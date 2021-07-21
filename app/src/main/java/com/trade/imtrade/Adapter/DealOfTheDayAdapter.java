@@ -9,9 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
-import com.trade.imtrade.Model.ResponseModel.DealOfTheDayResponse;
-import com.trade.imtrade.R;
+import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomRecomandedBinding;
 
@@ -19,13 +17,13 @@ import java.util.List;
 
 public class DealOfTheDayAdapter extends RecyclerView.Adapter<DealOfTheDayAdapter.DealViewHolder> {
     Context context;
-    List<DealOfTheDayResponse>dealOfTheDayResponses;
-    DealOfTheDayClickListener dealOfTheDayClickListener;
+    List<HomeProductResponse>dealOfTheDayResponses;
+    HomeProductClickListener homeProductClickListener;
 
-    public DealOfTheDayAdapter(Context context, List<DealOfTheDayResponse>dealOfTheDayResponses,DealOfTheDayClickListener dealOfTheDayClickListener) {
+    public DealOfTheDayAdapter(Context context, List<HomeProductResponse>dealOfTheDayResponses,HomeProductClickListener homeProductClickListener) {
         this.context = context;
         this.dealOfTheDayResponses = dealOfTheDayResponses;
-        this.dealOfTheDayClickListener = dealOfTheDayClickListener;
+        this.homeProductClickListener = homeProductClickListener;
 
     }
 
@@ -65,7 +63,7 @@ public class DealOfTheDayAdapter extends RecyclerView.Adapter<DealOfTheDayAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            dealOfTheDayClickListener.onDealOfTheDayItemClickListener(dealOfTheDayResponses,position);
+            homeProductClickListener.onHomeProductItemClickListener(dealOfTheDayResponses,position);
         }
     });
     }
@@ -87,7 +85,8 @@ public class DealOfTheDayAdapter extends RecyclerView.Adapter<DealOfTheDayAdapte
         }
     }
 
-    public interface DealOfTheDayClickListener{
-        void onDealOfTheDayItemClickListener(List<DealOfTheDayResponse> data, int position);
+    public interface HomeProductClickListener{
+        void onHomeProductItemClickListener(List<HomeProductResponse> data, int position);
     }
+
 }
