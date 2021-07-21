@@ -24,12 +24,8 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.BrandsAdapter;
 import com.trade.imtrade.Adapter.Categories_Adapter;
-import com.trade.imtrade.Adapter.DealOfTheDayAdapter;
-import com.trade.imtrade.Adapter.DiscountByBrandsAdapter;
 import com.trade.imtrade.Adapter.GameAdapter;
-import com.trade.imtrade.Adapter.MostPopularProductAdapter;
-import com.trade.imtrade.Adapter.ProductToSeasonAdapter;
-import com.trade.imtrade.Adapter.Recommended_Adapter;
+import com.trade.imtrade.Adapter.HomeProduct_Adapter;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
@@ -44,14 +40,12 @@ import com.trade.imtrade.view_presenter.Home_Presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener, MostPopularProductAdapter.HomeProductClickListener, DealOfTheDayAdapter.HomeProductClickListener
-        , DiscountByBrandsAdapter.HomeProductClickListener, ProductToSeasonAdapter.HomeProductClickListener,Recommended_Adapter.HomeProductClickListener {
+public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener, HomeProduct_Adapter.HomeProductClickListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
     private Dialog dialog;
 
-    String[] price = {"Mobiles", "Laptops", "Television", "Shose", "Fashion", "Women's", "Men's", "Furniture", "Headphone", "Appliances", "Grocery", "Sports", "Baby Toys"};
     Integer[] Image = {R.mipmap.game1, R.mipmap.game2, R.mipmap.game3};
     NavController navController;
 
@@ -182,7 +176,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     public void onAllPopularProductSuccess(List<HomeProductResponse> PopularProductResponse, String message) {
 
         if (message.equalsIgnoreCase("ok")) {
-            MostPopularProductAdapter mostPopularProductAdapter = new MostPopularProductAdapter(getContext(), PopularProductResponse, this::onHomeProductItemClickListener);
+            HomeProduct_Adapter mostPopularProductAdapter = new HomeProduct_Adapter(getContext(), PopularProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.PopularProductRcycler.setLayoutManager(mLayoutManager1);
             binding.PopularProductRcycler.setItemAnimator(new DefaultItemAnimator());
@@ -194,11 +188,11 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onDealOfTheDaySuccess(List<HomeProductResponse> DealOfTheDayResponses, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            DealOfTheDayAdapter dealOfTheDayAdapter = new DealOfTheDayAdapter(getContext(), DealOfTheDayResponses, this::onHomeProductItemClickListener);
+            HomeProduct_Adapter homeProduct_adapter = new HomeProduct_Adapter(getContext(), DealOfTheDayResponses, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.DealRcycler.setLayoutManager(mLayoutManager1);
             binding.DealRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.DealRcycler.setAdapter(dealOfTheDayAdapter);
+            binding.DealRcycler.setAdapter(homeProduct_adapter);
         }
     }
 
@@ -206,7 +200,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     public void onDiscountForYouSuccess(List<HomeProductResponse> DiscountForYouResponses, String message) {
 
         if (message.equalsIgnoreCase("ok")) {
-            DiscountByBrandsAdapter discountByBrandsAdapter = new DiscountByBrandsAdapter(getContext(), DiscountForYouResponses, this::onHomeProductItemClickListener);
+            HomeProduct_Adapter discountByBrandsAdapter = new HomeProduct_Adapter(getContext(), DiscountForYouResponses, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.DiscountByBrandsRecyclerView.setLayoutManager(mLayoutManager1);
             binding.DiscountByBrandsRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -218,7 +212,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     public void onSeasonProductSuccess(List<HomeProductResponse> SeasonProductResponse, String message) {
 
         if (message.equalsIgnoreCase("ok")) {
-            ProductToSeasonAdapter productToSeasonAdapter = new ProductToSeasonAdapter(getContext(), SeasonProductResponse, this::onHomeProductItemClickListener);
+            HomeProduct_Adapter productToSeasonAdapter = new HomeProduct_Adapter(getContext(), SeasonProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.SeasonRcycler.setLayoutManager(mLayoutManager1);
             binding.SeasonRcycler.setItemAnimator(new DefaultItemAnimator());
@@ -230,7 +224,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onReCommendedProductSuccess(List<HomeProductResponse> ReCommendedProductResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            Recommended_Adapter recommended_adapter = new Recommended_Adapter(getContext(), ReCommendedProductResponse,this::onHomeProductItemClickListener);
+            HomeProduct_Adapter recommended_adapter = new HomeProduct_Adapter(getContext(), ReCommendedProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.recommendedRcycler.setLayoutManager(mLayoutManager1);
             binding.recommendedRcycler.setItemAnimator(new DefaultItemAnimator());
@@ -280,7 +274,8 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onHomeProductItemClickListener(List<HomeProductResponse> data, int position) {
         String roleId = data.get(position).getRoute();
+        Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
-      //  navController.navigate(R.id.action_home_Fragment_to_product_Details);
+        //  navController.navigate(R.id.action_home_Fragment_to_product_Details);
     }
 }

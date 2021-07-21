@@ -4,48 +4,44 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
-import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomRecomandedBinding;
 
 import java.util.List;
 
-public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapter.RecommendedViewHolder> {
+public class HomeProduct_Adapter extends RecyclerView.Adapter<HomeProduct_Adapter.HomeProductViewHolder> {
     Context context;
     List<HomeProductResponse> RecommendedProductResponses;
     HomeProductClickListener homeProductClickListener;
 
-    public Recommended_Adapter(Context context, List<HomeProductResponse> RecommendedProductResponses, HomeProductClickListener homeProductClickListener) {
+    public HomeProduct_Adapter(Context context, List<HomeProductResponse> RecommendedProductResponses, HomeProductClickListener homeProductClickListener) {
         this.context = context;
         this.RecommendedProductResponses = RecommendedProductResponses;
         this.homeProductClickListener = homeProductClickListener;
 
     }
 
-    public Recommended_Adapter() {
+    public HomeProduct_Adapter() {
     }
 
 
     @NonNull
     @Override
-    public RecommendedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HomeProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CustomRecomandedBinding binding = CustomRecomandedBinding.inflate(inflater, parent, false);
 
-        return new RecommendedViewHolder(binding);
+        return new HomeProductViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendedViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeProductViewHolder holder, int position) {
 
         holder.binding.cateName.setText(RecommendedProductResponses.get(position).getName());
         //  holder.binding.catePrice.setText(RecommendedProductResponses.get(position).getDiscount());
@@ -80,10 +76,10 @@ public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapte
         return RecommendedProductResponses.size();
     }
 
-    public class RecommendedViewHolder extends RecyclerView.ViewHolder {
+    public class HomeProductViewHolder extends RecyclerView.ViewHolder {
         CustomRecomandedBinding binding;
 
-        public RecommendedViewHolder(CustomRecomandedBinding binding) {
+        public HomeProductViewHolder(CustomRecomandedBinding binding) {
             super(binding.getRoot());
 
             this.binding = binding;
@@ -95,5 +91,6 @@ public class Recommended_Adapter extends RecyclerView.Adapter<Recommended_Adapte
     public interface HomeProductClickListener{
         void onHomeProductItemClickListener(List<HomeProductResponse> data, int position);
     }
+
 
 }

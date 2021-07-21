@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.trade.imtrade.Adapter.My_Address_Adapter;
-import com.trade.imtrade.Adapter.Recommended_Adapter;
 import com.trade.imtrade.R;
 import com.trade.imtrade.databinding.FragmentMyAddressBinding;
 import com.trade.imtrade.utils.AppUtils;
