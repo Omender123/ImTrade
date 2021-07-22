@@ -139,7 +139,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
                 binding.slider.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemSelected(int i) {
-                        Toast.makeText(getContext(), "" + ProductId.get(i), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getContext(), "" + ProductId.get(i), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -274,8 +274,8 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onHomeProductItemClickListener(List<HomeProductResponse> data, int position) {
         String roleId = data.get(position).getRoute();
-        Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
-        //  navController.navigate(R.id.action_home_Fragment_to_product_Details);
+        navController.navigate(R.id.action_home_Fragment_to_product_Details);
     }
 }
