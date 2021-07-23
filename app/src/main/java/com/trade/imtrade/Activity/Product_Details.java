@@ -73,7 +73,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
         presenter.GetProductDetails(Product_Details.this, RouteId);
         CheckBoxList();
         changeStatusBarColor();
-        getReviewList();
+
          getAllReview_Product();
 
 
@@ -156,18 +156,6 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void getReviewList() {
-        String[] price = {"Full Name", "Full Name"};
-
-
-        ReviewAdapter reviewAdapter = new ReviewAdapter(getApplicationContext(), price);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        binding.ReviewRecyclerView.setLayoutManager(mLayoutManager1);
-        binding.ReviewRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.ReviewRecyclerView.setAdapter(reviewAdapter);
-
-    }
-
     private void getAllReview_Product() {
         String price[] = {"7999", "8999", "10000", "7999", "8999", "10000"};
         Review_product_Adapter review_product_adapter = new Review_product_Adapter(this, price);
@@ -229,6 +217,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             getColorList(productDetailsResponse);
             getStorageList(productDetailsResponse);
             getDelatilsList(productDetailsResponse,false);
+            getReviewList(productDetailsResponse);
 
 
         }
@@ -304,10 +293,6 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getDelatilsList(ProductDetailsResponse productDetailsResponse,Boolean count) {
-        String DetailsType[] = {"Brands Name", "OS", "RAM", "ROM", "FRONT CAMERA", "BACK CAMERA", "BATTERY"};
-        String Details[] = {"VIVO", "ANDROID", "8 GB", "512 GB", "64 MP", "128 MP", "5000 MH"};
-
-
         if (count == true) {
             DetailsAdapter detailsAdapter = new DetailsAdapter(getApplicationContext(),productDetailsResponse, true);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -321,6 +306,17 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             binding.detailsRecyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.detailsRecyclerView.setAdapter(detailsAdapter);
         }
+
+    }
+
+    private void getReviewList(ProductDetailsResponse productDetailsResponse) {
+
+
+        ReviewAdapter reviewAdapter = new ReviewAdapter(getApplicationContext(), productDetailsResponse);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        binding.ReviewRecyclerView.setLayoutManager(mLayoutManager1);
+        binding.ReviewRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        binding.ReviewRecyclerView.setAdapter(reviewAdapter);
 
     }
 
