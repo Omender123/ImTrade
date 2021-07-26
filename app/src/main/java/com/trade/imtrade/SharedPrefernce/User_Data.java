@@ -1,13 +1,16 @@
 package com.trade.imtrade.SharedPrefernce;
 
 public class User_Data {
-    String id,email, Token,referral_code;
+    String id,email, Token,referral_code,UserName,PhoneNo;
 
-    public User_Data(String id, String email, String token, String referral_code) {
+    public User_Data(String id, String email, String token, String referral_code,String UserName,String PhoneNo) {
         this.id = id;
         this.email = email;
-        Token = token;
+        this.Token = token;
         this.referral_code = referral_code;
+        this.UserName = UserName;
+        this.PhoneNo= PhoneNo;
+
     }
 
     public User_Data() {
@@ -43,5 +46,21 @@ public class User_Data {
 
     public void setReferral_code(String referral_code) {
         this.referral_code = referral_code;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    public String getPhoneNo() {
+        return PhoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        PhoneNo = phoneNo;
     }
 }

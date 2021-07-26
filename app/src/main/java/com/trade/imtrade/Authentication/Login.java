@@ -172,7 +172,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
             User_Data user_data = new User_Data(response.getResult().getId(),
                     response.getResult().getEmail(),
                     response.getToken(),
-                    response.getResult().getMyReferalcode());
+                    response.getResult().getMyReferalcode(),null,null);
             SharedPrefManager.getInstance(this).SetLoginData(user_data);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
@@ -189,7 +189,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
             User_Data user_data = new User_Data(response.getResult().getId(),
                     response.getResult().getEmail(),
                     response.getToken(),
-                    response.getResult().getMyReferalcode());
+                    response.getResult().getMyReferalcode(),null,null);
             SharedPrefManager.getInstance(this).SetLoginData(user_data);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();

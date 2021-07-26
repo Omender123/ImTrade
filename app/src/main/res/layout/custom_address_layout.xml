@@ -12,8 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#252428"
+            app:cardCornerRadius="5dp"
             app:cardElevation="8dp">
 
             <RelativeLayout
@@ -40,11 +40,11 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="5dp"
                     android:layout_toStartOf="@+id/img_cancel"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins_semibold"
                     android:justificationMode="inter_word"
                     android:text="Full Name"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
+                    android:textColor="@color/drawer_icon"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -55,11 +55,11 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="5dp"
                     android:layout_toStartOf="@+id/img_cancel"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:justificationMode="inter_word"
                     android:text="Rz-165B B-Block, Roshan Vihar, Najafgarh \nNew Delhi-110043, Delhi, India"
-                    android:textColor="@color/text_login"
-                    android:textSize="13sp"
+                    android:textColor="#B38A8D91"
+                    android:textSize="10sp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -70,11 +70,11 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="8dp"
                     android:layout_toStartOf="@+id/text_edit"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:justificationMode="inter_word"
                     android:text="Phone Number : 8766372989"
-                    android:textColor="@color/text_login"
-                    android:textSize="13sp"
+                    android:textColor="#B38A8D91"
+                    android:textSize="10sp"
                     android:textStyle="normal" />
 
                 <TextView
@@ -86,13 +86,14 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/curved_border"
-                    android:paddingStart="15dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="15dp"
-                    android:paddingBottom="5dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="3dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Edit"
-                    android:textColor="@color/text_color"
-                    android:textStyle="bold" />
+                    android:textSize="8sp"
+                    android:textColor="@color/drawer_icon" />
 
 
             </RelativeLayout>

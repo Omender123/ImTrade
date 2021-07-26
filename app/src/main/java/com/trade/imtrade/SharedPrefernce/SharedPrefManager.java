@@ -13,6 +13,8 @@ public class SharedPrefManager {
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_TOKEN = "KEY_TOKEN";
     private static final String KEY_REFERRAL_CODE = "KEY_REFERRAL_CODE";
+    private static final String KEY_USERNAME = "KEY_USERNAME";
+    private static final String KEY_USERPHONE = "KEY_USERPHONE";
     private static SharedPrefManager mInstance;
 
     private static Context mCtx;
@@ -38,6 +40,9 @@ public class SharedPrefManager {
          editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_TOKEN, user.getToken());
         editor.putString(KEY_REFERRAL_CODE, user.getReferral_code());
+        editor.putString(KEY_USERNAME, user.getUserName());
+        editor.putString(KEY_USERPHONE, user.getPhoneNo());
+
         editor.apply();
     }
 
@@ -54,7 +59,9 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_ID, null),
                  sharedPreferences.getString(KEY_EMAIL, null),
                 sharedPreferences.getString(KEY_TOKEN, null),
-                sharedPreferences.getString(KEY_REFERRAL_CODE, null)
+                sharedPreferences.getString(KEY_REFERRAL_CODE, null),
+                sharedPreferences.getString(KEY_USERNAME,null ),
+                sharedPreferences.getString(KEY_USERPHONE,null)
 
                 );
     }

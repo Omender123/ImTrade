@@ -27,12 +27,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
+import com.trade.imtrade.SharedPrefernce.User_Data;
 
 import java.io.File;
 
@@ -44,11 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AppBarConfiguration appBarConfiguration;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
-    FloatingActionButton floatingActionButton ;
+    private View navHeader, navDrawer;
+    TextView username, usergmail;
+    FloatingActionButton floatingActionButton;
     CoordinatorLayout coordinatorLayout;
     ImageView img_discount;
-    Boolean backhome =false;
-    RelativeLayout relative,img_cart;
+    Boolean backhome = false;
+    User_Data user_data;
+    RelativeLayout relative, img_cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         toolbar = findViewById(R.id.toolbar);
         floatingActionButton = findViewById(R.id.fab);
-        coordinatorLayout =(CoordinatorLayout) findViewById(R.id.coordinator);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         img_discount = (ImageView) findViewById(R.id.img_discount);
         img_cart = (RelativeLayout) findViewById(R.id.relative_cart);
         relative = (RelativeLayout) findViewById(R.id.relative);
@@ -66,12 +71,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         changeStatusBarColor();
         SetBottomBarNavigationView();
+        navHeader = navigationView.getHeaderView(0);
+        username = (TextView) navHeader.findViewById(R.id.nav_username);
+        usergmail = (TextView) navHeader.findViewById(R.id.nav_usergmail);
+
+
+        user_data = SharedPrefManager.getInstance(this).getLoginDATA();
+
+        if (user_data.getUserName()==null){
+            username.setText("UserName");
+            usergmail.setText("UserName@gmail.com");
+        }else{
+            username.setText(user_data.getUserName());
+            usergmail.setText(user_data.getEmail());
+        }
 
 
 
-
-    //   NavigationUI.setupWithNavController(navigationView, navController);
-
+        //   NavigationUI.setupWithNavController(navigationView, navController);
 
 
         floatingActionButton.setOnClickListener(this);
@@ -80,44 +97,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     private void SetBottomBarNavigationView() {
         drawer = findViewById(R.id.drawer);
 
-       navigationView = findViewById(R.id.navigationView);
+        navigationView = findViewById(R.id.navigationView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.main);
-        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile,R.id.nav_Referral,R.id.product_Details})
+        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile, R.id.nav_Referral, R.id.product_Details})
                 .setDrawerLayout(drawer)
                 .build();
-      NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-       // NavigationUI.setupWithNavController(toolbar,navController,drawer);
+        // NavigationUI.setupWithNavController(toolbar,navController,drawer);
 
 
-
-      //  toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
+        //  toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
         //toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-       NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-       navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-           @Override
-           public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-               if(destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile ) {
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+           /*    if( destination.getId() == R.id.update_profile ) {
                    img_discount.setVisibility(View.GONE);
                    coordinatorLayout.setVisibility(View.GONE);
-               }else if (destination.getId()==R.id.Search_nearBy || destination.getId()==R.id.categories || destination.getId()==R.id.product_Fragemet || destination.getId()==R.id.filter_Fragment ){
-                   backhome =true;
-                   coordinatorLayout.setVisibility(View.GONE);
-               }
-               else {
-                  img_discount.setVisibility(View.VISIBLE);
-                  coordinatorLayout.setVisibility(View.VISIBLE);
-               }
-           }
-       });
-
+               }else*/
+                if (destination.getId() == R.id.Search_nearBy || destination.getId() == R.id.categories || destination.getId() == R.id.product_Fragemet || destination.getId() == R.id.filter_Fragment
+                        || destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile) {
+                    coordinatorLayout.setVisibility(View.GONE);
+                } else {
+                    img_discount.setVisibility(View.VISIBLE);
+                    coordinatorLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
     }
@@ -125,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onSupportNavigateUp() {
-       // toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
+        // toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_icon_menu));
         return NavigationUI.navigateUp(navController, appBarConfiguration);
     }
 
@@ -133,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-          }
+        }
         /*else {
             if (bottomNavigationView.getSelectedItemId()==R.id.home_Fragment){
                 if (backhome ==true ){
@@ -173,9 +187,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
               }*/
         else {
-                super.onBackPressed();
-            }
-           }
+            super.onBackPressed();
+        }
+    }
 
 
     private void changeStatusBarColor() {
@@ -188,23 +202,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.fab:
                 navController.navigate(R.id.fab);
-                backhome =true;
-              ///navController.popBackStack();
+                backhome = true;
+                ///navController.popBackStack();
 
                 break;
         }
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return NavigationUI.onNavDestinationSelected(item,navController)||super.onOptionsItemSelected(item);
+        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 
     private void moreNavigationOptions() {
@@ -271,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
     @SuppressLint("LongLogTag")
     public void clearApplicationData() {
         File cache = getCacheDir();

@@ -13,7 +13,7 @@
             android:id="@+id/brands_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@mipmap/profile1" />
+            android:src="@drawable/ic_profile_image" />
 
         <TextView
             android:id="@+id/brands_name"

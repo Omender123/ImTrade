@@ -114,8 +114,9 @@
     <fragment
         android:id="@+id/update_profile"
         android:name="com.trade.imtrade.Fragment.Update_Profile"
-        android:label="Update Profile"
-        tools:layout="@layout/fragment_update__profile" />
+        android:label="My Account"
+        tools:layout="@layout/fragment_update__profile" >
+    </fragment>
 
     <fragment
         android:id="@+id/Search_nearBy"
@@ -198,5 +199,7 @@
         android:id="@+id/product_Details"
         android:name="com.trade.imtrade.Activity.Product_Details"
         tools:layout="@layout/activity_product__details" />
+
+
 
 </navigation>

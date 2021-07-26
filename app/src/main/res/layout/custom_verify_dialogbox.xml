@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#212121"
+    app:cardCornerRadius="13dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#212121"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center_horizontal"
+            android:text="OTP Verification"
+            android:textColor="#EEEEEE"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center_horizontal"
+            android:text="OTP has sent to you at your email address \n testkumar123@gmail.com"
+            android:textColor="#33EEEEEE"
+            android:textSize="12dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/text_resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Resend"
+            android:textColor="@color/purple_200"
+            android:textSize="10dp" />
+
+
+        <com.chaos.view.PinView
+            android:id="@+id/enter_otp"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hello"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="03dp"
+            android:cursorVisible="true"
+            android:inputType="numberPassword"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:cursorWidth="2dp"
+            app:hideLineWhenFilled="false"
+            app:itemCount="4"
+            app:itemHeight="50dp"
+            app:itemWidth="60dp"
+            app:itemRadius="6dp"
+            app:itemSpacing="25dp"
+            app:lineColor="#3C434A"
+            app:lineWidth="2dp"
+            app:viewType="rectangle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/text_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textColor="@color/purple_200"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="70dp"/>
+            <TextView
+                android:id="@+id/text_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:background="@drawable/curved_border"
+                android:backgroundTint="@color/purple_200"
+                android:textColor="#2E343B"
+                android:textSize="16sp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingStart="40dp"
+                android:paddingEnd="40dp"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="70dp"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

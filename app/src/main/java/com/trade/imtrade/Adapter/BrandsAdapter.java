@@ -43,7 +43,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
         holder.binding.brandsName.setText(brandsResponses.get(position).getName());
 
-     Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.mipmap.profile1).into(holder.binding.brandsImage);
+     Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
     }
 
     @Override

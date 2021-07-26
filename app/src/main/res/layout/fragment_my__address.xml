@@ -36,7 +36,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="15dp"
-                    app:cardBackgroundColor="@color/card_background"
+                    app:cardBackgroundColor="#252428"
                     app:cardCornerRadius="10dp">
 
                     <RelativeLayout
@@ -62,11 +62,10 @@
                             android:layout_marginEnd="5dp"
                             android:layout_toStartOf="@+id/text_add"
                             android:layout_toEndOf="@+id/image_view"
-                            android:fontFamily="@font/montserrat"
+                            android:fontFamily="@font/poppins_medium"
                             android:text="Add New Delivery \nAddress"
                             android:textColor="@color/text_color"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp"/>
 
                         <TextView
                             android:id="@+id/text_add"
@@ -97,9 +96,8 @@
                     android:layout_marginRight="15dp"
                     android:text="Old Address"
                     android:textColor="@color/text_color"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:fontFamily="@font/montserrat"/>
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_medium"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerView"
