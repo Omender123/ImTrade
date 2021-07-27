@@ -10,11 +10,13 @@ import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
+import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.Model.request.ChangePasswordBody;
 import com.trade.imtrade.Model.request.LoginBody;
 import com.trade.imtrade.Model.request.SendOtpBody;
 import com.trade.imtrade.Model.request.SignUpBody;
 import com.trade.imtrade.Model.request.SocialLoginBody;
+import com.trade.imtrade.Model.request.UpdateProfileBody;
 import com.trade.imtrade.Model.request.VerifyOTP_Body;
 
 import java.util.List;
@@ -24,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -78,5 +81,13 @@ public interface ApiService {
 
     @GET("products/hb-recommended")
     Call<List<HomeProductResponse>> getReCommendedProduct();
+
+    @PUT("user")
+    Call<ResponseBody>UpdateProfile(@Body UpdateProfileBody updateProfileBody);
+
+    @GET("user")
+    Call<UpdateProfileResponse>GetUpdateProfile();
+
+
 
 }

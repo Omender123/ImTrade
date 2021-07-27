@@ -18,8 +18,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/categories"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_home_Fragment_to_product_Fragemet"
             app:destination="@id/product_Fragemet"
@@ -28,7 +27,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/product_Fragemet"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_home_Fragment_to_product_Details"
             app:destination="@id/product_Details"
@@ -37,7 +36,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/product_Details"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/Wish_List"
@@ -72,6 +71,15 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/update_profile"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profile_to_ChangePassword"
+            app:destination="@id/ChangePassword"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/ChangePassword"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -115,8 +123,7 @@
         android:id="@+id/update_profile"
         android:name="com.trade.imtrade.Fragment.Update_Profile"
         android:label="My Account"
-        tools:layout="@layout/fragment_update__profile" >
-    </fragment>
+        tools:layout="@layout/fragment_update__profile"></fragment>
 
     <fragment
         android:id="@+id/Search_nearBy"
@@ -131,12 +138,11 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/categories"
         android:name="com.trade.imtrade.Fragment.Categories_Fragment"
         android:label="Categories"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_categories">
         <action
             android:id="@+id/action_categories_to_product_Fragemet"
             app:destination="@id/product_Fragemet"
@@ -145,7 +151,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/product_Fragemet"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/product_Fragemet"
@@ -168,7 +174,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/filter_Fragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_product_Fragemet_to_product_Details"
             app:destination="@id/product_Details"
@@ -177,7 +183,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/product_Details"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
 
 
     </fragment>
@@ -186,8 +192,6 @@
         android:name="com.trade.imtrade.Fragment.Filter_Fragment"
         android:label="Filters"
         tools:layout="@layout/fragment_filter" />
-
-
 
 
     <activity
@@ -200,6 +204,11 @@
         android:name="com.trade.imtrade.Activity.Product_Details"
         tools:layout="@layout/activity_product__details" />
 
+    <fragment
 
+        android:id="@+id/ChangePassword"
+        android:name="com.trade.imtrade.Fragment.ChangePassword_Fragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password" />
 
 </navigation>

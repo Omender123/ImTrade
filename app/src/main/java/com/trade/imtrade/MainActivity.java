@@ -15,7 +15,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,16 +33,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.trade.imtrade.Authentication.Change_Password;
+import com.trade.imtrade.Authentication.Success_screen;
+import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
+import com.trade.imtrade.SharedPerfence.MyPreferences;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
 import com.trade.imtrade.SharedPrefernce.User_Data;
+import com.trade.imtrade.utils.AppUtils;
+import com.trade.imtrade.view_presenter.Change_Password_Presenter;
+import com.trade.imtrade.view_presenter.MainActivity_Presenter;
 
 import java.io.File;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainActivity_Presenter.MainActivityView {
     NavController navController;
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -50,10 +63,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView username, usergmail;
     FloatingActionButton floatingActionButton;
     CoordinatorLayout coordinatorLayout;
-    ImageView img_discount;
+    ImageView img_discount,profile_Image;
     Boolean backhome = false;
     User_Data user_data;
     RelativeLayout relative, img_cart;
+    private Context context;
+    private Dialog dialog;
+    private View view;
+    private MainActivity_Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +91,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navHeader = navigationView.getHeaderView(0);
         username = (TextView) navHeader.findViewById(R.id.nav_username);
         usergmail = (TextView) navHeader.findViewById(R.id.nav_usergmail);
-
+        profile_Image = (ImageView)navHeader.findViewById(R.id.profile_Image);
 
         user_data = SharedPrefManager.getInstance(this).getLoginDATA();
 
-        if (user_data.getUserName()==null){
+        context = MainActivity.this;
+        dialog = AppUtils.hideShowProgress(context);
+
+
+        presenter = new MainActivity_Presenter(this);
+        presenter.GetUpdateProfile(MainActivity.this);
+
+        if (user_data.getUserName() == null) {
             username.setText("UserName");
             usergmail.setText("UserName@gmail.com");
-        }else{
+        } else {
             username.setText(user_data.getUserName());
             usergmail.setText(user_data.getEmail());
         }
 
+        String profileImage = MyPreferences.getInstance(context).getString(PrefConf.ProfileImage, null);
+        if (profileImage==null){
+            Glide.with(context).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(profile_Image);
 
+        }else if (!profileImage.equalsIgnoreCase("https://stargazeevents.s3.ap-south-1.amazonaws.com/pfiles/profile.png")){
+            Glide.with(context).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(profile_Image);
+
+        }else{
+            Glide.with(context).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(profile_Image);
+
+        }
 
         //   NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -124,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                    coordinatorLayout.setVisibility(View.GONE);
                }else*/
                 if (destination.getId() == R.id.Search_nearBy || destination.getId() == R.id.categories || destination.getId() == R.id.product_Fragemet || destination.getId() == R.id.filter_Fragment
-                        || destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile) {
+                        || destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile || destination.getId() == R.id.ChangePassword) {
                     coordinatorLayout.setVisibility(View.GONE);
                 } else {
                     img_discount.setVisibility(View.VISIBLE);
@@ -260,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         SharedPrefManager.getInstance(getApplicationContext()).logout();
+                        MyPreferences.getInstance(MainActivity.this).deletePreference(PrefConf.LOGINCHECK);
+                        MyPreferences.getInstance(MainActivity.this).deletePreference(PrefConf.ProfileImage);
                         clearApplicationData();
                         Toast.makeText(MainActivity.this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                         finish();
@@ -313,4 +349,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return dir.delete();
     }
 
+    @Override
+    public void showHideProgress(boolean isShow) {
+        if (isShow) {
+            dialog.show();
+        } else {
+            dialog.dismiss();
+        }
+
+    }
+
+    @Override
+    public void onError(String message) {
+        Toast.makeText(MainActivity.this, ""+message, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onUpdateProfileSuccess(UpdateProfileResponse updateProfileResponse, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            User_Data userData = new User_Data(user_data.getId(),updateProfileResponse.getEmail(),user_data.getToken(),user_data.getReferral_code(),updateProfileResponse.getFirstName(),updateProfileResponse.getPhone());
+            SharedPrefManager.getInstance(MainActivity.this).SetLoginData(userData);
+            username.setText(updateProfileResponse.getFirstName());
+            usergmail.setText(updateProfileResponse.getEmail());
+            MyPreferences.getInstance(MainActivity.this).putString(PrefConf.ProfileImage,updateProfileResponse.getProfileImage());
+            Glide.with(context).load(updateProfileResponse.getProfileImage()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(profile_Image);
+
+        }
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        Toast.makeText(MainActivity.this, ""+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+    }
 }

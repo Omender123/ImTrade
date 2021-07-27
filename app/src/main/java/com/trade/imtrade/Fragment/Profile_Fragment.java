@@ -23,9 +23,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.Profile_itemAdapter;
 import com.trade.imtrade.R;
 
+import com.trade.imtrade.SharedPerfence.MyPreferences;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
 import com.trade.imtrade.SharedPrefernce.User_Data;
 import com.trade.imtrade.databinding.FragmentProfileBinding;
@@ -43,6 +48,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
     NavController navController;
 
     User_Data user_data;
+    Boolean CheckedLogin;
 
     public Profile_Fragment() {
         // Required empty public constructor
@@ -59,6 +65,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
         dialog = AppUtils.hideShowProgress(getContext());
         getProfileItemList();
         user_data = SharedPrefManager.getInstance(getContext()).getLoginDATA();
+        CheckedLogin = MyPreferences.getInstance(getContext()).getBoolean(PrefConf.LOGINCHECK, false);
 
         if (user_data.getUserName() == null) {
             binding.userEmail.setVisibility(View.GONE);
@@ -77,6 +84,18 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
         binding.addUsername.setOnClickListener(this::onClick);
         binding.userName.setOnClickListener(this::onClick);
 
+        String profileImage = MyPreferences.getInstance(getContext()).getString(PrefConf.ProfileImage, null);
+        if (profileImage==null){
+            Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+
+        }else if (!profileImage.equalsIgnoreCase("https://stargazeevents.s3.ap-south-1.amazonaws.com/pfiles/profile.png")){
+            Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+
+        }else{
+            Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+
+        }
+
         return binding.getRoot();
 
     }
@@ -94,11 +113,31 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.userName:
-                navController.navigate(R.id.action_profile_to_update_profile);
+                if (CheckedLogin == true) {
+                    navController.navigate(R.id.action_profile_to_update_profile);
+                } else {
+                    Sneaker.with(getActivity())
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+
                 break;
 
             case R.id.add_username:
-                navController.navigate(R.id.action_profile_to_update_profile);
+
+                if (CheckedLogin == true) {
+                    navController.navigate(R.id.action_profile_to_update_profile);
+                } else {
+                    Sneaker.with(getActivity())
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
                 break;
 
         }
@@ -130,56 +169,65 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onProfileItemClickListener(ArrayList<String> ItemList, int position) {
-        switch (position) {
+        if (CheckedLogin == true) {
+            switch (position) {
+                case 0:
+                    navController.navigate(R.id.action_profile_to_update_profile);
+                    break;
 
-            case 0:
-                navController.navigate(R.id.action_profile_to_update_profile);
-                break;
+                case 1:
+                    navController.navigate(R.id.action_profile_to_My_address);
+                    break;
 
-            case 1:
-                navController.navigate(R.id.action_profile_to_My_address);
-                break;
+                case 2:
+                    navController.navigate(R.id.action_profile_to_ChangePassword);
 
-            case 2:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 3:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 3:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 4:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 4:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 5:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 5:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 6:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 6:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 7:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 7:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 8:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 8:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    break;
 
-                break;
+                case 9:
+                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
 
-            case 9:
-                Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
-
-                break;
+                    break;
+            }
+        } else {
+            Sneaker.with(getActivity())
+                    .setTitle("Your Can't access this app  please First Login ")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakError();
         }
+
 
     }
 }

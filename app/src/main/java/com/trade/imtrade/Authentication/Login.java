@@ -42,6 +42,8 @@ import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.request.LoginBody;
 import com.trade.imtrade.Model.request.SocialLoginBody;
 import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPerfence.MyPreferences;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
 import com.trade.imtrade.SharedPrefernce.User_Data;
 import com.trade.imtrade.databinding.ActivityLoginBinding;
@@ -114,6 +116,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
 
             case R.id.Skip:
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                MyPreferences.getInstance(getApplicationContext()).putBoolean(PrefConf.LOGINCHECK,false);
                 break;
         }
     }
@@ -174,6 +178,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                     response.getToken(),
                     response.getResult().getMyReferalcode(),null,null);
             SharedPrefManager.getInstance(this).SetLoginData(user_data);
+            MyPreferences.getInstance(getApplicationContext()).putBoolean(PrefConf.LOGINCHECK,true);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
 
@@ -191,6 +196,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                     response.getToken(),
                     response.getResult().getMyReferalcode(),null,null);
             SharedPrefManager.getInstance(this).SetLoginData(user_data);
+            MyPreferences.getInstance(getApplicationContext()).putBoolean(PrefConf.LOGINCHECK,true);
             startActivity(new Intent(Login.this, MainActivity.class));
             finish();
 

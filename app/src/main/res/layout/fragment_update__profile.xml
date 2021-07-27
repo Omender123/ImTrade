@@ -66,6 +66,8 @@
                     android:background="@drawable/verifying_textview"
                     android:fontFamily="@font/poppins"
                     android:hint="Email"
+                    android:editable="false"
+                    android:enabled="false"
                     android:inputType="textEmailAddress"
                     android:paddingStart="15dp"
                     android:paddingTop="15dp"
