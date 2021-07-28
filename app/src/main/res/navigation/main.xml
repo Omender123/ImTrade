@@ -80,6 +80,15 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/ChangePassword"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_profile_to_ChangeEmail"
+            app:destination="@id/ChangeEmail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/ChangeEmail"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -205,10 +214,16 @@
         tools:layout="@layout/activity_product__details" />
 
     <fragment
-
         android:id="@+id/ChangePassword"
         android:name="com.trade.imtrade.Fragment.ChangePassword_Fragment"
         android:label="Change Password"
         tools:layout="@layout/fragment_change_password" />
 
+
+
+    <fragment
+        android:id="@+id/ChangeEmail"
+        android:name="com.trade.imtrade.Fragment.Change_Email"
+        android:label="Change Email"
+        tools:layout="@layout/fragment_change__email" />
 </navigation>

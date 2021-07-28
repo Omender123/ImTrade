@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:background="@color/background"
         android:orientation="vertical"
-        tools:context=".Fragment.ChangePassword_Fragment">
+        tools:context=".Fragment.Change_Email">
 
         <ImageView
             android:id="@+id/image_"
@@ -17,7 +17,7 @@
 
 
         <EditText
-            android:id="@+id/ed_userOldPassword"
+            android:id="@+id/ed_userOldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -26,8 +26,8 @@
             android:layout_toStartOf="@+id/image_edit_email"
             android:background="@drawable/verifying_textview"
             android:fontFamily="@font/poppins"
-            android:hint="Old Password"
-            android:inputType="textPassword"
+            android:hint="Old Email"
+            android:inputType="textEmailAddress"
             android:paddingStart="15dp"
             android:paddingTop="13dp"
             android:paddingBottom="13dp"
@@ -37,7 +37,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/ed_usernewPassword"
+            android:id="@+id/ed_usernewEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -46,8 +46,8 @@
             android:layout_toStartOf="@+id/image_edit_email"
             android:background="@drawable/verifying_textview"
             android:fontFamily="@font/poppins"
-            android:hint="New Password"
-            android:inputType="textPassword"
+            android:hint="New Email"
+            android:inputType="textEmailAddress"
             android:paddingStart="15dp"
             android:paddingTop="13dp"
             android:paddingBottom="13dp"
@@ -57,7 +57,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/ed_userC_Password"
+            android:id="@+id/ed_userC_Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -65,8 +65,8 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/verifying_textview"
             android:fontFamily="@font/poppins"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
+            android:hint="Confirm New Email"
+            android:inputType="textEmailAddress"
             android:paddingStart="15dp"
             android:paddingTop="13dp"
             android:paddingBottom="13dp"

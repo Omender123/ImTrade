@@ -11,8 +11,11 @@ import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
+import com.trade.imtrade.Model.request.ChangeEmailBody;
 import com.trade.imtrade.Model.request.ChangePasswordBody;
+import com.trade.imtrade.Model.request.ForgetPasswordBody;
 import com.trade.imtrade.Model.request.LoginBody;
+import com.trade.imtrade.Model.request.SendNewEmailOtpBody;
 import com.trade.imtrade.Model.request.SendOtpBody;
 import com.trade.imtrade.Model.request.SignUpBody;
 import com.trade.imtrade.Model.request.SocialLoginBody;
@@ -43,6 +46,10 @@ public interface ApiService {
     @POST("user/sendOTP")
     Call<ResponseBody> SendOTP(@Body SendOtpBody sendOtpBody);
 
+    @POST("user/sendOTP")
+    Call<ResponseBody> SendNewOTP(@Body SendNewEmailOtpBody sendNewEmailOtpBody);
+
+
     @POST("user/emailVerify")
     Call<ResponseBody> VerifyOtp(@Body VerifyOTP_Body verifyOTP_body);
 
@@ -50,7 +57,7 @@ public interface ApiService {
     Call<SocialLoginResponse> SocialLogin(@Body SocialLoginBody socialLoginBody);
 
     @POST("user/forget-password/update")
-    Call<ResponseBody> ChangePassword(@Body ChangePasswordBody passwordBody);
+    Call<ResponseBody> ForgetPassword(@Body ForgetPasswordBody passwordBody);
 
     @GET("banner")
     Call<List<BannerResponse>> getBanner();
@@ -88,6 +95,11 @@ public interface ApiService {
     @GET("user")
     Call<UpdateProfileResponse>GetUpdateProfile();
 
+    @PUT("user/updateEmail")
+    Call<ResponseBody>ChangeEmail(@Body ChangeEmailBody changeEmailBody);
+
+    @POST("user/change-password")
+    Call<ResponseBody>ChangePassword(@Body ChangePasswordBody passwordBody);
 
 
 }

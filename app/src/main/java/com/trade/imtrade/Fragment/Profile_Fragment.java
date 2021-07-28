@@ -89,7 +89,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
             Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
         }else if (!profileImage.equalsIgnoreCase("https://stargazeevents.s3.ap-south-1.amazonaws.com/pfiles/profile.png")){
-            Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+            Glide.with(getContext()).load(PrefConf.IMAGE_URL+profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
         }else{
             Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
@@ -148,6 +148,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
         arrayList.add("My account ");
         arrayList.add("My Addresses");
         arrayList.add("Change password");
+        arrayList.add("Change Email");
         arrayList.add("My Rewards");
         arrayList.add("My orders");
         arrayList.add("My Review");
@@ -185,7 +186,7 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
                     break;
 
                 case 3:
-                    Toast.makeText(getContext(), "" + ItemList.get(position), Toast.LENGTH_SHORT).show();
+                    navController.navigate(R.id.action_profile_to_ChangeEmail);
 
                     break;
 

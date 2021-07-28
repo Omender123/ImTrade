@@ -10,24 +10,22 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.irozon.sneaker.Sneaker;
-import com.trade.imtrade.Model.request.ChangePasswordBody;
-import com.trade.imtrade.Model.request.SendOtpBody;
+import com.trade.imtrade.Model.request.ForgetPasswordBody;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.ActivityChangePasswordBinding;
 import com.trade.imtrade.utils.AppUtils;
-import com.trade.imtrade.view_presenter.Change_Password_Presenter;
-import com.trade.imtrade.view_presenter.Send_OTP_Presenter;
+import com.trade.imtrade.view_presenter.Forget_Password_Presenter;
 
 import de.mateware.snacky.Snacky;
 
-public class Change_Password extends AppCompatActivity implements View.OnClickListener, Change_Password_Presenter.Change_PasswordView {
+public class Change_Password extends AppCompatActivity implements View.OnClickListener, Forget_Password_Presenter.Change_PasswordView {
     ActivityChangePasswordBinding binding;
     private Context context;
     private Dialog dialog;
     private View view;
-    private Change_Password_Presenter presenter;
+    private Forget_Password_Presenter presenter;
     String Email, Otp;
 
     @Override
@@ -40,7 +38,7 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
         context = Change_Password.this;
         dialog = AppUtils.hideShowProgress(context);
 
-        presenter = new Change_Password_Presenter(this);
+        presenter = new Forget_Password_Presenter(this);
 
         Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL, "");
         Otp = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.OTP, "");
@@ -87,8 +85,8 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
                     .show();
         } else {
 
-            ChangePasswordBody changePasswordBody = new ChangePasswordBody(Email, Otp, new_pass);
-            presenter.ChangedPassword(changePasswordBody);
+            ForgetPasswordBody forgetPasswordBody = new ForgetPasswordBody(Email, Otp, new_pass);
+            presenter.ForgetPassword(forgetPasswordBody);
         }
 
     }

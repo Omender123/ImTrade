@@ -38,7 +38,7 @@ public class Update_Profile extends Fragment implements View.OnClickListener, Up
     FragmentUpdateProfileBinding binding;
     private View view;
     private Dialog dialog;
-    UpdateProfile_Presenter presenter;
+    private UpdateProfile_Presenter presenter;
     User_Data userData;
 
     String FullName, Email,Phone;
@@ -77,7 +77,7 @@ public class Update_Profile extends Fragment implements View.OnClickListener, Up
             Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
         }else if (!profileImage.equalsIgnoreCase("https://stargazeevents.s3.ap-south-1.amazonaws.com/pfiles/profile.png")){
-            Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+            Glide.with(getContext()).load(PrefConf.IMAGE_URL+profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
         }else{
             Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);

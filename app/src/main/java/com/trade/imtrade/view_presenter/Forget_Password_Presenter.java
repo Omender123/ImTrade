@@ -2,8 +2,7 @@ package com.trade.imtrade.view_presenter;
 
 import android.content.Context;
 
-import com.trade.imtrade.Model.request.ChangePasswordBody;
-import com.trade.imtrade.Model.request.VerifyOTP_Body;
+import com.trade.imtrade.Model.request.ForgetPasswordBody;
 import com.trade.imtrade.utils.AppUtils;
 
 import org.json.JSONException;
@@ -16,17 +15,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Change_Password_Presenter {
+public class Forget_Password_Presenter {
 
     private Change_PasswordView view;
 
-    public Change_Password_Presenter(Change_PasswordView view) {
+    public Forget_Password_Presenter(Change_PasswordView view) {
         this.view = view;
     }
 
-    public void ChangedPassword(ChangePasswordBody body){
+    public void ForgetPassword(ForgetPasswordBody body){
         view.showHideProgress(true);
-        Call<ResponseBody> userCall = AppUtils.getApi((Context)view).ChangePassword(body);
+        Call<ResponseBody> userCall = AppUtils.getApi((Context)view).ForgetPassword(body);
         userCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -37,7 +36,7 @@ public class Change_Password_Presenter {
                     try {
                         String  errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("body");
+                        String err_msg  = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {
