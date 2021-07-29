@@ -18,6 +18,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.trade.imtrade.Activity.CartActivity;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         floatingActionButton.setOnClickListener(this);
+        img_cart.setOnClickListener(this);
 
         moreNavigationOptions();
     }
@@ -237,9 +240,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.fab:
                 navController.navigate(R.id.fab);
-                backhome = true;
-                ///navController.popBackStack();
+                break;
 
+            case R.id.relative_cart:
+                  startActivity(new Intent(MainActivity.this, CartActivity.class));
                 break;
         }
     }

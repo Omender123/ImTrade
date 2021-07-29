@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.trade.imtrade.Adapter.DetailsAdapter;
 import com.trade.imtrade.Adapter.ReviewAdapter;
 import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Adapter.StorageAdapter;
+import com.trade.imtrade.MainActivity;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
@@ -119,7 +121,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.relative_cart:
-                Toast.makeText(this, "Cart", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Product_Details.this, CartActivity.class));
                 break;
 
             case R.id.showMore:

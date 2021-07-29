@@ -107,14 +107,10 @@ FragmentChangePasswordBinding binding;
                     .setDuration(2500)
                     .sneakWarning();
         }else {
-          /*  SendOtpBody sendOtpBody = new SendOtpBody(Email);
-            presenter.SendOTP(getContext(),sendOtpBody);*/
+            SendOtpBody sendOtpBody = new SendOtpBody(Email);
+            presenter.SendOTP(getContext(),sendOtpBody);
 
-            Sneaker.with(getActivity())
-                    .setTitle("Api lagani baki h ")
-                    .setCornerRadius(4)
-                    .setDuration(2500)
-                    .sneakSuccess();
+
         }
 
     }
