@@ -1,6 +1,11 @@
 package com.trade.imtrade.Fragment;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +32,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.Profile_itemAdapter;
+import com.trade.imtrade.MainActivity;
+import com.trade.imtrade.Model.ResponseModel.AddProfileResponse;
 import com.trade.imtrade.R;
 
 import com.trade.imtrade.SharedPerfence.MyPreferences;
@@ -34,16 +41,28 @@ import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.SharedPrefernce.SharedPrefManager;
 import com.trade.imtrade.SharedPrefernce.User_Data;
 import com.trade.imtrade.databinding.FragmentProfileBinding;
-import com.trade.imtrade.databinding.FragmentProfileBindingImpl;
 import com.trade.imtrade.utils.AppUtils;
+import com.trade.imtrade.utils.ImagePath;
+import com.trade.imtrade.view_presenter.ProfilePresenter;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-public class Profile_Fragment extends Fragment implements View.OnClickListener, Profile_itemAdapter.OnProfileItemListener {
+import static android.app.Activity.RESULT_OK;
+
+
+public class Profile_Fragment extends Fragment implements View.OnClickListener, Profile_itemAdapter.OnProfileItemListener, ProfilePresenter.ProfileView {
     FragmentProfileBinding binding;
     private View view;
     private Dialog dialog;
+    public boolean permissionStatus;
+    private int PICK_PHOTO_FOR_AVATAR = 1;
+    private Dialog dialogBox;
+    private ProfilePresenter presenter;
 
     NavController navController;
 
@@ -83,18 +102,22 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
         }
         binding.addUsername.setOnClickListener(this::onClick);
         binding.userName.setOnClickListener(this::onClick);
+        binding.imgUpload.setOnClickListener(this::onClick);
+
 
         String profileImage = MyPreferences.getInstance(getContext()).getString(PrefConf.ProfileImage, null);
-        if (profileImage==null){
+        if (profileImage == null) {
             Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
-        }else if (!profileImage.equalsIgnoreCase("https://stargazeevents.s3.ap-south-1.amazonaws.com/pfiles/profile.png")){
-            Glide.with(getContext()).load(PrefConf.IMAGE_URL+profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+        } else if (!profileImage.equalsIgnoreCase("https://stargazeevents.s3.ap-south-1.amazonaws.com/pfiles/profile.png")) {
+            Glide.with(getContext()).load(PrefConf.IMAGE_URL + profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
-        }else{
+        } else {
             Glide.with(getContext()).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
 
         }
+
+        presenter = new ProfilePresenter(this);
 
         return binding.getRoot();
 
@@ -140,8 +163,24 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
                 }
                 break;
 
+            case R.id.img_upload:
+
+                if (CheckedLogin == true) {
+
+                    galleryPicker();
+                } else {
+                    Sneaker.with(getActivity())
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+                break;
+
         }
     }
+
 
     private void getProfileItemList() {
         ArrayList<String> arrayList = new ArrayList<String>();
@@ -230,5 +269,113 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
         }
 
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+
+            case AppUtils.PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    permissionStatus = true;
+
+                } else {
+                    permissionStatus = false;
+                    String msg = "Please Allow Permission to share.";
+                    customAlert(msg);
+
+                }
+                return;
+        }
+    }
+
+    private void customAlert(String msg) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setMessage(msg);
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialogBox.dismiss();
+            }
+        }).show();
+    }
+
+    private void galleryPicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
+    }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == RESULT_OK) {
+            if (data == null)
+                return;
+            Uri uri = data.getData();
+            System.out.println("urii  "+uri +" "+uri.getPath());
+            String path  = ImagePath.getPath(getContext(),uri);
+            System.out.println("urii path "+path );
+            if(path!=null && !path.equals("")) {
+                File file = new File(path);
+                uploadImage(file);
+            }
+
+        }
+    }
+
+    @Override
+    public void showHideProgress(boolean isShow) {
+        if (isShow){
+            dialog.show();
+        }else{
+            dialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onError(String message) {
+        Sneaker.with(getActivity())
+                .setTitle(message)
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakError();
+    }
+
+    @Override
+    public void onProfileUpload(AddProfileResponse addProfileResponse) {
+     String Image = addProfileResponse.getResult().getProfileImage();
+     MyPreferences.getInstance(getContext()).putString(PrefConf.ProfileImage, Image);
+        Sneaker.with(getActivity())
+                .setTitle("Successfully Upload Profile image")
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakSuccess();
+        Glide.with(getContext()).load(PrefConf.IMAGE_URL + Image).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(binding.imageProfile);
+
+
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        Sneaker.with(getActivity())
+                .setTitle(t.getLocalizedMessage())
+                .setMessage("")
+                .setCornerRadius(4)
+                .setDuration(1500)
+                .sneakError();
+    }
+
+    private void uploadImage( File file){
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part image =
+                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        presenter.uploadImage(getContext(),image);
     }
 }

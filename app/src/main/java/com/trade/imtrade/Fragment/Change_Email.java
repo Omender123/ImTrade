@@ -138,7 +138,7 @@ public class Change_Email extends Fragment implements View.OnClickListener, Chan
             }else{
                 SendOtpBody sendOLDBody = new SendOtpBody(OldEmail);
                 presenter.SendOldEmailOTP(getContext(),sendOLDBody);
-                SendNewEmailOtpBody sendOtpBody = new SendNewEmailOtpBody(NewEmail);
+                SendNewEmailOtpBody sendOtpBody = new SendNewEmailOtpBody(OldEmail,NewEmail);
                 presenter.SendNewEmailOTP(getContext(),sendOtpBody);
 
                 new Handler().postDelayed(new Runnable() {
@@ -209,6 +209,9 @@ public class Change_Email extends Fragment implements View.OnClickListener, Chan
             binding.edUserOldEmail.setText("");
             binding.edUsernewEmail.setText("");
             binding.edUserCEmail.setText("");
+            User_Data user_data = new User_Data(userData.getId(),NewEmail,userData.getToken(),userData.getReferral_code(),userData.getUserName(),userData.getPhoneNo());
+            SharedPrefManager.getInstance(getContext()).SetLoginData(user_data);
+
             Sneaker.with(getActivity())
                     .setTitle("Email Change is SuccessFully")
                     .setMessage("")
@@ -218,7 +221,8 @@ public class Change_Email extends Fragment implements View.OnClickListener, Chan
 
 
             dialogbox.dismiss();
-           }
+
+        }
     }
 
 
@@ -278,7 +282,7 @@ public class Change_Email extends Fragment implements View.OnClickListener, Chan
         text_resend1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendNewEmailOtpBody sendOtpBody = new SendNewEmailOtpBody(NewEmail);
+                SendNewEmailOtpBody sendOtpBody = new SendNewEmailOtpBody(OldEmail,NewEmail);
                 presenter.SendNewEmailOTP(getContext(),sendOtpBody);
 
             }

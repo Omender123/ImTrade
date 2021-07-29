@@ -4,23 +4,35 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SendNewEmailOtpBody {
+    @SerializedName("email")
+    @Expose
+    private String OldEmail;
     @SerializedName("newEmail")
     @Expose
-    private String email;
+    private String NewEmail;
+
+    public SendNewEmailOtpBody(String oldEmail, String newEmail) {
+        OldEmail = oldEmail;
+        NewEmail = newEmail;
+    }
+
     public SendNewEmailOtpBody() {
+
     }
 
-    public SendNewEmailOtpBody(String email) {
-        super();
-        this.email = email;
+    public String getOldEmail() {
+        return OldEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public void setOldEmail(String oldEmail) {
+        OldEmail = oldEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getNewEmail() {
+        return NewEmail;
     }
 
+    public void setNewEmail(String newEmail) {
+        NewEmail = newEmail;
+    }
 }
