@@ -38,6 +38,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Activity.CartActivity;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Dialog dialog;
     private View view;
     private MainActivity_Presenter presenter;
+    Boolean CheckedLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profile_Image = (ImageView) navHeader.findViewById(R.id.profile_Image);
 
         user_data = SharedPrefManager.getInstance(this).getLoginDATA();
+        CheckedLogin = MyPreferences.getInstance(MainActivity.this).getBoolean(PrefConf.LOGINCHECK, false);
+
 
         context = MainActivity.this;
         dialog = AppUtils.hideShowProgress(context);
@@ -243,7 +248,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.relative_cart:
-                  startActivity(new Intent(MainActivity.this, CartActivity.class));
+                if (CheckedLogin == true) {
+                    startActivity(new Intent(MainActivity.this, CartActivity.class));
+                } else {
+                    Sneaker.with(MainActivity.this)
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+
                 break;
         }
     }

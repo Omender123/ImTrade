@@ -22,12 +22,14 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     Context context;
     String[] price;
     ArrayList<String> arrayList;
+    String string;
 
 
-    public CartItemAdapter(Context context, String[] price,ArrayList<String>arrayList) {
+    public CartItemAdapter(Context context, String[] price,ArrayList<String>arrayList,String string) {
         this.context = context;
         this.price = price;
         this.arrayList=arrayList;
+        this.string=string;
     }
 
     public CartItemAdapter() {
@@ -47,11 +49,11 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
 
         holder.binding.productPrice.setText(price[position]);
+        holder.binding.save.setText(string);
 
         ArrayAdapter<String> adp = new ArrayAdapter<String>(context, R.layout.spinner_list, arrayList);
         holder.binding.spinner.setAdapter(adp);
 
-        //  adp.setDropDownViewResource(R.layout.spinner_list);
 
         holder.binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

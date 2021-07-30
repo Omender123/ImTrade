@@ -184,16 +184,16 @@ public class Profile_Fragment extends Fragment implements View.OnClickListener, 
 
     private void getProfileItemList() {
         ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add("My account ");
+        arrayList.add("My Account ");
         arrayList.add("My Addresses");
-        arrayList.add("Change password");
+        arrayList.add("Change Password");
         arrayList.add("Change Email");
         arrayList.add("My Rewards");
-        arrayList.add("My orders");
+        arrayList.add("My Orders");
         arrayList.add("My Review");
         arrayList.add("My iMX");
         arrayList.add("Add Events ");
-        arrayList.add("My Personalise notifications ");
+        arrayList.add("My Personalise Notifications ");
 
         Profile_itemAdapter profile_itemAdapter = new Profile_itemAdapter(arrayList, getContext(), this::onProfileItemClickListener);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

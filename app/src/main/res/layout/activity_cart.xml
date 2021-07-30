@@ -33,15 +33,19 @@
             android:src="@drawable/background_design" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/image_">
+            android:layout_above="@id/text_BuyNow"
+            android:layout_below="@id/image_"
+            android:background="@color/background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/background"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cartReyclerView"
@@ -52,14 +56,13 @@
                     tools:itemCount="2"
                     tools:listitem="@layout/custom_cart_layout" />
 
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    app:cardElevation="4dp"
                     app:cardBackgroundColor="#252428"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="4dp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -71,12 +74,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
+                            android:layout_marginRight="10dp"
                             android:layout_toStartOf="@+id/change"
                             android:fontFamily="@font/poppins_medium"
                             android:text="Full Name"
-                            android:layout_marginRight="10dp"
                             android:textColor="#D8D8D8"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/full_address"
@@ -87,34 +90,267 @@
                             android:layout_marginTop="1dp"
                             android:layout_marginEnd="10dp"
                             android:layout_toStartOf="@+id/change"
-                            android:justificationMode="inter_word"
                             android:fontFamily="@font/poppins"
+                            android:justificationMode="inter_word"
                             android:text="A-226 pheas 1 chhattarpur new Delhi matabhavan NEW DELHI....."
                             android:textColor="#B3D8D8D8"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/change"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:paddingStart="22dp"
-                            android:layout_marginTop="12dp"
-                            android:paddingEnd="22dp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:textColor="#2E343B"
-                            android:text="Change"
-                            android:textSize="13dp"
+                            android:layout_marginTop="12sp"
                             android:background="@drawable/verifying_textview"
-                            android:backgroundTint="@color/purple_200"/>
+                            android:backgroundTint="@color/purple_200"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:paddingStart="22dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="22dp"
+                            android:paddingBottom="10dp"
+                            android:text="Change"
+                            android:textColor="#2E343B"
+                            android:textSize="13sp" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/text_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Price Details"
+                    android:textColor="#80D8D8D8"
+                    android:textSize="14sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/boxthin">
+
+                    <TextView
+                        android:id="@+id/text_totalItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/text_totalPriceItem"
+                        android:fontFamily="@font/poppins"
+                        android:text="Price (3 items)"
+                        android:textColor="#B3D8D8D8"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/text_totalPriceItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/poppins"
+                        android:text="25,497.00 Rs"
+                        android:textColor="#D8D8D8"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/text_tax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_totalItem"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/text_taxPrice"
+                        android:fontFamily="@font/poppins"
+                        android:text="Tax"
+                        android:textColor="#B3D8D8D8"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/text_taxPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_totalPriceItem"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="(+) 40.00 Rs"
+                        android:textColor="#D8D8D8"
+                        android:textSize="12sp" />
+
+
+                    <TextView
+                        android:id="@+id/text_promo_applied"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_tax"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/text_taxPrice"
+                        android:fontFamily="@font/poppins"
+                        android:text="Promotion Applied"
+                        android:textColor="#B3D8D8D8"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/text_Pricepromo_applied"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_taxPrice"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="(-) 40.00 Rs"
+                        android:textColor="#D8D8D8"
+                        android:textSize="12sp" />
+
+
+                    <TextView
+                        android:id="@+id/text_otherCharges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_promo_applied"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/text_otherPriceCharges"
+                        android:fontFamily="@font/poppins"
+                        android:text="Other Charges"
+                        android:textColor="#B3D8D8D8"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/text_otherPriceCharges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_Pricepromo_applied"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="(+) 40.00 Rs"
+                        android:textColor="#D8D8D8"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@id/text_otherCharges"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="21dp"
+                        android:background="#4DFFFFFF" />
+
+
+                    <TextView
+                        android:id="@+id/text_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/view"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toStartOf="@+id/text_totalPrice"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Order Total"
+                        android:textColor="#B3D8D8D8"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/text_totalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/view"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="25,537.00 Rs"
+                        android:textColor="#019624"
+                        android:textSize="18sp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/text_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Save for later"
+                    android:textColor="#80D8D8D8"
+                    android:textSize="14sp" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/SaveReyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/custom_cart_layout" />
+
+
+                <TextView
+                    android:id="@+id/text_relatedProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Related Product"
+                    android:textColor="#80D8D8D8"
+                    android:textSize="14sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/relatedProduct_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="3dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/review_product_layout" />
+
+
             </LinearLayout>
 
 
         </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/text_BuyNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="#171717">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/verifying_textview"
+                android:backgroundTint="@color/purple_200"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Proceed to Buy (3 items)"
+                android:textColor="#2e343b"
+                android:textSize="13sp" />
+        </LinearLayout>
 
 
     </RelativeLayout>

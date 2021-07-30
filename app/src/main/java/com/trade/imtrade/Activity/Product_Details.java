@@ -46,6 +46,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
     private Dialog dialog;
     private View view;
     ProductDetailsResponse productDetailsResponses;
+    Boolean CheckedLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,8 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
         presenter = new ProductDetails_Presenter(this);
         dialog = AppUtils.hideShowProgress(context);
 
+        CheckedLogin = MyPreferences.getInstance(Product_Details.this).getBoolean(PrefConf.LOGINCHECK, false);
+
 
         binding.back.setOnClickListener(this);
         binding.relativeCart.setOnClickListener(this);
@@ -70,13 +73,15 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
         binding.HideMore1.setOnClickListener(this);
         binding.showDetails.setOnClickListener(this);
         binding.HideDetails.setOnClickListener(this);
+        binding.textAddtocart.setOnClickListener(this);
+        binding.textBuyNow.setOnClickListener(this);
 
 
         presenter.GetProductDetails(Product_Details.this, RouteId);
         CheckBoxList();
         changeStatusBarColor();
 
-         getAllReview_Product();
+        getAllReview_Product();
 
 
     }
@@ -121,7 +126,17 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.relative_cart:
-                startActivity(new Intent(Product_Details.this, CartActivity.class));
+                if (CheckedLogin == true) {
+                    startActivity(new Intent(Product_Details.this, CartActivity.class));
+                } else {
+                    Sneaker.with(Product_Details.this)
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+
                 break;
 
             case R.id.showMore:
@@ -148,12 +163,50 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             case R.id.showDetails:
                 binding.showDetails.setVisibility(View.GONE);
                 binding.HideDetails.setVisibility(View.VISIBLE);
-                getDelatilsList(productDetailsResponses,true);
+                getDelatilsList(productDetailsResponses, true);
                 break;
             case R.id.HideDetails:
                 binding.showDetails.setVisibility(View.VISIBLE);
                 binding.HideDetails.setVisibility(View.GONE);
-                getDelatilsList(productDetailsResponses,false);
+                getDelatilsList(productDetailsResponses, false);
+                break;
+
+            case R.id.text_addtocart:
+                if (CheckedLogin == true) {
+                    Sneaker.with(Product_Details.this)
+                            .setTitle("Successfully add product in cart ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakSuccess();
+
+                } else {
+                    Sneaker.with(Product_Details.this)
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+                break;
+
+            case R.id.text_BuyNow:
+                if (CheckedLogin == true) {
+                    Sneaker.with(Product_Details.this)
+                            .setTitle("Successfully Buy  product ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakSuccess();
+
+                } else {
+                    Sneaker.with(Product_Details.this)
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
                 break;
         }
     }
@@ -190,7 +243,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onProductDetailsSuccess(ProductDetailsResponse productDetailsResponse, String message) {
-        productDetailsResponses =productDetailsResponse;
+        productDetailsResponses = productDetailsResponse;
         if (message.equalsIgnoreCase("ok")) {
             /*--------------ProductBanner--------------*/
             List<SlideModel> BannerImage = new ArrayList<>();
@@ -212,13 +265,13 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             /*--------------SetProductDetails--------------*/
             binding.productName.setText(productDetailsResponse.getName());
             binding.textRating.setText(productDetailsResponse.getAverageRating());
-            binding.productPrice.setText(productDetailsResponse.getDiscount()+" Rs");
-            binding.productOffPrice.setText(productDetailsResponse.getVariables().get(0).getPrice().getMargin()+" %off");
-            binding.productWorngPrice.setText(productDetailsResponse.getVariables().get(0).getPrice().getMrp()+" Rs");
+            binding.productPrice.setText(productDetailsResponse.getDiscount() + " Rs");
+            binding.productOffPrice.setText(productDetailsResponse.getVariables().get(0).getPrice().getMargin() + " %off");
+            binding.productWorngPrice.setText(productDetailsResponse.getVariables().get(0).getPrice().getMrp() + " Rs");
 
             getColorList(productDetailsResponse);
             getStorageList(productDetailsResponse);
-            getDelatilsList(productDetailsResponse,false);
+            getDelatilsList(productDetailsResponse, false);
             getReviewList(productDetailsResponse);
 
 
@@ -238,15 +291,15 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
     private void getColorList(ProductDetailsResponse productDetailsResponse) {
 
-        if (productDetailsResponse.getColor().size()>0&& productDetailsResponse.getColor()!=null){
+        if (productDetailsResponse.getColor().size() > 0 && productDetailsResponse.getColor() != null) {
 
-            ColorAdapter colorAdapter = new ColorAdapter(getApplicationContext(),productDetailsResponse, this);
+            ColorAdapter colorAdapter = new ColorAdapter(getApplicationContext(), productDetailsResponse, this);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.ColorRecyclerView.setLayoutManager(mLayoutManager1);
             binding.ColorRecyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.ColorRecyclerView.setAdapter(colorAdapter);
             binding.textColor.setText(productDetailsResponse.getColor().get(0).getName().toUpperCase());
-        }else {
+        } else {
             Sneaker.with(this)
                     .setTitle("No Product Color are Available")
                     .setMessage("")
@@ -259,22 +312,22 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onOnColorClickListener(ProductDetailsResponse productDetailsResponse,int position) {
+    public void onOnColorClickListener(ProductDetailsResponse productDetailsResponse, int position) {
         binding.textColor.setText(productDetailsResponse.getColor().get(position).getName().toUpperCase());
-        Toast.makeText(context, ""+productDetailsResponse.getColor().get(position).getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + productDetailsResponse.getColor().get(position).getName(), Toast.LENGTH_SHORT).show();
     }
 
     private void getStorageList(ProductDetailsResponse productDetailsResponse) {
-        if (productDetailsResponse.getStorage().size()>0&& productDetailsResponse.getStorage()!=null){
+        if (productDetailsResponse.getStorage().size() > 0 && productDetailsResponse.getStorage() != null) {
 
 
-            StorageAdapter storageAdapter = new StorageAdapter(getApplicationContext(),productDetailsResponse , this);
+            StorageAdapter storageAdapter = new StorageAdapter(getApplicationContext(), productDetailsResponse, this);
             RecyclerView.LayoutManager mLayoutManager1 = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
             binding.storageRecyclerView.setLayoutManager(mLayoutManager1);
             binding.storageRecyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.storageRecyclerView.setAdapter(storageAdapter);
             binding.textStorage.setText(productDetailsResponse.getStorage().get(0).getSize());
-        }else {
+        } else {
             Sneaker.with(this)
                     .setTitle("No Product Size and Storage are Available")
                     .setMessage("")
@@ -285,18 +338,19 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
     @Override
-    public void onToggleItemClickListener(ProductDetailsResponse productDetailsResponse,int position) {
+    public void onToggleItemClickListener(ProductDetailsResponse productDetailsResponse, int position) {
 
-            binding.textStorage.setText(productDetailsResponse.getStorage().get(position).getSize());
+        binding.textStorage.setText(productDetailsResponse.getStorage().get(position).getSize());
 
-        Toast.makeText(context, ""+productDetailsResponse.getStorage().get(position).getSize(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + productDetailsResponse.getStorage().get(position).getSize(), Toast.LENGTH_SHORT).show();
 
     }
 
-    private void getDelatilsList(ProductDetailsResponse productDetailsResponse,Boolean count) {
+    private void getDelatilsList(ProductDetailsResponse productDetailsResponse, Boolean count) {
         if (count == true) {
-            DetailsAdapter detailsAdapter = new DetailsAdapter(getApplicationContext(),productDetailsResponse, true);
+            DetailsAdapter detailsAdapter = new DetailsAdapter(getApplicationContext(), productDetailsResponse, true);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             binding.detailsRecyclerView.setLayoutManager(mLayoutManager1);
             binding.detailsRecyclerView.setItemAnimator(new DefaultItemAnimator());

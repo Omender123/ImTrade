@@ -568,7 +568,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:text="Review"
                     android:textColor="@color/review_color"
                     android:textSize="18sp"
@@ -594,10 +594,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp">
+            android:background="#171717"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/text_addtocart"
