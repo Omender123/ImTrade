@@ -13,6 +13,7 @@ public class PrefConf {
     public static final String ROUTEID = "ROUTEID";
     public static final String LOGINCHECK = "LOGINCHECK";
     public static final String ProfileImage = "ProfileImage";
+    public static final String CARTCOUNT = "CARTCOUNT";
 
 
 }

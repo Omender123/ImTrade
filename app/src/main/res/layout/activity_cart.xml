@@ -143,7 +143,6 @@
                         android:layout_marginRight="10dp"
                         android:layout_toStartOf="@+id/text_totalPriceItem"
                         android:fontFamily="@font/poppins"
-                        android:text="Price (3 items)"
                         android:textColor="#B3D8D8D8"
                         android:textSize="12sp" />
 
@@ -180,7 +179,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/poppins"
-                        android:text="(+) 40.00 Rs"
+                        android:text="(+) 00.00 Rs"
                         android:textColor="#D8D8D8"
                         android:textSize="12sp" />
 
@@ -207,7 +206,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/poppins"
-                        android:text="(-) 40.00 Rs"
+                        android:text="(-) 00.00 Rs"
                         android:textColor="#D8D8D8"
                         android:textSize="12sp" />
 
@@ -234,7 +233,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/poppins"
-                        android:text="(+) 40.00 Rs"
+                        android:text="(+) 00.00 Rs"
                         android:textColor="#D8D8D8"
                         android:textSize="12sp" />
 
@@ -271,7 +270,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="25,537.00 Rs"
                         android:textColor="#019624"
                         android:textSize="18sp" />
 
@@ -340,6 +338,7 @@
             android:background="#171717">
 
             <TextView
+                android:id="@+id/btn_totalItem"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="15dp"
@@ -347,7 +346,6 @@
                 android:backgroundTint="@color/purple_200"
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
-                android:text="Proceed to Buy (3 items)"
                 android:textColor="#2e343b"
                 android:textSize="13sp" />
         </LinearLayout>

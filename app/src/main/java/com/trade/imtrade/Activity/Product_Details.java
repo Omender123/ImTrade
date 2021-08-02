@@ -27,6 +27,7 @@ import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Adapter.StorageAdapter;
 import com.trade.imtrade.MainActivity;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
+import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -36,6 +37,8 @@ import com.trade.imtrade.view_presenter.ProductDetails_Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
 
 public class Product_Details extends AppCompatActivity implements View.OnClickListener, ColorAdapter.OnColorItemListener, StorageAdapter.OnToggleItemListener, ProductDetails_Presenter.GetProductDetailsView {
     ActivityProductDetailsBinding binding;
@@ -47,6 +50,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
     private View view;
     ProductDetailsResponse productDetailsResponses;
     Boolean CheckedLogin;
+    int cartCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
 
         presenter.GetProductDetails(Product_Details.this, RouteId);
+        getCartCount();
         CheckBoxList();
         changeStatusBarColor();
 
@@ -128,6 +133,8 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             case R.id.relative_cart:
                 if (CheckedLogin == true) {
                     startActivity(new Intent(Product_Details.this, CartActivity.class));
+                    MyPreferences.getInstance(Product_Details.this).putInteger(PrefConf.CARTCOUNT, 0);
+
                 } else {
                     Sneaker.with(Product_Details.this)
                             .setTitle("Your Can't access this app  please First Login ")
@@ -173,12 +180,8 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
             case R.id.text_addtocart:
                 if (CheckedLogin == true) {
-                    Sneaker.with(Product_Details.this)
-                            .setTitle("Successfully add product in cart ")
-                            .setMessage("")
-                            .setCornerRadius(4)
-                            .setDuration(1500)
-                            .sneakSuccess();
+                    AddToCartBody addToCartBody = new AddToCartBody(productDetailsResponses.getId(), 1);
+                    presenter.AddToCart(Product_Details.this, addToCartBody);
 
                 } else {
                     Sneaker.with(Product_Details.this)
@@ -209,6 +212,12 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCartCount();
     }
 
     private void getAllReview_Product() {
@@ -277,6 +286,23 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
         }
 
+    }
+
+    @Override
+    public void onAddToCartSuccess(ResponseBody responseBody, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            Sneaker.with(Product_Details.this)
+                    .setTitle("Successfully add product in cart ")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+
+            int cart = cartCount + 1;
+            MyPreferences.getInstance(Product_Details.this).putInteger(PrefConf.CARTCOUNT, cart);
+            binding.textCartCount.setVisibility(View.VISIBLE);
+            binding.textCartCount.setText(String.valueOf(cart));
+        }
     }
 
     @Override
@@ -376,4 +402,14 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    private void getCartCount() {
+        cartCount = MyPreferences.getInstance(Product_Details.this).getInteger(PrefConf.CARTCOUNT, 0);
+        if (cartCount == 0) {
+
+            binding.textCartCount.setVisibility(View.GONE);
+        } else {
+            binding.textCartCount.setVisibility(View.VISIBLE);
+            binding.textCartCount.setText(String.valueOf(cartCount));
+        }
+    }
 }

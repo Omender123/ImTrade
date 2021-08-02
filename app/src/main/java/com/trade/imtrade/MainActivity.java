@@ -40,6 +40,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Activity.CartActivity;
+import com.trade.imtrade.Activity.Product_Details;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     private View navHeader, navDrawer;
-    TextView username, usergmail;
+    TextView username, usergmail,text_cart_Count;
     FloatingActionButton floatingActionButton;
     CoordinatorLayout coordinatorLayout;
     ImageView img_discount, profile_Image;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View view;
     private MainActivity_Presenter presenter;
     Boolean CheckedLogin;
+    int cartCount;
 
 
     @Override
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_discount = (ImageView) findViewById(R.id.img_discount);
         img_cart = (RelativeLayout) findViewById(R.id.relative_cart);
         relative = (RelativeLayout) findViewById(R.id.relative);
+        text_cart_Count = (TextView) findViewById(R.id.text_cart_Count); 
 
         setSupportActionBar(toolbar);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         context = MainActivity.this;
         dialog = AppUtils.hideShowProgress(context);
-
+        getCartCount();
 
         presenter = new MainActivity_Presenter(this);
         presenter.GetUpdateProfile(MainActivity.this);
@@ -112,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             username.setText(user_data.getUserName());
             usergmail.setText(user_data.getEmail());
         }
+
+
 
         String profileImage = MyPreferences.getInstance(context).getString(PrefConf.ProfileImage, null);
         if (profileImage == null) {
@@ -250,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.relative_cart:
                 if (CheckedLogin == true) {
                     startActivity(new Intent(MainActivity.this, CartActivity.class));
+                    MyPreferences.getInstance(MainActivity.this).putInteger(PrefConf.CARTCOUNT,0);
                 } else {
                     Sneaker.with(MainActivity.this)
                             .setTitle("Your Can't access this app  please First Login ")
@@ -403,5 +409,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onFailure(Throwable t) {
         Toast.makeText(MainActivity.this, "" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCartCount();
+    }
+
+    private void getCartCount(){
+        cartCount = MyPreferences.getInstance(MainActivity.this).getInteger(PrefConf.CARTCOUNT,0);
+        if (cartCount==0){
+
+            text_cart_Count.setVisibility(View.GONE);
+        }else{
+            text_cart_Count.setVisibility(View.VISIBLE);
+            text_cart_Count.setText(String.valueOf(cartCount));
+        }
     }
 }

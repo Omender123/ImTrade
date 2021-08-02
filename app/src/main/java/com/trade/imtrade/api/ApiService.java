@@ -5,6 +5,7 @@ import com.trade.imtrade.Model.ResponseModel.AddProfileResponse;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
@@ -12,6 +13,7 @@ import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
+import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.Model.request.ChangeEmailBody;
 import com.trade.imtrade.Model.request.ChangePasswordBody;
 import com.trade.imtrade.Model.request.ForgetPasswordBody;
@@ -29,6 +31,7 @@ import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -108,5 +111,15 @@ public interface ApiService {
     @Multipart
     @PUT("user/addProfile")
     Call<AddProfileResponse> uploadPic(@Part MultipartBody.Part image);
+
+    @POST("cart")
+    Call<ResponseBody>AddToCart(@Body AddToCartBody addToCartBody);
+
+    @GET("cart")
+    Call<CartProductResponse>GetCartProduct();
+
+    @DELETE("cart")
+    Call<ResponseBody>DeleteCartProduct(@Query("id") String ProductId);
+
 
 }
