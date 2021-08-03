@@ -10,6 +10,7 @@ import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
+import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
@@ -97,29 +98,38 @@ public interface ApiService {
     Call<List<HomeProductResponse>> getReCommendedProduct();
 
     @PUT("user")
-    Call<ResponseBody>UpdateProfile(@Body UpdateProfileBody updateProfileBody);
+    Call<ResponseBody> UpdateProfile(@Body UpdateProfileBody updateProfileBody);
 
     @GET("user")
-    Call<UpdateProfileResponse>GetUpdateProfile();
+    Call<UpdateProfileResponse> GetUpdateProfile();
 
     @PUT("user/updateEmail")
-    Call<ResponseBody>ChangeEmail(@Body ChangeEmailBody changeEmailBody);
+    Call<ResponseBody> ChangeEmail(@Body ChangeEmailBody changeEmailBody);
 
     @POST("user/change-password")
-    Call<ResponseBody>ChangePassword(@Body ChangePasswordBody passwordBody);
+    Call<ResponseBody> ChangePassword(@Body ChangePasswordBody passwordBody);
 
     @Multipart
     @PUT("user/addProfile")
     Call<AddProfileResponse> uploadPic(@Part MultipartBody.Part image);
 
     @POST("cart")
-    Call<ResponseBody>AddToCart(@Body AddToCartBody addToCartBody);
+    Call<ResponseBody> AddToCart(@Body AddToCartBody addToCartBody);
 
     @GET("cart")
-    Call<CartProductResponse>GetCartProduct();
+    Call<CartProductResponse> GetCartProduct();
 
     @DELETE("cart")
-    Call<ResponseBody>DeleteCartProduct(@Query("id") String ProductId);
+    Call<ResponseBody> DeleteCartProduct(@Query("id") String ProductId);
+
+    @PUT("cart/updateProduct")
+    Call<ResponseBody> IncreaseQuantity(@Body AddToCartBody addToCartBody);
+
+    @POST("saveForLater")
+    Call<ResponseBody> SaveForLater(@Query("id") String ProductId);
+
+    @GET("saveForLater")
+    Call<SaveForLaterResponse> GetSaveForLater();
 
 
 }

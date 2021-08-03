@@ -18,6 +18,8 @@
         <item name="android:navigationBarColor">@color/bottom_bar</item>
 
         <!-- Customize your theme here. -->
+
+
     </style>
 
     <style name="Theme.ImTrade.NoActionBar">
@@ -66,6 +68,6 @@
         <item name="cornerSizeBottomRight">15dp</item>
         <item name="cornerSizeBottomLeft">15dp</item>
     </style>
-    
+
 
 </resources>

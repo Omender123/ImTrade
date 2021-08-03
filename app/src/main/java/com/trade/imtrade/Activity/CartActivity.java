@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,10 @@ import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.CartItemAdapter;
 import com.trade.imtrade.Adapter.GameAdapter;
 import com.trade.imtrade.Adapter.Review_product_Adapter;
+import com.trade.imtrade.Adapter.SaveForLaterAdapter;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
+import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
+import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -30,15 +34,14 @@ import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 
-public class CartActivity extends AppCompatActivity implements CartPresenter.CartPresenterView, CartItemAdapter.OnGetCartItemListener {
+public class CartActivity extends AppCompatActivity implements CartPresenter.CartPresenterView, CartItemAdapter.OnGetCartItemListener,SaveForLaterAdapter.OnGetCartItemListener, View.OnClickListener {
     ActivityCartBinding binding;
     CartPresenter presenter;
     private Context context;
     private Dialog dialog;
     private View view;
     String TotalItem;
-
-    String[] price1 = {"8999 Rs"};
+    Boolean check= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +59,13 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
         //  getAllCartItem();
         // getSaveCartItem();
 
+        binding.textBuyNow.setOnClickListener(this);
         presenter.GetCartProduct(CartActivity.this);
+      //  presenter.GetSaveForLater(CartActivity.this);
         getAllRelated_Product();
 
     }
 
-    private void getSaveCartItem(CartProductResponse cartProductResponse) {
-        ArrayList<String> arrayList = new ArrayList<String>();
-        for (int i = 1; i <= 15; i++) {
-            arrayList.add(String.valueOf(i));
-        }
-        CartItemAdapter cartItemAdapter = new CartItemAdapter(CartActivity.this, cartProductResponse, arrayList, "Move To Cart", this);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        binding.SaveReyclerView.setLayoutManager(mLayoutManager1);
-        binding.SaveReyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.SaveReyclerView.setAdapter(cartItemAdapter);
-
-    }
 
     private void getAllRelated_Product() {
         String price[] = {"7999", "8999", "10000"};
@@ -131,7 +124,14 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
             binding.textTotalPriceItem.setText(TotalPrice+" Rs");
             binding.textTotalPrice.setText(TotalPrice+" Rs");
 
-            getSaveCartItem(cartProductResponse);
+
+            if (check==true){
+                startActivity(new Intent(CartActivity.this,OrderSummary.class));
+                MyPreferences.getInstance(CartActivity.this).putString(PrefConf.textTotalItem,binding.textTotalItem.getText().toString());
+                MyPreferences.getInstance(CartActivity.this).putString(PrefConf.textTotalPriceItem,binding.textTotalPriceItem.getText().toString());
+                MyPreferences.getInstance(CartActivity.this).putString(PrefConf.textTotalPrice,binding.textTotalPrice.getText().toString());
+
+            }
         }
 
     }
@@ -139,7 +139,49 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     @Override
     public void onDeleteCartSuccess(ResponseBody responseBody, String message) {
         if (message.equalsIgnoreCase("ok")) {
+            Sneaker.with(this)
+                    .setTitle("Product Successful Delete in Cart")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
             presenter.GetCartProduct(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onIncreaseQuentitySuccess(ResponseBody responseBody, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+           // presenter.GetCartProduct(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onSaveForLaterSuccess(ResponseBody responseBody, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            Sneaker.with(this)
+                    .setTitle("Product successfully added in save for later")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+
+            presenter.GetCartProduct(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onGetSaveForLaterSuccess(SaveForLaterResponse saveForLaterResponse, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            ArrayList<String> arrayList = new ArrayList<String>();
+            for (int i = 1; i <= 15; i++) {
+                arrayList.add(String.valueOf(i));
+            }
+            SaveForLaterAdapter cartItemAdapter = new SaveForLaterAdapter(CartActivity.this, saveForLaterResponse, arrayList, "Move To Cart", this);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+            binding.SaveReyclerView.setLayoutManager(mLayoutManager1);
+            binding.SaveReyclerView.setItemAnimator(new DefaultItemAnimator());
+            binding.SaveReyclerView.setAdapter(cartItemAdapter);
         }
     }
 
@@ -154,17 +196,68 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     }
 
     @Override
-    public void onIncreaseQuantityItemClickListener(String ProductId, int Quantity) {
-        // Toast.makeText(context, ""+Quantity, Toast.LENGTH_SHORT).show();
+    public void onIncreaseQuantityItemClickListener(String ProductId, int Quantity,String Type) {
+        if (Type.equalsIgnoreCase("Save For Later")){
+            AddToCartBody addToCartBody  = new AddToCartBody(ProductId,Quantity);
+            presenter.IncreaseQuentity(CartActivity.this,addToCartBody);
+
+        }else{
+           /* Sneaker.with(this)
+                    .setTitle("Coming Soon")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+        */}
     }
 
     @Override
-    public void onSaveLaterItemClickListener(String ProductId) {
+    public void onSaveLaterItemClickListener(String ProductId,String Type) {
+        if (Type.equalsIgnoreCase("Save For Later")){
+            presenter.SaveForLater(CartActivity.this,ProductId);
+
+        }else{
+            Sneaker.with(this)
+                    .setTitle("Coming Soon")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+        }
 
     }
 
     @Override
-    public void onDeleteItemClickListener(String ProductId) {
-        presenter.DeleteCartProduct(CartActivity.this, ProductId);
+    public void onDeleteItemClickListener(String ProductId,String Type) {
+        if (Type.equalsIgnoreCase("Save For Later")){
+            presenter.DeleteCartProduct(CartActivity.this, ProductId);
+
+        }else{
+            Sneaker.with(this)
+                    .setTitle("Coming Soon")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.text_BuyNow:
+                check= true;
+                presenter.GetCartProduct(CartActivity.this);
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        check= false;
+        presenter.GetCartProduct(CartActivity.this);
+       presenter.GetSaveForLater(CartActivity.this);
+
     }
 }
