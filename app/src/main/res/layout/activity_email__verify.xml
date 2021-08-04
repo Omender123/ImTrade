@@ -14,12 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="Signup"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="normal" />
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/create"
@@ -29,12 +28,11 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="60dp"
             android:layout_marginRight="15dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="start"
             android:text="Enter OTP"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
 
         <TextView
@@ -44,7 +42,7 @@
             android:layout_below="@id/create"
             android:layout_marginStart="15dp"
             android:layout_marginRight="15dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins"
             android:gravity="start"
             android:text="Hello, Nice to meet you."
             android:textColor="@color/text_hint"
@@ -63,7 +61,7 @@
             android:layout_marginTop="40dp"
             android:cursorVisible="true"
             android:inputType="numberPassword"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"
             app:cursorWidth="2dp"
@@ -82,10 +80,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/enter_otp"
             android:layout_marginLeft="25dp"
+            android:fontFamily="@font/poppins"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:text="OTP  receive in your Email"
-            android:textColor="@color/text_hint" />
+            android:textColor="@color/text_hint"
+            android:textStyle="normal"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_done"
@@ -103,9 +103,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Confirm"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="normal" />
 
@@ -124,7 +124,7 @@
             android:visibility="gone"
             android:fontFamily="@font/montserrat"
             android:text="Resend OTP"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="normal" />
 

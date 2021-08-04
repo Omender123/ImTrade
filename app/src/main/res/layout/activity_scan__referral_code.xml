@@ -17,12 +17,11 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins_medium"
             android:text="SignUp"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <com.budiyev.android.codescanner.CodeScannerView
             android:id="@+id/scannerView"
@@ -33,6 +32,8 @@
             app:frameAspectRatioHeight="1"
             app:frameAspectRatioWidth="1"
             app:frameColor="#3C434A"
+            app:flashButtonColor="@color/black"
+            app:autoFocusButtonColor="@color/black"
             android:layout_below="@id/text1"
             app:frameCornersRadius="20dp"
             app:frameCornersSize="50dp"
@@ -58,7 +59,7 @@
             android:paddingStart="10dp"
             android:textColor="@color/text_hint" />
 
-        <Button
+        <TextView
             android:id="@+id/btn_go"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -68,12 +69,12 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="15dp"
+            android:gravity="center_vertical|center"
             android:background="@drawable/verifying_textview"
-            android:fontFamily="@font/montserrat"
+            android:backgroundTint="@color/btn_color"
+            android:fontFamily="@font/poppins_medium"
             android:text="Ready to go"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/white"/>
 
         <View
             android:layout_width="match_parent"

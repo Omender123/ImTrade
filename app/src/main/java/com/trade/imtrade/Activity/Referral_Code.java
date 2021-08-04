@@ -58,9 +58,5 @@ public class Referral_Code extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AppUtils.FullScreen(this);
-    }
+
 }

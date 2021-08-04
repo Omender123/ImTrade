@@ -30,7 +30,8 @@
                 android:textSize="25dp"
                 android:layout_marginTop="50dp"
                 android:layout_below="@id/sucess"
-                android:textColor="@color/text_color"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/successfully"
@@ -39,7 +40,7 @@
                 android:text="Successfully"
                 android:layout_below="@id/create_account"
                 android:textSize="50dp"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/btn_color"
                 android:textStyle="bold"
                 android:gravity="center"

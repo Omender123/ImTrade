@@ -173,11 +173,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     @Override
     public void onGetSaveForLaterSuccess(SaveForLaterResponse saveForLaterResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            ArrayList<String> arrayList = new ArrayList<String>();
-            for (int i = 1; i <= 15; i++) {
-                arrayList.add(String.valueOf(i));
-            }
-            SaveForLaterAdapter cartItemAdapter = new SaveForLaterAdapter(CartActivity.this, saveForLaterResponse, arrayList, "Move To Cart", this);
+            SaveForLaterAdapter cartItemAdapter = new SaveForLaterAdapter(CartActivity.this, saveForLaterResponse, "Move To Cart", this);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             binding.SaveReyclerView.setLayoutManager(mLayoutManager1);
             binding.SaveReyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -197,20 +193,10 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
 
     @Override
     public void onIncreaseQuantityItemClickListener(String ProductId, int Quantity,String Type) {
-        if (Type.equalsIgnoreCase("Save For Later")){
             AddToCartBody addToCartBody  = new AddToCartBody(ProductId,Quantity);
             presenter.IncreaseQuentity(CartActivity.this,addToCartBody);
 
-        }else{
-           /* Sneaker.with(this)
-                    .setTitle("Coming Soon")
-                    .setMessage("")
-                    .setCornerRadius(4)
-                    .setDuration(1500)
-                    .sneakSuccess();
-        */}
-    }
-
+        }
     @Override
     public void onSaveLaterItemClickListener(String ProductId,String Type) {
         if (Type.equalsIgnoreCase("Save For Later")){

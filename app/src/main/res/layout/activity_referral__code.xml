@@ -82,8 +82,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="15dp"
-                    android:fontFamily="@font/montserrat"
-                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/black"
                     android:textSize="27dp"
                     android:textStyle="bold" />
 
@@ -96,11 +96,11 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/verifying_textview"
-                    android:backgroundTint="@color/purple_200"
-                    android:fontFamily="@font/montserrat"
+                    android:backgroundTint="@color/btn_color"
+                    android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
                     android:text="Copy"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -115,10 +115,11 @@
                     android:layout_marginTop="130dp"
                     android:drawableLeft="@drawable/ic_share"
                     android:drawablePadding="10dp"
+                    android:drawableTint="@color/black"
                     android:drawingCacheQuality="high"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Share"
-                    android:textColor="@color/text_login"
+                    android:textColor="@color/black"
                     android:textSize="15dp" />
             </LinearLayout>
 

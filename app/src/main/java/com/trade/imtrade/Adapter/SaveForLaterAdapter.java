@@ -20,14 +20,12 @@ import java.util.ArrayList;
 public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapter.CartItemViewHolder> {
     Context context;
     SaveForLaterResponse saveForLaterResponse;
-    ArrayList<String> arrayList;
     String string;
     private OnGetCartItemListener onGetCartItemListener;
 
-    public SaveForLaterAdapter(Context context, SaveForLaterResponse saveForLaterResponse, ArrayList<String> arrayList, String string,OnGetCartItemListener onGetCartItemListener) {
+    public SaveForLaterAdapter(Context context, SaveForLaterResponse saveForLaterResponse, String string,OnGetCartItemListener onGetCartItemListener) {
         this.context = context;
         this.saveForLaterResponse = saveForLaterResponse;
-        this.arrayList = arrayList;
         this.string = string;
         this.onGetCartItemListener = onGetCartItemListener;
     }
@@ -56,16 +54,16 @@ public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapte
 
         holder.binding.save.setText(string);
 
-        // holder.binding.spinner.setId(Integer.parseInt(saveForLaterResponse.getProducts().get(position).getQuantity()));
-        ArrayAdapter<String> adp = new ArrayAdapter<String>(context, R.layout.spinner_list, arrayList);
-        holder.binding.spinner.setAdapter(adp);
-      /*  if (saveForLaterResponse.getProducts().get(position).getQuantity() != null) {
-            int spinnerPosition = adp.getPosition(saveForLaterResponse.getProducts().get(position).getQuantity());
-            holder.binding.spinner.setSelection(spinnerPosition);
+        if (string.equalsIgnoreCase("Move To Cart")){
+            holder.binding.spinner.setVisibility(View.GONE);
+            holder.binding.textQuentity.setVisibility(View.GONE);
+            holder.binding.textQuentity1.setVisibility(View.VISIBLE);
+            holder.binding.textQuentity1.setText("Qty:  1 ");
 
-        }*/
+        }
 
-        holder.binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+   /*     holder.binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int positions, long id) {
                 int Quantity = Integer.parseInt(arrayList.get(positions));
@@ -77,7 +75,7 @@ public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapte
 
             }
         });
-
+*/
         holder.binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
