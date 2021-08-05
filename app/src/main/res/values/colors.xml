@@ -11,7 +11,10 @@
     <color name="background">#F7F7F7</color>
     <color name="text_title">#40EEEEEE</color>
     <color name="text_color">#EEEEEE</color>
-    <color name="text_categoriescolor">#80EEEEEE</color>
+    <color name="text_categoriescolor">#212121</color>
+    <color name="image_categoriescolor">#E0F2F7</color>
+    <color name="border_color">#7070F7</color>
+
     <color name="text_hint">#B3000000</color>
     <color name="text_border">#3c434a</color>
     <color name="btn_color">#FB641B</color>
@@ -23,8 +26,9 @@
     <color name="gray_opacity">#B5474242</color>
     <color name="colorPrimaryDark">#0F161F</color>
     <color name="select">#ffc51a</color>
-    <color name="un_select">#5a5d60</color>
+    <color name="un_select">#DDDDDD</color>
     <color name="bottom_bar">#004BB9</color>
+     <color name="toolbar_color">#004BB9</color>
 
     <color name="text_color1">#99D8D8D8</color>
 
@@ -35,11 +39,11 @@
 
     <color name="card_background">#282c31</color>
 
-    <color name="text_tittle">#80D8D8D8</color>
-    <color name="product_name">#CCD8D8D8</color>
-    <color name="product_Price">#D8D8D8</color>
+    <color name="text_tittle">#212121</color>
+    <color name="product_name">#212121</color>
+    <color name="product_Price">#212121</color>
     <color name="green">#019624</color>
-    <color name="review_color">#585858</color>
+    <color name="review_color">#4D212121</color>
 
     <color name="toggleOnColor">#FF4081</color>
     <color name="toggleOffColor">@android:color/transparent</color>

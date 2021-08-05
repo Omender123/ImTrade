@@ -16,10 +16,10 @@
           android:id="@+id/Shop_By_categories"
           android:icon="@drawable/ic_categories"
           android:title="Shop By Categories" />
-      <item
+     <!-- <item
           android:id="@+id/Wish_List"
           android:icon="@drawable/ic_my_wish_list1"
-          android:title="My Wish List" />
+          android:title="My Wish List" />-->
       <item
           android:id="@+id/My_cart"
           android:icon="@drawable/ic_my_cart"

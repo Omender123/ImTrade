@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class BannerResponse {
+
+    @SerializedName("position")
+    @Expose
+    private String position;
     @SerializedName("active")
     @Expose
     private Boolean active;
@@ -16,6 +20,9 @@ public class BannerResponse {
     @SerializedName("link")
     @Expose
     private String link;
+    @SerializedName("product_id")
+    @Expose
+    private String productId;
     @SerializedName("image")
     @Expose
     private String image;
@@ -25,9 +32,14 @@ public class BannerResponse {
     @SerializedName("updatedAt")
     @Expose
     private String updatedAt;
-    @SerializedName("product_id")
-    @Expose
-    private String productId;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
     public Boolean getActive() {
         return active;
@@ -61,6 +73,14 @@ public class BannerResponse {
         this.link = link;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     public String getImage() {
         return image;
     }
@@ -85,11 +105,4 @@ public class BannerResponse {
         this.updatedAt = updatedAt;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 }

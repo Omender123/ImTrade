@@ -60,9 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
     private View navHeader, navDrawer;
-    TextView username, usergmail,text_cart_Count;
-    FloatingActionButton floatingActionButton;
-    CoordinatorLayout coordinatorLayout;
+    TextView username, usergmail, text_cart_Count;
     ImageView img_discount, profile_Image;
     Boolean backhome = false;
     User_Data user_data;
@@ -81,12 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         AppUtils.checkAndRequestPermissions(this);
         toolbar = findViewById(R.id.toolbar);
-        floatingActionButton = findViewById(R.id.fab);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         img_discount = (ImageView) findViewById(R.id.img_discount);
         img_cart = (RelativeLayout) findViewById(R.id.relative_cart);
         relative = (RelativeLayout) findViewById(R.id.relative);
-        text_cart_Count = (TextView) findViewById(R.id.text_cart_Count); 
+        text_cart_Count = (TextView) findViewById(R.id.text_cart_Count);
 
         setSupportActionBar(toolbar);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -117,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
         String profileImage = MyPreferences.getInstance(context).getString(PrefConf.ProfileImage, null);
         if (profileImage == null) {
             Glide.with(context).load(profileImage).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(profile_Image);
@@ -133,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //   NavigationUI.setupWithNavController(navigationView, navController);
 
 
-        floatingActionButton.setOnClickListener(this);
         img_cart.setOnClickListener(this);
 
         moreNavigationOptions();
@@ -146,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navigationView = findViewById(R.id.navigationView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.main);
-        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.Wish_List, R.id.explorer, R.id.profile, R.id.nav_Referral, R.id.product_Details})
+        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.activity, R.id.location, R.id.explorer, R.id.profile, R.id.nav_Referral, R.id.product_Details})
                 .setDrawerLayout(drawer)
                 .build();
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -169,10 +163,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (destination.getId() == R.id.Search_nearBy || destination.getId() == R.id.categories || destination.getId() == R.id.product_Fragemet || destination.getId() == R.id.filter_Fragment
                         || destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile || destination.getId() == R.id.ChangePassword
                         || destination.getId() == R.id.ChangeEmail) {
-                    coordinatorLayout.setVisibility(View.GONE);
+                    bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     img_discount.setVisibility(View.VISIBLE);
-                    coordinatorLayout.setVisibility(View.VISIBLE);
+                    bottomNavigationView.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -248,14 +242,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.fab:
-                navController.navigate(R.id.fab);
-                break;
-
             case R.id.relative_cart:
                 if (CheckedLogin == true) {
                     startActivity(new Intent(MainActivity.this, CartActivity.class));
-                    MyPreferences.getInstance(MainActivity.this).putInteger(PrefConf.CARTCOUNT,0);
+                    MyPreferences.getInstance(MainActivity.this).putInteger(PrefConf.CARTCOUNT, 0);
                 } else {
                     Sneaker.with(MainActivity.this)
                             .setTitle("Your Can't access this app  please First Login ")
@@ -417,12 +407,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getCartCount();
     }
 
-    private void getCartCount(){
-        cartCount = MyPreferences.getInstance(MainActivity.this).getInteger(PrefConf.CARTCOUNT,0);
-        if (cartCount==0){
+    private void getCartCount() {
+        cartCount = MyPreferences.getInstance(MainActivity.this).getInteger(PrefConf.CARTCOUNT, 0);
+        if (cartCount == 0) {
 
             text_cart_Count.setVisibility(View.GONE);
-        }else{
+        } else {
             text_cart_Count.setVisibility(View.VISIBLE);
             text_cart_Count.setText(String.valueOf(cartCount));
         }

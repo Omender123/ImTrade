@@ -4,14 +4,22 @@
 
     <item
         android:id="@id/home_Fragment"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_icon_feather_home"
         android:title="Home"
         android:menuCategory="secondary"/>
     <item
-        android:id="@id/Wish_List"
-        android:icon="@drawable/ic_my_wish_list"
-        android:title="My Wish List"
+        android:id="@id/activity"
+        android:icon="@drawable/ic_icon_feather_calendar"
+        android:title="Activity"
         android:menuCategory="secondary"/>
+
+    <item
+        android:id="@id/location"
+        android:icon="@drawable/ic_icon_feather_map_pin"
+        android:title="Location"
+        android:menuCategory="secondary"/>
+
+
     <item
         android:id="@id/explorer"
         android:icon="@drawable/ic_explore"

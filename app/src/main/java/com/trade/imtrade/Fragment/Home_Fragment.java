@@ -66,7 +66,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
         presenter.GetBanner(getContext());
         presenter.GetAllCategories(getContext());
-        presenter.GetAllBrands(getContext());
+        //   presenter.GetAllBrands(getContext());
         presenter.GetAllPopularProduct(getContext());
         presenter.GetDealOfTheDay(getContext());
         presenter.GetDiscountForYou(getContext());
@@ -123,23 +123,33 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onBannerSuccess(List<BannerResponse> bannerResponses, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            List<SlideModel> BannerImage = new ArrayList<>();
+            List<SlideModel> TopImage = new ArrayList<>();
+            List<SlideModel> MiddleImage = new ArrayList<>();
+            List<SlideModel> BottomImage = new ArrayList<>();
             List<String> ProductId = new ArrayList<>();
             if (bannerResponses != null) {
                 for (int i = 0; i < bannerResponses.size(); i++) {
                     BannerResponse banner = bannerResponses.get(i);
-                    BannerImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
-
-                    // Log.d("imagesss",PrefConf.IMAGE_URL + banner.getImage());
-                    ProductId.add(banner.getProductId());
+                    if (banner.getPosition().equalsIgnoreCase("top")) {
+                        TopImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    } else if (banner.getPosition().equalsIgnoreCase("middle")) {
+                        MiddleImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    }else if (banner.getPosition().equalsIgnoreCase("bottom")) {
+                        BottomImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    }
                 }
 
-                binding.slider.setImageList(BannerImage);
+                binding.slider.setImageList(TopImage);
+                binding.middleSlider.setImageList(MiddleImage);
+                binding.bottomSlider.setImageList(BottomImage);
 
                 binding.slider.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemSelected(int i) {
-                      //  Toast.makeText(getContext(), "" + ProductId.get(i), Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(getContext(), "" + ProductId.get(i), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -165,9 +175,9 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         if (message.equalsIgnoreCase("ok")) {
             BrandsAdapter brandsAdapter = new BrandsAdapter(getContext(), brandsResponses);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.RecyclerViewBrands.setLayoutManager(mLayoutManager1);
-            binding.RecyclerViewBrands.setItemAnimator(new DefaultItemAnimator());
-            binding.RecyclerViewBrands.setAdapter(brandsAdapter);
+            //  binding.RecyclerViewBrands.setLayoutManager(mLayoutManager1);
+            // binding.RecyclerViewBrands.setItemAnimator(new DefaultItemAnimator());
+            // binding.RecyclerViewBrands.setAdapter(brandsAdapter);
 
         }
     }
@@ -274,7 +284,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onHomeProductItemClickListener(List<HomeProductResponse> data, int position) {
         String roleId = data.get(position).getRoute();
-       // Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
         navController.navigate(R.id.action_home_Fragment_to_product_Details);
     }

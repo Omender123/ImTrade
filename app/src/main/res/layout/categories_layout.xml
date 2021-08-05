@@ -14,11 +14,13 @@
             android:layout_width="46dp"
             android:layout_height="46dp"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginTop="2dp"
+            android:padding="15dp"
+            app:cardBackgroundColor="@color/image_categoriescolor">
             <ImageView
                 android:id="@+id/product_img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:scaleType="center"
                 android:src="@mipmap/laptop" />

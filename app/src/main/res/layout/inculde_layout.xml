@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background">
 
 
@@ -10,18 +10,17 @@
         android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/bottom_bar"
-        >
+        android:background="@color/bottom_bar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
-            android:textAlignment="center"
             android:layout_alignParentLeft="true"
             android:layout_toStartOf="@+id/linear"
             android:background="@color/bottom_bar"
-            android:elevation="4dp"
+            android:elevation="1dp"
+            android:textAlignment="center"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
             tools:ignore="RtlCompat" />
@@ -30,56 +29,49 @@
             android:id="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginEnd="10dp"
             android:background="@color/bottom_bar"
-            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/img_discount"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
-                android:src="@drawable/ic_discount"
-                android:layout_marginRight="10dp"/>
-         <!--   <ImageView
-                android:id="@+id/img_cart"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_shopping_cart"/>-->
+                android:src="@drawable/ic_discount" />
+
             <RelativeLayout
                 android:id="@+id/relative_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
-                android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="23dp"
-                    android:layout_height="23dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/ic_shopping_cart" />
 
                 <TextView
                     android:id="@+id/text_cart_Count"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/ic_history"
-                    android:backgroundTint="@color/purple_200"
-                    android:fontFamily="@font/montserrat"
-                    android:gravity="center"
-                    android:text="1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="11dp"
                     android:layout_marginTop="2dp"
-                    android:textColor="@color/black"
-                    android:textSize="5dp"
-                    android:textStyle="bold" />
+                    android:background="@drawable/ic_history"
+                    android:backgroundTint="@color/btn_color"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center|center_horizontal"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="6dp" />
 
             </RelativeLayout>
 
@@ -128,50 +120,22 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/coordinator"
+        android:layout_above="@+id/bottomNavigation"
         android:layout_below="@+id/relative"
         android:background="@color/background"
         app:defaultNavHost="true"
         app:navGraph="@navigation/main" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentEnd="true"
-        android:background="@android:color/transparent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true">
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:fabCradleMargin="06dp"
-            android:backgroundTint="#171717"
-            app:fabCradleVerticalOffset="10dp"
-            app:fabCradleRoundedCornerRadius="12dp"
-            android:layout_marginLeft="-5dp"
-            android:layout_gravity="bottom">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/backgorund_bottonbar"
+        app:itemIconTint="@color/nav"
+        app:itemTextColor="@color/nav"
+        app:menu="@menu/main" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                app:itemIconTint="@color/nav"
-                app:itemTextColor="@color/nav"
-
-                app:menu="@menu/main" />
-
-        </com.google.android.material.bottomappbar.BottomAppBar>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_icon_location"
-            app:backgroundTint="@color/select"
-            app:layout_anchor="@id/bottomAppBar" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>
