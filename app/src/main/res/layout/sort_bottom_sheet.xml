@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
+    android:layout_height="wrap_content"
+    android:background="@drawable/backgorund_bottonbar"
     android:orientation="vertical"
     android:paddingBottom="40dp">
 
@@ -10,19 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/poppins_medium"
         android:text="Sort By"
-        android:textColor="@color/text_tittle"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textColor="#99212121"
+        android:textSize="14sp"/>
 
-    <ImageView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/text_tittle" />
+        android:layout_height="0.5dp"
+        android:background="#D8D8D8"/>
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -38,13 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:bufferType="normal"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins"
             android:layoutDirection="rtl"
             android:text="Relevance"
-            android:buttonTint="@color/purple_200"
+            android:checked="true"
+            android:buttonTint="@color/btn_color"
             android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textColor="@color/product_Price"
+            android:textSize="14sp"
             android:textStyle="normal" />
 
         <RadioButton
@@ -52,12 +52,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:bufferType="normal"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins"
             android:layoutDirection="rtl"
             android:text="Popularity"
-            android:buttonTint="@color/purple_200"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:buttonTint="@color/btn_color"
+            android:textColor="@color/product_Price"
+            android:textSize="14sp"
             android:textStyle="normal" />
 
         <RadioButton
@@ -65,12 +65,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:bufferType="normal"
-            android:fontFamily="@font/montserrat"
-            android:buttonTint="@color/purple_200"
+            android:fontFamily="@font/poppins"
+            android:buttonTint="@color/btn_color"
             android:layoutDirection="rtl"
             android:text="Price- Low to High"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textColor="@color/product_Price"
+            android:textSize="14sp"
             android:textStyle="normal" />
 
         <RadioButton
@@ -78,12 +78,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:bufferType="normal"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins"
             android:layoutDirection="rtl"
             android:text="Price- High to Low"
-            android:buttonTint="@color/purple_200"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:buttonTint="@color/btn_color"
+            android:textColor="@color/product_Price"
+            android:textSize="14sp"
             android:textStyle="normal" />
 
         <RadioButton
@@ -91,12 +91,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:bufferType="normal"
-            android:fontFamily="@font/montserrat"
-            android:buttonTint="@color/purple_200"
+            android:fontFamily="@font/poppins"
+            android:buttonTint="@color/btn_color"
             android:layoutDirection="rtl"
             android:text="Newest First"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textColor="@color/product_Price"
+            android:textSize="14sp"
             android:textStyle="normal" />
     </RadioGroup>
 

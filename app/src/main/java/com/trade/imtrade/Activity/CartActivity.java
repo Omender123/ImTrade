@@ -59,7 +59,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
         //  getAllCartItem();
         // getSaveCartItem();
 
-        binding.textBuyNow.setOnClickListener(this);
+        binding.btnTotalItem.setOnClickListener(this);
         presenter.GetCartProduct(CartActivity.this);
       //  presenter.GetSaveForLater(CartActivity.this);
         getAllRelated_Product();
@@ -98,40 +98,17 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
 
     @Override
     public void onCartSuccess(CartProductResponse cartProductResponse, String message) {
-        int totalQuentity = 0,TotalItemPrice=0,TotalPrice=0;
-        if (message.equalsIgnoreCase("ok")) {
-            ArrayList<String> arrayList = new ArrayList<String>();
-            for (int i = 1; i <= 15; i++) {
-                arrayList.add(String.valueOf(i));
-            }
-            CartItemAdapter cartItemAdapter = new CartItemAdapter(CartActivity.this, cartProductResponse, arrayList, "Save For Later", this);
+        if (message.equalsIgnoreCase("ok") && cartProductResponse!=null) {
+            CartItemAdapter cartItemAdapter = new CartItemAdapter(CartActivity.this, cartProductResponse,"Save For Later", this);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             binding.cartReyclerView.setLayoutManager(mLayoutManager1);
             binding.cartReyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.cartReyclerView.setAdapter(cartItemAdapter);
-
             TotalItem = String.valueOf(cartProductResponse.getProducts().size());
             binding.btnTotalItem.setText("Proceed to Buy ("+ TotalItem+" items)");
 
-            for (int i=0; i<cartProductResponse.getProducts().size();i++){
-                totalQuentity = totalQuentity + Integer.valueOf(cartProductResponse.getProducts().get(i).getQuantity());
-                TotalItemPrice = TotalItemPrice+Integer.valueOf(cartProductResponse.getProducts().get(i).getProductId().getDiscount());
-            }
 
 
-            TotalPrice = totalQuentity*TotalItemPrice;
-            binding.textTotalItem.setText("Price ("+TotalItem+" items)");
-            binding.textTotalPriceItem.setText(TotalPrice+" Rs");
-            binding.textTotalPrice.setText(TotalPrice+" Rs");
-
-
-            if (check==true){
-                startActivity(new Intent(CartActivity.this,OrderSummary.class));
-                MyPreferences.getInstance(CartActivity.this).putString(PrefConf.textTotalItem,binding.textTotalItem.getText().toString());
-                MyPreferences.getInstance(CartActivity.this).putString(PrefConf.textTotalPriceItem,binding.textTotalPriceItem.getText().toString());
-                MyPreferences.getInstance(CartActivity.this).putString(PrefConf.textTotalPrice,binding.textTotalPrice.getText().toString());
-
-            }
         }
 
     }
@@ -231,9 +208,8 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.text_BuyNow:
-                check= true;
-                presenter.GetCartProduct(CartActivity.this);
+            case R.id.btn_totalItem:
+
                 break;
         }
     }
@@ -241,7 +217,6 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     @Override
     protected void onResume() {
         super.onResume();
-        check= false;
         presenter.GetCartProduct(CartActivity.this);
        presenter.GetSaveForLater(CartActivity.this);
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
 import com.trade.imtrade.R;
@@ -26,14 +28,12 @@ import java.util.List;
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     Context context;
     CartProductResponse cartProductResponse;
-    ArrayList<String> arrayList;
     String string;
     private OnGetCartItemListener onGetCartItemListener;
 
-    public CartItemAdapter(Context context, CartProductResponse cartProductResponse, ArrayList<String> arrayList, String string,OnGetCartItemListener onGetCartItemListener) {
+    public CartItemAdapter(Context context, CartProductResponse cartProductResponse,String string,OnGetCartItemListener onGetCartItemListener) {
         this.context = context;
         this.cartProductResponse = cartProductResponse;
-        this.arrayList = arrayList;
         this.string = string;
         this.onGetCartItemListener = onGetCartItemListener;
     }
@@ -55,34 +55,20 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         Glide.with(context).load(PrefConf.IMAGE_URL + cartProductResponse.getProducts().get(position).getProductId().getImages().get(0)).into(holder.binding.productImg);
         holder.binding.productName.setText(cartProductResponse.getProducts().get(position).getProductId().getName());
-        holder.binding.textRating.setText(cartProductResponse.getProducts().get(position).getProductId().getAverageRating());
+        SimpleRatingBar.AnimationBuilder builder = holder.binding.textRating.getAnimationBuilder()
+                .setRatingTarget(Float.parseFloat(cartProductResponse.getProducts().get(position).getProductId().getAverageRating()))
+                .setDuration(2000)
+                .setRepeatMode(1)
+
+                .setInterpolator(new BounceInterpolator());
+        builder.start();
+
         holder.binding.productPrice.setText(cartProductResponse.getProducts().get(position).getProductId().getDiscount() + " Rs");
         holder.binding.productWorngPrice.setText(cartProductResponse.getProducts().get(position).getProductId().getVariables().get(0).getPrice().getMrp() + " Rs");
         holder.binding.productOffPrice.setText(cartProductResponse.getProducts().get(position).getProductId().getVariables().get(0).getPrice().getMargin() + " %OFF");
 
-        holder.binding.save.setText(string);
+        holder.binding.textSave.setText(string);
 
-       // holder.binding.spinner.setId(Integer.parseInt(cartProductResponse.getProducts().get(position).getQuantity()));
-        ArrayAdapter<String> adp = new ArrayAdapter<String>(context, R.layout.spinner_list, arrayList);
-        holder.binding.spinner.setAdapter(adp);
-        if (cartProductResponse.getProducts().get(position).getQuantity() != null) {
-            int spinnerPosition = adp.getPosition(cartProductResponse.getProducts().get(position).getQuantity());
-             holder.binding.spinner.setSelection(spinnerPosition);
-
-        }
-
-        holder.binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int positions, long id) {
-                int Quantity = Integer.parseInt(arrayList.get(positions));
-                onGetCartItemListener.onIncreaseQuantityItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(),Quantity,string);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         holder.binding.save.setOnClickListener(new View.OnClickListener() {
             @Override

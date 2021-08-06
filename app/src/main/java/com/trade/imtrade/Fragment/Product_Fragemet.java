@@ -1,6 +1,8 @@
 package com.trade.imtrade.Fragment;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -132,7 +134,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
             }
         });
 
-        bottomSheetDialog.show();
+         bottomSheetDialog.show();
     }
 
     @Override

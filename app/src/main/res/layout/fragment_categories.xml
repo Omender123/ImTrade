@@ -13,16 +13,16 @@
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:background="@drawable/background_design"
-           android:paddingBottom="5dp"
+           android:paddingBottom="3dp"
+           android:background="@color/toolbar_color"
            android:orientation="vertical">
 
            <androidx.cardview.widget.CardView
                android:layout_width="match_parent"
                android:layout_height="50dp"
                android:layout_margin="15dp"
+               app:cardBackgroundColor="@color/white"
                app:cardCornerRadius="8dp">
-
                <RelativeLayout
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"

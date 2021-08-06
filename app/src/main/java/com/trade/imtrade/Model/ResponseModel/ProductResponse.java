@@ -1,6 +1,7 @@
 package com.trade.imtrade.Model.ResponseModel;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -36,6 +37,9 @@ public class ProductResponse {
         @SerializedName("name")
         @Expose
         private String name;
+        @SerializedName("stockVisible")
+        @Expose
+        private Boolean stockVisible;
         @SerializedName("averageRating")
         @Expose
         private String averageRating;
@@ -74,8 +78,16 @@ public class ProductResponse {
             this.name = name;
         }
 
-        public String  getAverageRating() {
+        public String getAverageRating() {
             return averageRating;
+        }
+
+        public Boolean getStockVisible() {
+            return stockVisible;
+        }
+
+        public void setStockVisible(Boolean stockVisible) {
+            this.stockVisible = stockVisible;
         }
 
         public void setAverageRating(String averageRating) {
@@ -193,6 +205,7 @@ public class ProductResponse {
             }
 
         }
+
         public class Variable {
 
             @SerializedName("price")
@@ -206,6 +219,7 @@ public class ProductResponse {
             public void setPrice(Price price) {
                 this.price = price;
             }
+
             public class Price {
 
                 @SerializedName("mrp")

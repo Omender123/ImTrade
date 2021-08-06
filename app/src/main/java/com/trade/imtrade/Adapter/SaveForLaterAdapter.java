@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -47,35 +49,26 @@ public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapte
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         Glide.with(context).load(PrefConf.IMAGE_URL + saveForLaterResponse.getProducts().get(position).getImages().get(0)).into(holder.binding.productImg);
         holder.binding.productName.setText(saveForLaterResponse.getProducts().get(position).getName());
-        holder.binding.textRating.setText(saveForLaterResponse.getProducts().get(position).getAverageRating());
+        SimpleRatingBar.AnimationBuilder builder = holder.binding.textRating.getAnimationBuilder()
+                .setRatingTarget(Float.parseFloat(saveForLaterResponse.getProducts().get(position).getAverageRating()))
+                .setDuration(2000)
+                .setRepeatMode(1)
+                .setInterpolator(new BounceInterpolator());
+                 builder.start();
+
         holder.binding.productPrice.setText(saveForLaterResponse.getProducts().get(position).getDiscount() + " Rs");
         holder.binding.productWorngPrice.setText(saveForLaterResponse.getProducts().get(position).getVariables().get(0).getPrice().getMrp() + " Rs");
         holder.binding.productOffPrice.setText(saveForLaterResponse.getProducts().get(position).getVariables().get(0).getPrice().getMargin() + " %OFF");
 
-        holder.binding.save.setText(string);
+        holder.binding.textSave.setText(string);
 
         if (string.equalsIgnoreCase("Move To Cart")){
-            holder.binding.spinner.setVisibility(View.GONE);
-            holder.binding.textQuentity.setVisibility(View.GONE);
-            holder.binding.textQuentity1.setVisibility(View.VISIBLE);
-            holder.binding.textQuentity1.setText("Qty:  1 ");
+            holder.binding.card1.setVisibility(View.GONE);
 
         }
 
 
-   /*     holder.binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int positions, long id) {
-                int Quantity = Integer.parseInt(arrayList.get(positions));
-                onGetCartItemListener.onIncreaseQuantityItemClickListener(saveForLaterResponse.getProducts().get(position).getId(),Quantity,string);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-*/
         holder.binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
