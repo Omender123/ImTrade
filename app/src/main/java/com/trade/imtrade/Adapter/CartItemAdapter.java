@@ -1,5 +1,6 @@
 package com.trade.imtrade.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
+import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
 import com.trade.imtrade.R;
@@ -31,7 +33,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     String string;
     private OnGetCartItemListener onGetCartItemListener;
 
-    public CartItemAdapter(Context context, CartProductResponse cartProductResponse,String string,OnGetCartItemListener onGetCartItemListener) {
+    public CartItemAdapter(Context context, CartProductResponse cartProductResponse, String string, OnGetCartItemListener onGetCartItemListener) {
         this.context = context;
         this.cartProductResponse = cartProductResponse;
         this.string = string;
@@ -68,12 +70,12 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         holder.binding.productOffPrice.setText(cartProductResponse.getProducts().get(position).getProductId().getVariables().get(0).getPrice().getMargin() + " %OFF");
 
         holder.binding.textSave.setText(string);
-
+        holder.binding.textCount.setText(cartProductResponse.getProducts().get(position).getQuantity());
 
         holder.binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onGetCartItemListener.onSaveLaterItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(),string);
+                onGetCartItemListener.onSaveLaterItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(), string);
 
             }
         });
@@ -81,36 +83,65 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         holder.binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onGetCartItemListener.onDeleteItemClickListener(cartProductResponse.getProducts().get(position).getId(),string);
+                onGetCartItemListener.onDeleteItemClickListener(cartProductResponse.getProducts().get(position).getId(), string);
 
             }
         });
 
+        holder.binding.textIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(cartProductResponse.getProducts().get(position).getQuantity());
+                int quantity1 = quantity + 1;
+                holder.binding.textCount.setText(String.valueOf(quantity1));
+                onGetCartItemListener.onIncreaseQuantityItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(), quantity1);
 
+
+
+        }
+    });
+        holder.binding.textDecrease.setOnClickListener(new View.OnClickListener()
+
+    {
+        @Override
+        public void onClick (View v){
+        int quantity = Integer.parseInt(cartProductResponse.getProducts().get(position).getQuantity());
+        int quantity1 = quantity - 1;
+        if (quantity1 == 0) {
+            Toast.makeText(context, "atleast  one product Quantity is Compulsory", Toast.LENGTH_SHORT).show();
+            holder.binding.textCount.setText(String.valueOf(1));
+        } else {
+            holder.binding.textCount.setText(String.valueOf(quantity1));
+            onGetCartItemListener.onIncreaseQuantityItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(), quantity1);
+
+        }
     }
+    });
+
+}
 
     @Override
     public int getItemCount() {
         return cartProductResponse.getProducts().size();
     }
 
-    public class CartItemViewHolder extends RecyclerView.ViewHolder {
-        CustomCartLayoutBinding binding;
+public class CartItemViewHolder extends RecyclerView.ViewHolder {
+    CustomCartLayoutBinding binding;
 
-        public CartItemViewHolder(CustomCartLayoutBinding binding) {
-            super(binding.getRoot());
+    public CartItemViewHolder(CustomCartLayoutBinding binding) {
+        super(binding.getRoot());
 
-            this.binding = binding;
+        this.binding = binding;
 
 
-        }
     }
+}
 
-    public interface OnGetCartItemListener {
-        void onIncreaseQuantityItemClickListener(String ProductId, int Quantity,String Type);
+public interface OnGetCartItemListener {
+    void onIncreaseQuantityItemClickListener(String ProductId, int Quantity);
 
-        void onSaveLaterItemClickListener(String ProductId,String Type);
+    void onSaveLaterItemClickListener(String ProductId, String Type);
 
-        void onDeleteItemClickListener(String ProductId,String Type);
-    }
+    void onDeleteItemClickListener(String ProductId, String Type);
+}
 }

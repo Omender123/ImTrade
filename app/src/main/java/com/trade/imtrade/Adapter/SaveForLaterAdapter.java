@@ -18,6 +18,7 @@ import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomCartLayoutBinding;
 
+
 import java.util.ArrayList;
 public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapter.CartItemViewHolder> {
     Context context;
@@ -98,15 +99,16 @@ public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapte
 
         public CartItemViewHolder(CustomCartLayoutBinding binding) {
             super(binding.getRoot());
-
             this.binding = binding;
+
+            binding.relative.setBackgroundColor(context.getResources().getColor(R.color.white));
 
 
         }
     }
 
     public interface OnGetCartItemListener {
-        void onIncreaseQuantityItemClickListener(String ProductId, int Quantity,String Type);
+        void onIncreaseQuantityItemClickListener(String ProductId, int Quantity);
 
         void onSaveLaterItemClickListener(String ProductId,String Type);
 

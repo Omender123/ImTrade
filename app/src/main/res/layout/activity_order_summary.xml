@@ -30,25 +30,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            app:cardBackgroundColor="#252428"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="4dp">
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Select Delivery Address"
+                    android:textColor="@color/product_Price"
+                    android:textSize="16sp" />
+
 
                 <TextView
                     android:id="@+id/full_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_toStartOf="@+id/change"
-                    android:fontFamily="@font/poppins_medium"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins"
                     android:text="Full Name"
-                    android:textColor="#D8D8D8"
+                    android:textColor="@color/product_Price"
                     android:textSize="14sp" />
 
                 <TextView
@@ -58,74 +68,86 @@
                     android:layout_below="@id/full_name"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="1dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_toStartOf="@+id/change"
                     android:fontFamily="@font/poppins"
                     android:justificationMode="inter_word"
-                    android:text="A-226 pheas 1 chhattarpur new Delhi matabhavan NEW DELHI....."
-                    android:textColor="#B3D8D8D8"
+                    android:text="A-226 Pheas 1 Chhattarpur new Delhi \nMatabhavan New Delhi,\nDelhi 110074 India"
+                    android:textColor="@color/product_Price"
                     android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/change"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="12sp"
-                    android:background="@drawable/verifying_textview"
-                    android:backgroundTint="@color/purple_200"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:paddingStart="22dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="22dp"
-                    android:paddingBottom="10dp"
-                    android:text="Change"
-                    android:textColor="#2E343B"
-                    android:textSize="13sp" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="15dp"
+                    app:cardBackgroundColor="#DBDBDB"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp">
 
-        <TextView
-            android:id="@+id/text_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Price Details"
-            android:textColor="#80D8D8D8"
-            android:textSize="14sp" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_changeAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/poppins"
+                            android:gravity="center_vertical|center"
+                            android:text="Change Address"
+                            android:textColor="@color/product_Price"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:background="@drawable/boxthin">
+            android:background="@drawable/verifying_textview"
+            android:backgroundTint="@color/white"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/text_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Price Details"
+                android:textColor="@color/product_Price"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/text_totalItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/text_product"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginRight="10dp"
-                android:text="Price (2 items)"
                 android:layout_toStartOf="@+id/text_totalPriceItem"
-                android:fontFamily="@font/poppins"
-                android:textColor="#B3D8D8D8"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Price (2 items)"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/text_totalPriceItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@id/text_product"
                 android:layout_alignParentEnd="true"
                 android:fontFamily="@font/poppins"
                 android:text="25,497.00 Rs"
-                android:textColor="#D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
             <TextView
@@ -137,9 +159,9 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="10dp"
                 android:layout_toStartOf="@+id/text_taxPrice"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Tax"
-                android:textColor="#B3D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
             <TextView
@@ -151,7 +173,7 @@
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/poppins"
                 android:text="(+) 00.00 Rs"
-                android:textColor="#D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
 
@@ -164,9 +186,9 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="10dp"
                 android:layout_toStartOf="@+id/text_taxPrice"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Promotion Applied"
-                android:textColor="#B3D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
             <TextView
@@ -178,7 +200,7 @@
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/poppins"
                 android:text="(-) 00.00 Rs"
-                android:textColor="#D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
 
@@ -191,9 +213,9 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="10dp"
                 android:layout_toStartOf="@+id/text_otherPriceCharges"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:text="Other Charges"
-                android:textColor="#B3D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
             <TextView
@@ -205,7 +227,7 @@
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/poppins"
                 android:text="(+) 00.00 Rs"
-                android:textColor="#D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="12sp" />
 
             <View
@@ -216,7 +238,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="21dp"
-                android:background="#4DFFFFFF" />
+                android:background="#D9D9D9" />
 
 
             <TextView
@@ -230,7 +252,7 @@
                 android:layout_toStartOf="@+id/text_totalPrice"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Order Total"
-                android:textColor="#B3D8D8D8"
+                android:textColor="@color/product_Price"
                 android:textSize="18sp" />
 
             <TextView
@@ -257,11 +279,11 @@
             android:layout_marginTop="50dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/verifying_textview"
-            android:backgroundTint="@color/purple_200"
-            android:fontFamily="@font/poppins_semibold"
+            android:backgroundTint="@color/btn_color"
+            android:fontFamily="@font/poppins"
             android:gravity="center"
-            android:text="Continue"
-            android:textColor="#2e343b"
+            android:text="Confirm"
+            android:textColor="@color/white"
             android:textSize="13sp" />
     </LinearLayout>
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.trade.imtrade.databinding.ReviewProductLayoutBinding;
+import com.trade.imtrade.databinding.CustomRecomandedBinding;
 
 public class Review_product_Adapter extends RecyclerView.Adapter<Review_product_Adapter.ReviewProductViewHolder>  {
     Context context;
@@ -26,7 +26,7 @@ public class Review_product_Adapter extends RecyclerView.Adapter<Review_product_
     @Override
     public ReviewProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ReviewProductLayoutBinding binding = ReviewProductLayoutBinding.inflate(inflater,parent,false);
+        CustomRecomandedBinding binding = CustomRecomandedBinding.inflate(inflater,parent,false);
 
         return new ReviewProductViewHolder(binding);
     }
@@ -43,8 +43,8 @@ public class Review_product_Adapter extends RecyclerView.Adapter<Review_product_
     }
 
     public class ReviewProductViewHolder extends RecyclerView.ViewHolder {
-        ReviewProductLayoutBinding binding;
-        public ReviewProductViewHolder(ReviewProductLayoutBinding binding) {
+        CustomRecomandedBinding binding;
+        public ReviewProductViewHolder(CustomRecomandedBinding binding) {
             super(binding.getRoot());
 
             this.binding = binding;

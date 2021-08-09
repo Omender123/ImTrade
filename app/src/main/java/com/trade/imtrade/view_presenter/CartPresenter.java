@@ -87,7 +87,7 @@ public class CartPresenter {
 
     }
 
-    public void IncreaseQuentity(Context context, AddToCartBody addToCartBody){
+    public void IncreaseQuentity(Context context, AddToCartBody addToCartBody) {
         view.showHideProgress(true);
         Call<ResponseBody> userCall = AppUtils.getApi(context).AddToCart(addToCartBody);
         userCall.enqueue(new Callback<ResponseBody>() {
@@ -95,12 +95,12 @@ public class CartPresenter {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
-                    view.onIncreaseQuentitySuccess(response.body(),response.message());
+                    view.onIncreaseQuentitySuccess(response.body(), response.message());
                 } else {
                     try {
-                        String  errorRes = response.errorBody().string();
+                        String errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("error");
+                        String err_msg = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {
@@ -118,7 +118,7 @@ public class CartPresenter {
 
     }
 
-    public void SaveForLater(Context context, String ProductId){
+    public void SaveForLater(Context context, String ProductId) {
         view.showHideProgress(true);
         Call<ResponseBody> userCall = AppUtils.getApi(context).SaveForLater(ProductId);
         userCall.enqueue(new Callback<ResponseBody>() {
@@ -126,12 +126,12 @@ public class CartPresenter {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
-                    view.onSaveForLaterSuccess(response.body(),response.message());
+                    view.onSaveForLaterSuccess(response.body(), response.message());
                 } else {
                     try {
-                        String  errorRes = response.errorBody().string();
+                        String errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("error");
+                        String err_msg = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {
@@ -180,6 +180,67 @@ public class CartPresenter {
 
     }
 
+    public void DeleteSaveForLaterProduct(Context context, String ProductId) {
+        view.showHideProgress(true);
+        Call<ResponseBody> userCall = AppUtils.getApi(context).DeleteSaveForLaterProduct(ProductId);
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onDeleteSaveForLaterProductSuccess(response.body(), response.message());
+                } else {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void moveToCart(Context context, String ProductId) {
+        view.showHideProgress(true);
+        Call<ResponseBody> userCall = AppUtils.getApi(context).moveToCart(ProductId);
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onMoveToCartSuccess(response.body(), response.message());
+                } else {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
 
     public interface CartPresenterView {
         void showHideProgress(boolean isShow);
@@ -190,11 +251,15 @@ public class CartPresenter {
 
         void onDeleteCartSuccess(ResponseBody responseBody, String message);
 
-        void onIncreaseQuentitySuccess(ResponseBody responseBody,String message);
+        void onIncreaseQuentitySuccess(ResponseBody responseBody, String message);
 
-        void onSaveForLaterSuccess(ResponseBody responseBody,String message);
+        void onSaveForLaterSuccess(ResponseBody responseBody, String message);
 
-        void onGetSaveForLaterSuccess(SaveForLaterResponse saveForLaterResponse,String message);
+        void onGetSaveForLaterSuccess(SaveForLaterResponse saveForLaterResponse, String message);
+
+        void onDeleteSaveForLaterProductSuccess(ResponseBody responseBody, String message);
+
+        void onMoveToCartSuccess(ResponseBody responseBody, String message);
 
         void onFailure(Throwable t);
     }

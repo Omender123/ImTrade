@@ -34,14 +34,14 @@ import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 
-public class CartActivity extends AppCompatActivity implements CartPresenter.CartPresenterView, CartItemAdapter.OnGetCartItemListener,SaveForLaterAdapter.OnGetCartItemListener, View.OnClickListener {
+public class CartActivity extends AppCompatActivity implements CartPresenter.CartPresenterView, CartItemAdapter.OnGetCartItemListener, SaveForLaterAdapter.OnGetCartItemListener, View.OnClickListener {
     ActivityCartBinding binding;
     CartPresenter presenter;
     private Context context;
     private Dialog dialog;
     private View view;
     String TotalItem;
-    Boolean check= false;
+    Boolean check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +61,14 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
 
         binding.btnTotalItem.setOnClickListener(this);
         presenter.GetCartProduct(CartActivity.this);
-      //  presenter.GetSaveForLater(CartActivity.this);
+        //  presenter.GetSaveForLater(CartActivity.this);
         getAllRelated_Product();
 
     }
 
 
     private void getAllRelated_Product() {
-        String price[] = {"7999", "8999", "10000"};
+        String price[] = {"7999 Rs", "8999 Rs", "10000 Rs"};
         Review_product_Adapter review_product_adapter = new Review_product_Adapter(this, price);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         binding.relatedProductRcycler.setLayoutManager(mLayoutManager1);
@@ -98,15 +98,14 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
 
     @Override
     public void onCartSuccess(CartProductResponse cartProductResponse, String message) {
-        if (message.equalsIgnoreCase("ok") && cartProductResponse!=null) {
-            CartItemAdapter cartItemAdapter = new CartItemAdapter(CartActivity.this, cartProductResponse,"Save For Later", this);
+        if (message.equalsIgnoreCase("ok") && cartProductResponse != null) {
+            CartItemAdapter cartItemAdapter = new CartItemAdapter(CartActivity.this, cartProductResponse, "Save For Later", this);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             binding.cartReyclerView.setLayoutManager(mLayoutManager1);
             binding.cartReyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.cartReyclerView.setAdapter(cartItemAdapter);
             TotalItem = String.valueOf(cartProductResponse.getProducts().size());
-            binding.btnTotalItem.setText("Proceed to Buy ("+ TotalItem+" items)");
-
+            binding.btnTotalItem.setText("Proceed to Buy (" + TotalItem + " items)");
 
 
         }
@@ -129,7 +128,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     @Override
     public void onIncreaseQuentitySuccess(ResponseBody responseBody, String message) {
         if (message.equalsIgnoreCase("ok")) {
-           // presenter.GetCartProduct(CartActivity.this);
+            presenter.GetCartProduct(CartActivity.this);
         }
     }
 
@@ -144,17 +143,51 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
                     .sneakSuccess();
 
             presenter.GetCartProduct(CartActivity.this);
+            presenter.GetSaveForLater(CartActivity.this);
         }
     }
 
     @Override
     public void onGetSaveForLaterSuccess(SaveForLaterResponse saveForLaterResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            SaveForLaterAdapter cartItemAdapter = new SaveForLaterAdapter(CartActivity.this, saveForLaterResponse, "Move To Cart", this);
-            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-            binding.SaveReyclerView.setLayoutManager(mLayoutManager1);
-            binding.SaveReyclerView.setItemAnimator(new DefaultItemAnimator());
-            binding.SaveReyclerView.setAdapter(cartItemAdapter);
+            if (saveForLaterResponse.getProducts()!=null && saveForLaterResponse.getProducts().size()>0){
+                SaveForLaterAdapter cartItemAdapter = new SaveForLaterAdapter(CartActivity.this, saveForLaterResponse, "Move To Cart", this);
+                RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                binding.SaveReyclerView.setLayoutManager(mLayoutManager1);
+                binding.SaveReyclerView.setItemAnimator(new DefaultItemAnimator());
+                binding.SaveReyclerView.setAdapter(cartItemAdapter);
+                binding.linearSave.setVisibility(View.VISIBLE);
+            }else {
+                binding.linearSave.setVisibility(View.GONE);
+            }
+
+        }
+    }
+
+    @Override
+    public void onDeleteSaveForLaterProductSuccess(ResponseBody responseBody, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            Sneaker.with(this)
+                    .setTitle("Product Successful Delete in Save For Later")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+            presenter.GetSaveForLater(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onMoveToCartSuccess(ResponseBody responseBody, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            Sneaker.with(this)
+                    .setTitle("Product Successful Move in  Cart")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
+            presenter.GetSaveForLater(CartActivity.this);
+            presenter.GetCartProduct(CartActivity.this);
         }
     }
 
@@ -169,47 +202,49 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     }
 
     @Override
-    public void onIncreaseQuantityItemClickListener(String ProductId, int Quantity,String Type) {
-            AddToCartBody addToCartBody  = new AddToCartBody(ProductId,Quantity);
-            presenter.IncreaseQuentity(CartActivity.this,addToCartBody);
+    public void onIncreaseQuantityItemClickListener(String ProductId, int Quantity) {
 
-        }
+
+        AddToCartBody addToCartBody = new AddToCartBody(ProductId, Quantity);
+        presenter.IncreaseQuentity(CartActivity.this, addToCartBody);
+
+
+    }
+
     @Override
-    public void onSaveLaterItemClickListener(String ProductId,String Type) {
-        if (Type.equalsIgnoreCase("Save For Later")){
-            presenter.SaveForLater(CartActivity.this,ProductId);
+    public void onSaveLaterItemClickListener(String ProductId, String Type) {
+        if (Type.equalsIgnoreCase("Save For Later")) {
+            presenter.SaveForLater(CartActivity.this, ProductId);
 
-        }else{
-            Sneaker.with(this)
-                    .setTitle("Coming Soon")
-                    .setMessage("")
-                    .setCornerRadius(4)
-                    .setDuration(1500)
-                    .sneakSuccess();
+        } else {
+            presenter.moveToCart(CartActivity.this, ProductId);
+
         }
 
     }
 
     @Override
-    public void onDeleteItemClickListener(String ProductId,String Type) {
-        if (Type.equalsIgnoreCase("Save For Later")){
+    public void onDeleteItemClickListener(String ProductId, String Type) {
+        if (Type.equalsIgnoreCase("Save For Later")) {
             presenter.DeleteCartProduct(CartActivity.this, ProductId);
 
-        }else{
+        } else {
+           // presenter.DeleteSaveForLaterProduct(CartActivity.this, ProductId);
             Sneaker.with(this)
                     .setTitle("Coming Soon")
                     .setMessage("")
                     .setCornerRadius(4)
                     .setDuration(1500)
                     .sneakSuccess();
+
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_totalItem:
-
+                startActivity(new Intent(CartActivity.this, OrderSummary.class));
                 break;
         }
     }
@@ -218,7 +253,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     protected void onResume() {
         super.onResume();
         presenter.GetCartProduct(CartActivity.this);
-       presenter.GetSaveForLater(CartActivity.this);
+        presenter.GetSaveForLater(CartActivity.this);
 
     }
 }

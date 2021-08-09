@@ -56,56 +56,94 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="1"
                     tools:listitem="@layout/custom_cart_layout" />
 
-
-                <TextView
-                    android:id="@+id/text_save"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Save for later"
-                    android:textColor="@color/product_Price"
-                    android:textSize="14sp" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/SaveReyclerView"
+                <LinearLayout
+                    android:id="@+id/linear_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/custom_cart_layout" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/verifying_textview"
+                    android:backgroundTint="@color/white"
+                    >
+                    <TextView
+                        android:id="@+id/text_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Save for later"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="@color/product_Price"
+                        android:textSize="14sp" />
 
 
-                <TextView
-                    android:id="@+id/text_relatedProduct"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/SaveReyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/white"
+                        android:layout_marginBottom="15dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/custom_cart_layout" />
+
+
+                </LinearLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="18dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Related Product"
-                    android:textColor="#80D8D8D8"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/recom_More"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Related Product"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/recom_More"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/toolbar_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/relatedProduct_rcycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="05dp"
+                    android:layout_marginTop="-5dp"
                     android:orientation="horizontal"
                     android:paddingBottom="3dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/review_product_layout" />
+                    tools:listitem="@layout/custom_recomanded" />
 
 
             </LinearLayout>

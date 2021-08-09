@@ -131,5 +131,11 @@ public interface ApiService {
     @GET("saveForLater")
     Call<SaveForLaterResponse> GetSaveForLater();
 
+    @DELETE("saveForLater")
+    Call<ResponseBody> DeleteSaveForLaterProduct(@Query("id") String ProductId);
+
+    @POST("saveForLater/moveTocart")
+    Call<ResponseBody> moveToCart(@Query("id") String ProductId);
+
 
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background">
@@ -14,8 +15,7 @@
             android:layout_height="120dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
@@ -38,7 +38,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="15dp"
             android:layout_toEndOf="@+id/card"
             android:fontFamily="@font/poppins"
             android:justificationMode="inter_word"
@@ -74,7 +74,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="15dp"
             android:layout_toEndOf="@id/text_rating"
             android:enabled="false"
             android:fontFamily="@font/poppins"
@@ -120,7 +120,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="15dp"
             android:layout_toEndOf="@id/product_worng_price"
             android:fontFamily="@font/poppins_medium"
             android:text="20% OFF"
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_stock"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="15dp"
             android:layout_toEndOf="@+id/card"
             android:orientation="horizontal">
 
@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/linear"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="15dp"
             android:layout_toEndOf="@+id/card"
             android:orientation="horizontal">
 
@@ -208,9 +208,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/linear1"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="3dp"
+            android:layout_marginLeft="5dp"
             app:cardBackgroundColor="#C4C4C4"
             android:layout_marginBottom="5dp"
             app:cardElevation="1dp">
@@ -287,8 +287,8 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@id/linear1"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
             app:cardCornerRadius="3dp"
             app:cardBackgroundColor="@color/white"
             android:layout_marginBottom="5dp"
@@ -309,10 +309,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="#D9D9D9"
             android:layout_below="@id/delete"/>
     </RelativeLayout>

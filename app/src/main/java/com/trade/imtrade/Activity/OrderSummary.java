@@ -31,9 +31,6 @@ ActivityOrderSummaryBinding binding;
         view = binding.getRoot();
         context = OrderSummary.this;
 
-        binding.textTotalItem.setText(MyPreferences.getInstance(OrderSummary.this).getString(PrefConf.textTotalItem,null));
-        binding.textTotalPriceItem.setText(MyPreferences.getInstance(OrderSummary.this).getString(PrefConf.textTotalPriceItem,null));
-        binding.textTotalPrice.setText(MyPreferences.getInstance(OrderSummary.this).getString(PrefConf.textTotalPrice,null));
 
     }
 }
