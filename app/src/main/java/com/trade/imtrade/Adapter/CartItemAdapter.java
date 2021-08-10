@@ -61,7 +61,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
                 .setRatingTarget(Float.parseFloat(cartProductResponse.getProducts().get(position).getProductId().getAverageRating()))
                 .setDuration(2000)
                 .setRepeatMode(1)
-
                 .setInterpolator(new BounceInterpolator());
         builder.start();
 
@@ -71,6 +70,20 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
         holder.binding.textSave.setText(string);
         holder.binding.textCount.setText(cartProductResponse.getProducts().get(position).getQuantity());
+        if (cartProductResponse.getProducts().get(position).getProductId().getProductColor()!=null){
+            holder.binding.colorText.setText(cartProductResponse.getProducts().get(position).getProductId().getProductColor());
+        }else {
+            holder.binding.colorText.setText("No Color Selected");
+
+        }
+
+        if (cartProductResponse.getProducts().get(position).getProductId().getProductStorage()!=null){
+            holder.binding.sizeText.setText(cartProductResponse.getProducts().get(position).getProductId().getProductStorage());
+
+        }else {
+            holder.binding.sizeText.setText("No Size Selected");
+
+        }
 
         holder.binding.save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,51 +110,48 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
                 onGetCartItemListener.onIncreaseQuantityItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(), quantity1);
 
 
+            }
+        });
+        holder.binding.textDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(cartProductResponse.getProducts().get(position).getQuantity());
+                int quantity1 = quantity - 1;
+                if (quantity1 == 0) {
+                    Toast.makeText(context, "atleast  one product Quantity is Compulsory", Toast.LENGTH_SHORT).show();
+                    holder.binding.textCount.setText(String.valueOf(1));
+                } else {
+                    holder.binding.textCount.setText(String.valueOf(quantity1));
+                    onGetCartItemListener.onIncreaseQuantityItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(), quantity1);
 
-        }
-    });
-        holder.binding.textDecrease.setOnClickListener(new View.OnClickListener()
+                }
+            }
+        });
 
-    {
-        @Override
-        public void onClick (View v){
-        int quantity = Integer.parseInt(cartProductResponse.getProducts().get(position).getQuantity());
-        int quantity1 = quantity - 1;
-        if (quantity1 == 0) {
-            Toast.makeText(context, "atleast  one product Quantity is Compulsory", Toast.LENGTH_SHORT).show();
-            holder.binding.textCount.setText(String.valueOf(1));
-        } else {
-            holder.binding.textCount.setText(String.valueOf(quantity1));
-            onGetCartItemListener.onIncreaseQuantityItemClickListener(cartProductResponse.getProducts().get(position).getProductId().getId(), quantity1);
-
-        }
     }
-    });
-
-}
 
     @Override
     public int getItemCount() {
         return cartProductResponse.getProducts().size();
     }
 
-public class CartItemViewHolder extends RecyclerView.ViewHolder {
-    CustomCartLayoutBinding binding;
+    public class CartItemViewHolder extends RecyclerView.ViewHolder {
+        CustomCartLayoutBinding binding;
 
-    public CartItemViewHolder(CustomCartLayoutBinding binding) {
-        super(binding.getRoot());
+        public CartItemViewHolder(CustomCartLayoutBinding binding) {
+            super(binding.getRoot());
 
-        this.binding = binding;
+            this.binding = binding;
 
 
+        }
     }
-}
 
-public interface OnGetCartItemListener {
-    void onIncreaseQuantityItemClickListener(String ProductId, int Quantity);
+    public interface OnGetCartItemListener {
+        void onIncreaseQuantityItemClickListener(String ProductId, int Quantity);
 
-    void onSaveLaterItemClickListener(String ProductId, String Type);
+        void onSaveLaterItemClickListener(String ProductId, String Type);
 
-    void onDeleteItemClickListener(String ProductId, String Type);
-}
+        void onDeleteItemClickListener(String ProductId, String Type);
+    }
 }

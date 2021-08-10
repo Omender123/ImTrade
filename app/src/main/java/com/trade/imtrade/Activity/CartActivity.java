@@ -229,13 +229,8 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
             presenter.DeleteCartProduct(CartActivity.this, ProductId);
 
         } else {
-           // presenter.DeleteSaveForLaterProduct(CartActivity.this, ProductId);
-            Sneaker.with(this)
-                    .setTitle("Coming Soon")
-                    .setMessage("")
-                    .setCornerRadius(4)
-                    .setDuration(1500)
-                    .sneakSuccess();
+           presenter.DeleteSaveForLaterProduct(CartActivity.this, ProductId);
+
 
         }
     }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background"
+        tools:context=".Activity.Payment">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/bottom_bar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+            app:titleTextColor="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Price Details"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/product_Price"/>
+        <TextView
+            android:id="@+id/text_totalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="25dp"
+            android:text="25,537.00 Rs"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/product_Price"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+            <RadioButton
+                android:id="@+id/radio_cod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:bufferType="normal"
+                android:fontFamily="@font/poppins"
+                android:layoutDirection="rtl"
+                android:text="COD "
+                android:buttonTint="@color/btn_color"
+                android:textAlignment="textStart"
+                android:textColor="@color/product_Price"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#33212121"/>
+
+            <RadioButton
+                android:id="@+id/radio_imx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:bufferType="normal"
+                android:fontFamily="@font/poppins"
+                android:layoutDirection="rtl"
+                android:text="iMX "
+                android:buttonTint="@color/btn_color"
+                android:textAlignment="textStart"
+                android:textColor="@color/product_Price"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#33212121"/>
+
+            <RadioButton
+                android:id="@+id/radio_credit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:bufferType="normal"
+                android:fontFamily="@font/poppins"
+                android:layoutDirection="rtl"
+                android:text="Credit Card/Debit Card "
+                android:buttonTint="@color/btn_color"
+                android:textAlignment="textStart"
+                android:textColor="@color/product_Price"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#33212121"/>
+
+            <RadioButton
+                android:id="@+id/radio_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:bufferType="normal"
+                android:fontFamily="@font/poppins"
+                android:layoutDirection="rtl"
+                android:text="Bank Transfer "
+                android:buttonTint="@color/btn_color"
+                android:textAlignment="textStart"
+                android:textColor="@color/product_Price"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#33212121"/>
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/btn_Continue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/verifying_textview"
+            android:backgroundTint="@color/btn_color"
+            android:gravity="center|center_vertical"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:fontFamily="@font/poppins"/>
+    </LinearLayout>
+
+</layout>

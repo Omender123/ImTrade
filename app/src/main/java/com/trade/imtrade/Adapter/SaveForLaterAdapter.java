@@ -63,6 +63,22 @@ public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapte
 
         holder.binding.textSave.setText(string);
 
+        if (saveForLaterResponse.getProducts().get(position).getProductColor()!=null){
+            holder.binding.colorText.setText(saveForLaterResponse.getProducts().get(position).getProductColor());
+        }else {
+            holder.binding.colorText.setText("No Color Selected");
+
+        }
+
+        if (saveForLaterResponse.getProducts().get(position).getProductStorage()!=null){
+            holder.binding.sizeText.setText(saveForLaterResponse.getProducts().get(position).getProductStorage());
+
+        }else {
+            holder.binding.sizeText.setText("No Size Selected");
+
+        }
+
+
         if (string.equalsIgnoreCase("Move To Cart")){
             holder.binding.card1.setVisibility(View.GONE);
 

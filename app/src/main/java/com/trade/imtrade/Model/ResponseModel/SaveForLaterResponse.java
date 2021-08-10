@@ -46,6 +46,9 @@ public class SaveForLaterResponse {
         @SerializedName("_id")
         @Expose
         private String id;
+        @SerializedName("stockVisible")
+        @Expose
+        private Boolean stockVisible;
         @SerializedName("averageRating")
         @Expose
         private String averageRating;
@@ -70,6 +73,12 @@ public class SaveForLaterResponse {
         @SerializedName("storage")
         @Expose
         private List<Storage> storage = null;
+        @SerializedName("productColor")
+        @Expose
+        private String productColor;
+        @SerializedName("productStorage")
+        @Expose
+        private String productStorage;
 
         public String getId() {
             return id;
@@ -77,6 +86,14 @@ public class SaveForLaterResponse {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public Boolean getStockVisible() {
+            return stockVisible;
+        }
+
+        public void setStockVisible(Boolean stockVisible) {
+            this.stockVisible = stockVisible;
         }
 
         public String getAverageRating() {
@@ -142,11 +159,30 @@ public class SaveForLaterResponse {
         public void setStorage(List<Storage> storage) {
             this.storage = storage;
         }
+
+        public String getProductColor() {
+            return productColor;
+        }
+
+        public void setProductColor(String productColor) {
+            this.productColor = productColor;
+        }
+
+        public String getProductStorage() {
+            return productStorage;
+        }
+
+        public void setProductStorage(String productStorage) {
+            this.productStorage = productStorage;
+        }
         public class Variable {
 
             @SerializedName("price")
             @Expose
             private Price price;
+            @SerializedName("stock")
+            @Expose
+            private Stock stock;
 
             public Price getPrice() {
                 return price;
@@ -156,52 +192,92 @@ public class SaveForLaterResponse {
                 this.price = price;
             }
 
-        }public class Price {
-
-            @SerializedName("mrp")
-            @Expose
-            private String mrp;
-            @SerializedName("finalPrice")
-            @Expose
-            private String finalPrice;
-            @SerializedName("minPrice")
-            @Expose
-            private String minPrice;
-            @SerializedName("margin")
-            @Expose
-            private String margin;
-
-            public String getMrp() {
-                return mrp;
+            public Stock getStock() {
+                return stock;
             }
 
-            public void setMrp(String mrp) {
-                this.mrp = mrp;
+            public void setStock(Stock stock) {
+                this.stock = stock;
             }
 
-            public String getFinalPrice() {
-                return finalPrice;
+            public class Price {
+
+                @SerializedName("mrp")
+                @Expose
+                private String mrp;
+                @SerializedName("finalPrice")
+                @Expose
+                private String finalPrice;
+                @SerializedName("minPrice")
+                @Expose
+                private String minPrice;
+                @SerializedName("margin")
+                @Expose
+                private String margin;
+
+                public String getMrp() {
+                    return mrp;
+                }
+
+                public void setMrp(String mrp) {
+                    this.mrp = mrp;
+                }
+
+                public String getFinalPrice() {
+                    return finalPrice;
+                }
+
+                public void setFinalPrice(String finalPrice) {
+                    this.finalPrice = finalPrice;
+                }
+
+                public String getMinPrice() {
+                    return minPrice;
+                }
+
+                public void setMinPrice(String minPrice) {
+                    this.minPrice = minPrice;
+                }
+
+                public String getMargin() {
+                    return margin;
+                }
+
+                public void setMargin(String margin) {
+                    this.margin = margin;
+                }
             }
 
-            public void setFinalPrice(String finalPrice) {
-                this.finalPrice = finalPrice;
-            }
+            public class Stock {
 
-            public String getMinPrice() {
-                return minPrice;
-            }
+                @SerializedName("quantity")
+                @Expose
+                private String quantity;
+                @SerializedName("availableQuantity")
+                @Expose
+                private String availableQuantity;
 
-            public void setMinPrice(String minPrice) {
-                this.minPrice = minPrice;
-            }
+                public String getQuantity() {
+                    return quantity;
+                }
 
-            public String getMargin() {
-                return margin;
-            }
+                public void setQuantity(String quantity) {
+                    this.quantity = quantity;
+                }
 
-            public void setMargin(String margin) {
-                this.margin = margin;
+                public String getAvailableQuantity() {
+                    return availableQuantity;
+                }
+
+                public void setAvailableQuantity(String availableQuantity) {
+                    this.availableQuantity = availableQuantity;
+                }
+
             }
+        }
+
+        public class Categories {
+
 
         }
 
@@ -218,11 +294,6 @@ public class SaveForLaterResponse {
             public void setBrandName(String brandName) {
                 this.brandName = brandName;
             }
-
-        }
-
-        public class Categories {
-
 
         }
 

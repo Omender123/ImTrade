@@ -74,11 +74,15 @@ public class CartProductResponse {
         public void setProductId(ProductId productId) {
             this.productId = productId;
         }
+
         public class ProductId {
 
             @SerializedName("images")
             @Expose
             private List<String> images = null;
+            @SerializedName("stockVisible")
+            @Expose
+            private Boolean stockVisible;
             @SerializedName("averageRating")
             @Expose
             private String averageRating;
@@ -100,9 +104,18 @@ public class CartProductResponse {
             @SerializedName("categories")
             @Expose
             private Categories categories;
+            @SerializedName("description")
+            @Expose
+            private Description description;
             @SerializedName("storage")
             @Expose
             private List<Storage> storage = null;
+            @SerializedName("productColor")
+            @Expose
+            private String productColor;
+            @SerializedName("productStorage")
+            @Expose
+            private String productStorage;
 
             public List<String> getImages() {
                 return images;
@@ -110,6 +123,14 @@ public class CartProductResponse {
 
             public void setImages(List<String> images) {
                 this.images = images;
+            }
+
+            public Boolean getStockVisible() {
+                return stockVisible;
+            }
+
+            public void setStockVisible(Boolean stockVisible) {
+                this.stockVisible = stockVisible;
             }
 
             public String getAverageRating() {
@@ -168,6 +189,14 @@ public class CartProductResponse {
                 this.categories = categories;
             }
 
+            public Description getDescription() {
+                return description;
+            }
+
+            public void setDescription(Description description) {
+                this.description = description;
+            }
+
             public List<Storage> getStorage() {
                 return storage;
             }
@@ -175,6 +204,186 @@ public class CartProductResponse {
             public void setStorage(List<Storage> storage) {
                 this.storage = storage;
             }
+
+            public String getProductColor() {
+                return productColor;
+            }
+
+            public void setProductColor(String productColor) {
+                this.productColor = productColor;
+            }
+
+            public String getProductStorage() {
+                return productStorage;
+            }
+
+            public void setProductStorage(String productStorage) {
+                this.productStorage = productStorage;
+            }
+
+            public class Variable {
+
+                @SerializedName("price")
+                @Expose
+                private Price price;
+                @SerializedName("stock")
+                @Expose
+                private Stock stock;
+
+                public Price getPrice() {
+                    return price;
+                }
+
+                public void setPrice(Price price) {
+                    this.price = price;
+                }
+
+                public Stock getStock() {
+                    return stock;
+                }
+
+                public void setStock(Stock stock) {
+                    this.stock = stock;
+                }
+
+                public class Price {
+
+                    @SerializedName("mrp")
+                    @Expose
+                    private String mrp;
+                    @SerializedName("finalPrice")
+                    @Expose
+                    private String finalPrice;
+                    @SerializedName("minPrice")
+                    @Expose
+                    private String minPrice;
+                    @SerializedName("margin")
+                    @Expose
+                    private String margin;
+
+                    public String getMrp() {
+                        return mrp;
+                    }
+
+                    public void setMrp(String mrp) {
+                        this.mrp = mrp;
+                    }
+
+                    public String getFinalPrice() {
+                        return finalPrice;
+                    }
+
+                    public void setFinalPrice(String finalPrice) {
+                        this.finalPrice = finalPrice;
+                    }
+
+                    public String getMinPrice() {
+                        return minPrice;
+                    }
+
+                    public void setMinPrice(String minPrice) {
+                        this.minPrice = minPrice;
+                    }
+
+                    public String getMargin() {
+                        return margin;
+                    }
+
+                    public void setMargin(String margin) {
+                        this.margin = margin;
+                    }
+
+                }
+
+
+                public class Stock {
+
+                    @SerializedName("quantity")
+                    @Expose
+                    private String quantity;
+                    @SerializedName("availableQuantity")
+                    @Expose
+                    private String availableQuantity;
+
+                    public String getQuantity() {
+                        return quantity;
+                    }
+
+                    public void setQuantity(String quantity) {
+                        this.quantity = quantity;
+                    }
+
+                    public String getAvailableQuantity() {
+                        return availableQuantity;
+                    }
+
+                    public void setAvailableQuantity(String availableQuantity) {
+                        this.availableQuantity = availableQuantity;
+                    }
+
+                }
+
+            }
+
+            public class Categories {
+
+
+            }
+
+            public class Brand {
+
+                @SerializedName("brandName")
+                @Expose
+                private String brandName;
+
+                public String getBrandName() {
+                    return brandName;
+                }
+
+                public void setBrandName(String brandName) {
+                    this.brandName = brandName;
+                }
+
+            }
+
+            public class Description {
+
+                @SerializedName("activeIngredients")
+                @Expose
+                private List<Object> activeIngredients = null;
+                @SerializedName("short")
+                @Expose
+                private String _short;
+                @SerializedName("long")
+                @Expose
+                private String _long;
+
+                public List<Object> getActiveIngredients() {
+                    return activeIngredients;
+                }
+
+                public void setActiveIngredients(List<Object> activeIngredients) {
+                    this.activeIngredients = activeIngredients;
+                }
+
+                public String getShort() {
+                    return _short;
+                }
+
+                public void setShort(String _short) {
+                    this._short = _short;
+                }
+
+                public String getLong() {
+                    return _long;
+                }
+
+                public void setLong(String _long) {
+                    this._long = _long;
+                }
+
+            }
+
             public class Storage {
 
                 @SerializedName("_id")
@@ -201,94 +410,9 @@ public class CartProductResponse {
                 }
 
             }
-
-            public class Variable {
-
-                @SerializedName("price")
-                @Expose
-                private Price price;
-
-                public Price getPrice() {
-                    return price;
-                }
-
-                public void setPrice(Price price) {
-                    this.price = price;
-                }
-
-            }
-
-            public class Brand {
-
-                @SerializedName("brandName")
-                @Expose
-                private String brandName;
-
-                public String getBrandName() {
-                    return brandName;
-                }
-
-                public void setBrandName(String brandName) {
-                    this.brandName = brandName;
-                }
-
-            }
-
-            public class Price {
-
-                @SerializedName("mrp")
-                @Expose
-                private String mrp;
-                @SerializedName("finalPrice")
-                @Expose
-                private String finalPrice;
-                @SerializedName("minPrice")
-                @Expose
-                private String minPrice;
-                @SerializedName("margin")
-                @Expose
-                private String margin;
-
-                public String getMrp() {
-                    return mrp;
-                }
-
-                public void setMrp(String mrp) {
-                    this.mrp = mrp;
-                }
-
-                public String getFinalPrice() {
-                    return finalPrice;
-                }
-
-                public void setFinalPrice(String finalPrice) {
-                    this.finalPrice = finalPrice;
-                }
-
-                public String getMinPrice() {
-                    return minPrice;
-                }
-
-                public void setMinPrice(String minPrice) {
-                    this.minPrice = minPrice;
-                }
-
-                public String getMargin() {
-                    return margin;
-                }
-
-                public void setMargin(String margin) {
-                    this.margin = margin;
-                }
-
-            }
-
-            public class Categories {
-
-
-            }
         }
     }
+
 
 }
 
