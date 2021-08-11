@@ -23,8 +23,7 @@ String type;
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_success_screen);
        // FullScreen();
-        AppUtils.FullScreen(this);
-        type = MyPreferences.getInstance(Success_screen.this).getString(PrefConf.TYPE,"");
+       type = MyPreferences.getInstance(Success_screen.this).getString(PrefConf.TYPE,"");
 
         if (type.equals("Change_password")){
             binding.createAccount.setText("Password Changed");
@@ -50,6 +49,5 @@ String type;
     @Override
     protected void onResume() {
         super.onResume();
-        AppUtils.FullScreen(this);
-    }
+       }
 }

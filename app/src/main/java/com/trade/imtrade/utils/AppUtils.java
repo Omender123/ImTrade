@@ -357,6 +357,19 @@ public static String getDateTime(String timeStamp){
                 |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
+
+    public static void StatusbarColor(Activity activity){
+        View decorView = activity.getWindow().getDecorView();
+        Window window = activity.getWindow();
+
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(activity,R.color.background));
+
+    }
+
+
 }
 
 

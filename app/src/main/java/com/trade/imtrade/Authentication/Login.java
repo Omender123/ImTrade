@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
         binding.forgot.setOnClickListener(this);
         binding.Skip.setOnClickListener(this);
 
-        AppUtils.FullScreen(this);
+       // AppUtils.StatusbarColor(this);
 
         initview();
 
@@ -143,7 +143,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
                     .warning()
                     .show();
         } else {
-            AppUtils.FullScreen(this);
+           // AppUtils.FullScreen(this);
 
             LoginBody user = new LoginBody(Email, password);
             presenter.loginUser(user);
@@ -217,7 +217,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Lo
     @Override
     protected void onResume() {
         super.onResume();
-        AppUtils.FullScreen(this);
+        //AppUtils.FullScreen(this);
         AppEventsLogger.activateApp(Login.this);
     }
 

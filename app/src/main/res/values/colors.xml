@@ -15,7 +15,7 @@
     <color name="image_categoriescolor">#E0F2F7</color>
     <color name="border_color">#7070F7</color>
 
-    <color name="text_hint">#B3000000</color>
+    <color name="text_hint">#2B2B2B</color>
     <color name="text_border">#3c434a</color>
     <color name="btn_color">#FB641B</color>
     <color name="text_login">#CC252525</color>

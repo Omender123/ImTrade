@@ -53,7 +53,8 @@ ActivitySignUpBinding binding;
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up);
         binding.cardNext.setOnClickListener(this);
-        AppUtils.FullScreen(this);
+        binding.imageBack.setOnClickListener(this);
+    //    AppUtils.FullScreen(this);
 
         code = new ArrayList<String>();
 
@@ -75,9 +76,13 @@ ActivitySignUpBinding binding;
             case R.id.card_next:
               doRegister();
                 AppUtils.hideKeyboard(v,getApplicationContext());
-                AppUtils.FullScreen(this);
-
                  break;
+
+            case R.id.image_back:
+               onBackPressed();
+                break;
+
+
         }
     }
 
@@ -269,6 +274,6 @@ ActivitySignUpBinding binding;
     @Override
     protected void onResume() {
         super.onResume();
-        AppUtils.FullScreen(this);
+      //  AppUtils.FullScreen(this);
     }
 }

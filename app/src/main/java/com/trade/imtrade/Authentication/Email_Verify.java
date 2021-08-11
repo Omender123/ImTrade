@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import de.mateware.snacky.Snacky;
 
 public class Email_Verify extends AppCompatActivity implements View.OnClickListener, VerifyOtp_Presenter.OTP_VerifyView, Send_OTP_Presenter.OTP_SendView {
-ActivityEmailVerifyBinding binding;
+    ActivityEmailVerifyBinding binding;
     private Context context;
     private Dialog dialog;
     private VerifyOtp_Presenter presenter;
@@ -45,71 +45,68 @@ ActivityEmailVerifyBinding binding;
     private TimerStatus timerStatus = TimerStatus.STOPPED;
 
 
-    Boolean click=false;
+    Boolean click = false;
     private static CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     //   setContentView(R.layout.activity_email__verify);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_email__verify);
-        AppUtils.FullScreen(this);
-        view = binding.getRoot();
+        //   setContentView(R.layout.activity_email__verify);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_email__verify);
+       view = binding.getRoot();
         context = Email_Verify.this;
         presenter = new VerifyOtp_Presenter(this);
         presenter1 = new Send_OTP_Presenter(this);
         dialog = AppUtils.hideShowProgress(context);
 
-        Type = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.TYPE1,"");
+        Type = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.TYPE1, "");
 
-        if (Type.equals("SignUp")){
-            binding.textSignup.setText(Type);
-        }else{
-            binding.textSignup.setText(Type);
-        }
 
         binding.cardDone.setOnClickListener(this);
+        binding.imgBack.setOnClickListener(this);
+
         startCountDownTimer();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.card_done:
-                AppUtils.FullScreen(this);
-                AppUtils.hideKeyboard(v,getApplicationContext());
-                if (Type.equals("SignUp")){
+               AppUtils.hideKeyboard(v, getApplicationContext());
+                if (Type.equals("SignUp")) {
                     VerifyOtp();
-                 }else{
-                    startActivity(new Intent(getApplicationContext(),Change_Password.class));
-                    MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.OTP,binding.enterOtp.getText().toString());
+                } else {
+                    startActivity(new Intent(getApplicationContext(), Change_Password.class));
+                    MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.OTP, binding.enterOtp.getText().toString());
 
                 }
+                break;
+            case R.id.img_back:
+                onBackPressed();
                 break;
         }
     }
 
     private void VerifyOtp() {
-        String Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL,"");
+        String Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL, "");
         String otp = binding.enterOtp.getText().toString();
-        if (otp.isEmpty()){
+        if (otp.isEmpty()) {
             Snacky.builder()
                     .setActivity(Email_Verify.this)
                     .setText("Please enter OTP !")
                     .setTextColor(getResources().getColor(R.color.white))
                     .warning()
                     .show();
-        }else{
-             VerifyOTP_Body verifyOTP_body = new VerifyOTP_Body(Email,otp);
-             presenter.VerifyUser(verifyOTP_body);
+        } else {
+            VerifyOTP_Body verifyOTP_body = new VerifyOTP_Body(Email, otp);
+            presenter.VerifyUser(verifyOTP_body);
         }
     }
 
     public void Resend_OTP(View view) {
-        String Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL,"");
+        String Email = MyPreferences.getInstance(getApplicationContext()).getString(PrefConf.EMAIL, "");
 
-        AppUtils.FullScreen(this);
-        AppUtils.hideKeyboard(view,getApplicationContext());
+       AppUtils.hideKeyboard(view, getApplicationContext());
         SendOtpBody sendOtpBody = new SendOtpBody(Email);
         presenter1.SendOTP(sendOtpBody);
 
@@ -117,9 +114,9 @@ ActivityEmailVerifyBinding binding;
 
     @Override
     public void showHideProgress(boolean isShow) {
-        if (isShow){
+        if (isShow) {
             dialog.show();
-        }else{
+        } else {
             dialog.dismiss();
         }
     }
@@ -137,9 +134,9 @@ ActivityEmailVerifyBinding binding;
 
     @Override
     public void onSuccess(String message) {
-        if (message.equalsIgnoreCase("ok")){
-            MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.TYPE,"SignUP");
-            startActivity(new Intent(getApplicationContext(),Success_screen.class));
+        if (message.equalsIgnoreCase("ok")) {
+            MyPreferences.getInstance(Email_Verify.this).putString(PrefConf.TYPE, "SignUP");
+            startActivity(new Intent(getApplicationContext(), Success_screen.class));
         }
 
     }
@@ -157,9 +154,9 @@ ActivityEmailVerifyBinding binding;
 
     @Override
     public void showOTPHideProgress(boolean isShow) {
-        if (isShow){
+        if (isShow) {
             dialog.show();
-        }else{
+        } else {
             dialog.dismiss();
         }
     }
@@ -177,7 +174,7 @@ ActivityEmailVerifyBinding binding;
     @Override
     public void onOTPSuccess(String message) {
 
-        if (message.equalsIgnoreCase("ok")){
+        if (message.equalsIgnoreCase("ok")) {
             Sneaker.with(this)
                     .setTitle("OTP Resend in Your Email")
                     .setMessage("")
@@ -198,11 +195,12 @@ ActivityEmailVerifyBinding binding;
                 .setDuration(1500)
                 .sneakError();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        AppUtils.FullScreen(this);
-    }
+       }
+
     private void reset() {
         stopCountDownTimer();
         startCountDownTimer();
@@ -214,10 +212,9 @@ ActivityEmailVerifyBinding binding;
         countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-               binding.resend.setVisibility(View.GONE);
-               binding.timer.setVisibility(View.VISIBLE);
-                binding.timer.setText("Time left "+hmsTimeFormatter(millisUntilFinished)+"s");
-
+                binding.resend.setVisibility(View.GONE);
+                binding.timer.setVisibility(View.VISIBLE);
+                binding.timer.setText("Time left " + hmsTimeFormatter(millisUntilFinished) + "s");
 
 
             }
@@ -250,7 +247,7 @@ ActivityEmailVerifyBinding binding;
 
     private String hmsTimeFormatter(long milliSeconds) {
 
-        String hms = String.format("%02d",  TimeUnit.MILLISECONDS.toSeconds(milliSeconds) );
+        String hms = String.format("%02d", TimeUnit.MILLISECONDS.toSeconds(milliSeconds));
         return hms;
 
 

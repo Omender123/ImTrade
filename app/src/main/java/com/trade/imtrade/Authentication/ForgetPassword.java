@@ -39,13 +39,13 @@ ActivityForgetPasswordBinding  binding;
        // setContentView(R.layout.activity_forget_password);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_forget_password);
 
-        AppUtils.FullScreen(this);
         view = binding.getRoot();
         context = ForgetPassword.this;
         presenter1 = new Send_OTP_Presenter(this);
         dialog = AppUtils.hideShowProgress(context);
 
         binding.cardNext.setOnClickListener(this);
+        binding.imgBack.setOnClickListener(this);
 
     }
 
@@ -53,10 +53,12 @@ ActivityForgetPasswordBinding  binding;
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.card_next:
-                AppUtils.FullScreen(this);
                 AppUtils.hideKeyboard(v,getApplicationContext());
-               // startActivity(new Intent(getApplicationContext(),Change_Password.class));
-              SendOTP();
+               SendOTP();
+                break;
+
+            case R.id.img_back:
+                onBackPressed();
                 break;
         }
     }
@@ -126,9 +128,5 @@ ActivityForgetPasswordBinding  binding;
                 .setDuration(1500)
                 .sneakError();
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AppUtils.FullScreen(this);
-    }
+
 }

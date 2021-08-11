@@ -33,7 +33,7 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_change__password);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_change__password);
-        AppUtils.FullScreen(this);
+       
         view = binding.getRoot();
         context = Change_Password.this;
         dialog = AppUtils.hideShowProgress(context);
@@ -50,7 +50,7 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.card_Done:
-                AppUtils.FullScreen(this);
+               
                 AppUtils.hideKeyboard(v, getApplicationContext());
                 change_password();
                 break;
@@ -94,7 +94,7 @@ public class Change_Password extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        AppUtils.FullScreen(this);
+       
     }
 
     @Override

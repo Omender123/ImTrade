@@ -9,32 +9,19 @@
         android:background="@color/background"
         tools:context=".Authentication.Scan_Referral_code">
 
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="SignUp"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
         <com.budiyev.android.codescanner.CodeScannerView
             android:id="@+id/scannerView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             app:frameAspectRatioHeight="1"
             app:frameAspectRatioWidth="1"
-            app:frameColor="#3C434A"
+            android:layout_marginTop="50dp"
+            app:frameColor="@color/btn_color"
             app:flashButtonColor="@color/black"
             app:autoFocusButtonColor="@color/black"
-            android:layout_below="@id/text1"
             app:frameCornersRadius="20dp"
             app:frameCornersSize="50dp"
             app:frameSize="0.75"
@@ -56,8 +43,9 @@
             android:drawableLeft="@drawable/ic_pay"
             android:drawablePadding="15dp"
             android:gravity="center_vertical"
-            android:paddingStart="10dp"
-            android:textColor="@color/text_hint" />
+            android:paddingStart="14dp"
+            android:fontFamily="@font/poppins"
+            android:textColor="#992B2B2B" />
 
         <TextView
             android:id="@+id/btn_go"
@@ -76,24 +64,6 @@
             android:text="Ready to go"
             android:textColor="@color/white"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/btn_go"
-            android:layout_above="@id/bottom"/>
-
-        <ImageView
-            android:id="@+id/bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="-10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_bottom" />
 
 
     </RelativeLayout>

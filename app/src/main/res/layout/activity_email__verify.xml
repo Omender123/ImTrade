@@ -7,18 +7,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-         tools:context=".Authentication.Email_Verify">
+        tools:context=".Authentication.Email_Verify">
 
-        <TextView
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_arrow_back"
+            />
+        <ImageView
             android:id="@+id/text_signup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/poppins_medium"
-            android:gravity="center"
-            android:text="Signup"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_below="@id/img_back"
+            android:layout_height="150dp"
+            android:src="@mipmap/logo"
+            />
 
         <TextView
             android:id="@+id/create"
@@ -26,13 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_signup"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="60dp"
             android:layout_marginRight="15dp"
             android:fontFamily="@font/poppins_semibold"
-            android:gravity="start"
+            android:gravity="center_vertical|center"
             android:text="Enter OTP"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textColor="@color/product_Price"
+            android:textSize="26dp" />
 
 
         <TextView
@@ -41,13 +45,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/create"
             android:layout_marginStart="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:fontFamily="@font/poppins"
             android:gravity="start"
-            android:text="Hello, Nice to meet you."
-            android:textColor="@color/text_hint"
-            android:textSize="12dp"
-            android:textStyle="normal" />
+            android:text="Confirm your Email if you want to change your email id please click on the edit icon"
+            android:textColor="#99212121"
+            android:justificationMode="inter_word"
+            android:textSize="14dp" />
 
         <com.chaos.view.PinView
             android:id="@+id/enter_otp"
@@ -58,7 +62,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:paddingLeft="15dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:cursorVisible="true"
             android:inputType="numberPassword"
             android:textColor="@color/black"
@@ -84,7 +88,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:text="OTP  receive in your Email"
-            android:textColor="@color/text_hint"
+            android:textColor="#992B2B2B"
             android:textStyle="normal"/>
 
         <androidx.cardview.widget.CardView
@@ -97,7 +101,7 @@
             android:layout_marginRight="15dp"
             app:cardBackgroundColor="@color/btn_color"
             app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            app:cardElevation="1dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -122,11 +126,10 @@
             android:layout_marginTop="3dp"
             android:layout_marginRight="16dp"
             android:visibility="gone"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins_medium"
             android:text="Resend OTP"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="normal" />
+            android:textColor="@color/product_Price"
+            android:textSize="15sp" />
 
 
         <TextView
@@ -141,18 +144,6 @@
             android:textAlignment="center"
             android:textColor="@color/text_login"
             android:textStyle="normal" />
-        <ImageView
-            android:id="@+id/bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="-10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_bottom" />
 
 
     </RelativeLayout>

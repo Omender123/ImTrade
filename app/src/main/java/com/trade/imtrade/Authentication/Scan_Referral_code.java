@@ -38,7 +38,6 @@ ActivityScanReferralCodeBinding binding;
       //  setContentView(R.layout.activity_scan__referral_code);
 
         binding= DataBindingUtil.setContentView(this,R.layout.activity_scan__referral_code);
-        AppUtils.FullScreen(this);
         codeScanner = new CodeScanner(this,binding.scannerView);
 
 
@@ -90,7 +89,6 @@ ActivityScanReferralCodeBinding binding;
     @Override
     protected void onResume() {
         super.onResume();
-        AppUtils.FullScreen(this);
         requestForCamera();
        // codeScanner.startPreview();
     }
