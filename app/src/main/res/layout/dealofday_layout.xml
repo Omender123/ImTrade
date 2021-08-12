@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:background="@color/background"
+        android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/background"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="15dp"
+                        android:layout_below="@id/view"
+                        android:background="@color/white">
+                          <ImageView
+                            android:id="@+id/cate_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/deal1"
+                            android:layout_gravity="center"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:id="@+id/cate_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/poppins"
+                            android:text="Audemars Pluguet Watch"
+                            android:textColor="@color/product_name"
+                            android:textSize="10dp"
+                            android:textStyle="normal" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/cate_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4500Rs"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="05dp"
+                                android:textSize="10dp"
+                                android:textColor="@color/product_Price"
+                                android:fontFamily="@font/poppins_semibold"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/product_worng_price"
+                                android:fontFamily="@font/poppins_medium"
+                                android:layout_toEndOf="@id/product_price"
+                                android:background="@drawable/striking_text"
+                                android:foreground="@drawable/striking_text"
+                                android:textSize="8sp"
+                                android:text="10,999 Rs"
+                                android:textColor="@color/review_color"
+                                android:layout_below="@id/text_rating"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/product_Off_price"
+                                android:layout_toEndOf="@id/product_worng_price"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textStyle="normal"
+                                android:textSize="8sp"
+                                android:layout_marginLeft="5dp"
+                                android:text="22 %OFF"
+                                android:textColor="@color/green"
+                                android:layout_below="@id/text_rating"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</layout>

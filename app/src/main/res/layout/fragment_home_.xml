@@ -126,7 +126,7 @@
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="160dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 app:iss_auto_cycle="true"
@@ -134,388 +134,614 @@
                 app:iss_delay="1000"
                 app:iss_period="2000" />
 
-            <RelativeLayout
+            <!--      <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="15dp">
+
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentStart="true"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginLeft="15dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_toStartOf="@id/recom_More"
+                          android:fontFamily="@font/poppins_medium"
+                          android:text="Recommended"
+                          android:textColor="@color/text_tittle"
+                          android:textSize="16sp" />
+
+                      <TextView
+                          android:id="@+id/recom_More"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentEnd="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginRight="15dp"
+                          android:fontFamily="@font/poppins"
+                          android:text="See All"
+                          android:textColor="@color/toolbar_color"
+                          android:textSize="12sp" />
+                  </RelativeLayout>
+
+
+                  <androidx.recyclerview.widget.RecyclerView
+                      android:id="@+id/recommended_rcycler"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginRight="5dp"
+                      android:orientation="horizontal"
+                      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                      tools:listitem="@layout/custom_recomanded" />
+
+
+                  &lt;!&ndash;        <TextView
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="15dp"
+                              android:layout_marginTop="10dp"
+                              android:layout_marginRight="15dp"
+                              android:fontFamily="@font/poppins_medium"
+                              android:text="Brands"
+                              android:textColor="@color/text_tittle"
+                              android:textSize="16sp" />
+
+                          <androidx.recyclerview.widget.RecyclerView
+                              android:id="@+id/RecyclerView_Brands"
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="10dp"
+                              android:layout_marginRight="5dp"
+                              android:orientation="horizontal"
+                              app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                              tools:listitem="@layout/custom_brands_layout" />
+              &ndash;&gt;
+
+                  <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp">
+
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentStart="true"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginLeft="15dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_toStartOf="@id/disByBrands_More"
+                          android:fontFamily="@font/poppins_medium"
+                          android:text="Discount For You"
+                          android:textColor="@color/text_tittle"
+                          android:textSize="16sp" />
+
+                      <TextView
+                          android:id="@+id/disByBrands_More"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentEnd="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginRight="15dp"
+                          android:fontFamily="@font/poppins"
+                          android:text="See All"
+                          android:textColor="@color/toolbar_color"
+                          android:textSize="12sp" />
+                  </RelativeLayout>
+
+
+                  <androidx.recyclerview.widget.RecyclerView
+                      android:id="@+id/DiscountByBrands_recyclerView"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginRight="5dp"
+                      android:orientation="horizontal"
+                      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                      tools:listitem="@layout/custom_recomanded" />
+
+                  <androidx.cardview.widget.CardView
+                      android:layout_width="match_parent"
+                      android:layout_height="130dp"
+                      android:layout_margin="15dp"
+                      app:cardBackgroundColor="@color/background"
+                      app:cardCornerRadius="12dp">
+
+
+                      <com.denzcoskun.imageslider.ImageSlider
+                          android:id="@+id/middle_slider"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          app:iss_auto_cycle="true"
+                          app:iss_period="2000"
+                          app:iss_delay="1000"
+                          app:iss_corner_radius="12"/>
+
+                      &lt;!&ndash;  <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/third"
+                            android:scaleType="centerCrop"/>&ndash;&gt;
+
+                  </androidx.cardview.widget.CardView>
+
+
+                  <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="15dp"
+                      android:layout_marginTop="25dp"
+                      android:layout_marginRight="15dp">
+
+                      <TextView
+                          android:id="@+id/text_demi"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:fontFamily="@font/poppins"
+                          android:text="Save Date for Event and get Free\nReminder Best Recommended Gift"
+                          android:textColor="#CC212121"
+                          android:textSize="12sp" />
+
+                      <ImageView
+                          android:id="@+id/null1"
+                          android:layout_width="0.5dp"
+                          android:layout_height="40dp"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginLeft="20dp"
+                          android:layout_marginRight="10dp"
+                          android:layout_toEndOf="@+id/text_demi"
+                          android:background="#A9A9A9" />
+
+                      <TextView
+                          android:id="@+id/text_add"
+                          android:layout_width="90dp"
+                          android:layout_height="34dp"
+                          android:layout_alignParentEnd="true"
+                          android:layout_marginStart="10dp"
+                          android:layout_marginTop="3dp"
+                          android:layout_toEndOf="@id/null1"
+                          android:background="@drawable/radio_normal"
+                          android:backgroundTint="@color/btn_color"
+                          android:fontFamily="@font/poppins_medium"
+                          android:gravity="center_vertical|center"
+                          android:text="Add"
+                          android:textColor="@color/white" />
+                  </RelativeLayout>
+
+                  <ImageView
+                      android:layout_width="match_parent"
+                      android:layout_height="0.5dp"
+                      android:layout_below="@id/text_demi"
+                      android:layout_alignParentStart="true"
+                      android:layout_alignParentEnd="true"
+                      android:layout_alignParentBottom="true"
+                      android:background="#A9A9A9" />
+
+
+                  <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="30dp">
+
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentStart="true"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginLeft="15dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_toStartOf="@id/Deal_More"
+                          android:fontFamily="@font/poppins"
+                          android:text="Deal of The Day"
+                          android:textColor="@color/text_tittle"
+                          android:textSize="15sp"
+                          android:textStyle="bold" />
+
+                      <TextView
+                          android:id="@+id/Deal_More"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentEnd="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginRight="15dp"
+                          android:fontFamily="@font/poppins"
+                          android:text="More"
+                          android:textColor="@color/toolbar_color"
+                          android:textSize="15sp"
+                          android:textStyle="bold" />
+                  </RelativeLayout>
+
+
+                  <androidx.recyclerview.widget.RecyclerView
+                      android:id="@+id/Deal_rcycler"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginRight="5dp"
+                      android:orientation="horizontal"
+                      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                      tools:listitem="@layout/custom_recomanded" />
+
+                  <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp">
+
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentStart="true"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginLeft="15dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_toStartOf="@id/PopularProduct_More"
+                          android:fontFamily="@font/poppins_medium"
+                          android:text="Most Popular Product"
+                          android:textColor="@color/text_tittle"
+                          android:textSize="16sp" />
+
+                      <TextView
+                          android:id="@+id/PopularProduct_More"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentEnd="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginRight="15dp"
+                          android:fontFamily="@font/poppins"
+                          android:text="See All"
+                          android:textColor="@color/toolbar_color"
+                          android:textSize="12sp" />
+                  </RelativeLayout>
+
+
+                  <androidx.recyclerview.widget.RecyclerView
+                      android:id="@+id/PopularProduct_rcycler"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginRight="5dp"
+                      android:orientation="horizontal"
+                      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                      tools:listitem="@layout/custom_recomanded" />
+
+                  <androidx.cardview.widget.CardView
+                      android:layout_width="match_parent"
+                      android:layout_height="130dp"
+                      android:layout_margin="15dp"
+                      app:cardBackgroundColor="@color/background"
+                      app:cardCornerRadius="12dp">
+
+
+                      <com.denzcoskun.imageslider.ImageSlider
+                          android:id="@+id/bottom_slider"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          app:iss_auto_cycle="true"
+                          app:iss_period="2000"
+                          app:iss_delay="1000"
+                          app:iss_corner_radius="12"/>
+
+                      &lt;!&ndash;  <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/third"
+                            android:scaleType="centerCrop"/>&ndash;&gt;
+
+                  </androidx.cardview.widget.CardView>
+
+
+                  <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp">
+
+                      <TextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentStart="true"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginLeft="15dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_toStartOf="@id/season_More"
+                          android:fontFamily="@font/poppins_medium"
+                          android:text="Product according to season"
+                          android:textColor="@color/text_tittle"
+                          android:textSize="16sp" />
+
+                      <TextView
+                          android:id="@+id/season_More"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_alignParentTop="true"
+                          android:layout_alignParentEnd="true"
+                          android:layout_alignParentBottom="true"
+                          android:layout_marginRight="15dp"
+                          android:fontFamily="@font/poppins"
+                          android:text="See All"
+                          android:textColor="@color/toolbar_color"
+                          android:textSize="12sp" />
+                  </RelativeLayout>
+
+
+                  <androidx.recyclerview.widget.RecyclerView
+                      android:id="@+id/Season_rcycler"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginRight="5dp"
+                      android:orientation="horizontal"
+                      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                      tools:listitem="@layout/custom_recomanded" />
+
+                  <TextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentStart="true"
+                      android:layout_alignParentTop="true"
+                      android:layout_alignParentBottom="true"
+                      android:layout_marginLeft="15dp"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginRight="15dp"
+                      android:fontFamily="@font/poppins_medium"
+                      android:text="Games"
+                      android:textColor="@color/text_tittle"
+                      android:textSize="16sp" />
+
+
+                  <androidx.recyclerview.widget.RecyclerView
+                      android:id="@+id/game_rcycler"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginBottom="15dp"
+                      android:orientation="horizontal"
+                      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                      tools:listitem="@layout/custom_game_layout" />
+
+      -->
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    android:layout_toStartOf="@id/recom_More"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Recommended"
-                    android:textColor="@color/text_tittle"
-                    android:textSize="16sp" />
+                    android:text="Discounted Categories"
+                    android:textColor="@color/product_Price"
+                    android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/recom_More"
-                    android:layout_width="wrap_content"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_discountCategories"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="See All"
-                    android:textColor="@color/toolbar_color"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/discount_categories_layout" />
+            </LinearLayout>
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recommended_rcycler"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/custom_recomanded" />
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="5dp">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
-            <!--        <TextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/recom_More"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Brands"
+                        android:text="Deal of the Day"
                         android:textColor="@color/text_tittle"
                         android:textSize="16sp" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/RecyclerView_Brands"
+                    <TextView
+                        android:id="@+id/recom_More"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_DealofDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:spanCount="2"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/dealofday_layout" />
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/middle_slider"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="0"
+                app:iss_delay="1000"
+                app:iss_period="2000" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="5dp"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/custom_brands_layout" />
-        -->
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/PopularthisWeek_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Popular This Week"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/PopularthisWeek_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
 
-                <TextView
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_PopularThisWeek"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toStartOf="@id/disByBrands_More"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Discount For You"
-                    android:textColor="@color/text_tittle"
-                    android:textSize="16sp" />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
 
-                <TextView
-                    android:id="@+id/disByBrands_More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="See All"
-                    android:textColor="@color/toolbar_color"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_recomanded" />
+            </LinearLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/DiscountByBrands_recyclerView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/custom_recomanded" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_margin="15dp"
-                app:cardBackgroundColor="@color/background"
-                app:cardCornerRadius="12dp">
-
-
-                <com.denzcoskun.imageslider.ImageSlider
-                    android:id="@+id/middle_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:iss_auto_cycle="true"
-                    app:iss_period="2000"
-                    app:iss_delay="1000"
-                    app:iss_corner_radius="12"/>
-
-                <!--  <ImageView
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:src="@mipmap/third"
-                      android:scaleType="centerCrop"/>-->
-
-            </androidx.cardview.widget.CardView>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="15dp">
-
-                <TextView
-                    android:id="@+id/text_demi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Save Date for Event and get Free\nReminder Best Recommended Gift"
-                    android:textColor="#CC212121"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/null1"
-                    android:layout_width="0.5dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toEndOf="@+id/text_demi"
-                    android:background="#A9A9A9" />
-
-                <TextView
-                    android:id="@+id/text_add"
-                    android:layout_width="90dp"
-                    android:layout_height="34dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_toEndOf="@id/null1"
-                    android:background="@drawable/radio_normal"
-                    android:backgroundTint="@color/btn_color"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="center_vertical|center"
-                    android:text="Add"
-                    android:textColor="@color/white" />
-            </RelativeLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@id/text_demi"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:background="#A9A9A9" />
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toStartOf="@id/Deal_More"
-                    android:fontFamily="@font/poppins"
-                    android:text="Deal of The Day"
-                    android:textColor="@color/text_tittle"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/Deal_More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="More"
-                    android:textColor="@color/toolbar_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Deal_rcycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/custom_recomanded" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toStartOf="@id/PopularProduct_More"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Most Popular Product"
-                    android:textColor="@color/text_tittle"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/PopularProduct_More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="See All"
-                    android:textColor="@color/toolbar_color"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/PopularProduct_rcycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/custom_recomanded" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_margin="15dp"
-                app:cardBackgroundColor="@color/background"
-                app:cardCornerRadius="12dp">
-
-
-                <com.denzcoskun.imageslider.ImageSlider
-                    android:id="@+id/bottom_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:iss_auto_cycle="true"
-                    app:iss_period="2000"
-                    app:iss_delay="1000"
-                    app:iss_corner_radius="12"/>
-
-                <!--  <ImageView
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:src="@mipmap/third"
-                      android:scaleType="centerCrop"/>-->
-
-            </androidx.cardview.widget.CardView>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toStartOf="@id/season_More"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Product according to season"
-                    android:textColor="@color/text_tittle"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/season_More"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="@font/poppins"
-                    android:text="See All"
-                    android:textColor="@color/toolbar_color"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Season_rcycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/custom_recomanded" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Games"
-                android:textColor="@color/text_tittle"
-                android:textSize="16sp" />
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/game_rcycler"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/contiuneYour_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Continue Your Hunt"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/contiuneYour_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_contiuneYour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical"
+                    android:layout_marginStart="15dp"
+                    app:spanCount="2"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/continue_your_hunt_layout" />
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/bottom_slider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/custom_game_layout" />
-
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="0"
+                app:iss_delay="1000"
+                app:iss_period="2000" />
 
         </LinearLayout>
 

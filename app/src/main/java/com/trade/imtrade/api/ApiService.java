@@ -89,7 +89,7 @@ public interface ApiService {
     Call<List<HomeProductResponse>> getAllDealOfTheDay();
 
     @GET("products/discountForYou")
-    Call<List<HomeProductResponse>> getDiscountForYou();
+    Call<List<HomeProductResponse>> getGetContinueHuntYou();
 
     @GET("products/sesionProducts")
     Call<List<HomeProductResponse>> getSeasonProduct();

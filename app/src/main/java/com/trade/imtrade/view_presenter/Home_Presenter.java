@@ -192,15 +192,15 @@ public class Home_Presenter {
 
     }
 
-    public void GetDiscountForYou(Context context) {
+    public void GetContinueHuntYou(Context context) {
         view.showHideProgress(true);
-        Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getDiscountForYou();
+        Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getGetContinueHuntYou();
         userCall.enqueue(new Callback<List<HomeProductResponse>>() {
             @Override
             public void onResponse(Call<List<HomeProductResponse>> call, Response<List<HomeProductResponse>> response) {
                 view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
-                    view.onDiscountForYouSuccess(response.body(), response.message());
+                    view.onContinueHuntYouSuccess(response.body(), response.message());
                 } else if (response.code() == 400 || response.code() == 401) {
                     try {
                         String errorRes = response.errorBody().string();
@@ -310,7 +310,7 @@ public class Home_Presenter {
 
         void onDealOfTheDaySuccess(List<HomeProductResponse> DealOfTheDayResponse, String message);
 
-        void onDiscountForYouSuccess(List<HomeProductResponse> DiscountForYouResponse, String message);
+        void onContinueHuntYouSuccess(List<HomeProductResponse> DiscountForYouResponse, String message);
 
         void onSeasonProductSuccess(List<HomeProductResponse> SeasonProductResponse, String message);
 

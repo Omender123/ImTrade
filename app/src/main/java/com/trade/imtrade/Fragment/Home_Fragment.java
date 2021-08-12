@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,9 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Adapter.BrandsAdapter;
 import com.trade.imtrade.Adapter.Categories_Adapter;
+import com.trade.imtrade.Adapter.Continue_HuntAdapter;
+import com.trade.imtrade.Adapter.DealofDayAdapter;
+import com.trade.imtrade.Adapter.Discount_categoriesAdapter;
 import com.trade.imtrade.Adapter.GameAdapter;
 import com.trade.imtrade.Adapter.HomeProduct_Adapter;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
@@ -40,13 +45,16 @@ import com.trade.imtrade.view_presenter.Home_Presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener, HomeProduct_Adapter.HomeProductClickListener {
+public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener, HomeProduct_Adapter.HomeProductClickListener, Continue_HuntAdapter.HomeProductClickListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
     private Dialog dialog;
 
     Integer[] Image = {R.mipmap.game1, R.mipmap.game2, R.mipmap.game3};
+    Integer[] cate_Image = {R.mipmap.discounted_categories_1, R.mipmap.discounted_categories_2, R.mipmap.discounted_categories_3, R.mipmap.discounted_categories_2, R.mipmap.discounted_categories_1};
+    String[] cate_name = {"Fresh Fruits & Vegetables", "Appliances", "Packet Food", "Appliances", "Fresh Fruits & Vegetables"};
+
     NavController navController;
 
     public Home_Fragment() {
@@ -68,13 +76,14 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         presenter.GetAllCategories(getContext());
         //   presenter.GetAllBrands(getContext());
         presenter.GetAllPopularProduct(getContext());
-        presenter.GetDealOfTheDay(getContext());
-        presenter.GetDiscountForYou(getContext());
-        presenter.GetSeasonProduct(getContext());
-        presenter.GetRecommendedProduct(getContext());
+        //presenter.GetDealOfTheDay(getContext());
+        presenter.GetContinueHuntYou(getContext());
+        //presenter.GetSeasonProduct(getContext());
+        //presenter.GetRecommendedProduct(getContext());
         binding.cateAll.setOnClickListener(this);
         getAllGame();
-
+        getAllDiscountCategories();
+        getDealOfDay();
 
         return binding.getRoot();
     }
@@ -93,11 +102,31 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     private void getAllGame() {
         GameAdapter gameAdapter = new GameAdapter(getContext(), Image);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.gameRcycler.setLayoutManager(mLayoutManager1);
-        binding.gameRcycler.setItemAnimator(new DefaultItemAnimator());
-        binding.gameRcycler.setAdapter(gameAdapter);
+        //  binding.gameRcycler.setLayoutManager(mLayoutManager1);
+        //  binding.gameRcycler.setItemAnimator(new DefaultItemAnimator());
+        //  binding.gameRcycler.setAdapter(gameAdapter);
 
     }
+
+    private void getAllDiscountCategories() {
+        Discount_categoriesAdapter discount_categoriesAdapter = new Discount_categoriesAdapter(getContext(), cate_name, cate_Image);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerViewDiscountCategories.setLayoutManager(mLayoutManager1);
+        binding.recyclerViewDiscountCategories.setItemAnimator(new DefaultItemAnimator());
+        binding.recyclerViewDiscountCategories.setAdapter(discount_categoriesAdapter);
+
+    }
+
+    private void getDealOfDay() {
+        Integer[] cate_image = {R.mipmap.deal1, R.mipmap.deal3, R.mipmap.deal3};
+        DealofDayAdapter dealofDayAdapter = new DealofDayAdapter(getContext(), cate_image);
+        RecyclerView.LayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        binding.recyclerViewDealofDay.setLayoutManager(mLayoutManager1);
+        binding.recyclerViewDealofDay.setItemAnimator(new DefaultItemAnimator());
+        binding.recyclerViewDealofDay.setAdapter(dealofDayAdapter);
+
+    }
+
 
     @Override
     public void showHideProgress(boolean isShow) {
@@ -136,7 +165,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
                     } else if (banner.getPosition().equalsIgnoreCase("middle")) {
                         MiddleImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    }else if (banner.getPosition().equalsIgnoreCase("bottom")) {
+                    } else if (banner.getPosition().equalsIgnoreCase("bottom")) {
                         BottomImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
                     }
@@ -188,9 +217,9 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         if (message.equalsIgnoreCase("ok")) {
             HomeProduct_Adapter mostPopularProductAdapter = new HomeProduct_Adapter(getContext(), PopularProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.PopularProductRcycler.setLayoutManager(mLayoutManager1);
-            binding.PopularProductRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.PopularProductRcycler.setAdapter(mostPopularProductAdapter);
+            binding.recyclerViewPopularThisWeek.setLayoutManager(mLayoutManager1);
+            binding.recyclerViewPopularThisWeek.setItemAnimator(new DefaultItemAnimator());
+            binding.recyclerViewPopularThisWeek.setAdapter(mostPopularProductAdapter);
 
         }
     }
@@ -200,21 +229,21 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         if (message.equalsIgnoreCase("ok")) {
             HomeProduct_Adapter homeProduct_adapter = new HomeProduct_Adapter(getContext(), DealOfTheDayResponses, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.DealRcycler.setLayoutManager(mLayoutManager1);
-            binding.DealRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.DealRcycler.setAdapter(homeProduct_adapter);
+            // binding.DealRcycler.setLayoutManager(mLayoutManager1);
+            //binding.DealRcycler.setItemAnimator(new DefaultItemAnimator());
+            // binding.DealRcycler.setAdapter(homeProduct_adapter);
         }
     }
 
     @Override
-    public void onDiscountForYouSuccess(List<HomeProductResponse> DiscountForYouResponses, String message) {
+    public void onContinueHuntYouSuccess(List<HomeProductResponse> DiscountForYouResponses, String message) {
 
         if (message.equalsIgnoreCase("ok")) {
-            HomeProduct_Adapter discountByBrandsAdapter = new HomeProduct_Adapter(getContext(), DiscountForYouResponses, this::onHomeProductItemClickListener);
-            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.DiscountByBrandsRecyclerView.setLayoutManager(mLayoutManager1);
-            binding.DiscountByBrandsRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            binding.DiscountByBrandsRecyclerView.setAdapter(discountByBrandsAdapter);
+            Continue_HuntAdapter continue_huntAdapter = new Continue_HuntAdapter(getContext(), DiscountForYouResponses, this::onHomeProductItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+            binding.recyclerViewContiuneYour.setLayoutManager(mLayoutManager1);
+            binding.recyclerViewContiuneYour.setItemAnimator(new DefaultItemAnimator());
+            binding.recyclerViewContiuneYour.setAdapter(continue_huntAdapter);
         }
     }
 
@@ -224,9 +253,9 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         if (message.equalsIgnoreCase("ok")) {
             HomeProduct_Adapter productToSeasonAdapter = new HomeProduct_Adapter(getContext(), SeasonProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.SeasonRcycler.setLayoutManager(mLayoutManager1);
-            binding.SeasonRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.SeasonRcycler.setAdapter(productToSeasonAdapter);
+            // binding.SeasonRcycler.setLayoutManager(mLayoutManager1);
+            // binding.SeasonRcycler.setItemAnimator(new DefaultItemAnimator());
+            // binding.SeasonRcycler.setAdapter(productToSeasonAdapter);
 
         }
     }
@@ -236,9 +265,9 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         if (message.equalsIgnoreCase("ok")) {
             HomeProduct_Adapter recommended_adapter = new HomeProduct_Adapter(getContext(), ReCommendedProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.recommendedRcycler.setLayoutManager(mLayoutManager1);
-            binding.recommendedRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.recommendedRcycler.setAdapter(recommended_adapter);
+            // binding.recommendedRcycler.setLayoutManager(mLayoutManager1);
+            // binding.recommendedRcycler.setItemAnimator(new DefaultItemAnimator());
+            // binding.recommendedRcycler.setAdapter(recommended_adapter);
 
         }
     }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/background">
+
+            <LinearLayout
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp">
+
+                <ImageView
+                    android:id="@+id/cate_img"
+                    android:layout_width="45dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@mipmap/deal2" />
+
+                <TextView
+                    android:id="@+id/cate_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/poppins"
+                    android:text="Audemars Pluguet Watch"
+                    android:textColor="@color/product_name"
+                    android:textSize="10dp"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cate_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="05dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="4500Rs"
+                        android:textColor="@color/product_Price"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/product_worng_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_rating"
+                        android:layout_toEndOf="@id/product_price"
+                        android:background="@drawable/striking_text"
+                        android:fontFamily="@font/poppins_medium"
+                        android:foreground="@drawable/striking_text"
+                        android:text="10,999 Rs"
+                        android:textColor="@color/review_color"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:id="@+id/product_Off_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_rating"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toEndOf="@id/product_worng_price"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="22 %OFF"
+                        android:textColor="@color/green"
+                        android:textSize="8sp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</layout>
