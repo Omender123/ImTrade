@@ -15,17 +15,7 @@
             android:layout_height="70dp"
             android:src="@mipmap/fruits" />
 
-        <TextView
-            android:id="@+id/brands_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:fontFamily="@font/poppins_semibold"
-            android:layout_marginTop="5dp"
-            android:text="Nike"
-            android:textSize="12sp"
-            android:textColor="@color/product_name" />
+
     </LinearLayout>
 
 </layout>

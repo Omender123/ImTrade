@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/background">
+        android:background="@color/white">
         <androidx.cardview.widget.CardView
             android:layout_width="125dp"
             android:layout_height="150dp"
@@ -15,7 +15,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            app:cardElevation="3dp">
+            app:cardElevation="1dp">
 
             <ImageView
                 android:id="@+id/game_img"

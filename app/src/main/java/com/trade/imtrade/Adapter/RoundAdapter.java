@@ -13,20 +13,23 @@ import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;
-import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;
 
 import java.util.List;
 
-public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsViewHolder>  {
+public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.BrandsViewHolder>  {
     Context context;
-    List<BrandsResponse>brandsResponses;
+   // List<BrandsResponse>brandsResponses;
+    String brands_Name[];
+    Integer brands_Image[];
 
-    public BrandsAdapter(Context context,List<BrandsResponse>brandsResponses) {
+    public RoundAdapter(Context context, /*List<BrandsResponse>brandsResponses*/ String brands_Name[], Integer brands_Image[]) {
         this.context = context;
-        this.brandsResponses = brandsResponses;
+        //this.brandsResponses = brandsResponses;
+        this.brands_Image = brands_Image;
+        this.brands_Name=brands_Name;
     }
 
-    public BrandsAdapter() {
+    public RoundAdapter() {
     }
 
 
@@ -41,14 +44,15 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.BrandsView
 
     @Override
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
-        holder.binding.brandsName.setText(brandsResponses.get(position).getName());
+        holder.binding.brandsName.setText(brands_Name[position]);
+        holder.binding.brandsImage.setImageResource(brands_Image[position]);
 
-     Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
+    // Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
     }
 
     @Override
     public int getItemCount() {
-        return brandsResponses.size();
+        return brands_Image.length;
     }
 
     public class BrandsViewHolder extends RecyclerView.ViewHolder {

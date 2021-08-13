@@ -620,7 +620,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:paddingBottom="5dp">
+                android:paddingBottom="15dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -716,18 +716,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/background"/>
+                    android:background="@color/background" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView_contiuneYour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical"
-                    android:layout_marginStart="15dp"
-                    app:spanCount="2"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
                     tools:itemCount="4"
                     tools:listitem="@layout/continue_your_hunt_layout" />
             </LinearLayout>
@@ -737,11 +737,608 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 app:iss_auto_cycle="true"
                 app:iss_corner_radius="0"
                 app:iss_delay="1000"
                 app:iss_period="2000" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/Daily_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Daily Usable Products"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Daily_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_Daily"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/custom_brands_layout" />
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/forth_slider"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="0"
+                app:iss_delay="1000"
+                app:iss_period="2000" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/recom_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Recommended Products"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/recom_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recommended_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_recomanded" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/winner_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Winner of This Weak"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/winner_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_winner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/custom_brands_layout" />
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/fivth_slider"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="0"
+                app:iss_delay="1000"
+                app:iss_period="2000" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/Festival_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Festival Offer on Products"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Festival_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Festival_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_recomanded" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/Fresh_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Fresh Arrivals"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Fresh_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Fresh_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_recomanded" />
+            </LinearLayout>
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/sixth_slider"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="0"
+                app:iss_delay="1000"
+                app:iss_period="2000" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/game_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Games"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/game_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/game_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_game_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/Sponsored_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Sponsored Products"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Sponsored_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Sponsored_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_recomanded" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Stories"
+                    android:textColor="@color/text_tittle"
+                    android:textSize="16sp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_Stories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/custom_brands_layout" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/Coffee_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Coffee"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Coffee_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_Coffee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/custom_brands_layout" />
+            </LinearLayout>
+
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/seventh_slider"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="10dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="0"
+                app:iss_delay="1000"
+                app:iss_period="2000" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toStartOf="@id/Hotel_more"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Hotel Near By Me"
+                        android:textColor="@color/text_tittle"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/Hotel_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="See All"
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/Hotel_rcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/custom_hotel_layout" />
+            </LinearLayout>
 
         </LinearLayout>
 
