@@ -2,7 +2,6 @@ package com.trade.imtrade.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,27 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
-import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;
 
 import java.util.List;
 
-public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.BrandsViewHolder> {
+public class RoundAdapter1 extends RecyclerView.Adapter<RoundAdapter1.BrandsViewHolder> {
     Context context;
-    List<AllCategoriesResponse> allCategoriesResponses;
-    private OnCategoriesItemListener onCategoriesItemListener;
+    String[] cate_name;
+    Integer[] cate_Image;
 
-
-    public RoundAdapter(Context context, List<AllCategoriesResponse> allCategoriesResponses, OnCategoriesItemListener onCategoriesItemListener) {
+    public RoundAdapter1(Context context,String[] cate_name,Integer[] cate_Image) {
         this.context = context;
-        this.allCategoriesResponses = allCategoriesResponses;
-        this.onCategoriesItemListener = onCategoriesItemListener;
-
+        this.cate_name = cate_name;
+        this.cate_Image = cate_Image;
     }
 
-    public RoundAdapter() {
+    public RoundAdapter1() {
     }
 
 
@@ -46,22 +42,14 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.BrandsViewHo
 
     @Override
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
-        holder.binding.brandsName.setText(allCategoriesResponses.get(position).getName());
-
-        Glide.with(context).load(PrefConf.IMAGE_URL + allCategoriesResponses.get(position).getImage()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCategoriesItemListener.onCategoriesItemClickListener(allCategoriesResponses,position);
-            }
-        });
-
+        holder.binding.brandsName.setText(cate_name[position]);
+        holder.binding.brandsImage.setImageResource(cate_Image[position]);
+      //  Glide.with(context).load(PrefConf.IMAGE_URL + allCategoriesResponses.get(position).getImage()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
     }
 
     @Override
     public int getItemCount() {
-        return allCategoriesResponses.size();
+        return cate_Image.length;
     }
 
     public class BrandsViewHolder extends RecyclerView.ViewHolder {
@@ -74,10 +62,6 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.BrandsViewHo
 
 
         }
-    }
-
-    public interface OnCategoriesItemListener {
-        void onCategoriesItemClickListener(List<AllCategoriesResponse> data, int position);
     }
 
 }

@@ -97,6 +97,9 @@ public interface ApiService {
     @GET("products/hb-recommended")
     Call<List<HomeProductResponse>> getReCommendedProduct();
 
+    @GET("products/freshArrival")
+    Call<List<HomeProductResponse>> getFreshArrival();
+
     @PUT("user")
     Call<ResponseBody> UpdateProfile(@Body UpdateProfileBody updateProfileBody);
 
@@ -136,6 +139,12 @@ public interface ApiService {
 
     @POST("saveForLater/moveTocart")
     Call<ResponseBody> moveToCart(@Query("id") String ProductId);
+
+    @GET("categories/discountAll")
+    Call<List<AllCategoriesResponse>> getAllDiscountCategories();
+
+    @GET("categories/usableAllCategories")
+    Call<List<AllCategoriesResponse>> getAllDailyUsableCategories();
 
 
 }

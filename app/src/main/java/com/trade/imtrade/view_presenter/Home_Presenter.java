@@ -294,8 +294,111 @@ public class Home_Presenter {
 
     }
 
+    public void GetDiscountCategories(Context context) {
+        view.showHideProgress(true);
+        Call<List<AllCategoriesResponse>> userCall = AppUtils.getApi(context).getAllDiscountCategories();
+        userCall.enqueue(new Callback<List<AllCategoriesResponse>>() {
+            @Override
+            public void onResponse(Call<List<AllCategoriesResponse>> call, Response<List<AllCategoriesResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onAllDiscountCategoriesSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AllCategoriesResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetDailyUsableCategories(Context context) {
+        view.showHideProgress(true);
+        Call<List<AllCategoriesResponse>> userCall = AppUtils.getApi(context).getAllDailyUsableCategories();
+        userCall.enqueue(new Callback<List<AllCategoriesResponse>>() {
+            @Override
+            public void onResponse(Call<List<AllCategoriesResponse>> call, Response<List<AllCategoriesResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onAllDailyUsableCategoriesSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AllCategoriesResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetFreshArrival(Context context) {
+        view.showHideProgress(true);
+        Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getFreshArrival();
+        userCall.enqueue(new Callback<List<HomeProductResponse>>() {
+            @Override
+            public void onResponse(Call<List<HomeProductResponse>> call, Response<List<HomeProductResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onFreshArrivalSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HomeProductResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
 
     public interface HomeView {
+
         void showHideProgress(boolean isShow);
 
         void onError(String message);
@@ -304,6 +407,10 @@ public class Home_Presenter {
 
         void onAllCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message);
 
+        void onAllDiscountCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message);
+
+        void onAllDailyUsableCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message);
+
         void onAllBrandsSuccess(List<BrandsResponse> brandsResponses, String message);
 
         void onAllPopularProductSuccess(List<HomeProductResponse> PopularProductResponse, String message);
@@ -311,6 +418,8 @@ public class Home_Presenter {
         void onDealOfTheDaySuccess(List<HomeProductResponse> DealOfTheDayResponse, String message);
 
         void onContinueHuntYouSuccess(List<HomeProductResponse> DiscountForYouResponse, String message);
+
+        void onFreshArrivalSuccess(List<HomeProductResponse> FreshArrivalResponse, String message);
 
         void onSeasonProductSuccess(List<HomeProductResponse> SeasonProductResponse, String message);
 
