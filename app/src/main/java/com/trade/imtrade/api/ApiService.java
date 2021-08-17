@@ -6,6 +6,7 @@ import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
+import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
@@ -100,6 +101,16 @@ public interface ApiService {
     @GET("products/freshArrival")
     Call<List<HomeProductResponse>> getFreshArrival();
 
+    @GET("products/sponsoredProduct")
+    Call<List<HomeProductResponse>> getSponsoredProduct();
+
+    @GET("products/festivalOffer")
+    Call<List<HomeProductResponse>> getFestivalOfferProduct();
+
+    @GET("products/dashboardDod")
+    Call<List<DealofDayResponse>> getHometDealofDayProduct();
+
+
     @PUT("user")
     Call<ResponseBody> UpdateProfile(@Body UpdateProfileBody updateProfileBody);
 
@@ -145,6 +156,8 @@ public interface ApiService {
 
     @GET("categories/usableAllCategories")
     Call<List<AllCategoriesResponse>> getAllDailyUsableCategories();
+
+
 
 
 }

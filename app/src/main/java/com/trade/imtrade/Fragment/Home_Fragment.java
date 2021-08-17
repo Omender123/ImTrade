@@ -36,6 +36,7 @@ import com.trade.imtrade.Adapter.StoriesAdapter;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
@@ -49,15 +50,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener,
-        HomeProduct_Adapter.HomeProductClickListener, Continue_HuntAdapter.HomeProductClickListener, Discount_categoriesAdapter.OnCategoriesItemListener, RoundAdapter.OnCategoriesItemListener {
+        HomeProduct_Adapter.HomeProductClickListener, Continue_HuntAdapter.HomeProductClickListener, Discount_categoriesAdapter.OnCategoriesItemListener, RoundAdapter.OnCategoriesItemListener, DealofDayAdapter.DealOfDaytClickListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
     private Dialog dialog;
 
     Integer[] Image = {R.mipmap.game1, R.mipmap.game2, R.mipmap.game3};
-    Integer[] cate_Image = {R.mipmap.discounted_categories_1, R.mipmap.discounted_categories_2, R.mipmap.discounted_categories_3, R.mipmap.discounted_categories_2, R.mipmap.discounted_categories_1};
-    String[] cate_name = {"Fresh Fruits & Vegetables", "Appliances", "Packet Food", "Appliances", "Fresh Fruits & Vegetables"};
 
     NavController navController;
 
@@ -87,11 +86,13 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         presenter.GetDiscountCategories(getContext());
         presenter.GetRecommendedProduct(getContext());
         presenter.GetDailyUsableCategories(getContext());
+        presenter.GetSponsoredProduct(getContext());
+        presenter.GetFestivalOfferProduct(getContext());
+        presenter.GetHomeDealOfDayProduct(getContext());
 
 
         binding.cateAll.setOnClickListener(this);
         getAllGame();
-        getDealOfDay();
         getallWinnerOfThisWeek();
         getallStories();
         getallCoffeeProduct();
@@ -167,17 +168,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
 
-    private void getDealOfDay() {
-        Integer[] cate_image = {R.mipmap.deal1, R.mipmap.deal3, R.mipmap.deal3};
-        DealofDayAdapter dealofDayAdapter = new DealofDayAdapter(getContext(), cate_image);
-        RecyclerView.LayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        binding.recyclerViewDealofDay.setLayoutManager(mLayoutManager1);
-        binding.recyclerViewDealofDay.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerViewDealofDay.setAdapter(dealofDayAdapter);
-
-    }
-
-
     @Override
     public void showHideProgress(boolean isShow) {
         if (isShow) {
@@ -202,32 +192,49 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onBannerSuccess(List<BannerResponse> bannerResponses, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            List<SlideModel> TopImage = new ArrayList<>();
-            List<SlideModel> MiddleImage = new ArrayList<>();
-            List<SlideModel> BottomImage = new ArrayList<>();
+            List<SlideModel> FirstImage = new ArrayList<>();
+            List<SlideModel> SecondImage = new ArrayList<>();
+            List<SlideModel> ThirdImage = new ArrayList<>();
+            List<SlideModel> FourthImage = new ArrayList<>();
+            List<SlideModel> FifthImage = new ArrayList<>();
+            List<SlideModel> SexthImage = new ArrayList<>();
+            List<SlideModel> SeventhImage = new ArrayList<>();
+
             List<String> ProductId = new ArrayList<>();
             if (bannerResponses != null) {
                 for (int i = 0; i < bannerResponses.size(); i++) {
                     BannerResponse banner = bannerResponses.get(i);
-                    if (banner.getPosition().equalsIgnoreCase("top")) {
-                        TopImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                    if (banner.getPosition().equalsIgnoreCase("first")) {
+                        FirstImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    } else if (banner.getPosition().equalsIgnoreCase("middle")) {
-                        MiddleImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                    } else if (banner.getPosition().equalsIgnoreCase("second")) {
+                        SecondImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    } else if (banner.getPosition().equalsIgnoreCase("bottom")) {
-                        BottomImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                    } else if (banner.getPosition().equalsIgnoreCase("third")) {
+                        ThirdImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    }else if (banner.getPosition().equalsIgnoreCase("fourth")) {
+                        FourthImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    }else if (banner.getPosition().equalsIgnoreCase("fifth")) {
+                        FifthImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    }else if (banner.getPosition().equalsIgnoreCase("sixth")) {
+                        SexthImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
+                        ProductId.add(banner.getProductId());
+                    }else if (banner.getPosition().equalsIgnoreCase("seventh")) {
+                        SeventhImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
                     }
                 }
 
-                binding.slider.setImageList(TopImage);
-                binding.middleSlider.setImageList(MiddleImage);
-                binding.bottomSlider.setImageList(BottomImage);
-                binding.forthSlider.setImageList(TopImage);
-                binding.fivthSlider.setImageList(MiddleImage);
-                binding.sixthSlider.setImageList(BottomImage);
-                binding.seventhSlider.setImageList(TopImage);
+                binding.slider.setImageList(FirstImage);
+                binding.middleSlider.setImageList(SecondImage);
+                binding.bottomSlider.setImageList(ThirdImage);
+                binding.forthSlider.setImageList(FourthImage);
+                binding.fivthSlider.setImageList(FifthImage);
+                binding.sixthSlider.setImageList(SexthImage);
+                binding.seventhSlider.setImageList(SeventhImage);
 
 
                 binding.slider.setItemClickListener(new ItemClickListener() {
@@ -359,20 +366,48 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
             binding.recommendedRcycler.setItemAnimator(new DefaultItemAnimator());
             binding.recommendedRcycler.setAdapter(recommended_adapter);
 
-            /*Festival Offer on Products*/
-            RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            binding.FestivalRcycler.setLayoutManager(mLayoutManager2);
-            binding.FestivalRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.FestivalRcycler.setAdapter(recommended_adapter);
 
+        }
+    }
 
-            /*Sponsored Products*/
+    @Override
+    public void onSponsoredProductSuccess(List<HomeProductResponse> SponsoredProductResponse, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            HomeProduct_Adapter SponsoredProductAdapter = new HomeProduct_Adapter(getContext(), SponsoredProductResponse, this::onHomeProductItemClickListener);
             RecyclerView.LayoutManager mLayoutManager4 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             binding.SponsoredRcycler.setLayoutManager(mLayoutManager4);
             binding.SponsoredRcycler.setItemAnimator(new DefaultItemAnimator());
-            binding.SponsoredRcycler.setAdapter(recommended_adapter);
+            binding.SponsoredRcycler.setAdapter(SponsoredProductAdapter);
+        }
+    }
+
+    @Override
+    public void onFestivalOfferSuccess(List<HomeProductResponse> FestivalOfferResponse, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            if (FestivalOfferResponse.size() > 0) {
+                HomeProduct_Adapter FestivalOfferAdapter = new HomeProduct_Adapter(getContext(), FestivalOfferResponse, this::onHomeProductItemClickListener);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                binding.FestivalRcycler.setLayoutManager(mLayoutManager);
+                binding.FestivalRcycler.setItemAnimator(new DefaultItemAnimator());
+                binding.FestivalRcycler.setAdapter(FestivalOfferAdapter);
+                binding.linearFestival.setVisibility(View.VISIBLE);
+            } else {
+                binding.linearFestival.setVisibility(View.GONE);
+            }
 
         }
+    }
+
+    @Override
+    public void onHometDealofDayProductSuccess(List<DealofDayResponse> dealofDayResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            DealofDayAdapter dealofDayAdapter = new DealofDayAdapter(getContext(), dealofDayResponses, this::onDealOfDayItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            binding.recyclerViewDealofDay.setLayoutManager(mLayoutManager1);
+            binding.recyclerViewDealofDay.setItemAnimator(new DefaultItemAnimator());
+            binding.recyclerViewDealofDay.setAdapter(dealofDayAdapter);
+        }
+
     }
 
     @Override
@@ -417,6 +452,13 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     public void onHomeProductItemClickListener(List<HomeProductResponse> data, int position) {
         String roleId = data.get(position).getRoute();
         // Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
+        MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
+        navController.navigate(R.id.action_home_Fragment_to_product_Details);
+    }
+
+    @Override
+    public void onDealOfDayItemClickListener(List<DealofDayResponse> data, int position) {
+        String roleId = data.get(position).getRoute();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
         navController.navigate(R.id.action_home_Fragment_to_product_Details);
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.utils.AppUtils;
 
@@ -396,6 +397,108 @@ public class Home_Presenter {
 
     }
 
+    public void GetSponsoredProduct(Context context) {
+        view.showHideProgress(true);
+        Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getSponsoredProduct();
+        userCall.enqueue(new Callback<List<HomeProductResponse>>() {
+            @Override
+            public void onResponse(Call<List<HomeProductResponse>> call, Response<List<HomeProductResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onSponsoredProductSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HomeProductResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetFestivalOfferProduct(Context context) {
+        view.showHideProgress(true);
+        Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getFestivalOfferProduct();
+        userCall.enqueue(new Callback<List<HomeProductResponse>>() {
+            @Override
+            public void onResponse(Call<List<HomeProductResponse>> call, Response<List<HomeProductResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onFestivalOfferSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HomeProductResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetHomeDealOfDayProduct(Context context) {
+        view.showHideProgress(true);
+        Call<List<DealofDayResponse>> userCall = AppUtils.getApi(context).getHometDealofDayProduct();
+        userCall.enqueue(new Callback<List<DealofDayResponse>>() {
+            @Override
+            public void onResponse(Call<List<DealofDayResponse>> call, Response<List<DealofDayResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onHometDealofDayProductSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<DealofDayResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
 
     public interface HomeView {
 
@@ -424,6 +527,13 @@ public class Home_Presenter {
         void onSeasonProductSuccess(List<HomeProductResponse> SeasonProductResponse, String message);
 
         void onReCommendedProductSuccess(List<HomeProductResponse> ReCommendedProductResponse, String message);
+
+        void onSponsoredProductSuccess(List<HomeProductResponse> SponsoredProductResponse, String message);
+
+        void onFestivalOfferSuccess(List<HomeProductResponse> FestivalOfferResponse, String message);
+
+        void onHometDealofDayProductSuccess(List<DealofDayResponse> dealofDayResponses, String message);
+
 
         void onFailure(Throwable t);
 
