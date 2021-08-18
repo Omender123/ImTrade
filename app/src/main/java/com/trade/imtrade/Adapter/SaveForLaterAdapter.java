@@ -117,7 +117,6 @@ public class SaveForLaterAdapter extends RecyclerView.Adapter<SaveForLaterAdapte
             super(binding.getRoot());
             this.binding = binding;
 
-            binding.relative.setBackgroundColor(context.getResources().getColor(R.color.white));
 
 
         }

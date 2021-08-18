@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     private View navHeader, navDrawer;
     TextView username, usergmail, text_cart_Count;
-    ImageView img_discount, profile_Image;
+    ImageView img_discount, profile_Image,img_search;
     Boolean backhome = false;
     User_Data user_data;
     RelativeLayout relative, img_cart;
@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_cart = (RelativeLayout) findViewById(R.id.relative_cart);
         relative = (RelativeLayout) findViewById(R.id.relative);
         text_cart_Count = (TextView) findViewById(R.id.text_cart_Count);
+        img_search =(ImageView) findViewById(R.id.img_search);
+
 
         setSupportActionBar(toolbar);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -92,14 +94,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         username = (TextView) navHeader.findViewById(R.id.nav_username);
         usergmail = (TextView) navHeader.findViewById(R.id.nav_usergmail);
         profile_Image = (ImageView) navHeader.findViewById(R.id.profile_Image);
-
-        user_data = SharedPrefManager.getInstance(this).getLoginDATA();
+         user_data = SharedPrefManager.getInstance(this).getLoginDATA();
         CheckedLogin = MyPreferences.getInstance(MainActivity.this).getBoolean(PrefConf.LOGINCHECK, false);
 
 
         context = MainActivity.this;
         dialog = AppUtils.hideShowProgress(context);
-        getCartCount();
 
         presenter = new MainActivity_Presenter(this);
         presenter.GetUpdateProfile(MainActivity.this);
@@ -156,15 +156,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-           /*    if( destination.getId() == R.id.update_profile ) {
-                   img_discount.setVisibility(View.GONE);
-                   coordinatorLayout.setVisibility(View.GONE);
-               }else*/
                 if (destination.getId() == R.id.Search_nearBy || destination.getId() == R.id.categories || destination.getId() == R.id.product_Fragemet || destination.getId() == R.id.filter_Fragment
                         || destination.getId() == R.id.My_address || destination.getId() == R.id.address || destination.getId() == R.id.update_profile || destination.getId() == R.id.ChangePassword
                         || destination.getId() == R.id.ChangeEmail) {
                     bottomNavigationView.setVisibility(View.GONE);
-                } else {
+                } /*else if(destination.getId() == R.id.CartFragment){
+                    img_cart.setVisibility(View.GONE);
+                    img_search.setVisibility(View.VISIBLE);
+                    bottomNavigationView.setVisibility(View.GONE);
+                }*/ else {
                     img_discount.setVisibility(View.VISIBLE);
                     bottomNavigationView.setVisibility(View.VISIBLE);
                 }
@@ -245,8 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.relative_cart:
                 if (CheckedLogin == true) {
                     startActivity(new Intent(MainActivity.this, CartActivity.class));
-                    MyPreferences.getInstance(MainActivity.this).putInteger(PrefConf.CARTCOUNT, 0);
-                } else {
+                  } else {
                     Sneaker.with(MainActivity.this)
                             .setTitle("Your Can't access this app  please First Login ")
                             .setMessage("")
@@ -404,17 +403,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        getCartCount();
+
     }
 
-    private void getCartCount() {
-        cartCount = MyPreferences.getInstance(MainActivity.this).getInteger(PrefConf.CARTCOUNT, 0);
-        if (cartCount == 0) {
 
-            text_cart_Count.setVisibility(View.GONE);
-        } else {
-            text_cart_Count.setVisibility(View.VISIBLE);
-            text_cart_Count.setText(String.valueOf(cartCount));
-        }
-    }
 }

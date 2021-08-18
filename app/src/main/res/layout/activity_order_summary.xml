@@ -29,22 +29,17 @@
                 android:orientation="vertical"
                 android:paddingBottom="30dp">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="15dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="15dp">
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white"
+                        android:paddingTop="10dp"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp"
+                        android:paddingBottom="10dp">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -109,16 +104,44 @@
                         </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/product_Price"
+                        android:text="Discount Coupons Code"
+                        android:fontFamily="@font/poppins_medium" />
+
+                    <EditText
+                        android:id="@+id/ed_discount"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp"
+                        android:textColor="#99212121"
+                        android:fontFamily="@font/poppins"
+                        android:textSize="13sp"
+                        android:background="@drawable/verifying_textview"/>
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
                     android:background="@drawable/verifying_textview"
                     android:backgroundTint="@color/white"
-                    android:padding="15dp">
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:id="@+id/text_product"
@@ -277,20 +300,28 @@
                 </RelativeLayout>
 
 
-                <TextView
-                    android:id="@+id/btn_Continue"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/verifying_textview"
-                    android:backgroundTint="@color/btn_color"
-                    android:fontFamily="@font/poppins"
-                    android:gravity="center"
-                    android:text="Confirm"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/white"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginBottom="10dp"
+                  android:orientation="vertical">
+                  <TextView
+                      android:id="@+id/btn_Continue"
+                      android:layout_width="match_parent"
+                      android:layout_height="50dp"
+                      android:layout_marginLeft="15dp"
+                      android:layout_marginTop="50dp"
+                      android:layout_marginRight="15dp"
+                      android:background="@drawable/verifying_textview"
+                      android:backgroundTint="@color/btn_color"
+                      android:fontFamily="@font/poppins"
+                      android:gravity="center"
+                      android:text="Confirm"
+                      android:textColor="@color/white"
+                      android:textSize="13sp" />
+              </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
