@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardBackgroundColor="#212121"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="13dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#212121"
+        android:background="@color/white"
         android:orientation="vertical"
         android:paddingTop="20dp"
         android:paddingBottom="30dp">
@@ -22,7 +22,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center_horizontal"
             android:text="OTP Verification"
-            android:textColor="#EEEEEE"
+            android:textColor="@color/product_Price"
             android:textSize="25dp" />
 
         <TextView
@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center_horizontal"
             android:text="OTP has sent to you at your email address \n testkumar123@gmail.com"
-            android:textColor="#33EEEEEE"
+            android:textColor="#B3212121"
             android:textSize="12dp"
             android:textStyle="normal" />
 
@@ -50,11 +50,13 @@
                 android:layout_gravity="right"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="1dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/montserrat"
+                android:textStyle="bold"
+                android:visibility="gone"
                 android:text="Old Email OTP"
-                android:textColor="#33FFFFFF"
-                android:textSize="12dp"
-                android:visibility="gone" />
+                android:textColor="#B3212121"
+                android:textSize="12sp"
+                 />
 
             <TextView
                 android:id="@+id/text_resend"
@@ -67,7 +69,7 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Resend"
-                android:textColor="@color/purple_200"
+                android:textColor="@color/btn_color"
                 android:textSize="10dp" />
         </RelativeLayout>
 
@@ -88,16 +90,16 @@
             android:paddingRight="15dp"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:textStyle="bold"
+            android:textStyle="normal"
             app:cursorWidth="2dp"
             app:hideLineWhenFilled="false"
             app:itemCount="4"
             app:itemHeight="50dp"
-            app:itemRadius="6dp"
+            app:itemRadius="8dp"
             app:itemSpacing="25dp"
             app:itemWidth="60dp"
-            app:lineColor="#3C434A"
-            app:lineWidth="2dp"
+            app:lineColor="#D5D5D5"
+            app:lineWidth="1dp"
             app:viewType="rectangle" />
 
         <RelativeLayout
@@ -115,9 +117,10 @@
                 android:layout_gravity="right"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="1dp"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/montserrat"
+                android:textStyle="bold"
                 android:text="New Email OTP"
-                android:textColor="#33FFFFFF"
+                android:textColor="#B3212121"
                 android:textSize="12dp" />
 
             <TextView
@@ -131,7 +134,7 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Resend"
-                android:textColor="@color/purple_200"
+                android:textColor="@color/btn_color"
                 android:textSize="10dp" />
         </RelativeLayout>
 
@@ -151,17 +154,17 @@
             android:paddingRight="15dp"
             android:textColor="@color/white"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:visibility="gone"
+            android:textStyle="normal"
             app:cursorWidth="2dp"
             app:hideLineWhenFilled="false"
             app:itemCount="4"
             app:itemHeight="50dp"
-            app:itemRadius="6dp"
+            app:itemRadius="8dp"
             app:itemSpacing="25dp"
             app:itemWidth="60dp"
-            app:lineColor="#3C434A"
-            app:lineWidth="2dp"
+            android:visibility="gone"
+            app:lineColor="#D5D5D5"
+            app:lineWidth="1dp"
             app:viewType="rectangle" />
 
         <RelativeLayout
@@ -176,7 +179,7 @@
                 android:layout_marginTop="70dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Cancel"
-                android:textColor="@color/purple_200"
+                android:textColor="@color/btn_color"
                 android:textSize="16sp" />
 
             <TextView
@@ -188,14 +191,14 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/curved_border"
-                android:backgroundTint="@color/purple_200"
+                android:backgroundTint="@color/btn_color"
                 android:fontFamily="@font/poppins_semibold"
                 android:paddingStart="40dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="40dp"
                 android:paddingBottom="10dp"
                 android:text="Save"
-                android:textColor="#2E343B"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
         </RelativeLayout>
 

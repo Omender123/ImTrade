@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:context=".Fragment.Update_Profile">
 
@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="160dp"
             android:background="@drawable/background_design"
+            android:backgroundTint="@color/toolbar_color"
             android:orientation="vertical">
 
             <ImageView
@@ -30,12 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
-            android:background="@color/background">
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <EditText
@@ -48,66 +52,58 @@
                     android:fontFamily="@font/poppins"
                     android:hint="Full Name"
                     android:inputType="text"
-                    android:paddingStart="15dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:textColor="@color/text_hint"
-                    android:textColorHint="@color/text_hint"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:padding="15dp"
+                    android:textColor="#992B2B2B"
+                    android:textColorHint="#992B2B2B"
+                    android:textSize="13sp" />
 
 
                 <EditText
                     android:id="@+id/ed_userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="20dp"
                     android:layout_toStartOf="@+id/image_edit_email"
                     android:background="@drawable/verifying_textview"
-                    android:fontFamily="@font/poppins"
-                    android:hint="Email"
                     android:editable="false"
                     android:enabled="false"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:paddingStart="15dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:textColor="@color/text_hint"
-                    android:textColorHint="@color/text_hint"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:padding="15dp"
+                    android:textColor="#992B2B2B"
+                    android:textColorHint="#992B2B2B"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/ed_userPhone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/verifying_textview"
                     android:fontFamily="@font/poppins"
                     android:hint="Phone No."
                     android:inputType="numberSigned"
-                    android:paddingStart="15dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:textColor="@color/text_hint"
-                    android:textColorHint="@color/text_hint"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:padding="15dp"
+                    android:textColor="#992B2B2B"
+                    android:textColorHint="#992B2B2B"
+                    android:textSize="13sp" />
 
 
-                <Button
+                <TextView
                     android:id="@+id/btn_done"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="100dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="75dp"
                     android:background="@drawable/verifying_textview"
-                    android:fontFamily="@font/montserrat"
+                    android:fontFamily="@font/poppins"
                     android:text="Submit"
+                    android:gravity="center"
+                    android:elevation="2dp"
+                    android:backgroundTint="@color/btn_color"
                     android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

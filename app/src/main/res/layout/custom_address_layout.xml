@@ -5,100 +5,106 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background">
+        android:background="@color/white">
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="9dp"
-            app:cardBackgroundColor="#252428"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="8dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:cardBackgroundColor="#DADADA"
+            app:cardElevation="-10dp"
+            app:cardCornerRadius="5dp">
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="20dp">
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                android:layout_margin="1dp"
+                app:cardElevation="-10dp"
+                app:cardCornerRadius="5dp">
 
-                <ImageView
-                    android:id="@+id/img_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_cancle" />
-
-                <TextView
-                    android:id="@+id/text_name"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_toStartOf="@+id/img_cancel"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:justificationMode="inter_word"
-                    android:text="Full Name"
-                    android:textColor="@color/drawer_icon"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="20dp">
 
-                <TextView
-                    android:id="@+id/text_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_name"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_toStartOf="@+id/img_cancel"
-                    android:fontFamily="@font/poppins"
-                    android:justificationMode="inter_word"
-                    android:text="Rz-165B B-Block, Roshan Vihar, Najafgarh \nNew Delhi-110043, Delhi, India"
-                    android:textColor="#B38A8D91"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    <ImageView
+                        android:id="@+id/img_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_cancle" />
 
-                <TextView
-                    android:id="@+id/text_phone_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_address"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="8dp"
-                    android:layout_toStartOf="@+id/text_edit"
-                    android:fontFamily="@font/poppins"
-                    android:justificationMode="inter_word"
-                    android:text="Phone Number : 8766372989"
-                    android:textColor="#B38A8D91"
-                    android:textSize="10sp"
-                    android:textStyle="normal" />
+                    <TextView
+                        android:id="@+id/text_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_toStartOf="@+id/img_cancel"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:justificationMode="inter_word"
+                        android:text="Full Name"
+                        android:textColor="@color/product_Price"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/text_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_address"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/curved_border"
-                    android:paddingStart="12dp"
-                    android:paddingTop="3dp"
-                    android:paddingEnd="12dp"
-                    android:paddingBottom="3dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Edit"
-                    android:textSize="8sp"
-                    android:textColor="@color/drawer_icon" />
+                    <TextView
+                        android:id="@+id/text_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_name"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_toStartOf="@+id/img_cancel"
+                        android:fontFamily="@font/poppins"
+                        android:justificationMode="inter_word"
+                        android:text="Rz-165B B-Block, Roshan Vihar, Najafgarh \nNew Delhi-110043, Delhi, India"
+                        android:textColor="#B3212121"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/text_phone_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_address"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_toStartOf="@+id/text_edit"
+                        android:fontFamily="@font/poppins"
+                        android:justificationMode="inter_word"
+                        android:text="Phone Number : 8766372989"
+                        android:textColor="#B3212121"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/text_edit"
+                        android:layout_width="43dp"
+                        android:layout_height="23dp"
+                        android:layout_below="@id/text_address"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/curved_border"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Edit"
+                        android:textSize="8sp"
+                        android:textColor="@color/product_Price" />
 
 
-            </RelativeLayout>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-
 </layout>

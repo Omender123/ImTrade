@@ -5,15 +5,15 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
+        android:background="@color/white"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:text="My Account"
         android:textStyle="normal"
-        android:textColor="#CCD8D8D8"
+        android:textColor="@color/product_Price"
         android:fontFamily="@font/poppins"
         android:textSize="16sp"
-
+        android:drawableTint="#B3212121"
         android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"/>
 
 </layout>

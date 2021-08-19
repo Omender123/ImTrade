@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/white"
         tools:context=".Fragment.Profile_Fragment">
 
         <LinearLayout
@@ -18,6 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/background_design"
+            android:backgroundTint="@color/toolbar_color"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="40dp">
@@ -63,7 +64,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:text="Add User Name"
-                android:textColor="@color/text_hint"
+                android:textColor="#80FFFFFF"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -79,27 +80,25 @@
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TestKumar123"
-                android:textSize="17dp"
-                android:textColor="@color/product_Price"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins"
-                android:drawablePadding="10dp"
-                android:visibility="gone"
+                android:layout_marginTop="10dp"
                 android:drawableRight="@drawable/ic_baseline_edit_24"
-                android:layout_marginTop="10dp"/>
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/poppins_bold"
+                android:text="TestKumar123"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+               android:visibility="gone" />
             <TextView
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Testkumar123@gmail.com"
-                android:textSize="15dp"
-                android:textColor="#80EEEEEE"
-                android:textStyle="normal"
+                android:textSize="13sp"
+                android:textColor="#80FFFFFF"
                 android:visibility="gone"
                 android:fontFamily="@font/poppins"
-                android:drawablePadding="10dp"
-                android:layout_marginTop="05dp"/>
+                android:drawablePadding="10dp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
