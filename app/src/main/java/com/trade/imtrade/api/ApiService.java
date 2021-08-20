@@ -4,9 +4,10 @@ package com.trade.imtrade.api;
 import com.trade.imtrade.Model.ResponseModel.AddProfileResponse;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
-import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
+import com.trade.imtrade.Model.ResponseModel.ContinueYourHuntResponse;
 import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
+import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
@@ -14,6 +15,7 @@ import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
+import com.trade.imtrade.Model.ResponseModel.StoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.Model.request.ChangeEmailBody;
@@ -34,6 +36,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -80,8 +84,6 @@ public interface ApiService {
     @GET("products/route")
     Call<ProductDetailsResponse> getProductFullDetails(@Query("route") String Route);
 
-    @GET("brand/header")
-    Call<List<BrandsResponse>> getAllBrands();
 
     @GET("products/popularProducts")
     Call<List<HomeProductResponse>> getAllPopularProduct();
@@ -89,8 +91,6 @@ public interface ApiService {
     @GET("products/DealOfTheDay")
     Call<List<HomeProductResponse>> getAllDealOfTheDay();
 
-    @GET("products/discountForYou")
-    Call<List<HomeProductResponse>> getGetContinueHuntYou();
 
     @GET("products/sesionProducts")
     Call<List<HomeProductResponse>> getSeasonProduct();
@@ -157,7 +157,22 @@ public interface ApiService {
     @GET("categories/usableAllCategories")
     Call<List<AllCategoriesResponse>> getAllDailyUsableCategories();
 
+    @GET("WOTW")
+    Call<List<AllCategoriesResponse>> getAllWinnerOfThisWeek();
 
+    @GET("CYH")
+    Call<ContinueYourHuntResponse> getAllContinueYourHunt();
+
+    @GET("story")
+    Call<List<StoriesResponse>> getAllStories();
+
+    @FormUrlEncoded
+    @POST("coffee/locate")
+    Call<List<HotelAndCoffeeResponse>> getAllCoffee(@Field("pinCode") String pinCode);
+
+    @FormUrlEncoded
+    @POST("hotel/locate")
+    Call<List<HotelAndCoffeeResponse>> getAllHotel(@Field("pinCode") String pinCode);
 
 
 }

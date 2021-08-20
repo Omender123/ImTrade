@@ -7,18 +7,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.trade.imtrade.databinding.CustomStoriesLayoutBinding;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.trade.imtrade.Model.ResponseModel.StoriesResponse;
+import com.trade.imtrade.R;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomStoriesLayoutBinding;
 
-public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesViewHolder>  {
+import java.util.List;
+
+public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesViewHolder> {
     Context context;
-    // List<BrandsResponse>brandsResponses;
-    Integer brands_Image[];
+    List<StoriesResponse> storiesResponses;
 
-    public StoriesAdapter(Context context, /*List<BrandsResponse>brandsResponses*/ Integer brands_Image[]) {
+    public StoriesAdapter(Context context, List<StoriesResponse> storiesResponses) {
         this.context = context;
-        //this.brandsResponses = brandsResponses;
-        this.brands_Image = brands_Image;
+        this.storiesResponses = storiesResponses;
     }
 
     public StoriesAdapter() {
@@ -29,25 +33,25 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesV
     @Override
     public StoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        CustomStoriesLayoutBinding binding = CustomStoriesLayoutBinding.inflate(inflater,parent,false);
+        CustomStoriesLayoutBinding binding = CustomStoriesLayoutBinding.inflate(inflater, parent, false);
 
         return new StoriesViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoriesViewHolder holder, int position) {
-        holder.binding.brandsImage.setImageResource(brands_Image[position]);
 
-        // Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
+        Glide.with(context).load(PrefConf.IMAGE_URL + storiesResponses.get(position).getImage()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
     }
 
     @Override
     public int getItemCount() {
-        return brands_Image.length;
+        return storiesResponses.size();
     }
 
     public class StoriesViewHolder extends RecyclerView.ViewHolder {
         CustomStoriesLayoutBinding binding;
+
         public StoriesViewHolder(CustomStoriesLayoutBinding binding) {
             super(binding.getRoot());
 

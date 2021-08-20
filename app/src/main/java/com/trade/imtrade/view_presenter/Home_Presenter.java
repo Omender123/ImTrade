@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
-import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.ContinueYourHuntResponse;
 import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
+import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
+import com.trade.imtrade.Model.ResponseModel.StoriesResponse;
 import com.trade.imtrade.utils.AppUtils;
 
 import org.json.JSONException;
@@ -93,39 +95,6 @@ public class Home_Presenter {
 
     }
 
-    public void GetAllBrands(Context context) {
-        view.showHideProgress(true);
-        Call<List<BrandsResponse>> userCall = AppUtils.getApi(context).getAllBrands();
-        userCall.enqueue(new Callback<List<BrandsResponse>>() {
-            @Override
-            public void onResponse(Call<List<BrandsResponse>> call, Response<List<BrandsResponse>> response) {
-                view.showHideProgress(false);
-                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
-                    view.onAllBrandsSuccess(response.body(), response.message());
-                } else if (response.code() == 400 || response.code() == 401) {
-                    try {
-                        String errorRes = response.errorBody().string();
-                        JSONObject object = new JSONObject(errorRes);
-                        String err_msg = object.getString("body");
-                        view.onError(err_msg);
-
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    view.onError(response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<BrandsResponse>> call, Throwable t) {
-                view.showHideProgress(false);
-                view.onFailure(t);
-            }
-        });
-
-    }
-
     public void GetAllPopularProduct(Context context) {
         view.showHideProgress(true);
         Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getAllPopularProduct();
@@ -195,10 +164,10 @@ public class Home_Presenter {
 
     public void GetContinueHuntYou(Context context) {
         view.showHideProgress(true);
-        Call<List<HomeProductResponse>> userCall = AppUtils.getApi(context).getGetContinueHuntYou();
-        userCall.enqueue(new Callback<List<HomeProductResponse>>() {
+        Call<ContinueYourHuntResponse> userCall = AppUtils.getApi(context).getAllContinueYourHunt();
+        userCall.enqueue(new Callback<ContinueYourHuntResponse>() {
             @Override
-            public void onResponse(Call<List<HomeProductResponse>> call, Response<List<HomeProductResponse>> response) {
+            public void onResponse(Call<ContinueYourHuntResponse> call, Response<ContinueYourHuntResponse> response) {
                 view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
                     view.onContinueHuntYouSuccess(response.body(), response.message());
@@ -207,19 +176,19 @@ public class Home_Presenter {
                         String errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
                         String err_msg = object.getString("body");
-                        view.onError(err_msg);
+                        view.onContinueHuntYouError(err_msg);
 
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    view.onError(response.message());
+                    view.onContinueHuntYouError(response.message());
 
                 }
             }
 
             @Override
-            public void onFailure(Call<List<HomeProductResponse>> call, Throwable t) {
+            public void onFailure(Call<ContinueYourHuntResponse> call, Throwable t) {
                 view.showHideProgress(false);
                 view.onFailure(t);
             }
@@ -499,6 +468,141 @@ public class Home_Presenter {
 
     }
 
+    public void GetWinnerOfThisWeek(Context context) {
+        view.showHideProgress(true);
+        Call<List<AllCategoriesResponse>> userCall = AppUtils.getApi(context).getAllWinnerOfThisWeek();
+        userCall.enqueue(new Callback<List<AllCategoriesResponse>>() {
+            @Override
+            public void onResponse(Call<List<AllCategoriesResponse>> call, Response<List<AllCategoriesResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onAllWinnerOfThisWeekSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AllCategoriesResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetStories(Context context) {
+        view.showHideProgress(true);
+        Call<List<StoriesResponse>> userCall = AppUtils.getApi(context).getAllStories();
+        userCall.enqueue(new Callback<List<StoriesResponse>>() {
+            @Override
+            public void onResponse(Call<List<StoriesResponse>> call, Response<List<StoriesResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onStoriesSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<StoriesResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetAllCoffee(Context context,String pincode) {
+        view.showHideProgress(true);
+        Call<List<HotelAndCoffeeResponse>> userCall = AppUtils.getApi(context).getAllCoffee(pincode);
+        userCall.enqueue(new Callback<List<HotelAndCoffeeResponse>>() {
+            @Override
+            public void onResponse(Call<List<HotelAndCoffeeResponse>> call, Response<List<HotelAndCoffeeResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 ) {
+                    view.onCoffeeSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HotelAndCoffeeResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetAllHotel(Context context,String pincode) {
+        view.showHideProgress(true);
+        Call<List<HotelAndCoffeeResponse>> userCall = AppUtils.getApi(context).getAllHotel(pincode);
+        userCall.enqueue(new Callback<List<HotelAndCoffeeResponse>>() {
+            @Override
+            public void onResponse(Call<List<HotelAndCoffeeResponse>> call, Response<List<HotelAndCoffeeResponse>> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 ) {
+                    view.onHotelSuccess(response.body(), response.message());
+                } else if (response.code() == 400 || response.code() == 401) {
+                    try {
+                        String errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    view.onError(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HotelAndCoffeeResponse>> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
 
     public interface HomeView {
 
@@ -512,15 +616,17 @@ public class Home_Presenter {
 
         void onAllDiscountCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message);
 
-        void onAllDailyUsableCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message);
+        void onAllWinnerOfThisWeekSuccess(List<AllCategoriesResponse> allWinnerOfThisWeekResponses, String message);
 
-        void onAllBrandsSuccess(List<BrandsResponse> brandsResponses, String message);
+        void onAllDailyUsableCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message);
 
         void onAllPopularProductSuccess(List<HomeProductResponse> PopularProductResponse, String message);
 
         void onDealOfTheDaySuccess(List<HomeProductResponse> DealOfTheDayResponse, String message);
 
-        void onContinueHuntYouSuccess(List<HomeProductResponse> DiscountForYouResponse, String message);
+        void onContinueHuntYouSuccess(ContinueYourHuntResponse continueYourHuntResponse, String message);
+
+        void onContinueHuntYouError(String message);
 
         void onFreshArrivalSuccess(List<HomeProductResponse> FreshArrivalResponse, String message);
 
@@ -533,6 +639,12 @@ public class Home_Presenter {
         void onFestivalOfferSuccess(List<HomeProductResponse> FestivalOfferResponse, String message);
 
         void onHometDealofDayProductSuccess(List<DealofDayResponse> dealofDayResponses, String message);
+
+        void onStoriesSuccess(List<StoriesResponse> storiesResponses, String message);
+
+        void onCoffeeSuccess(List<HotelAndCoffeeResponse> coffeeResponses, String message);
+
+        void onHotelSuccess(List<HotelAndCoffeeResponse> hotelResponses, String message);
 
 
         void onFailure(Throwable t);

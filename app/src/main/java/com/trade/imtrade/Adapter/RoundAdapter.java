@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
-import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;

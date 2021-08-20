@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
+import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
+import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomBrandsLayoutBinding;
@@ -18,13 +20,11 @@ import java.util.List;
 
 public class RoundAdapter1 extends RecyclerView.Adapter<RoundAdapter1.BrandsViewHolder> {
     Context context;
-    String[] cate_name;
-    Integer[] cate_Image;
+    List<HotelAndCoffeeResponse> hotelAndCoffeeResponses;
 
-    public RoundAdapter1(Context context,String[] cate_name,Integer[] cate_Image) {
+    public RoundAdapter1(Context context, List<HotelAndCoffeeResponse> hotelAndCoffeeResponses) {
         this.context = context;
-        this.cate_name = cate_name;
-        this.cate_Image = cate_Image;
+        this.hotelAndCoffeeResponses = hotelAndCoffeeResponses;
     }
 
     public RoundAdapter1() {
@@ -42,14 +42,14 @@ public class RoundAdapter1 extends RecyclerView.Adapter<RoundAdapter1.BrandsView
 
     @Override
     public void onBindViewHolder(@NonNull BrandsViewHolder holder, int position) {
-        holder.binding.brandsName.setText(cate_name[position]);
-        holder.binding.brandsImage.setImageResource(cate_Image[position]);
-      //  Glide.with(context).load(PrefConf.IMAGE_URL + allCategoriesResponses.get(position).getImage()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
+        holder.binding.brandsName.setText(hotelAndCoffeeResponses.get(position).getName());
+        Glide.with(context).load(PrefConf.IMAGE_URL + hotelAndCoffeeResponses.get(position).getImages().get(0)).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
+
     }
 
     @Override
     public int getItemCount() {
-        return cate_Image.length;
+        return hotelAndCoffeeResponses.size();
     }
 
     public class BrandsViewHolder extends RecyclerView.ViewHolder {

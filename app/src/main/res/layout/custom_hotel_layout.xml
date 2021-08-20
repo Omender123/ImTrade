@@ -29,9 +29,9 @@
                        android:layout_height="95dp"
                        android:src="@mipmap/hotel1"/>
                    <TextView
+                       android:id="@+id/hotel_name"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:text="Hotel Full Name"
                        android:layout_marginTop="5dp"
                        android:layout_marginLeft="5dp"
                        android:layout_marginRight="5dp"
@@ -39,6 +39,7 @@
                        android:fontFamily="@font/poppins"
                        android:textSize="12sp"/>
                    <TextView
+                       android:id="@+id/hotel_price"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="8,499 Rs"

@@ -672,6 +672,7 @@
 
 
             <LinearLayout
+                android:id="@+id/linear_continueHunt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -1215,6 +1216,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_coffee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -1287,6 +1289,7 @@
 
 
             <LinearLayout
+                android:id="@+id/linear_hotel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

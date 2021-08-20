@@ -35,9 +35,11 @@ import com.trade.imtrade.Adapter.RoundAdapter1;
 import com.trade.imtrade.Adapter.StoriesAdapter;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
-import com.trade.imtrade.Model.ResponseModel.BrandsResponse;
+import com.trade.imtrade.Model.ResponseModel.ContinueYourHuntResponse;
 import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
+import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
+import com.trade.imtrade.Model.ResponseModel.StoriesResponse;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -50,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, View.OnClickListener, Categories_Adapter.OnCategoriesItemListener,
-        HomeProduct_Adapter.HomeProductClickListener, Continue_HuntAdapter.HomeProductClickListener, Discount_categoriesAdapter.OnCategoriesItemListener, RoundAdapter.OnCategoriesItemListener, DealofDayAdapter.DealOfDaytClickListener {
+        HomeProduct_Adapter.HomeProductClickListener, Continue_HuntAdapter.ContinueYourHuntClickListener, Discount_categoriesAdapter.OnCategoriesItemListener, RoundAdapter.OnCategoriesItemListener, DealofDayAdapter.DealOfDaytClickListener {
     private FragmentHomeBinding binding;
     private Home_Presenter presenter;
     private View view;
@@ -89,15 +91,14 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         presenter.GetSponsoredProduct(getContext());
         presenter.GetFestivalOfferProduct(getContext());
         presenter.GetHomeDealOfDayProduct(getContext());
+        presenter.GetWinnerOfThisWeek(getContext());
+        presenter.GetStories(getContext());
+        presenter.GetAllCoffee(getContext(),"100111");
+        presenter.GetAllHotel(getContext(),"100111");
 
 
         binding.cateAll.setOnClickListener(this);
         getAllGame();
-        getallWinnerOfThisWeek();
-        getallStories();
-        getallCoffeeProduct();
-        getallHotel();
-
         return binding.getRoot();
     }
 
@@ -112,51 +113,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
 
-    private void getallWinnerOfThisWeek() {
-        Integer[] cate_Image = {R.mipmap.winner_1, R.mipmap.winner_2, R.mipmap.winner_3, R.mipmap.winner_4, R.mipmap.winner_5, R.mipmap.winner_1, R.mipmap.winner_2, R.mipmap.winner_3};
-        String[] cate_name = {"Aayansh", "Avyukt", "Kiyansh", "Yuvaan", "Aayansh", "Avyukt", "Kiyansh", "Yuvaan"};
 
-        RoundAdapter1 gameAdapter = new RoundAdapter1(getContext(), cate_name, cate_Image);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyclerViewWinner.setLayoutManager(mLayoutManager1);
-        binding.recyclerViewWinner.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerViewWinner.setAdapter(gameAdapter);
-
-    }
-
-    private void getallStories() {
-        Integer[] cate_Image = {R.mipmap.stories_1, R.mipmap.stories_2, R.mipmap.stories_3, R.mipmap.stories_4, R.mipmap.stories_1, R.mipmap.stories_2, R.mipmap.stories_3, R.mipmap.stories_4};
-
-        StoriesAdapter gameAdapter = new StoriesAdapter(getContext(), cate_Image);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyclerViewStories.setLayoutManager(mLayoutManager1);
-        binding.recyclerViewStories.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerViewStories.setAdapter(gameAdapter);
-
-    }
-
-    private void getallHotel() {
-        Integer[] cate_Image = {R.mipmap.hotel1, R.mipmap.hotel2, R.mipmap.hotel3, R.mipmap.hotel1, R.mipmap.hotel2, R.mipmap.hotel3, R.mipmap.hotel1, R.mipmap.hotel2};
-
-        HotelAdapter gameAdapter = new HotelAdapter(getContext(), cate_Image);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.HotelRcycler.setLayoutManager(mLayoutManager1);
-        binding.HotelRcycler.setItemAnimator(new DefaultItemAnimator());
-        binding.HotelRcycler.setAdapter(gameAdapter);
-
-    }
-
-    private void getallCoffeeProduct() {
-        Integer[] cate_Image = {R.mipmap.coffee_1, R.mipmap.coffee_2, R.mipmap.coffee_3, R.mipmap.coffee_1, R.mipmap.coffee_2, R.mipmap.coffee_3, R.mipmap.coffee_1, R.mipmap.coffee_3};
-        String[] cate_name = {"Coffee 1", "Coffee 2", "Coffee 3", "Coffee 4", "Coffee 5", "Coffee 6", "Coffee 7", "Coffee 7"};
-
-        RoundAdapter1 gameAdapter = new RoundAdapter1(getContext(), cate_name, cate_Image);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyclerViewCoffee.setLayoutManager(mLayoutManager1);
-        binding.recyclerViewCoffee.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerViewCoffee.setAdapter(gameAdapter);
-
-    }
 
     private void getAllGame() {
         GameAdapter gameAdapter = new GameAdapter(getContext(), Image);
@@ -213,16 +170,16 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
                     } else if (banner.getPosition().equalsIgnoreCase("third")) {
                         ThirdImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    }else if (banner.getPosition().equalsIgnoreCase("fourth")) {
+                    } else if (banner.getPosition().equalsIgnoreCase("fourth")) {
                         FourthImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    }else if (banner.getPosition().equalsIgnoreCase("fifth")) {
+                    } else if (banner.getPosition().equalsIgnoreCase("fifth")) {
                         FifthImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    }else if (banner.getPosition().equalsIgnoreCase("sixth")) {
+                    } else if (banner.getPosition().equalsIgnoreCase("sixth")) {
                         SexthImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
-                    }else if (banner.getPosition().equalsIgnoreCase("seventh")) {
+                    } else if (banner.getPosition().equalsIgnoreCase("seventh")) {
                         SeventhImage.add(new SlideModel(PrefConf.IMAGE_URL + banner.getImage(), ScaleTypes.FIT));
                         ProductId.add(banner.getProductId());
                     }
@@ -274,6 +231,18 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
+    public void onAllWinnerOfThisWeekSuccess(List<AllCategoriesResponse> allWinnerOfThisWeekResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            RoundAdapter gameAdapter = new RoundAdapter(getContext(), allWinnerOfThisWeekResponses, this::onCategoriesItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.recyclerViewWinner.setLayoutManager(mLayoutManager1);
+            binding.recyclerViewWinner.setItemAnimator(new DefaultItemAnimator());
+            binding.recyclerViewWinner.setAdapter(gameAdapter);
+        }
+
+    }
+
+    @Override
     public void onAllDailyUsableCategoriesSuccess(List<AllCategoriesResponse> allCategoriesResponses, String message) {
         if (message.equalsIgnoreCase("ok")) {
             RoundAdapter gameAdapter = new RoundAdapter(getContext(), allCategoriesResponses, this::onCategoriesItemClickListener);
@@ -284,17 +253,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         }
     }
 
-    @Override
-    public void onAllBrandsSuccess(List<BrandsResponse> brandsResponses, String message) {
-        if (message.equalsIgnoreCase("ok")) {
-            // RoundAdapter roundAdapter = new RoundAdapter(getContext(), brandsResponses);
-            //RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-            //  binding.RecyclerViewBrands.setLayoutManager(mLayoutManager1);
-            // binding.RecyclerViewBrands.setItemAnimator(new DefaultItemAnimator());
-            // binding.RecyclerViewBrands.setAdapter(brandsAdapter);
-
-        }
-    }
 
     @Override
     public void onAllPopularProductSuccess(List<HomeProductResponse> PopularProductResponse, String message) {
@@ -321,15 +279,24 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
-    public void onContinueHuntYouSuccess(List<HomeProductResponse> DiscountForYouResponses, String message) {
-
+    public void onContinueHuntYouSuccess(ContinueYourHuntResponse continueYourHuntResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            Continue_HuntAdapter continue_huntAdapter = new Continue_HuntAdapter(getContext(), DiscountForYouResponses, this::onHomeProductItemClickListener);
-            RecyclerView.LayoutManager mLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-            binding.recyclerViewContiuneYour.setLayoutManager(mLayoutManager1);
-            binding.recyclerViewContiuneYour.setItemAnimator(new DefaultItemAnimator());
-            binding.recyclerViewContiuneYour.setAdapter(continue_huntAdapter);
+            if (continueYourHuntResponse.getProducts() != null && continueYourHuntResponse.getProducts().size() > 0) {
+                Continue_HuntAdapter continue_huntAdapter = new Continue_HuntAdapter(getContext(), continueYourHuntResponse, this::onContinueYourHuntItemClickListener, false);
+                RecyclerView.LayoutManager mLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+                binding.recyclerViewContiuneYour.setLayoutManager(mLayoutManager1);
+                binding.recyclerViewContiuneYour.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerViewContiuneYour.setAdapter(continue_huntAdapter);
+                binding.linearContinueHunt.setVisibility(View.VISIBLE);
+            } else {
+                binding.linearContinueHunt.setVisibility(View.GONE);
+            }
         }
+    }
+
+    @Override
+    public void onContinueHuntYouError(String message) {
+        binding.linearContinueHunt.setVisibility(View.GONE);
     }
 
     @Override
@@ -411,6 +378,50 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     }
 
     @Override
+    public void onStoriesSuccess(List<StoriesResponse> storiesResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            StoriesAdapter gameAdapter = new StoriesAdapter(getContext(), storiesResponses);
+            RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+            binding.recyclerViewStories.setLayoutManager(mLayoutManager1);
+            binding.recyclerViewStories.setItemAnimator(new DefaultItemAnimator());
+            binding.recyclerViewStories.setAdapter(gameAdapter);
+        }
+
+    }
+
+    @Override
+    public void onCoffeeSuccess(List<HotelAndCoffeeResponse> coffeeResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            if (coffeeResponses != null && coffeeResponses.size() > 0) {
+                RoundAdapter1 gameAdapter = new RoundAdapter1(getContext(),coffeeResponses);
+                RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                binding.recyclerViewCoffee.setLayoutManager(mLayoutManager1);
+                binding.recyclerViewCoffee.setItemAnimator(new DefaultItemAnimator());
+                binding.recyclerViewCoffee.setAdapter(gameAdapter);
+                binding.linearCoffee.setVisibility(View.VISIBLE);
+            } else {
+                binding.linearCoffee.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onHotelSuccess(List<HotelAndCoffeeResponse> hotelResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            if (hotelResponses != null && hotelResponses.size() > 0) {
+                HotelAdapter gameAdapter = new HotelAdapter(getContext(), hotelResponses);
+                RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                binding.HotelRcycler.setLayoutManager(mLayoutManager1);
+                binding.HotelRcycler.setItemAnimator(new DefaultItemAnimator());
+                binding.HotelRcycler.setAdapter(gameAdapter);
+                binding.linearHotel.setVisibility(View.VISIBLE);
+            } else {
+                binding.linearHotel.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
     public void onFailure(Throwable t) {
         Sneaker.with(getActivity())
                 .setTitle(t.getLocalizedMessage())
@@ -461,5 +472,10 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         String roleId = data.get(position).getRoute();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
         navController.navigate(R.id.action_home_Fragment_to_product_Details);
+    }
+
+    @Override
+    public void onContinueYourHuntItemClickListener(ContinueYourHuntResponse data, int position) {
+
     }
 }

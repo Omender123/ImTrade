@@ -7,16 +7,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomHotelLayoutBinding;
 import com.trade.imtrade.databinding.CustomHotelLayoutBinding;
+
+import java.util.List;
 
 public class HotelAdapter  extends RecyclerView.Adapter<HotelAdapter.HotelViewHolder> {
     Context context;
-     Integer brands_Image[];
+    List<HotelAndCoffeeResponse> hotelAndCoffeeResponses;
 
-    public HotelAdapter(Context context,  Integer brands_Image[]) {
+    public HotelAdapter(Context context, List<HotelAndCoffeeResponse> hotelAndCoffeeResponses) {
         this.context = context;
-         this.brands_Image = brands_Image;
+        this.hotelAndCoffeeResponses = hotelAndCoffeeResponses;
     }
 
     public HotelAdapter() {
@@ -34,14 +39,16 @@ public class HotelAdapter  extends RecyclerView.Adapter<HotelAdapter.HotelViewHo
 
     @Override
     public void onBindViewHolder(@NonNull HotelViewHolder holder, int position) {
-        holder.binding.hotelImage.setImageResource(brands_Image[position]);
+        holder.binding.hotelName.setText(hotelAndCoffeeResponses.get(position).getName());
+       // holder.binding.hotelPrice.setText(hotelAndCoffeeResponses.get(position).getMenu().);
 
-        // Glide.with(context).load(PrefConf.IMAGE_URL+brandsResponses.get(position).getLogo()).apply(new RequestOptions().circleCrop()).placeholder(R.drawable.ic_profile_image).into(holder.binding.brandsImage);
+
+        Glide.with(context).load(PrefConf.IMAGE_URL+hotelAndCoffeeResponses.get(position).getImages().get(0)).into(holder.binding.hotelImage);
     }
 
     @Override
     public int getItemCount() {
-        return brands_Image.length;
+        return hotelAndCoffeeResponses.size();
     }
 
     public class HotelViewHolder extends RecyclerView.ViewHolder {
