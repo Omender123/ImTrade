@@ -28,15 +28,16 @@
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/product_Fragemet"
             app:popUpToInclusive="true" />
+
         <action
-            android:id="@+id/action_home_Fragment_to_product_Details"
-            app:destination="@id/product_Details"
+            android:id="@+id/action_home_Fragment_to_product_Details_Fragment"
+            app:destination="@id/product_Details_Fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/product_Details"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/product_Details_Fragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -135,7 +136,7 @@
         android:id="@+id/update_profile"
         android:name="com.trade.imtrade.Fragment.Update_Profile"
         android:label="My Account"
-        tools:layout="@layout/fragment_update__profile"></fragment>
+        tools:layout="@layout/fragment_update__profile"/>
 
     <fragment
         android:id="@+id/Search_nearBy"
@@ -188,15 +189,14 @@
             app:popUpTo="@id/filter_Fragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_product_Fragemet_to_product_Details"
-            app:destination="@id/product_Details"
+            android:id="@+id/action_product_Fragemet_to_product_Details_Fragment"
+            app:destination="@id/product_Details_Fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/product_Details"
+            app:popUpTo="@id/product_Details_Fragment"
             app:popUpToInclusive="true" />
-
 
     </fragment>
     <fragment
@@ -211,13 +211,6 @@
         android:name="com.trade.imtrade.Activity.Referral_Code"
         android:label="Referral Code"
         tools:layout="@layout/activity_referral__code" />
-    <activity
-        android:id="@+id/product_Details"
-        android:name="com.trade.imtrade.Activity.Product_Details"
-        tools:layout="@layout/activity_product__details" >
-
-
-    </activity>
 
     <fragment
         android:id="@+id/ChangePassword"
@@ -234,6 +227,16 @@
         tools:layout="@layout/fragment_change__email" />
 
 
+    <fragment
+        android:id="@+id/product_Details_Fragment"
+        android:name="com.trade.imtrade.Fragment.Product_Details_Fragment"
+        android:label="{ProductName}"
+        tools:layout="@layout/fragment_product__details">
+        <argument
+            android:name="ProductName"
+            android:defaultValue="defaultValue"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

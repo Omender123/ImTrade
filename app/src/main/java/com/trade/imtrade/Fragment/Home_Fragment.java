@@ -93,8 +93,8 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         presenter.GetHomeDealOfDayProduct(getContext());
         presenter.GetWinnerOfThisWeek(getContext());
         presenter.GetStories(getContext());
-        presenter.GetAllCoffee(getContext(),"100111");
-        presenter.GetAllHotel(getContext(),"100111");
+        presenter.GetAllCoffee(getContext(), "100111");
+        presenter.GetAllHotel(getContext(), "100111");
 
 
         binding.cateAll.setOnClickListener(this);
@@ -111,8 +111,6 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
 
     }
-
-
 
 
     private void getAllGame() {
@@ -393,7 +391,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     public void onCoffeeSuccess(List<HotelAndCoffeeResponse> coffeeResponses, String message) {
         if (message.equalsIgnoreCase("ok")) {
             if (coffeeResponses != null && coffeeResponses.size() > 0) {
-                RoundAdapter1 gameAdapter = new RoundAdapter1(getContext(),coffeeResponses);
+                RoundAdapter1 gameAdapter = new RoundAdapter1(getContext(), coffeeResponses);
                 RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                 binding.recyclerViewCoffee.setLayoutManager(mLayoutManager1);
                 binding.recyclerViewCoffee.setItemAnimator(new DefaultItemAnimator());
@@ -462,20 +460,34 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     @Override
     public void onHomeProductItemClickListener(List<HomeProductResponse> data, int position) {
         String roleId = data.get(position).getRoute();
-        // Toast.makeText(getContext(), ""+roleId, Toast.LENGTH_SHORT).show();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
-        navController.navigate(R.id.action_home_Fragment_to_product_Details);
+        String ProductName = data.get(position).getName();
+
+        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment =  Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
+        fragment.setProductName(ProductName);
+        Navigation.findNavController(view).navigate(fragment);
     }
 
     @Override
     public void onDealOfDayItemClickListener(List<DealofDayResponse> data, int position) {
         String roleId = data.get(position).getRoute();
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
-        navController.navigate(R.id.action_home_Fragment_to_product_Details);
+        String ProductName = data.get(position).getName();
+
+        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment =  Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
+        fragment.setProductName(ProductName);
+        Navigation.findNavController(view).navigate(fragment);
     }
 
     @Override
     public void onContinueYourHuntItemClickListener(ContinueYourHuntResponse data, int position) {
+        String roleId = data.getProducts().get(position).getRoute();
+        MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
+        String ProductName = data.getProducts().get(position).getName();
+
+        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment =  Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
+        fragment.setProductName(ProductName);
+        Navigation.findNavController(view).navigate(fragment);
 
     }
 }

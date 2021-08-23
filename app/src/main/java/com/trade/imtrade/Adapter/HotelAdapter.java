@@ -40,7 +40,7 @@ public class HotelAdapter  extends RecyclerView.Adapter<HotelAdapter.HotelViewHo
     @Override
     public void onBindViewHolder(@NonNull HotelViewHolder holder, int position) {
         holder.binding.hotelName.setText(hotelAndCoffeeResponses.get(position).getName());
-       // holder.binding.hotelPrice.setText(hotelAndCoffeeResponses.get(position).getMenu().);
+       holder.binding.hotelPrice.setText(hotelAndCoffeeResponses.get(position).getPrice()+" Rs");
 
 
         Glide.with(context).load(PrefConf.IMAGE_URL+hotelAndCoffeeResponses.get(position).getImages().get(0)).into(holder.binding.hotelImage);

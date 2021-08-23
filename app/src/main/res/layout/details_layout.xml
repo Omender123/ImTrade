@@ -6,11 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
-        android:background="@color/background"
+        android:background="@color/white"
         android:text="Apple"
-        android:textColor="@color/product_Price"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:paddingStart="20dp"
+        android:textColor="#CC212121"
+        android:textSize="12sp"
+        />
 
 
 </layout>

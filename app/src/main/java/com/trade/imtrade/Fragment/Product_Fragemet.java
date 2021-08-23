@@ -45,6 +45,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
     String categoriesName;
 
     AllProductPresenter presenter;
+
     public Product_Fragemet() {
         // Required empty public constructor
     }
@@ -67,7 +68,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
 
         categoriesName = Product_FragemetArgs.fromBundle(getArguments()).getCategoriesTitle();
 
-        presenter.GetAllProduct(getContext(),categoriesName);
+        presenter.GetAllProduct(getContext(), categoriesName);
 
         return binding.getRoot();
     }
@@ -83,7 +84,6 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -92,7 +92,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
                 break;
 
             case R.id.text_filter:
-              navController.navigate(R.id.action_product_Fragemet_to_filter_Fragment);
+                navController.navigate(R.id.action_product_Fragemet_to_filter_Fragment);
                 break;
         }
 
@@ -134,17 +134,20 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
             }
         });
 
-         bottomSheetDialog.show();
+        bottomSheetDialog.show();
     }
 
     @Override
-    public void ProductOnClickListener(ProductResponse productResponse,int Position) {
+    public void ProductOnClickListener(ProductResponse productResponse, int Position) {
         String roleId = productResponse.getResponse().get(Position).getRoute();
+        String ProductName = productResponse.getResponse().get(Position).getName();
+        MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
 
-        MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID,roleId);
+        Product_FragemetDirections.ActionProductFragemetToProductDetailsFragment fragment = Product_FragemetDirections.actionProductFragemetToProductDetailsFragment();
+        fragment.setProductName(ProductName);
+        Navigation.findNavController(view).navigate(fragment);
 
 
-        navController.navigate(R.id.action_product_Fragemet_to_product_Details);
     }
 
     @Override
@@ -169,7 +172,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
     @Override
     public void onAllProductSuccess(ProductResponse productResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            ProductAdapter productAdapter = new ProductAdapter(getContext(),productResponse ,this::ProductOnClickListener);
+            ProductAdapter productAdapter = new ProductAdapter(getContext(), productResponse, this::ProductOnClickListener);
             RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
             binding.RecyclerView.setLayoutManager(mLayoutManager1);
             binding.RecyclerView.setItemAnimator(new DefaultItemAnimator());

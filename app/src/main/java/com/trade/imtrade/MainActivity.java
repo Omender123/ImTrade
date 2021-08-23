@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navigationView = findViewById(R.id.navigationView);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         navController = Navigation.findNavController(this, R.id.main);
-        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.activity, R.id.location, R.id.explorer, R.id.profile, R.id.nav_Referral, R.id.product_Details})
+        appBarConfiguration = new AppBarConfiguration.Builder(new int[]{R.id.home_Fragment, R.id.activity, R.id.location, R.id.explorer, R.id.profile, R.id.nav_Referral})
                 .setDrawerLayout(drawer)
                 .build();
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if (destination.getId() == R.id.Search_nearBy || destination.getId() == R.id.categories || destination.getId() == R.id.product_Fragemet || destination.getId() == R.id.filter_Fragment
-                        || destination.getId() == R.id.update_profile) {
+                        || destination.getId() == R.id.update_profile || destination.getId() == R.id.product_Details_Fragment) {
                     bottomNavigationView.setVisibility(View.GONE);
                 } else if (destination.getId() == R.id.address || destination.getId() == R.id.My_address || destination.getId() == R.id.ChangePassword || destination.getId() == R.id.ChangeEmail) {
                     img_search.setVisibility(View.VISIBLE);

@@ -68,9 +68,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         builder.start();
         Glide.with(context).load(PrefConf.IMAGE_URL + productResponse.getResponse().get(position).getImages().get(0)).into(holder.binding.productImg);
 
-        holder.binding.productPrice.setText(productResponse.getResponse().get(position).getDiscount() + " Rs");
-        holder.binding.productOffPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMargin() + " %OFF");
-        holder.binding.productWorngPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMrp() + " Rs");
+        if (productResponse.getResponse().get(position).getDiscount()!=null){
+            holder.binding.productPrice.setText(productResponse.getResponse().get(position).getDiscount() + " Rs");
+            holder.binding.productOffPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMargin() + " %OFF");
+            holder.binding.productWorngPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMrp() + " Rs");
+        }else{
+            holder.binding.productPrice.setText(productResponse.getResponse().get(position).getVariables().get(0).getPrice().getMrp()+" Rs");
+            holder.binding.productOffPrice.setVisibility(View.GONE);
+            holder.binding.productWorngPrice.setVisibility(View.GONE);
+
+        }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

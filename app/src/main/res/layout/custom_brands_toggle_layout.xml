@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/background">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/text_unshow"

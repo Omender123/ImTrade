@@ -33,6 +33,9 @@ public class HotelAndCoffeeResponse {
     @SerializedName("menu")
     @Expose
     private List<Menu> menu = null;
+    @SerializedName("price")
+    @Expose
+    private String price;
 
     public List<String> getImages() {
         return images;
@@ -105,6 +108,15 @@ public class HotelAndCoffeeResponse {
     public void setMenu(List<Menu> menu) {
         this.menu = menu;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
 
     public class Menu {
 

@@ -47,11 +47,15 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsV
     @Override
     public int getItemCount() {
         int size =0;
-        if (count==true){
+        if (count==false){
 
-            size= productDetailsResponse.getDetails().size();
+            if (productDetailsResponse.getDetails().size()<=4){
+                size =productDetailsResponse.getDetails().size();
+            }else{
+                size =4;
+            }
         }else{
-           size =3;
+            size =productDetailsResponse.getDetails().size();
         }
         return size;
     }

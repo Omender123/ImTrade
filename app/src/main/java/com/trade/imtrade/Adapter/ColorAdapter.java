@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.R;
@@ -49,7 +50,9 @@ public class ColorAdapter  extends RecyclerView.Adapter<ColorAdapter.ColorViewHo
     @Override
     public void onBindViewHolder(@NonNull ColorViewHolder holder, int position) {
       //  String color ="#000000";
-      holder.binding.cardColor.setCardBackgroundColor(Color.parseColor(productDetailsResponse.getColor().get(position).getCode()));
+     // holder.binding.cardColor.setCardBackgroundColor(Color.parseColor(productDetailsResponse.getColor().get(position).getCode()));
+        Glide.with(context).load(PrefConf.IMAGE_URL + productDetailsResponse.getColor().get(position).getImage()).apply(new RequestOptions().circleCrop())/*.placeholder(R.drawable.ic_profile_image)*/.into(holder.binding.colorImg);
+
         holder.binding.colorName.setText(productDetailsResponse.getColor().get(position).getName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

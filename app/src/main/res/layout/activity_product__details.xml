@@ -584,7 +584,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="3dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/review_product_layout" />
+                    tools:listitem="@layout/review_layout" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

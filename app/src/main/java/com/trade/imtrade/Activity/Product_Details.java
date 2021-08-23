@@ -258,7 +258,7 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             List<SlideModel> BannerImage = new ArrayList<>();
             if (productDetailsResponse.getImages().size() > 0 && productDetailsResponse.getImages() != null) {
                 for (int i = 0; i < productDetailsResponse.getImages().size(); i++) {
-                    BannerImage.add(new SlideModel(PrefConf.IMAGE_URL + productDetailsResponse.getImages().get(i), ScaleTypes.FIT));
+                    BannerImage.add(new SlideModel(PrefConf.IMAGE_URL + productDetailsResponse.getImages().get(i),ScaleTypes.FIT));
                 }
                 binding.slider.setImageList(BannerImage);
 

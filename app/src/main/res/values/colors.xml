@@ -42,6 +42,8 @@
     <color name="text_tittle">#212121</color>
     <color name="product_name">#212121</color>
     <color name="product_Price">#212121</color>
+    <color name="unselect">#80212121</color>
+
     <color name="green">#019624</color>
     <color name="review_color">#4D212121</color>
 

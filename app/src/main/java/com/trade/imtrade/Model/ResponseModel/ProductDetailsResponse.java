@@ -664,9 +664,12 @@ public class ProductDetailsResponse {
         @SerializedName("name")
         @Expose
         private String name;
-        @SerializedName("code")
+        @SerializedName("image")
         @Expose
-        private String code;
+        private String image;
+        @SerializedName("route")
+        @Expose
+        private String route;
 
         public String getId() {
             return id;
@@ -684,12 +687,20 @@ public class ProductDetailsResponse {
             this.name = name;
         }
 
-        public String getCode() {
-            return code;
+        public String getImage() {
+            return image;
         }
 
-        public void setCode(String code) {
-            this.code = code;
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getRoute() {
+            return route;
+        }
+
+        public void setRoute(String route) {
+            this.route = route;
         }
 
     }
