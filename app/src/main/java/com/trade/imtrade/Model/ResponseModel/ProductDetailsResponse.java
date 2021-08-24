@@ -1,6 +1,7 @@
 package com.trade.imtrade.Model.ResponseModel;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -72,9 +73,6 @@ public class ProductDetailsResponse {
     @SerializedName("images")
     @Expose
     private List<String> images = null;
-    @SerializedName("color")
-    @Expose
-    private List<Color> color = null;
     @SerializedName("storage")
     @Expose
     private List<Storage> storage = null;
@@ -84,15 +82,36 @@ public class ProductDetailsResponse {
     @SerializedName("popularProducts")
     @Expose
     private Boolean popularProducts;
+    @SerializedName("DealOfTheDay")
+    @Expose
+    private Boolean dealOfTheDay;
     @SerializedName("discountForYou")
     @Expose
     private Boolean discountForYou;
-    @SerializedName("sesionProducts")
+    @SerializedName("productColor")
     @Expose
-    private Boolean sesionProducts;
-    @SerializedName("is")
+    private String productColor;
+    @SerializedName("productStorage")
     @Expose
-    private Is is;
+    private String productStorage;
+    @SerializedName("noOfProductSold")
+    @Expose
+    private String noOfProductSold;
+    @SerializedName("freshArrival")
+    @Expose
+    private Boolean freshArrival;
+    @SerializedName("festivalOffer")
+    @Expose
+    private Boolean festivalOffer;
+    @SerializedName("sponsoredProduct")
+    @Expose
+    private Boolean sponsoredProduct;
+    @SerializedName("dashboardDod")
+    @Expose
+    private String dashboardDod;
+    @SerializedName("color")
+    @Expose
+    private List<Color> color = null;
 
     public String getId() {
         return id;
@@ -270,14 +289,6 @@ public class ProductDetailsResponse {
         this.images = images;
     }
 
-    public List<Color> getColor() {
-        return color;
-    }
-
-    public void setColor(List<Color> color) {
-        this.color = color;
-    }
-
     public List<Storage> getStorage() {
         return storage;
     }
@@ -302,6 +313,14 @@ public class ProductDetailsResponse {
         this.popularProducts = popularProducts;
     }
 
+    public Boolean getDealOfTheDay() {
+        return dealOfTheDay;
+    }
+
+    public void setDealOfTheDay(Boolean dealOfTheDay) {
+        this.dealOfTheDay = dealOfTheDay;
+    }
+
     public Boolean getDiscountForYou() {
         return discountForYou;
     }
@@ -310,20 +329,69 @@ public class ProductDetailsResponse {
         this.discountForYou = discountForYou;
     }
 
-    public Boolean getSesionProducts() {
-        return sesionProducts;
+    public String getProductColor() {
+        return productColor;
     }
 
-    public void setSesionProducts(Boolean sesionProducts) {
-        this.sesionProducts = sesionProducts;
+    public void setProductColor(String productColor) {
+        this.productColor = productColor;
     }
 
-    public Is getIs() {
-        return is;
+    public String getProductStorage() {
+        return productStorage;
     }
 
-    public void setIs(Is is) {
-        this.is = is;
+    public void setProductStorage(String productStorage) {
+        this.productStorage = productStorage;
+    }
+
+    public String getNoOfProductSold() {
+        return noOfProductSold;
+    }
+
+    public void setNoOfProductSold(String noOfProductSold) {
+        this.noOfProductSold = noOfProductSold;
+    }
+
+    public Boolean getFreshArrival() {
+        return freshArrival;
+    }
+
+    public void setFreshArrival(Boolean freshArrival) {
+        this.freshArrival = freshArrival;
+    }
+
+    public Boolean getFestivalOffer() {
+        return festivalOffer;
+    }
+
+    public void setFestivalOffer(Boolean festivalOffer) {
+        this.festivalOffer = festivalOffer;
+    }
+
+    public Boolean getSponsoredProduct() {
+        return sponsoredProduct;
+    }
+
+    public void setSponsoredProduct(Boolean sponsoredProduct) {
+        this.sponsoredProduct = sponsoredProduct;
+    }
+
+    public String getDashboardDod() {
+        return dashboardDod;
+    }
+
+    public void setDashboardDod(String dashboardDod) {
+        this.dashboardDod = dashboardDod;
+    }
+
+
+    public List<Color> getColor() {
+        return color;
+    }
+
+    public void setColor(List<Color> color) {
+        this.color = color;
     }
 
 
@@ -437,6 +505,7 @@ public class ProductDetailsResponse {
         public void setReview(Review__1 review) {
             this.review = review;
         }
+
         public class Review__1 {
 
             @SerializedName("_id")
@@ -775,4 +844,5 @@ public class ProductDetailsResponse {
 
     }
 
-  }
+}
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_Q"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Q : Can we connect tv "
+            android:drawableRight="@drawable/ic_forword_arrow"
+            android:drawableTint="#B3212121"
+            android:textColor="#2B2B2B"
+            android:textSize="12sp"
+            android:justificationMode="inter_word"
+            android:fontFamily="@font/poppins_medium"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A : "
+                android:textColor="#2B2B2B"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <TextView
+                android:id="@+id/text_A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:justificationMode="inter_word"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea "
+                 android:textColor="#B32B2B2B"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</layout>

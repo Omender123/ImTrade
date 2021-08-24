@@ -26,6 +26,7 @@ import com.trade.imtrade.Adapter.ReviewAdapter;
 import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Adapter.StorageAdapter;
 import com.trade.imtrade.MainActivity;
+import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.R;
@@ -303,6 +304,11 @@ public class Product_Details extends AppCompatActivity implements View.OnClickLi
             binding.textCartCount.setVisibility(View.VISIBLE);
             binding.textCartCount.setText(String.valueOf(cart));
         }
+    }
+
+    @Override
+    public void onCustomerQuestionsSuccess(List<CustomerQuestionsResponse> customerQuestionsResponses, String message) {
+
     }
 
     @Override

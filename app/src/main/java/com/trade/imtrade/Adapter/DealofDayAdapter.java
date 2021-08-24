@@ -67,7 +67,13 @@ public class DealofDayAdapter extends RecyclerView.Adapter<DealofDayAdapter.Deal
 
     @Override
     public int getItemCount() {
-        return dealofDayResponses.size();
+        int size=0;
+        if (dealofDayResponses.size() <= 3) {
+            size = dealofDayResponses.size();
+        } else {
+            size = 3;
+        }
+        return size;
     }
 
     public class DealOfDayViewHolder extends RecyclerView.ViewHolder {

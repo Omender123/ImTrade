@@ -6,6 +6,7 @@ import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
 import com.trade.imtrade.Model.ResponseModel.ContinueYourHuntResponse;
+import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
 import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
@@ -173,6 +174,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("hotel/locate")
     Call<List<HotelAndCoffeeResponse>> getAllHotel(@Field("pinCode") String pinCode);
+
+    @GET("qsns")
+    Call<List<CustomerQuestionsResponse>> getAllCustomerQuestions(@Query("id") String ProductId);
 
 
 }

@@ -29,10 +29,13 @@ import com.trade.imtrade.Activity.CartActivity;
 import com.trade.imtrade.Activity.Product_Details;
 import com.trade.imtrade.Adapter.ColorAdapter;
 import com.trade.imtrade.Adapter.ColorAdapter.OnColorItemListener;
+import com.trade.imtrade.Adapter.Customer_Questions_Adapter;
 import com.trade.imtrade.Adapter.DetailsAdapter;
+import com.trade.imtrade.Adapter.OfferAdapter;
 import com.trade.imtrade.Adapter.Other_Info_Adapter;
 import com.trade.imtrade.Adapter.Profile_itemAdapter;
 import com.trade.imtrade.Adapter.StorageAdapter;
+import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.R;
@@ -98,7 +101,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
         binding.HideDetails.setOnClickListener(this);
 
         getOtherInfo();
-
+        getOffer();
         return binding.getRoot();
     }
 
@@ -151,6 +154,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                     .setRepeatMode(1)
                     .setInterpolator(new BounceInterpolator());
             builder.start();
+            presenter.GetAllCustomerQuestions(getActivity(),productDetailsResponse.getId());
 
             binding.productName.setText(productDetailsResponse.getName());
 
@@ -178,6 +182,27 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     @Override
     public void onAddToCartSuccess(ResponseBody responseBody, String message) {
 
+    }
+
+    @Override
+    public void onCustomerQuestionsSuccess(List<CustomerQuestionsResponse> customerQuestionsResponses, String message) {
+      if (message.equalsIgnoreCase("ok")){
+          if (customerQuestionsResponses.size() > 0 && customerQuestionsResponses != null) {
+              Customer_Questions_Adapter profile_itemAdapter = new Customer_Questions_Adapter(getContext(),customerQuestionsResponses,false);
+              RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+              binding.custQuesRecycler.setLayoutManager(mLayoutManager);
+              binding.custQuesRecycler.setItemAnimator(new DefaultItemAnimator());
+              binding.custQuesRecycler.setAdapter(profile_itemAdapter);
+
+              binding.textSeeQA.setText("See all "+customerQuestionsResponses.size()+" questions answers");
+              binding.custQuesRecycler.setVisibility(View.VISIBLE);
+          } else {
+
+              binding.custQuesRecycler.setVisibility(View.GONE);
+              binding.textSeeQA.setVisibility(View.GONE);
+          }
+
+      }
     }
 
     @Override
@@ -235,7 +260,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             binding.ColorRecyclerView.setLayoutManager(mLayoutManager1);
             binding.ColorRecyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.ColorRecyclerView.setAdapter(colorAdapter);
-            binding.textColor.setText(productDetailsResponse.getColor().get(0).getName().toUpperCase());
+            binding.textColor.setText(productDetailsResponse.getProductColor().toUpperCase());
             binding.showMore.setText(productDetailsResponse.getColor().size() + " more");
         } else {
             Sneaker.with(this)
@@ -251,7 +276,6 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     @Override
     public void onOnColorClickListener(ProductDetailsResponse productDetailsResponse, int position) {
-        binding.textColor.setText(productDetailsResponse.getColor().get(position).getName().toUpperCase());
         Toast.makeText(getActivity(), "" + productDetailsResponse.getColor().get(position).getName(), Toast.LENGTH_SHORT).show();
     }
 
@@ -264,7 +288,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             binding.storageRecyclerView.setLayoutManager(mLayoutManager1);
             binding.storageRecyclerView.setItemAnimator(new DefaultItemAnimator());
             binding.storageRecyclerView.setAdapter(storageAdapter);
-            binding.textStorage.setText(productDetailsResponse.getStorage().get(0).getSize());
+            binding.textStorage.setText(productDetailsResponse.getProductStorage());
             binding.showMore1.setText(productDetailsResponse.getColor().size() + " more");
         } else {
             Sneaker.with(this)
@@ -281,7 +305,6 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     @Override
     public void onToggleItemClickListener(ProductDetailsResponse productDetailsResponse, int position) {
 
-        binding.textStorage.setText(productDetailsResponse.getStorage().get(position).getSize());
 
         Toast.makeText(getActivity(), "" + productDetailsResponse.getStorage().get(position).getSize(), Toast.LENGTH_SHORT).show();
 
@@ -323,4 +346,21 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     public void onOtherInfoItemClickListener(ArrayList<String> ItemList, int position) {
 
     }
+
+    private void getOffer() {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        arrayList.add("Cashback");
+        arrayList.add("Partner offers");
+        arrayList.add("No Cost EMI");
+
+        OfferAdapter profile_itemAdapter = new OfferAdapter(getContext(),arrayList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        binding.offerRecycler.setLayoutManager(mLayoutManager);
+        binding.offerRecycler.setItemAnimator(new DefaultItemAnimator());
+        binding.offerRecycler.setAdapter(profile_itemAdapter);
+
+    }
+
+
+
 }
