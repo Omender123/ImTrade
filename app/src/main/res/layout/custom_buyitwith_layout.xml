@@ -5,67 +5,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/white">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:padding="15dp"
-            app:cardBackgroundColor="#DADADA"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="-10dp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="1dp"
-                android:padding="15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="10dp">
-
-                <ImageView
-                    android:id="@+id/product_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="15dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/product2" />
-            </androidx.cardview.widget.CardView>
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/text_stock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/card"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:text="In Stock"
-            android:textSize="10sp"
-            android:textColor="@color/green"
-            android:fontFamily="@font/poppins_medium"/>
+        <ImageView
+            android:id="@+id/product_img"
+            android:layout_width="65dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/deal1" />
 
         <TextView
             android:id="@+id/product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_stock"
-            android:layout_toEndOf="@+id/card"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="25dp"
+            android:layout_toStartOf="@+id/checked"
+            android:layout_toEndOf="@+id/product_img"
             android:fontFamily="@font/poppins"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
             android:justificationMode="inter_word"
             android:text="Product Full Name and model 123ev 8th"
             android:textColor="@color/product_Price"
@@ -78,9 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             app:srb_starSize="13dp"
+            android:layout_marginStart="10dp"
             app:srb_numberOfStars="5"
             android:saveEnabled="false"
             app:srb_isIndicator="true"
@@ -89,19 +50,18 @@
             app:srb_starBorderWidth="2"
             app:srb_borderColor="#FF9C1B"
             app:srb_fillColor="#FFC51B"
-            android:layout_toEndOf="@id/card"/>
+            android:layout_toEndOf="@id/product_img"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/product_name"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/checked"
             android:layout_toEndOf="@id/text_rating"
             android:enabled="false"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/poppins"
             android:text="49876 rating"
             android:textColor="@color/product_Price"
@@ -113,10 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_rating"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@id/card"
+             android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/product_img"
             android:text="14999 Rs"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/product_Price"
             android:textSize="14sp" />
@@ -144,22 +104,26 @@
             android:layout_below="@id/text_rating"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="25dp"
-            android:layout_alignParentRight="true"
+            android:layout_toStartOf="@+id/checked"
             android:layout_toEndOf="@id/product_worng_price"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/green"
             android:textSize="11.5sp"
             android:text="20% OFF"
+            android:layout_marginEnd="5dp"
             android:textStyle="normal" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_below="@id/card"
-            android:layout_alignParentStart="true"
+        <CheckBox
+            android:id="@+id/checked"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:background="@color/background" />
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="24dp"
+            android:buttonTint="@color/green"
+            android:checked="true" />
+
     </RelativeLayout>
 
 </layout>

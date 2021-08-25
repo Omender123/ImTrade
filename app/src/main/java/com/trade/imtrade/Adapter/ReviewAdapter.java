@@ -35,13 +35,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
-        holder.binding.textName.setText(productDetailsResponse.getReviews().get(position).getReview().getUserDetail());
-        holder.binding.textRating.setText("4.0");
+        holder.binding.name.setText(productDetailsResponse.getReviews().get(position).getReview().getUserDetail());
+       /* holder.binding.textRating.setText("4.0");
         holder.binding.textReview.setText(productDetailsResponse.getReviews().get(position).getReview().getReview());
         holder.binding.textDislike.setText(productDetailsResponse.getReviews().get(position).getReview().getDislike());
         holder.binding.textLike.setText(productDetailsResponse.getReviews().get(position).getReview().getLike());
         holder.binding.textTime.setText(AppUtils.getDate(productDetailsResponse.getReviews().get(position).getReview().getCreatedAt()));
-
+*/
 
 
     }
