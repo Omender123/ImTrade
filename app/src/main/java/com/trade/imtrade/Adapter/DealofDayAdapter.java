@@ -42,7 +42,16 @@ public class DealofDayAdapter extends RecyclerView.Adapter<DealofDayAdapter.Deal
 
 
         holder.binding.cateName.setText(dealofDayResponses.get(position).getName());
-        Glide.with(context).load(PrefConf.IMAGE_URL + dealofDayResponses.get(position).getImages().get(0)).into(holder.binding.cateImg);
+
+        if (position==0){
+            Glide.with(context).load(PrefConf.IMAGE_URL + dealofDayResponses.get(0).getImages().get(0)).into(holder.binding.cateImg0);
+            holder.binding.cateImg0.setVisibility(View.VISIBLE);
+            holder.binding.cateImg1.setVisibility(View.GONE);
+        }else{
+            Glide.with(context).load(PrefConf.IMAGE_URL + dealofDayResponses.get(position).getImages().get(0)).into(holder.binding.cateImg1);
+            holder.binding.cateImg0.setVisibility(View.GONE);
+            holder.binding.cateImg1.setVisibility(View.VISIBLE);
+        }
 
         if (dealofDayResponses.get(position).getDiscount() != null) {
             holder.binding.catePrice.setText(dealofDayResponses.get(position).getDiscount() + " Rs");

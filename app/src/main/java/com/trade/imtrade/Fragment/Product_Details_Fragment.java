@@ -40,6 +40,7 @@ import com.trade.imtrade.Adapter.Profile_itemAdapter;
 import com.trade.imtrade.Adapter.ReviewAdapter;
 import com.trade.imtrade.Adapter.ReviewImageAdapter;
 import com.trade.imtrade.Adapter.ReviewVideoAdapter;
+import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Adapter.StorageAdapter;
 import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
@@ -59,7 +60,7 @@ import okhttp3.ResponseBody;
 
 
 public class Product_Details_Fragment extends Fragment implements ProductDetails_Presenter.GetProductDetailsView, View.OnClickListener, OnColorItemListener, StorageAdapter.OnToggleItemListener,
-        Other_Info_Adapter.OnOtherInfoItemListener ,BuyItWithAdapter.BuyitwithClickListener{
+        Other_Info_Adapter.OnOtherInfoItemListener, BuyItWithAdapter.BuyitwithClickListener {
     TextView text_cart_Count;
     FragmentProductDetailsBinding binding;
     private View view;
@@ -107,11 +108,13 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
         binding.showDetails.setOnClickListener(this);
         binding.HideDetails.setOnClickListener(this);
 
-        getOtherInfo();
+
+        Toast.makeText(getActivity(), ""+text_cart_Count.getText().toString(), Toast.LENGTH_SHORT).show();
         getOffer();
         CheckBoxList();
         getReviewVideo();
         getReviewImage();
+        getAllReview_Product();
         return binding.getRoot();
     }
 
@@ -187,7 +190,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                     .setRepeatMode(1)
                     .setInterpolator(new BounceInterpolator());
             builder.start();
-            presenter.GetAllCustomerQuestions(getActivity(),productDetailsResponse.getId());
+            presenter.GetAllCustomerQuestions(getActivity(), productDetailsResponse.getId());
 
             binding.productName.setText(productDetailsResponse.getName());
 
@@ -206,8 +209,8 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             getStorageList(productDetailsResponse);
             getDelatilsList(productDetailsResponse, false);
             getAllBuyItWith(productDetailsResponse);
-           getReviewList(productDetailsResponse);
-
+            getReviewList(productDetailsResponse);
+            getOtherInfo(productDetailsResponse);
 
         }
 
@@ -220,21 +223,21 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     @Override
     public void onCustomerQuestionsSuccess(List<CustomerQuestionsResponse> customerQuestionsResponses, String message) {
-      if (message.equalsIgnoreCase("ok")){
-          if (customerQuestionsResponses.size() > 0 && customerQuestionsResponses != null) {
-              Customer_Questions_Adapter profile_itemAdapter = new Customer_Questions_Adapter(getContext(),customerQuestionsResponses,false);
-              RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
-              binding.custQuesRecycler.setLayoutManager(mLayoutManager);
-              binding.custQuesRecycler.setItemAnimator(new DefaultItemAnimator());
-              binding.custQuesRecycler.setAdapter(profile_itemAdapter);
-              binding.custQuesRecycler.setVisibility(View.VISIBLE);
-          } else {
+        if (message.equalsIgnoreCase("ok")) {
+            if (customerQuestionsResponses.size() > 0 && customerQuestionsResponses != null) {
+                Customer_Questions_Adapter profile_itemAdapter = new Customer_Questions_Adapter(getContext(), customerQuestionsResponses, false);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                binding.custQuesRecycler.setLayoutManager(mLayoutManager);
+                binding.custQuesRecycler.setItemAnimator(new DefaultItemAnimator());
+                binding.custQuesRecycler.setAdapter(profile_itemAdapter);
+                binding.custQuesRecycler.setVisibility(View.VISIBLE);
+            } else {
 
-              binding.custQuesRecycler.setVisibility(View.GONE);
-              binding.textSeeQA.setVisibility(View.GONE);
-          }
+                binding.custQuesRecycler.setVisibility(View.GONE);
+                binding.textSeeQA.setVisibility(View.GONE);
+            }
 
-      }
+        }
     }
 
     @Override
@@ -359,23 +362,28 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     }
 
-    private void getOtherInfo() {
-        ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add("Free Home Delivery Availables");
-        arrayList.add("7 Days Replacement Policy");
-        arrayList.add("1 Year Brand Warranty");
+    private void getOtherInfo(ProductDetailsResponse productDetailsResponse) {
 
-        Other_Info_Adapter profile_itemAdapter = new Other_Info_Adapter(arrayList, getContext(), this::onOtherInfoItemClickListener);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        binding.OtherRecyclerView.setLayoutManager(mLayoutManager);
-        binding.OtherRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.OtherRecyclerView.setAdapter(profile_itemAdapter);
+        if (productDetailsResponse.getOtherInfo().size() > 0 && productDetailsResponse.getOtherInfo() != null) {
+            Other_Info_Adapter profile_itemAdapter = new Other_Info_Adapter(productDetailsResponse, getContext(), this::onOtherInfoItemClickListener);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            binding.OtherRecyclerView.setLayoutManager(mLayoutManager);
+            binding.OtherRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            binding.OtherRecyclerView.setAdapter(profile_itemAdapter);
+            binding.textOtherInfo.setVisibility(View.VISIBLE);
+            binding.OtherRecyclerView.setVisibility(View.VISIBLE);
+            binding.viewOtherInfo.setVisibility(View.VISIBLE);
+        } else {
+            binding.textOtherInfo.setVisibility(View.GONE);
+            binding.OtherRecyclerView.setVisibility(View.GONE);
+            binding.viewOtherInfo.setVisibility(View.GONE);
+        }
 
 
     }
 
     @Override
-    public void onOtherInfoItemClickListener(ArrayList<String> ItemList, int position) {
+    public void onOtherInfoItemClickListener(ProductDetailsResponse ItemList, int position) {
 
     }
 
@@ -385,8 +393,8 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
         arrayList.add("Partner offers");
         arrayList.add("No Cost EMI");
 
-        OfferAdapter profile_itemAdapter = new OfferAdapter(getContext(),arrayList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        OfferAdapter profile_itemAdapter = new OfferAdapter(getContext(), arrayList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         binding.offerRecycler.setLayoutManager(mLayoutManager);
         binding.offerRecycler.setItemAnimator(new DefaultItemAnimator());
         binding.offerRecycler.setAdapter(profile_itemAdapter);
@@ -395,28 +403,28 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     private void getAllBuyItWith(ProductDetailsResponse productDetailsResponse) {
 
-        if(productDetailsResponse.getAddOn().size()>0 && productDetailsResponse.getAddOn()!=null ){
-            BuyItWithAdapter buyItWithAdapter = new BuyItWithAdapter(getContext(),productDetailsResponse,this);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+        if (productDetailsResponse.getAddOn().size() > 0 && productDetailsResponse.getAddOn() != null) {
+            BuyItWithAdapter buyItWithAdapter = new BuyItWithAdapter(getContext(), productDetailsResponse, this);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
             binding.buyRecycler.setLayoutManager(mLayoutManager);
             binding.buyRecycler.setItemAnimator(new DefaultItemAnimator());
             binding.buyRecycler.setAdapter(buyItWithAdapter);
-            binding.txtAddButton.setText("Add all "+productDetailsResponse.getAddOn().size()+" to Cart");
+            binding.txtAddButton.setText("Add all " + productDetailsResponse.getAddOn().size() + " to Cart");
             binding.textBuyitWith.setVisibility(View.VISIBLE);
             binding.linerBuy.setVisibility(View.VISIBLE);
             binding.viewBuy.setVisibility(View.VISIBLE);
-            for (int i =0 ;i<productDetailsResponse.getAddOn().size();i++){
-               if (productDetailsResponse.getAddOn().get(i).getDiscount()!=null){
-                   int price = Integer.parseInt(productDetailsResponse.getAddOn().get(i).getDiscount());
-                   TotalPrice = TotalPrice+price;
-               }else {
-                   int price = Integer.parseInt(productDetailsResponse.getAddOn().get(i).getVariables().get(0).getPrice().getMrp());
-                   TotalPrice =TotalPrice+price;
-               }
+            for (int i = 0; i < productDetailsResponse.getAddOn().size(); i++) {
+                if (productDetailsResponse.getAddOn().get(i).getDiscount() != null) {
+                    int price = Integer.parseInt(productDetailsResponse.getAddOn().get(i).getDiscount());
+                    TotalPrice = TotalPrice + price;
+                } else {
+                    int price = Integer.parseInt(productDetailsResponse.getAddOn().get(i).getVariables().get(0).getPrice().getMrp());
+                    TotalPrice = TotalPrice + price;
+                }
 
-               binding.totalPrice.setText(""+TotalPrice);
+                binding.totalPrice.setText("" + TotalPrice);
             }
-        }else {
+        } else {
 
             binding.textBuyitWith.setVisibility(View.GONE);
             binding.linerBuy.setVisibility(View.GONE);
@@ -434,23 +442,27 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     }
 
     @Override
-    public void OnCheckBoxClickListener(ArrayList<String> ProductId,String totalPrice,Boolean checked  ) {
+    public void OnCheckBoxClickListener(ArrayList<String> ProductId, String totalPrice, Boolean checked) {
 
-        binding.txtAddButton.setText("Add all "+ProductId.size()+" to Cart");
+        binding.txtAddButton.setText("Add all " + ProductId.size() + " to Cart");
 
-        if (checked==true){
-            TotalPrice = TotalPrice+Integer.parseInt(totalPrice);
-        }else{
-            TotalPrice = TotalPrice-Integer.parseInt(totalPrice);
+        if (checked == true) {
+            TotalPrice = TotalPrice + Integer.parseInt(totalPrice);
+        } else {
+            TotalPrice = TotalPrice - Integer.parseInt(totalPrice);
         }
 
-        binding.totalPrice.setText(""+TotalPrice);
-       // Toast.makeText(getActivity(), ""+ProductId.size(), Toast.LENGTH_SHORT).show();
+        binding.totalPrice.setText("" + TotalPrice);
+        if (ProductId.size() == 0) {
+            binding.txtAddButton.setVisibility(View.GONE);
+        } else {
+            binding.txtAddButton.setVisibility(View.VISIBLE);
+        }
 
     }
 
     private void getReviewVideo() {
-        Integer[] Image = {R.mipmap.video, R.mipmap.video, R.mipmap.video,R.mipmap.video,R.mipmap.video};
+        Integer[] Image = {R.mipmap.video, R.mipmap.video, R.mipmap.video, R.mipmap.video, R.mipmap.video};
         ReviewVideoAdapter gameAdapter = new ReviewVideoAdapter(getContext(), Image);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.videoRecycler.setLayoutManager(mLayoutManager1);
@@ -460,7 +472,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     }
 
     private void getReviewImage() {
-        Integer[] Image = {R.mipmap.image, R.mipmap.image, R.mipmap.image,R.mipmap.image,R.mipmap.image};
+        Integer[] Image = {R.mipmap.image, R.mipmap.image, R.mipmap.image, R.mipmap.image, R.mipmap.image};
         ReviewImageAdapter gameAdapter = new ReviewImageAdapter(getContext(), Image);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.imageRecycler.setLayoutManager(mLayoutManager1);
@@ -470,13 +482,21 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     }
 
     private void getReviewList(ProductDetailsResponse productDetailsResponse) {
-
-
         ReviewAdapter reviewAdapter = new ReviewAdapter(getContext(), productDetailsResponse);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.ReviewRecyclerView.setLayoutManager(mLayoutManager1);
         binding.ReviewRecyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.ReviewRecyclerView.setAdapter(reviewAdapter);
+
+    }
+
+    private void getAllReview_Product() {
+        String price[] = {"7999", "8999", "10000", "7999", "8999", "10000"};
+        Review_product_Adapter review_product_adapter = new Review_product_Adapter(getActivity(), price);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        binding.relatedProductRcycler.setLayoutManager(mLayoutManager1);
+        binding.relatedProductRcycler.setItemAnimator(new DefaultItemAnimator());
+        binding.relatedProductRcycler.setAdapter(review_product_adapter);
 
     }
 }

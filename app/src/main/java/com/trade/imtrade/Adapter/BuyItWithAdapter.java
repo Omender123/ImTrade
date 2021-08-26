@@ -26,7 +26,7 @@ public class BuyItWithAdapter extends RecyclerView.Adapter<BuyItWithAdapter.Buyi
     Context context;
     ProductDetailsResponse productDetailsResponse;
     BuyitwithClickListener buyitwithClickListener;
-    ArrayList<String>ProductId = new ArrayList<String >();
+     public  static  ArrayList<String>ProductId = new ArrayList<String >();
 
     public BuyItWithAdapter(Context context, ProductDetailsResponse productDetailsResponse, BuyitwithClickListener buyitwithClickListener) {
         this.context = context;
@@ -80,6 +80,8 @@ public class BuyItWithAdapter extends RecyclerView.Adapter<BuyItWithAdapter.Buyi
                 buyitwithClickListener.onBuyitwithOnClickListener(productDetailsResponse, position);
             }
         });
+
+        ProductId.add(productDetailsResponse.getAddOn().get(position).getId());
 
         holder.binding.checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

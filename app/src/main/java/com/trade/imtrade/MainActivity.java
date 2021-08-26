@@ -49,7 +49,13 @@ import com.trade.imtrade.SharedPrefernce.User_Data;
 import com.trade.imtrade.utils.AppUtils;
 import com.trade.imtrade.view_presenter.MainActivity_Presenter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, MainActivity_Presenter.MainActivityView {
@@ -103,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         presenter = new MainActivity_Presenter(this);
         presenter.GetUpdateProfile(MainActivity.this);
+        presenter.GetCartCount(MainActivity.this);
 
         if (user_data.getUserName() == null) {
             username.setText("UserName");
@@ -371,8 +378,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onError(String message) {
-        Toast.makeText(MainActivity.this, "" + message, Toast.LENGTH_SHORT).show();
-
+       // Toast.makeText(MainActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+        text_cart_Count.setText("0");
     }
 
     @Override
@@ -392,6 +399,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+    }
+
+    @Override
+    public void onCartCountSuccess(ResponseBody responseBody, String message) {
+        try {
+            String s=responseBody.string();
+            JSONObject object = new JSONObject(s);
+            text_cart_Count.setText(object.getString("count"));
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

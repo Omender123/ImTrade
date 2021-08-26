@@ -178,5 +178,8 @@ public interface ApiService {
     @GET("qsns")
     Call<List<CustomerQuestionsResponse>> getAllCustomerQuestions(@Query("id") String ProductId);
 
+    @GET("cart/count")
+    Call<ResponseBody> getCartCount();
+
 
 }

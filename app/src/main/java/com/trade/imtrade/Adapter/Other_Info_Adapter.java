@@ -9,17 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.databinding.ProfileItemLayoutBinding;
 
 import java.util.ArrayList;
 
 public class Other_Info_Adapter  extends RecyclerView.Adapter<Other_Info_Adapter.OtherInfo_itemViewHolder> {
-    ArrayList<String> ItemList;
+    ProductDetailsResponse ItemList;
     Context context;
-
     private OnOtherInfoItemListener onOtherInfoItemListener;
 
-    public Other_Info_Adapter(ArrayList<String> itemList, Context context, OnOtherInfoItemListener onOtherInfoItemListener) {
+    public Other_Info_Adapter(ProductDetailsResponse itemList, Context context, OnOtherInfoItemListener onOtherInfoItemListener) {
         this.ItemList = itemList;
         this.context = context;
         this.onOtherInfoItemListener = onOtherInfoItemListener;
@@ -43,7 +43,7 @@ public class Other_Info_Adapter  extends RecyclerView.Adapter<Other_Info_Adapter
 
         holder.binding.text.setPadding(0,5,0,5);
         holder.binding.text.setTextSize(12);
-        holder.binding.text.setText(ItemList.get(position));
+        holder.binding.text.setText(ItemList.getOtherInfo().get(position).getDetail());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class Other_Info_Adapter  extends RecyclerView.Adapter<Other_Info_Adapter
 
     @Override
     public int getItemCount() {
-        return ItemList.size();
+        return ItemList.getOtherInfo().size();
     }
 
     public class OtherInfo_itemViewHolder extends RecyclerView.ViewHolder {
@@ -72,6 +72,6 @@ public class Other_Info_Adapter  extends RecyclerView.Adapter<Other_Info_Adapter
     }
 
     public interface OnOtherInfoItemListener {
-        void onOtherInfoItemClickListener(ArrayList<String> ItemList, int position);
+        void onOtherInfoItemClickListener(ProductDetailsResponse ItemList, int position);
     }
 }
