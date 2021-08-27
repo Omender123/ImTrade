@@ -3,6 +3,7 @@ package com.trade.imtrade.view_presenter;
 import android.content.Context;
 
 import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
+import com.trade.imtrade.Model.ResponseModel.OfferResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
@@ -28,12 +29,12 @@ public class ProductDetails_Presenter {
     }
 
     public void GetProductDetails(Context context, String Route){
-        view.showHideProgress(true);
+      //  view.showHideProgress(true);
         Call<ProductDetailsResponse> userCall = AppUtils.getApi(context).getProductFullDetails(Route);
         userCall.enqueue(new Callback<ProductDetailsResponse>() {
             @Override
             public void onResponse(Call<ProductDetailsResponse> call, Response<ProductDetailsResponse> response) {
-                view.showHideProgress(false);
+               // view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
                     view.onProductDetailsSuccess(response.body(),response.message());
                 } else if (response.code()==400){
@@ -51,7 +52,7 @@ public class ProductDetails_Presenter {
 
             @Override
             public void onFailure(Call<ProductDetailsResponse> call, Throwable t) {
-                view.showHideProgress(false);
+              //  view.showHideProgress(false);
                 view.onFailure(t);
             }
         });
@@ -88,12 +89,12 @@ public class ProductDetails_Presenter {
 
     }
     public void GetAllCustomerQuestions(Context context, String ProductId){
-        view.showHideProgress(true);
+  //      view.showHideProgress(true);
         Call<List<CustomerQuestionsResponse>> userCall = AppUtils.getApi(context).getAllCustomerQuestions(ProductId);
         userCall.enqueue(new Callback<List<CustomerQuestionsResponse>>() {
             @Override
             public void onResponse(Call<List<CustomerQuestionsResponse>> call, Response<List<CustomerQuestionsResponse>> response) {
-                view.showHideProgress(false);
+             //   view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
                     view.onCustomerQuestionsSuccess(response.body(),response.message());
                 } else if (response.code()==400){
@@ -111,7 +112,38 @@ public class ProductDetails_Presenter {
 
             @Override
             public void onFailure(Call<List<CustomerQuestionsResponse>> call, Throwable t) {
+              //  view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetAllOFFER(Context context){
+      //  view.showHideProgress(true);
+        Call<List<OfferResponse>> userCall = AppUtils.getApi(context).getAllOffer();
+        userCall.enqueue(new Callback<List<OfferResponse>>() {
+            @Override
+            public void onResponse(Call<List<OfferResponse>> call, Response<List<OfferResponse>> response) {
                 view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    view.onOfferSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("body");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<OfferResponse>> call, Throwable t) {
+             //   view.showHideProgress(false);
                 view.onFailure(t);
             }
         });
@@ -125,6 +157,7 @@ public class ProductDetails_Presenter {
         void onProductDetailsSuccess(ProductDetailsResponse productDetailsResponse, String message);
         void onAddToCartSuccess(ResponseBody responseBody, String message);
         void onCustomerQuestionsSuccess(List<CustomerQuestionsResponse>customerQuestionsResponses, String message);
+        void onOfferSuccess(List<OfferResponse>offerResponses, String message);
 
         void onFailure(Throwable t);
     }

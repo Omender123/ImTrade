@@ -62,7 +62,7 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
         view = binding.getRoot();
         presenter = new AllProductPresenter(this);
 
-        dialog = AppUtils.hideShowProgress(getContext());
+      //  dialog = AppUtils.hideShowProgress(getContext());
         binding.imgShort.setOnClickListener(this);
         binding.textFilter.setOnClickListener(this);
 
@@ -152,11 +152,11 @@ public class Product_Fragemet extends Fragment implements View.OnClickListener, 
 
     @Override
     public void showHideProgress(boolean isShow) {
-        if (isShow) {
+        /*if (isShow) {
             dialog.show();
         } else {
             dialog.dismiss();
-        }
+        }*/
     }
 
     @Override

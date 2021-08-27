@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.irozon.sneaker.Sneaker;
@@ -42,6 +43,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     private View view;
     String TotalItem;
     Boolean check = false;
+    TextView text_cart_Count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

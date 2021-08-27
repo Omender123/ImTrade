@@ -7,18 +7,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.trade.imtrade.Model.ResponseModel.OfferResponse;
 import com.trade.imtrade.databinding.CustomOfferLayoutBinding;
 import com.trade.imtrade.databinding.DetailsLayoutBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHolder> {
     Context context;
-    ArrayList<String>strings;
+    List<OfferResponse>offerResponses;
 
-    public OfferAdapter(Context context, ArrayList<String> strings) {
+    public OfferAdapter(Context context, List<OfferResponse>offerResponse) {
         this.context = context;
-        this.strings = strings;
+        this.offerResponses = offerResponse;
     }
 
     public OfferAdapter() {
@@ -35,13 +37,14 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferViewHol
 
     @Override
     public void onBindViewHolder(@NonNull OfferViewHolder holder, int position) {
-        holder.binding.textOffer.setText(strings.get(position));
+        holder.binding.textOffer.setText(offerResponses.get(position).getTitle());
+        holder.binding.textOfferDes.setText(offerResponses.get(position).getDescription());
 
     }
 
     @Override
     public int getItemCount() {
-        return strings.size();
+        return offerResponses.size();
     }
 
     public class OfferViewHolder extends RecyclerView.ViewHolder {

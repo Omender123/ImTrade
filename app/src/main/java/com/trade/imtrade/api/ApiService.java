@@ -11,6 +11,7 @@ import com.trade.imtrade.Model.ResponseModel.DealofDayResponse;
 import com.trade.imtrade.Model.ResponseModel.HotelAndCoffeeResponse;
 import com.trade.imtrade.Model.ResponseModel.LoginResponse;
 import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
+import com.trade.imtrade.Model.ResponseModel.OfferResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
 import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
@@ -181,5 +182,7 @@ public interface ApiService {
     @GET("cart/count")
     Call<ResponseBody> getCartCount();
 
+    @GET("offer")
+    Call<List<OfferResponse>> getAllOffer();
 
 }

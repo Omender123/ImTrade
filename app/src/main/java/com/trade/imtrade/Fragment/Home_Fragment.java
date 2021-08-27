@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
@@ -61,6 +62,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
     Integer[] Image = {R.mipmap.game1, R.mipmap.game2, R.mipmap.game3};
 
     NavController navController;
+    TextView text_cart_Count;
 
     public Home_Fragment() {
         // Required empty public constructor
@@ -74,7 +76,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
         presenter = new Home_Presenter(this);
         view = binding.getRoot();
-        dialog = AppUtils.hideShowProgress(getContext());
+        //  dialog = AppUtils.hideShowProgress(getContext());
 
         presenter.GetBanner(getContext());
         presenter.GetAllCategories(getContext());
@@ -125,11 +127,11 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
 
     @Override
     public void showHideProgress(boolean isShow) {
-        if (isShow) {
+      /*  if (isShow) {
             dialog.show();
         } else {
             dialog.dismiss();
-        }
+        }*/
 
     }
 
@@ -463,7 +465,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
         String ProductName = data.get(position).getName();
 
-        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment =  Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
+        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment = Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
         fragment.setProductName(ProductName);
         Navigation.findNavController(view).navigate(fragment);
     }
@@ -474,7 +476,7 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
         String ProductName = data.get(position).getName();
 
-        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment =  Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
+        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment = Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
         fragment.setProductName(ProductName);
         Navigation.findNavController(view).navigate(fragment);
     }
@@ -485,9 +487,10 @@ public class Home_Fragment extends Fragment implements Home_Presenter.HomeView, 
         MyPreferences.getInstance(getContext()).putString(PrefConf.ROUTEID, roleId);
         String ProductName = data.getProducts().get(position).getName();
 
-        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment =  Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
+        Home_FragmentDirections.ActionHomeFragmentToProductDetailsFragment fragment = Home_FragmentDirections.actionHomeFragmentToProductDetailsFragment();
         fragment.setProductName(ProductName);
         Navigation.findNavController(view).navigate(fragment);
 
     }
+
 }

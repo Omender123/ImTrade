@@ -4,17 +4,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,27 +19,24 @@ import android.view.animation.BounceInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.irozon.sneaker.Sneaker;
-import com.trade.imtrade.Activity.CartActivity;
-import com.trade.imtrade.Activity.Product_Details;
+import com.trade.imtrade.Activity.OrderSummary;
 import com.trade.imtrade.Adapter.BuyItWithAdapter;
 import com.trade.imtrade.Adapter.ColorAdapter;
 import com.trade.imtrade.Adapter.ColorAdapter.OnColorItemListener;
 import com.trade.imtrade.Adapter.Customer_Questions_Adapter;
 import com.trade.imtrade.Adapter.DetailsAdapter;
-import com.trade.imtrade.Adapter.GameAdapter;
 import com.trade.imtrade.Adapter.OfferAdapter;
 import com.trade.imtrade.Adapter.Other_Info_Adapter;
-import com.trade.imtrade.Adapter.Profile_itemAdapter;
 import com.trade.imtrade.Adapter.ReviewAdapter;
 import com.trade.imtrade.Adapter.ReviewImageAdapter;
 import com.trade.imtrade.Adapter.ReviewVideoAdapter;
 import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Adapter.StorageAdapter;
 import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
+import com.trade.imtrade.Model.ResponseModel.OfferResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.R;
@@ -50,7 +44,6 @@ import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.FragmentProductDetailsBinding;
 import com.trade.imtrade.utils.AppUtils;
-import com.trade.imtrade.view_presenter.Home_Presenter;
 import com.trade.imtrade.view_presenter.ProductDetails_Presenter;
 
 import java.util.ArrayList;
@@ -69,7 +62,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     ProductDetails_Presenter presenter;
     String RouteId;
     ProductDetailsResponse productDetailsResponses;
-    Boolean Check;
+    Boolean Check , CheckedLogin;
     int TotalPrice;
 
     public Product_Details_Fragment() {
@@ -93,6 +86,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product__details, container, false);
         RouteId = MyPreferences.getInstance(getActivity()).getString(PrefConf.ROUTEID, "");
+        CheckedLogin = MyPreferences.getInstance(getActivity()).getBoolean(PrefConf.LOGINCHECK, false);
 
         view = binding.getRoot();
         presenter = new ProductDetails_Presenter(this);
@@ -100,6 +94,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
         dialog = AppUtils.hideShowProgress(getContext());
 
         presenter.GetProductDetails(getActivity(), RouteId);
+        presenter.GetAllOFFER(getActivity());
 
         binding.showMore.setOnClickListener(this);
         binding.HideMore.setOnClickListener(this);
@@ -107,10 +102,10 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
         binding.HideMore1.setOnClickListener(this);
         binding.showDetails.setOnClickListener(this);
         binding.HideDetails.setOnClickListener(this);
+        binding.textAddtocart.setOnClickListener(this);
+        binding.textBuyNow.setOnClickListener(this);
 
 
-        Toast.makeText(getActivity(), ""+text_cart_Count.getText().toString(), Toast.LENGTH_SHORT).show();
-        getOffer();
         CheckBoxList();
         getReviewVideo();
         getReviewImage();
@@ -218,7 +213,17 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     @Override
     public void onAddToCartSuccess(ResponseBody responseBody, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            Sneaker.with(getActivity())
+                    .setTitle("Successfully add product in cart ")
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakSuccess();
 
+            int cart = Integer.parseInt(text_cart_Count.getText().toString()) + 1;
+            text_cart_Count.setText(String.valueOf(cart));
+        }
     }
 
     @Override
@@ -235,6 +240,26 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
                 binding.custQuesRecycler.setVisibility(View.GONE);
                 binding.textSeeQA.setVisibility(View.GONE);
+            }
+
+        }
+    }
+
+    @Override
+    public void onOfferSuccess(List<OfferResponse> offerResponses, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+            if (offerResponses.size() > 0 && offerResponses != null) {
+                OfferAdapter profile_itemAdapter = new OfferAdapter(getContext(), offerResponses);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+                binding.offerRecycler.setLayoutManager(mLayoutManager);
+                binding.offerRecycler.setItemAnimator(new DefaultItemAnimator());
+                binding.offerRecycler.setAdapter(profile_itemAdapter);
+                binding.offerRecycler.setVisibility(View.VISIBLE);
+                binding.txtOffer.setVisibility(View.VISIBLE);
+            } else {
+
+                binding.txtOffer.setVisibility(View.GONE);
+                binding.offerRecycler.setVisibility(View.GONE);
             }
 
         }
@@ -284,6 +309,37 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                 binding.HideDetails.setVisibility(View.GONE);
                 getDelatilsList(productDetailsResponses, false);
                 break;
+
+            case R.id.text_addtocart:
+                if (CheckedLogin == true) {
+                    AddToCartBody addToCartBody = new AddToCartBody(productDetailsResponses.getId(), 1);
+                    presenter.AddToCart(getActivity(), addToCartBody);
+
+                } else {
+                    Sneaker.with(getActivity())
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+                break;
+
+            case R.id.text_BuyNow:
+                if (CheckedLogin == true) {
+
+                    startActivity(new Intent(getActivity(), OrderSummary.class));
+
+                } else {
+                    Sneaker.with(getActivity())
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+                break;
+
         }
     }
 
@@ -387,19 +443,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     }
 
-    private void getOffer() {
-        ArrayList<String> arrayList = new ArrayList<String>();
-        arrayList.add("Cashback");
-        arrayList.add("Partner offers");
-        arrayList.add("No Cost EMI");
 
-        OfferAdapter profile_itemAdapter = new OfferAdapter(getContext(), arrayList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        binding.offerRecycler.setLayoutManager(mLayoutManager);
-        binding.offerRecycler.setItemAnimator(new DefaultItemAnimator());
-        binding.offerRecycler.setAdapter(profile_itemAdapter);
-
-    }
 
     private void getAllBuyItWith(ProductDetailsResponse productDetailsResponse) {
 

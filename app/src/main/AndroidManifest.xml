@@ -39,9 +39,6 @@
             android:name=".Activity.CartActivity"
             android:theme="@style/Theme.ImTrade.NoActionBar" />
         <activity
-            android:name=".Activity.Product_Details"
-            android:theme="@style/Theme.ImTrade.NoActionBar" />
-        <activity
             android:name=".Activity.Referral_Code"
             android:theme="@style/Theme.ImTrade.NoActionBar" />
         <activity

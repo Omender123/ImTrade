@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -36,11 +35,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Activity.CartActivity;
-import com.trade.imtrade.Activity.Product_Details;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -311,8 +308,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         SharedPrefManager.getInstance(getApplicationContext()).logout();
-                        MyPreferences.getInstance(MainActivity.this).deletePreference(PrefConf.LOGINCHECK);
-                        MyPreferences.getInstance(MainActivity.this).deletePreference(PrefConf.ProfileImage);
+                        MyPreferences.getInstance(MainActivity.this).clearPreferences();
                         clearApplicationData();
                         Toast.makeText(MainActivity.this, "Logout Successfully", Toast.LENGTH_SHORT).show();
                         finish();
@@ -407,6 +403,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String s=responseBody.string();
             JSONObject object = new JSONObject(s);
             text_cart_Count.setText(object.getString("count"));
+            MyPreferences.getInstance(MainActivity.this).putString(PrefConf.CARTCOUNT,object.getString("count"));
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -421,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
+      presenter.GetCartCount(MainActivity.this);
     }
 
 
