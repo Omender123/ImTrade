@@ -7,16 +7,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.trade.imtrade.Model.ResponseModel.ReviewResponse;
+import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.CustomReviewVideoLayoutBinding;
 import com.trade.imtrade.databinding.CustomReviewVideoLayoutBinding;
+
+import java.util.List;
 
 public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.ReviewVideoViewHolder>  {
     Context context;
-    Integer[] Image;
+    List<ReviewResponse> reviewResponse;
 
-    public ReviewVideoAdapter(Context context, Integer[] Image) {
+    public ReviewVideoAdapter(Context context, List<ReviewResponse> reviewResponse) {
         this.context = context;
-        this.Image = Image;
+        this.reviewResponse = reviewResponse;
     }
 
     public ReviewVideoAdapter() {
@@ -34,13 +39,13 @@ public class ReviewVideoAdapter extends RecyclerView.Adapter<ReviewVideoAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ReviewVideoAdapter.ReviewVideoViewHolder holder, int position) {
-        holder.binding.videoImage.setImageResource(Image[position]);
-        //   Glide.with(context).load("https://picsum.photos/id/896/300/200").into(holder.binding.b);
+
+         Glide.with(context).load(PrefConf.IMAGE_URL + reviewResponse.get(position).getThumbnail()).into(holder.binding.videoImage);
     }
 
     @Override
     public int getItemCount() {
-        return Image.length;
+        return reviewResponse.size();
     }
 
     public class ReviewVideoViewHolder extends RecyclerView.ViewHolder {

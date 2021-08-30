@@ -71,12 +71,12 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
 
     private void getAllRelated_Product() {
         String price[] = {"7999 Rs", "8999 Rs", "10000 Rs"};
-        Review_product_Adapter review_product_adapter = new Review_product_Adapter(this, price);
+       /* Review_product_Adapter review_product_adapter = new Review_product_Adapter(this, price);
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         binding.relatedProductRcycler.setLayoutManager(mLayoutManager1);
         binding.relatedProductRcycler.setItemAnimator(new DefaultItemAnimator());
         binding.relatedProductRcycler.setAdapter(review_product_adapter);
-
+*/
     }
 
     @Override

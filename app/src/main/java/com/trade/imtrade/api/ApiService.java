@@ -14,6 +14,8 @@ import com.trade.imtrade.Model.ResponseModel.HomeProductResponse;
 import com.trade.imtrade.Model.ResponseModel.OfferResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductResponse;
+import com.trade.imtrade.Model.ResponseModel.RelatedResponse;
+import com.trade.imtrade.Model.ResponseModel.ReviewResponse;
 import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
 import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
@@ -184,5 +186,17 @@ public interface ApiService {
 
     @GET("offer")
     Call<List<OfferResponse>> getAllOffer();
+
+    @GET("review")
+    Call<List<ReviewResponse>> getAllReview(@Query("id") String ProductId);
+
+    @GET("review/image")
+    Call<List<ReviewResponse>> getAllReviewImages(@Query("id") String ProductId);
+
+    @GET("review/video")
+    Call<List<ReviewResponse>> getAllReviewVideo(@Query("id") String ProductId);
+
+    @GET("products/relatedProduct")
+    Call<RelatedResponse> getAllRelatedProduct(@Query("id") String ProductId);
 
 }

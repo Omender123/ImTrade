@@ -153,6 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
+                    android:visibility="gone"
                     android:background="@color/white">
 
                     <TextView
@@ -191,6 +192,8 @@
                     android:layout_marginLeft="05dp"
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     android:paddingBottom="3dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/custom_recomanded" />

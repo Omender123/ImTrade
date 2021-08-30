@@ -6,6 +6,8 @@ import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
 import com.trade.imtrade.Model.ResponseModel.OfferResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
+import com.trade.imtrade.Model.ResponseModel.RelatedResponse;
+import com.trade.imtrade.Model.ResponseModel.ReviewResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.utils.AppUtils;
 
@@ -41,7 +43,7 @@ public class ProductDetails_Presenter {
                     try {
                         String  errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("body");
+                        String err_msg  = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {
@@ -101,7 +103,7 @@ public class ProductDetails_Presenter {
                     try {
                         String  errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("body");
+                        String err_msg  = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {
@@ -126,13 +128,13 @@ public class ProductDetails_Presenter {
             @Override
             public void onResponse(Call<List<OfferResponse>> call, Response<List<OfferResponse>> response) {
                 view.showHideProgress(false);
-                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                if (response.isSuccessful() && response.code() == 200 ) {
                     view.onOfferSuccess(response.body(),response.message());
                 } else if (response.code()==400){
                     try {
                         String  errorRes = response.errorBody().string();
                         JSONObject object = new JSONObject(errorRes);
-                        String err_msg  = object.getString("body");
+                        String err_msg  = object.getString("error");
                         view.onError(err_msg);
 
                     } catch (IOException | JSONException e) {
@@ -150,6 +152,130 @@ public class ProductDetails_Presenter {
 
     }
 
+    public void GetAllReview(Context context, String ProductId){
+        //      view.showHideProgress(true);
+        Call<List<ReviewResponse>> userCall = AppUtils.getApi(context).getAllReview(ProductId);
+        userCall.enqueue(new Callback<List<ReviewResponse>>() {
+            @Override
+            public void onResponse(Call<List<ReviewResponse>> call, Response<List<ReviewResponse>> response) {
+                //   view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200) {
+                    view.oAllReviewSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ReviewResponse>> call, Throwable t) {
+                //  view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetAllReviewImages(Context context, String ProductId){
+        //      view.showHideProgress(true);
+        Call<List<ReviewResponse>> userCall = AppUtils.getApi(context).getAllReviewImages(ProductId);
+        userCall.enqueue(new Callback<List<ReviewResponse>>() {
+            @Override
+            public void onResponse(Call<List<ReviewResponse>> call, Response<List<ReviewResponse>> response) {
+                //   view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 ) {
+                    view.oAllReviewImagesSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ReviewResponse>> call, Throwable t) {
+                //  view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetAllReviewVideo(Context context, String ProductId){
+        //      view.showHideProgress(true);
+        Call<List<ReviewResponse>> userCall = AppUtils.getApi(context).getAllReviewVideo(ProductId);
+        userCall.enqueue(new Callback<List<ReviewResponse>>() {
+            @Override
+            public void onResponse(Call<List<ReviewResponse>> call, Response<List<ReviewResponse>> response) {
+                //   view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200) {
+                    view.oAllReviewVideoSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ReviewResponse>> call, Throwable t) {
+                //  view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
+    public void GetAllRelatedProduct(Context context, String ProductId){
+        //  view.showHideProgress(true);
+        Call<RelatedResponse> userCall = AppUtils.getApi(context).getAllRelatedProduct(ProductId);
+        userCall.enqueue(new Callback<RelatedResponse>() {
+            @Override
+            public void onResponse(Call<RelatedResponse> call, Response<RelatedResponse> response) {
+                // view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 ) {
+                    view.onRelatedProductSuccess(response.body(),response.message());
+                } else if (response.code()==400){
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RelatedResponse> call, Throwable t) {
+                //  view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
 
     public interface GetProductDetailsView{
         void showHideProgress(boolean isShow);
@@ -158,6 +284,10 @@ public class ProductDetails_Presenter {
         void onAddToCartSuccess(ResponseBody responseBody, String message);
         void onCustomerQuestionsSuccess(List<CustomerQuestionsResponse>customerQuestionsResponses, String message);
         void onOfferSuccess(List<OfferResponse>offerResponses, String message);
+        void oAllReviewSuccess(List<ReviewResponse>offerResponses, String message);
+        void oAllReviewImagesSuccess(List<ReviewResponse>offerResponses, String message);
+        void oAllReviewVideoSuccess(List<ReviewResponse>offerResponses, String message);
+        void onRelatedProductSuccess(RelatedResponse relatedResponse , String message);
 
         void onFailure(Throwable t);
     }

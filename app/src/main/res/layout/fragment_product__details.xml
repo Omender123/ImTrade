@@ -690,218 +690,233 @@
                     android:textColor="@color/btn_color"
                     android:textSize="12sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:layout_below="@id/img_border3"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/background" />
-
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/linReview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:fontFamily="@font/poppins_medium"
-                    android:paddingStart="20dp"
-                    android:paddingTop="10dp"
-                    android:text="Customer Reviews"
-                    android:textColor="@color/product_Price"
-                    android:textSize="14sp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp">
-
-                    <com.iarcuschin.simpleratingbar.SimpleRatingBar
-                        android:id="@+id/text_Reviewrating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_below="@id/img_border3"
                         android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="8dp"
-                        android:saveEnabled="false"
-                        app:srb_borderColor="#FF9C1B"
-                        app:srb_fillColor="#FFC51B"
-                        app:srb_isIndicator="true"
-                        app:srb_numberOfStars="5"
-                        app:srb_rating="4"
-                        app:srb_starBorderWidth="2"
-                        app:srb_starSize="13dp"
-                        app:srb_stepSize="0.5" />
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/background" />
+
 
                     <TextView
-                        android:id="@+id/text_outOfRating"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_toStartOf="@+id/linRecent"
-                        android:layout_toEndOf="@id/text_Reviewrating"
-                        android:fontFamily="@font/poppins"
-                        android:text="4 out of 5"
-                        android:textColor="@color/product_Price"
-                        android:textSize="10sp" />
-
-                    <LinearLayout
-                        android:id="@+id/linRecent"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/sreach_bg"
-                        android:orientation="horizontal">
+                        android:background="@color/white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:text="Customer Reviews"
+                        android:textColor="@color/product_Price"
+                        android:textSize="14sp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp">
+
+                        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                            android:id="@+id/text_Reviewrating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="8dp"
+                            android:saveEnabled="false"
+                            app:srb_borderColor="#FF9C1B"
+                            app:srb_fillColor="#FFC51B"
+                            app:srb_isIndicator="true"
+                            app:srb_numberOfStars="5"
+                            app:srb_rating="4"
+                            app:srb_starBorderWidth="2"
+                            app:srb_starSize="13dp"
+                            app:srb_stepSize="0.5" />
 
                         <TextView
+                            android:id="@+id/text_outOfRating"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toStartOf="@+id/linRecent"
+                            android:layout_toEndOf="@id/text_Reviewrating"
+                            android:fontFamily="@font/poppins"
+                            android:text="4 out of 5"
+                            android:textColor="@color/product_Price"
+                            android:textSize="10sp" />
+
+                        <LinearLayout
+                            android:id="@+id/linRecent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins"
-                            android:padding="7dp"
-                            android:text="Recent"
-                            android:textColor="@color/product_Price"
-                            android:textSize="12sp" />
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/sreach_bg"
+                            android:orientation="horizontal">
 
-                        <View
-                            android:layout_width="0.5dp"
-                            android:layout_height="32dp"
-                            android:background="#59212121" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:padding="7dp"
+                                android:text="Recent"
+                                android:textColor="@color/product_Price"
+                                android:textSize="12sp" />
 
-                        <TextView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="1dp"
-                            android:layout_marginEnd="2dp"
-                            android:layout_marginBottom="1dp"
-                            android:background="@color/background"
-                            android:drawableRight="@drawable/ic_drop_down_arrow"
-                            android:drawableTint="@color/product_Price"
-                            android:padding="7dp"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </RelativeLayout>
+                            <View
+                                android:layout_width="0.5dp"
+                                android:layout_height="32dp"
+                                android:background="#59212121" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:fontFamily="@font/poppins_medium"
-                    android:paddingStart="20dp"
-                    android:text="166 rating and 20 reviews"
-                    android:textColor="#B32B2B2B"
-                    android:textSize="10sp" />
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginEnd="2dp"
+                                android:layout_marginBottom="1dp"
+                                android:background="@color/background"
+                                android:drawableRight="@drawable/ic_drop_down_arrow"
+                                android:drawableTint="@color/product_Price"
+                                android:padding="7dp"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5sp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#33212121" />
+                    <TextView
+                        android:id="@+id/txt_totalReviewrating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingStart="20dp"
+                        android:text="166 rating and 20 reviews"
+                        android:textColor="#B32B2B2B"
+                        android:textSize="10sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:paddingStart="20dp"
-                    android:paddingTop="10dp"
-                    android:text="Reviews with videos"
-                    android:textColor="@color/product_Price"
-                    android:textSize="12sp" />
+                    <View
+                        android:id="@+id/viewReviewVideo"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/video_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/custom_review_video_layout" />
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="#33212121" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5sp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#33212121" />
+                    <TextView
+                        android:id="@+id/textReviewVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:text="Reviews with videos"
+                        android:textColor="@color/product_Price"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:paddingStart="20dp"
-                    android:paddingTop="10dp"
-                    android:text="Reviews with images"
-                    android:textColor="@color/product_Price"
-                    android:textSize="12sp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/video_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/custom_review_video_layout" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/image_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/custom_reviewimage_layout" />
+                    <View
+                        android:id="@+id/viewReviewImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="#33212121" />
 
+                    <TextView
+                        android:id="@+id/textReviewImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:text="Reviews with images"
+                        android:textColor="@color/product_Price"
+                        android:textSize="12sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5sp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#33212121" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins"
-                    android:paddingStart="20dp"
-                    android:paddingBottom="14dp"
-                    android:text="Review"
-                    android:textColor="@color/product_Price"
-                    android:textSize="12sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/ReviewRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/sreach_bg"
-                    android:orientation="vertical"
-                    android:paddingStart="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="5dp"
-                    tools:itemCount="@integer/material_motion_duration_long_2"
-                    tools:listitem="@layout/review_layout" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/image_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/custom_reviewimage_layout" />
 
 
-                <TextView
-                    android:id="@+id/text_seeAllReview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:drawableRight="@drawable/ic_forword_arrow"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/btn_color"
-                    android:fontFamily="@font/poppins"
-                    android:text="Add Your Question"
-                    android:textColor="@color/btn_color"
-                    android:textSize="12sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5sp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="#33212121" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="20dp"
+                        android:paddingBottom="14dp"
+                        android:text="Review"
+                        android:textColor="@color/product_Price"
+                        android:textSize="12sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ReviewRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/sreach_bg"
+                        android:orientation="vertical"
+                        android:paddingStart="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="5dp"
+                        tools:itemCount="@integer/material_motion_duration_long_2"
+                        tools:listitem="@layout/review_layout" />
+
+
+                    <TextView
+                        android:id="@+id/text_seeAllReview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:drawableRight="@drawable/ic_forword_arrow"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/btn_color"
+                        android:fontFamily="@font/poppins"
+                        android:text="See all 11 Reviews "
+                        android:textColor="@color/btn_color"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
 
 
                 <View
@@ -915,6 +930,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/linRealted"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -955,6 +971,7 @@
                     tools:listitem="@layout/custom_recomanded" />
 
                 <View
+                    android:id="@+id/viewRealted"
                     android:layout_width="match_parent"
                     android:layout_height="5dp"
                     android:layout_below="@id/img_border3"
