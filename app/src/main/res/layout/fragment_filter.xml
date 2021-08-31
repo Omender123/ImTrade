@@ -2,26 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/white"
         tools:context=".Fragment.My_Address">
 
-    <ImageView
-        android:id="@+id/image_"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/background_design" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/image_"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true">
@@ -30,158 +21,138 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="25dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginRight="15dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Brands : "
-                        android:textStyle="bold"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:textSize="18sp"
-                        android:textColor="@color/product_Price" />
+                        android:fontFamily="@font/poppins"
+                        android:text="Brands : "
+                        android:textColor="@color/product_Price"
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/brands_unshow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_baseline_arrow_down_24"
-                        app:tint="#CCD8D8D8" />
+                        app:tint="@color/product_Price" />
+
                     <ImageView
                         android:id="@+id/brands_show"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:visibility="gone"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
+                        android:layout_alignParentRight="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                        android:visibility="gone"
+                        app:tint="@color/product_Price" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/custom_brands_toggle_layout"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="4"
                     tools:itemCount="20"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"/>
+                    tools:listitem="@layout/custom_brands_toggle_layout" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginRight="15dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rating : "
-                        android:textStyle="bold"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:textSize="18sp"
-                        android:textColor="@color/product_Price" />
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Rating : "
+                        android:textColor="@color/product_Price"
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/Rating_unshow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_baseline_arrow_down_24"
-                        app:tint="#CCD8D8D8" />
+                        app:tint="@color/product_Price" />
+
                     <ImageView
                         android:id="@+id/Rating_show"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:visibility="gone"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
+                        android:layout_alignParentRight="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+                        android:visibility="gone"
+                        app:tint="@color/product_Price" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RatingRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/custom_filter_rating_layout"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="3"
                     tools:itemCount="5"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"/>
+                    tools:listitem="@layout/custom_filter_rating_layout" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginRight="15dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Price : "
-                        android:textStyle="bold"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:textSize="18sp"
-                        android:textColor="@color/product_Price" />
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Price : "
+                    android:textColor="@color/product_Price"
+                    android:textSize="14sp" />
 
-                    <ImageView
-                        android:id="@+id/Price_unshow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_arrow_down_24"
-                        app:tint="#CCD8D8D8" />
-                    <ImageView
-                        android:id="@+id/Price_show"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:visibility="gone"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/layout_seekbar"
@@ -195,10 +166,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
+                        android:fontFamily="@font/poppins"
                         android:text="Min"
                         android:textColor="@color/product_name"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/text_progress"
@@ -207,10 +178,10 @@
                         android:layout_alignParentTop="true"
                         android:layout_toStartOf="@+id/text_max"
                         android:layout_toEndOf="@+id/text_min"
-                        android:textSize="12dp"
-                        android:textColor="@color/product_Price"
+                        android:fontFamily="@font/poppins"
                         android:gravity="center"
-                        android:textStyle="bold" />
+                        android:textColor="@color/product_Price"
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/text_max"
@@ -218,10 +189,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/poppins"
                         android:text="Max"
                         android:textColor="@color/product_name"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
+                        android:textSize="12dp" />
 
                     <SeekBar
                         android:id="@+id/seebar"
@@ -230,8 +201,8 @@
                         android:layout_below="@id/text_min"
                         android:layout_marginTop="5dp"
                         android:maxHeight="8dp"
-                        android:progressBackgroundTint="@color/product_Price"
-                        android:progressTint="@color/purple_200"
+                        android:progressBackgroundTint="#33212121"
+                        android:progressTint="@color/btn_color"
                         android:soundEffectsEnabled="true"
                         android:thumb="@drawable/seekbar_thumb_drawable"
                         android:thumbOffset="0dp" />
@@ -241,96 +212,64 @@
                         android:id="@+id/text_minPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/seebar"
                         android:layout_alignParentStart="true"
                         android:layout_marginTop="5dp"
-                        android:layout_below="@id/seebar"
+                        android:fontFamily="@font/poppins"
                         android:text="1000 Rs"
                         android:textColor="@color/product_name"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
+                        android:textSize="10dp" />
 
                     <TextView
                         android:id="@+id/text_maxPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/seebar"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppins"
                         android:text="10000 Rs"
-                        android:layout_below="@id/seebar"
                         android:textColor="@color/product_name"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
+                        android:textSize="10dp" />
 
                 </RelativeLayout>
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginRight="15dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Categories : "
-                        android:textStyle="bold"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:textSize="18sp"
-                        android:textColor="@color/product_Price" />
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Categories : "
+                    android:textColor="@color/product_Price"
+                    android:textSize="14sp" />
 
-                    <ImageView
-                        android:id="@+id/categorie_unshow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_arrow_down_24"
-                        app:tint="#CCD8D8D8" />
-                    <ImageView
-                        android:id="@+id/categorie_show"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:visibility="gone"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_up_24"/>
-                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/text_categories"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/verifying_textview"
-                    android:fontFamily="@font/montserrat"
+                    android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+                    android:drawableTint="#99212121"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
                     android:hint="Select Categories"
-                    android:inputType="text"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
-                    android:textColor="@color/text_color"
-                    android:textColorHint="@color/text_hint"
-                    android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
-                    android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:textColorHint="#99212121"
+                    android:textSize="13sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginStart="15dp"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginRight="15dp">
 
@@ -341,36 +280,33 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginTop="15dp"
+                        android:fontFamily="@font/poppins"
                         android:gravity="center"
-                        android:fontFamily="@font/montserrat"
                         android:text="Clear Filter "
-                        android:textColor="@color/purple_200"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/btn_color"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/btn_apply"
                         android:layout_width="130dp"
                         android:layout_height="50dp"
                         android:layout_alignParentTop="true"
-                        android:text="Apply"
-                        android:textSize="18sp"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textStyle="normal"
-                        android:fontFamily="@font/montserrat"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
                         android:background="@drawable/curved_border"
-                        android:backgroundTint="@color/purple_200"/>
-                  </RelativeLayout>
+                        android:backgroundTint="@color/btn_color"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="Apply"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"/>
+                </RelativeLayout>
 
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
-
 
 
 </layout>

@@ -199,4 +199,7 @@ public interface ApiService {
     @GET("products/relatedProduct")
     Call<RelatedResponse> getAllRelatedProduct(@Query("id") String ProductId);
 
+    @POST("CYH")
+    Call<ResponseBody> ADDContinueYourHuntProduct(@Query("id") String ProductID);
+
 }

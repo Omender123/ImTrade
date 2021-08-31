@@ -150,10 +150,10 @@
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:id="@+id/relativeRelated"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:visibility="gone"
                     android:background="@color/white">
 
                     <TextView
@@ -166,7 +166,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_toStartOf="@id/recom_More"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Related Product"
+                        android:text="Suggestion Product"
                         android:textColor="@color/text_tittle"
                         android:textSize="16sp" />
 
@@ -192,8 +192,6 @@
                     android:layout_marginLeft="05dp"
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-
                     android:paddingBottom="3dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/custom_recomanded" />

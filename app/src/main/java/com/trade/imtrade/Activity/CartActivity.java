@@ -20,7 +20,9 @@ import com.trade.imtrade.Adapter.CartItemAdapter;
 import com.trade.imtrade.Adapter.GameAdapter;
 import com.trade.imtrade.Adapter.Review_product_Adapter;
 import com.trade.imtrade.Adapter.SaveForLaterAdapter;
+import com.trade.imtrade.Adapter.SuggestionProductAdapter;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
+import com.trade.imtrade.Model.ResponseModel.ContinueYourHuntResponse;
 import com.trade.imtrade.Model.ResponseModel.SaveForLaterResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.R;
@@ -58,26 +60,15 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
         dialog = AppUtils.hideShowProgress(context);
 
 
-        //  getAllCartItem();
-        // getSaveCartItem();
 
         binding.btnTotalItem.setOnClickListener(this);
         presenter.GetCartProduct(CartActivity.this);
+        presenter.GetSuggestionProduct(CartActivity.this);
         //  presenter.GetSaveForLater(CartActivity.this);
-        getAllRelated_Product();
 
     }
 
 
-    private void getAllRelated_Product() {
-        String price[] = {"7999 Rs", "8999 Rs", "10000 Rs"};
-       /* Review_product_Adapter review_product_adapter = new Review_product_Adapter(this, price);
-        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        binding.relatedProductRcycler.setLayoutManager(mLayoutManager1);
-        binding.relatedProductRcycler.setItemAnimator(new DefaultItemAnimator());
-        binding.relatedProductRcycler.setAdapter(review_product_adapter);
-*/
-    }
 
     @Override
     public void showHideProgress(boolean isShow) {
@@ -190,6 +181,25 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
                     .sneakSuccess();
             presenter.GetSaveForLater(CartActivity.this);
             presenter.GetCartProduct(CartActivity.this);
+        }
+    }
+
+    @Override
+    public void onSuggestionProductSuccess(ContinueYourHuntResponse SuggestionProductResponse, String message) {
+        if (message.equalsIgnoreCase("ok")) {
+
+            if (SuggestionProductResponse.getProducts()!=null && SuggestionProductResponse.getProducts().size()>0){
+                SuggestionProductAdapter review_product_adapter = new SuggestionProductAdapter(getApplicationContext(),SuggestionProductResponse);
+                RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+                binding.relatedProductRcycler.setLayoutManager(mLayoutManager1);
+                binding.relatedProductRcycler.setItemAnimator(new DefaultItemAnimator());
+                binding.relatedProductRcycler.setAdapter(review_product_adapter);
+                binding.relatedProductRcycler.setVisibility(View.VISIBLE);
+                binding.relativeRelated.setVisibility(View.VISIBLE);
+            }else{
+                binding.relatedProductRcycler.setVisibility(View.GONE);
+                binding.relativeRelated.setVisibility(View.GONE);
+            }
         }
     }
 

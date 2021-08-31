@@ -188,6 +188,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             presenter.GetAllReviewImages(getActivity(), productDetailsResponse.getId());
             presenter.GetAllReviewVideo(getActivity(), productDetailsResponse.getId());
             presenter.GetAllRelatedProduct(getActivity(), productDetailsResponse.getId());
+            presenter.AddContinueYouHuntProduct(getActivity(), productDetailsResponse.getId());
 
             binding.productName.setText(productDetailsResponse.getName());
 
@@ -370,8 +371,21 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
     }
 
     @Override
+    public void onADDContinueYouHuntProductSuccess(String result, String message) {
+        if (message.equalsIgnoreCase("ok")){
+           /* Sneaker.with(getActivity())
+                    .setTitle(result)
+                    .setMessage("")
+                    .setCornerRadius(4)
+                    .setDuration(1500)
+                    .sneakError();*/
+
+        }
+    }
+
+    @Override
     public void onFailure(Throwable t) {
-        Sneaker.with(this)
+        Sneaker.with(getActivity())
                 .setTitle(t.getLocalizedMessage())
                 .setMessage("")
                 .setCornerRadius(4)

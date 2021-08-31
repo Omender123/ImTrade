@@ -18,16 +18,15 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/verifying_textview"
-            android:fontFamily="@font/montserrat"
+            android:background="@drawable/radio_normal"
+            android:fontFamily="@font/poppins"
             android:paddingStart="12dp"
             android:paddingTop="5dp"
             android:paddingEnd="12dp"
             android:paddingBottom="5dp"
             android:text="Apple"
             android:textColor="@color/product_name"
-            android:textSize="10sp"
-            android:textStyle="normal" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/text_show"
@@ -40,9 +39,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/checkedtoggle"
-            android:backgroundTint="#4DFFC51A"
-            android:fontFamily="@font/montserrat"
+            android:background="@drawable/radio_selected"
+            android:fontFamily="@font/poppins"
             android:paddingStart="12dp"
             android:paddingTop="5dp"
             android:paddingEnd="12dp"
@@ -50,7 +48,6 @@
             android:text="Apple"
             android:textColor="@color/product_Price"
             android:textSize="10sp"
-            android:textStyle="normal"
             android:visibility="gone" />
 
 

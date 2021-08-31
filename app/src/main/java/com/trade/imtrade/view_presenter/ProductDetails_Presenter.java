@@ -276,6 +276,45 @@ public class ProductDetails_Presenter {
 
     }
 
+    public void AddContinueYouHuntProduct(Context context, String ProductId){
+        view.showHideProgress(true);
+        Call<ResponseBody> userCall = AppUtils.getApi(context).ADDContinueYourHuntProduct(ProductId);
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                view.showHideProgress(false);
+                if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
+                    try {
+                        String  responses = response.body().string();
+                        JSONObject object = new JSONObject(responses);
+                        String Result  = object.getString("result");
+                        view.onADDContinueYouHuntProductSuccess(Result,response.message());
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                   // view.onAddToCartSuccess(response.body(),response.message());
+                } else {
+                    try {
+                        String  errorRes = response.errorBody().string();
+                        JSONObject object = new JSONObject(errorRes);
+                        String err_msg  = object.getString("error");
+                        view.onError(err_msg);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                view.showHideProgress(false);
+                view.onFailure(t);
+            }
+        });
+
+    }
+
 
     public interface GetProductDetailsView{
         void showHideProgress(boolean isShow);
@@ -288,6 +327,8 @@ public class ProductDetails_Presenter {
         void oAllReviewImagesSuccess(List<ReviewResponse>offerResponses, String message);
         void oAllReviewVideoSuccess(List<ReviewResponse>offerResponses, String message);
         void onRelatedProductSuccess(RelatedResponse relatedResponse , String message);
+        void onADDContinueYouHuntProductSuccess(String result , String message);
+
 
         void onFailure(Throwable t);
     }
