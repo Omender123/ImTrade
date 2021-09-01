@@ -252,6 +252,8 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
         switch (v.getId()) {
             case R.id.btn_totalItem:
                 startActivity(new Intent(CartActivity.this, OrderSummary.class));
+                MyPreferences.getInstance(this).putString(PrefConf.BUYNOWTYPE,"true");
+
                 break;
         }
     }

@@ -4,6 +4,7 @@ package com.trade.imtrade.api;
 import com.trade.imtrade.Model.ResponseModel.AddProfileResponse;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
+import com.trade.imtrade.Model.ResponseModel.BuyNowResponse;
 import com.trade.imtrade.Model.ResponseModel.CartProductResponse;
 import com.trade.imtrade.Model.ResponseModel.ContinueYourHuntResponse;
 import com.trade.imtrade.Model.ResponseModel.CustomerQuestionsResponse;
@@ -22,6 +23,7 @@ import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.ResponseModel.StoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
+import com.trade.imtrade.Model.request.BuyNowRequest;
 import com.trade.imtrade.Model.request.ChangeEmailBody;
 import com.trade.imtrade.Model.request.ChangePasswordBody;
 import com.trade.imtrade.Model.request.ForgetPasswordBody;
@@ -201,5 +203,19 @@ public interface ApiService {
 
     @POST("CYH")
     Call<ResponseBody> ADDContinueYourHuntProduct(@Query("id") String ProductID);
+
+    @POST("order/buynow")
+    Call<BuyNowResponse> BuyNowOneOrder(@Body BuyNowRequest buyNowRequest);
+
+    @POST("location/getCountry")
+    Call<ResponseBody> GetCountry();
+
+    @FormUrlEncoded
+    @POST("location/getState")
+    Call<ResponseBody> GetState(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("location/getCity")
+    Call<ResponseBody> GetCity(@Field("id") String id);
 
 }

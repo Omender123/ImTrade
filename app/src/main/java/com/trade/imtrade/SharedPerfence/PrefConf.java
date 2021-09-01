@@ -14,9 +14,8 @@ public class PrefConf {
     public static final String LOGINCHECK = "LOGINCHECK";
     public static final String ProfileImage = "ProfileImage";
     public static final String CARTCOUNT = "CARTCOUNT";
-    public static final String textTotalItem = "textTotalItem";
-    public static final String textTotalPriceItem = "textTotalPriceItem";
-    public static final String textTotalPrice = "textTotalPrice";
+    public static final String BUYNOWTYPE = "BUYNOWTYPE";
+    public static final String ProductID = "ProductID";
 
 
 }

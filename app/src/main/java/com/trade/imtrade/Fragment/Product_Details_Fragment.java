@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -225,6 +226,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
             int cart = Integer.parseInt(text_cart_Count.getText().toString()) + 1;
             text_cart_Count.setText(String.valueOf(cart));
+            Toast.makeText(getActivity(), "jjjjjj", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -278,7 +280,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                 binding.ReviewRecyclerView.setAdapter(reviewAdapter);
                 binding.textSeeAllReview.setText("See all " + offerResponses.size() + " Reviews ");
                 int total = 0;
-                for (int i = 0; i<offerResponses.size(); i++) {
+                for (int i = 0; i < offerResponses.size(); i++) {
                     int review = Integer.parseInt(offerResponses.get(i).getRating());
                     total = total + review;
 
@@ -290,8 +292,8 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                         .setRepeatMode(1)
                         .setInterpolator(new BounceInterpolator());
                 builder.start();
-                binding.textOutOfRating.setText(totalReview+" out of 5");
-                binding.txtTotalReviewrating.setText(total+" rating and "+offerResponses.size()+" reviews");
+                binding.textOutOfRating.setText(totalReview + " out of 5");
+                binding.txtTotalReviewrating.setText(total + " rating and " + offerResponses.size() + " reviews");
 
                 binding.linReview.setVisibility(View.VISIBLE);
             } else {
@@ -372,7 +374,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
     @Override
     public void onADDContinueYouHuntProductSuccess(String result, String message) {
-        if (message.equalsIgnoreCase("ok")){
+        if (message.equalsIgnoreCase("ok")) {
            /* Sneaker.with(getActivity())
                     .setTitle(result)
                     .setMessage("")
@@ -447,6 +449,8 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                 if (CheckedLogin == true) {
 
                     startActivity(new Intent(getActivity(), OrderSummary.class));
+                    MyPreferences.getInstance(getActivity()).putString(PrefConf.BUYNOWTYPE,"false");
+                    MyPreferences.getInstance(getActivity()).putString(PrefConf.ProductID,productDetailsResponses.getId());
 
                 } else {
                     Sneaker.with(getActivity())
@@ -577,15 +581,21 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             binding.textBuyitWith.setVisibility(View.VISIBLE);
             binding.linerBuy.setVisibility(View.VISIBLE);
             binding.viewBuy.setVisibility(View.VISIBLE);
+            ArrayList<String> ProductId = new ArrayList<String>();
             for (int i = 0; i < productDetailsResponse.getAddOn().size(); i++) {
                 if (productDetailsResponse.getAddOn().get(i).getDiscount() != null) {
                     int price = Integer.parseInt(productDetailsResponse.getAddOn().get(i).getDiscount());
                     TotalPrice = TotalPrice + price;
+                    ProductId.add(productDetailsResponse.getAddOn().get(i).getId());
                 } else {
                     int price = Integer.parseInt(productDetailsResponse.getAddOn().get(i).getVariables().get(0).getPrice().getMrp());
                     TotalPrice = TotalPrice + price;
+                    ProductId.add(productDetailsResponse.getAddOn().get(i).getId());
+
                 }
 
+
+                addtoCartMulti(ProductId);
                 binding.totalPrice.setText("" + TotalPrice);
             }
         } else {
@@ -623,6 +633,33 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             binding.txtAddButton.setVisibility(View.VISIBLE);
         }
 
+        addtoCartMulti(ProductId);
+    }
+
+    private void addtoCartMulti(ArrayList<String> productId) {
+
+        binding.txtAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (CheckedLogin == true) {
+                    for (int i = 0; i < productId.size(); i++) {
+
+                        AddToCartBody addToCartBody = new AddToCartBody(productId.get(i), 1);
+                        presenter.AddToCart(getActivity(), addToCartBody);
+
+                    }
+
+                } else {
+                    Sneaker.with(getActivity())
+                            .setTitle("Your Can't access this app  please First Login ")
+                            .setMessage("")
+                            .setCornerRadius(4)
+                            .setDuration(1500)
+                            .sneakError();
+                }
+
+            }
+        });
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
@@ -46,59 +47,105 @@
                 android:textColorHint="#99212121"
                 android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/text_country"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/verifying_textview"
-                android:drawableRight="@drawable/ic_baseline_arrow_down_24"
-                android:drawableTint="#99212121"
-                android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"
-                android:hint="Country"
-                android:inputType="text"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:textColor="#99212121"
-                android:textColorHint="#99212121"
-                android:textSize="13sp" />
+                android:background="@drawable/verifying_textview"
+                android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/text_state"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/verifying_textview"
-                android:drawableRight="@drawable/ic_baseline_arrow_down_24"
-                android:drawableTint="#99212121"
-                android:fontFamily="@font/poppins"
-                android:gravity="center_vertical"
-                android:hint="State"
-                android:inputType="text"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:textColor="#99212121"
-                android:textColorHint="#99212121"
-                android:textSize="13sp" />
+                <Spinner
+                    android:id="@+id/countrySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:spinnerMode="dropdown"
+                    android:background="@null"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light">
+                    <requestFocus />
+                </Spinner>
 
-            <TextView
-                android:id="@+id/text_city"
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentTop="true"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_baseline_arrow_down_24"
+                    app:tint="#99212121" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/verifying_textview"
-                android:drawableRight="@drawable/ic_baseline_arrow_down_24"
-                android:drawableTint="#99212121"
-                android:fontFamily="@font/poppins"
                 android:gravity="center_vertical"
-                android:hint="City"
-                android:inputType="text"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:textColor="#99212121"
-                android:textColorHint="#99212121"
-                android:textSize="13sp" />
+                android:background="@drawable/verifying_textview"
+                android:layout_marginTop="20dp">
+
+                <Spinner
+                    android:id="@+id/StateSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:spinnerMode="dropdown"
+                    android:background="@null"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light">
+                    <requestFocus />
+                </Spinner>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentTop="true"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_baseline_arrow_down_24"
+                    app:tint="#99212121" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cityRelative"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/verifying_textview"
+                android:layout_marginTop="20dp">
+
+                <Spinner
+                    android:id="@+id/CitySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:spinnerMode="dropdown"
+                    android:background="@null"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light">
+                    <requestFocus />
+                </Spinner>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentTop="true"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_baseline_arrow_down_24"
+                    app:tint="#99212121" />
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/text_pincode"
