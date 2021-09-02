@@ -410,9 +410,8 @@ public class Fragment_Address extends Fragment implements Address_Presenter.Addr
         } else {
             if (getArguments().getString("id") != null) {
                 AddAddressBody addAddressBody = new AddAddressBody(Name, phone_no, Country, State, City, pincode, address);
-                presenter.AddAddress(getContext(), addAddressBody);
-                presenter.EditAddAddress(getContext(),getArguments().getString("id"), addAddressBody);
-            }else {
+                presenter.EditAddAddress(getContext(), getArguments().getString("id"), addAddressBody);
+            } else {
                 AddAddressBody addAddressBody = new AddAddressBody(Name, phone_no, Country, State, City, pincode, address);
                 presenter.AddAddress(getContext(), addAddressBody);
             }

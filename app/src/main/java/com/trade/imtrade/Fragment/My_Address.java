@@ -146,7 +146,7 @@ public class My_Address extends Fragment implements View.OnClickListener, MyAddr
     public void OnClickEditItemAddressListener(String id) {
         Bundle bundle = new Bundle();
         bundle.putString("id",id);
-       // navController.navigate(R.id.address,bundle);
+       navController.navigate(R.id.address,bundle);
 
 
     }
