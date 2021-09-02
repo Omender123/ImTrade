@@ -26,9 +26,9 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Full Name"
                 android:inputType="text"
-                android:paddingStart="15dp"
+                android:paddingStart="20dp"
                 android:paddingEnd="15dp"
-                android:textColor="#99212121"
+                android:textColor="@color/product_Price"
                 android:textColorHint="#99212121"
                 android:textSize="13sp" />
 
@@ -41,9 +41,9 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Phone No."
                 android:inputType="numberSigned"
-                android:paddingStart="15dp"
+                android:paddingStart="20dp"
                 android:paddingEnd="15dp"
-                android:textColor="#99212121"
+                android:textColor="@color/product_Price"
                 android:textColorHint="#99212121"
                 android:textSize="13sp" />
 
@@ -81,8 +81,10 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/StateRecycler"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:background="@drawable/verifying_textview"
                 android:layout_marginTop="20dp">
@@ -117,6 +119,7 @@
                 android:id="@+id/cityRelative"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:background="@drawable/verifying_textview"
                 android:layout_marginTop="20dp">
@@ -156,9 +159,9 @@
                 android:fontFamily="@font/poppins"
                 android:hint="Pin Code"
                 android:inputType="number"
-                android:paddingStart="15dp"
+                android:paddingStart="20dp"
                 android:paddingEnd="15dp"
-                android:textColor="#99212121"
+                android:textColor="@color/product_Price"
                 android:textColorHint="#99212121"
                 android:textSize="13sp" />
 
@@ -176,7 +179,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="10dp"
                 android:scrollbars="vertical"
-                android:textColor="#99212121"
+                android:textColor="@color/product_Price"
                 android:textColorHint="#99212121"
                 android:textDirection="firstStrong"
                 android:textSize="13sp" />

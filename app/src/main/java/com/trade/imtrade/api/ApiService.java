@@ -2,6 +2,7 @@ package com.trade.imtrade.api;
 
 
 import com.trade.imtrade.Model.ResponseModel.AddProfileResponse;
+import com.trade.imtrade.Model.ResponseModel.AddressResponse;
 import com.trade.imtrade.Model.ResponseModel.AllCategoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.BannerResponse;
 import com.trade.imtrade.Model.ResponseModel.BuyNowResponse;
@@ -22,6 +23,7 @@ import com.trade.imtrade.Model.ResponseModel.SignUpResponse;
 import com.trade.imtrade.Model.ResponseModel.SocialLoginResponse;
 import com.trade.imtrade.Model.ResponseModel.StoriesResponse;
 import com.trade.imtrade.Model.ResponseModel.UpdateProfileResponse;
+import com.trade.imtrade.Model.request.AddAddressBody;
 import com.trade.imtrade.Model.request.AddToCartBody;
 import com.trade.imtrade.Model.request.BuyNowRequest;
 import com.trade.imtrade.Model.request.ChangeEmailBody;
@@ -217,5 +219,20 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("location/getCity")
     Call<ResponseBody> GetCity(@Field("id") String id);
+
+    @POST("user/address")
+    Call<ResponseBody> AddUserAddress(@Body AddAddressBody addAddressBody);
+
+    @GET("user/address")
+    Call<List<AddressResponse>> GetUserAddress();
+
+    @DELETE("user/address")
+    Call<ResponseBody> DeleteUserAddress(@Query("id")String id);
+
+    @GET("user/addressByID")
+    Call<AddressResponse> GetUserAddressById(@Query("id")String id);
+
+    @PUT("user/address")
+    Call<AddressResponse> EditUserAddressById(@Query("id")String id ,@Body AddAddressBody addAddressBody);
 
 }

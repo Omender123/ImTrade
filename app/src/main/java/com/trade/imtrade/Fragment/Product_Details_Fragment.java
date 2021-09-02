@@ -226,7 +226,7 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
 
             int cart = Integer.parseInt(text_cart_Count.getText().toString()) + 1;
             text_cart_Count.setText(String.valueOf(cart));
-            Toast.makeText(getActivity(), "jjjjjj", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -449,8 +449,8 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
                 if (CheckedLogin == true) {
 
                     startActivity(new Intent(getActivity(), OrderSummary.class));
-                    MyPreferences.getInstance(getActivity()).putString(PrefConf.BUYNOWTYPE,"false");
-                    MyPreferences.getInstance(getActivity()).putString(PrefConf.ProductID,productDetailsResponses.getId());
+                    MyPreferences.getInstance(getActivity()).putString(PrefConf.BUYNOWTYPE, "false");
+                    MyPreferences.getInstance(getActivity()).putString(PrefConf.ProductID, productDetailsResponses.getId());
 
                 } else {
                     Sneaker.with(getActivity())
