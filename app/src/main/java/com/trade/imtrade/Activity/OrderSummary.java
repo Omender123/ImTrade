@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.irozon.sneaker.Sneaker;
 import com.trade.imtrade.Model.ResponseModel.BuyNowResponse;
@@ -19,6 +20,8 @@ import com.trade.imtrade.SharedPerfence.PrefConf;
 import com.trade.imtrade.databinding.ActivityOrderSummaryBinding;
 import com.trade.imtrade.utils.AppUtils;
 import com.trade.imtrade.view_presenter.OrderSummary_Presenter;
+
+import java.util.ArrayList;
 
 public class OrderSummary extends AppCompatActivity implements View.OnClickListener, OrderSummary_Presenter.OrderSummaryView {
     ActivityOrderSummaryBinding binding;
@@ -38,26 +41,27 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
 
         AppUtils.setUpToolbar(this, binding.toolbar, true, true, "Order Summary");
 
-        check = MyPreferences.getInstance(OrderSummary.this).getString(PrefConf.BUYNOWTYPE, "false");
-        ProductID = MyPreferences.getInstance(OrderSummary.this).getString(PrefConf.ProductID, null);
-
         view = binding.getRoot();
         context = OrderSummary.this;
 
         presenter = new OrderSummary_Presenter(this);
         dialog = AppUtils.hideShowProgress(context);
-
         binding.btnContinue.setOnClickListener(this);
 
-        if (check.equalsIgnoreCase("false")) {
-            /*For Come to Product Description Screen*/
-            BuyNowRequest.Product  product = new BuyNowRequest.Product(ProductID,"1");
-            BuyNowRequest  buyNowRequest = new BuyNowRequest(product);
-            presenter.BuyNowOneProduct(OrderSummary.this,buyNowRequest);
 
-        } else {
-            /*For Come to Cart  Screen*/
+        try {
+            ArrayList<BuyNowRequest.Product> productArrayList = new ArrayList<BuyNowRequest.Product>();
+            Bundle bundle = getIntent().getExtras();
+            for (int i = 0; i < bundle.getStringArrayList("productId").size(); i++) {
+                BuyNowRequest.Product product = new BuyNowRequest.Product(bundle.getStringArrayList("productId").get(i), bundle.getIntegerArrayList("Quantity").get(i));
+                productArrayList.add(product);
+            }
+            BuyNowRequest buyNowRequest = new BuyNowRequest(productArrayList);
+            presenter.BuyNowOrderProduct(OrderSummary.this, buyNowRequest);
+        } catch (Exception e) {
+            Toast.makeText(context, "" + e.toString(), Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -96,9 +100,10 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
 
         if (message.equalsIgnoreCase("ok")) {
             binding.textTotalItem.setText("Price (1 items)");
-            binding.textTotalPriceItem.setText(buyNowResponse.getTotalMrp() + ".00 Rs");
-
-            binding.textTotalPrice.setText(buyNowResponse.getTotalMrp() + ".00 Rs");
+            binding.textTotalPriceItem.setText(buyNowResponse.getTotalAmount() + ".00 Rs");
+            binding.textTaxPrice.setText("(+) " + buyNowResponse.getTax() + ".00 Rs");
+            binding.textOtherPriceCharges.setText("(+) " + buyNowResponse.getShippingCharges() + ".00 Rs");
+            binding.textTotalPrice.setText(buyNowResponse.getTotalPayableAmount() + ".00 Rs");
         }
     }
 

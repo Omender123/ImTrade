@@ -42,6 +42,7 @@ import com.trade.imtrade.Model.ResponseModel.ProductDetailsResponse;
 import com.trade.imtrade.Model.ResponseModel.RelatedResponse;
 import com.trade.imtrade.Model.ResponseModel.ReviewResponse;
 import com.trade.imtrade.Model.request.AddToCartBody;
+import com.trade.imtrade.Model.request.BuyNowRequest;
 import com.trade.imtrade.R;
 import com.trade.imtrade.SharedPerfence.MyPreferences;
 import com.trade.imtrade.SharedPerfence.PrefConf;
@@ -448,9 +449,14 @@ public class Product_Details_Fragment extends Fragment implements ProductDetails
             case R.id.text_BuyNow:
                 if (CheckedLogin == true) {
 
-                    startActivity(new Intent(getActivity(), OrderSummary.class));
-                    MyPreferences.getInstance(getActivity()).putString(PrefConf.BUYNOWTYPE, "false");
-                    MyPreferences.getInstance(getActivity()).putString(PrefConf.ProductID, productDetailsResponses.getId());
+                    ArrayList<String >productId= new ArrayList<String>();
+                    ArrayList<Integer >Quantity= new ArrayList<Integer>();
+                    productId.clear();
+                    Quantity.clear();
+                    productId.add(productDetailsResponses.getId());
+                    Quantity.add(1);
+                    startActivity(new Intent(getActivity(), OrderSummary.class).putStringArrayListExtra("productId",productId).putIntegerArrayListExtra("Quantity",Quantity));
+
 
                 } else {
                     Sneaker.with(getActivity())

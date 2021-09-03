@@ -7,80 +7,91 @@ public class BuyNowResponse {
 
     @SerializedName("totalMrp")
     @Expose
-    private Integer totalMrp;
+    private String totalMrp;
     @SerializedName("shippingCharges")
     @Expose
-    private Integer shippingCharges;
+    private String shippingCharges;
     @SerializedName("totalWeight")
     @Expose
-    private Object totalWeight;
+    private String totalWeight;
     @SerializedName("tax")
     @Expose
-    private Integer tax;
+    private String tax;
     @SerializedName("totalSavings")
     @Expose
-    private Integer totalSavings;
+    private String totalSavings;
     @SerializedName("totalAmount")
     @Expose
-    private Integer totalAmount;
+    private String totalAmount;
     @SerializedName("totalPayableAmount")
     @Expose
-    private Integer totalPayableAmount;
+    private String totalPayableAmount;
+    @SerializedName("amountForCoupon")
+    @Expose
+    private String amountForCoupon;
 
-    public Integer getTotalMrp() {
+    public String getTotalMrp() {
         return totalMrp;
     }
 
-    public void setTotalMrp(Integer totalMrp) {
+    public void setTotalMrp(String totalMrp) {
         this.totalMrp = totalMrp;
     }
 
-    public Integer getShippingCharges() {
+    public String getShippingCharges() {
         return shippingCharges;
     }
 
-    public void setShippingCharges(Integer shippingCharges) {
+    public void setShippingCharges(String shippingCharges) {
         this.shippingCharges = shippingCharges;
     }
 
-    public Object getTotalWeight() {
+    public String getTotalWeight() {
         return totalWeight;
     }
 
-    public void setTotalWeight(Object totalWeight) {
+    public void setTotalWeight(String totalWeight) {
         this.totalWeight = totalWeight;
     }
 
-    public Integer getTax() {
+    public String getTax() {
         return tax;
     }
 
-    public void setTax(Integer tax) {
+    public void setTax(String tax) {
         this.tax = tax;
     }
 
-    public Integer getTotalSavings() {
+    public String getTotalSavings() {
         return totalSavings;
     }
 
-    public void setTotalSavings(Integer totalSavings) {
+    public void setTotalSavings(String totalSavings) {
         this.totalSavings = totalSavings;
     }
 
-    public Integer getTotalAmount() {
+    public String getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Integer totalAmount) {
+    public void setTotalAmount(String totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public Integer getTotalPayableAmount() {
+    public String getTotalPayableAmount() {
         return totalPayableAmount;
     }
 
-    public void setTotalPayableAmount(Integer totalPayableAmount) {
+    public void setTotalPayableAmount(String totalPayableAmount) {
         this.totalPayableAmount = totalPayableAmount;
+    }
+
+    public String getAmountForCoupon() {
+        return amountForCoupon;
+    }
+
+    public void setAmountForCoupon(String amountForCoupon) {
+        this.amountForCoupon = amountForCoupon;
     }
 
 }

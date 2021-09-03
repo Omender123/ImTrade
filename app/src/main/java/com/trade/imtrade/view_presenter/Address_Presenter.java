@@ -172,11 +172,11 @@ public class Address_Presenter {
     }
 
     public void EditAddAddress(Context context,String id, AddAddressBody addAddressBody) {
-        Call<AddressResponse> call = AppUtils.getApi(context).EditUserAddressById(id,addAddressBody);
+        Call<ResponseBody> call = AppUtils.getApi(context).EditUserAddressById(id,addAddressBody);
         view.showHideProgress(true);
-        call.enqueue(new Callback<AddressResponse>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<AddressResponse> call, Response<AddressResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 view.showHideProgress(false);
                 if (response.isSuccessful() && response.code() == 200 && response.body() != null) {
                     view.onEditUserAddressById(response.body(), response.message());
@@ -193,7 +193,7 @@ public class Address_Presenter {
             }
 
             @Override
-            public void onFailure(Call<AddressResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 view.showHideProgress(false);
                 view.onFailure(t);
             }
@@ -217,7 +217,7 @@ public class Address_Presenter {
 
         void onGetUserAddressById(AddressResponse addressResponse, String message);
 
-        void onEditUserAddressById(AddressResponse addressResponse, String message);
+        void onEditUserAddressById(ResponseBody responseBody, String message);
 
 
         void onFailure(Throwable t);

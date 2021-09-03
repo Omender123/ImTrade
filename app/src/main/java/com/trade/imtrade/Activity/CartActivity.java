@@ -46,6 +46,9 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     String TotalItem;
     Boolean check = false;
     TextView text_cart_Count;
+    ArrayList<String> productId ;
+    ArrayList<Integer> Quantity ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,8 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
         presenter = new CartPresenter(this);
         dialog = AppUtils.hideShowProgress(context);
 
-
+        productId = new ArrayList<String>();
+        Quantity = new ArrayList<Integer>();
 
         binding.btnTotalItem.setOnClickListener(this);
         presenter.GetCartProduct(CartActivity.this);
@@ -67,7 +71,6 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
         //  presenter.GetSaveForLater(CartActivity.this);
 
     }
-
 
 
     @Override
@@ -99,6 +102,14 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
             binding.cartReyclerView.setAdapter(cartItemAdapter);
             TotalItem = String.valueOf(cartProductResponse.getProducts().size());
             binding.btnTotalItem.setText("Proceed to Buy (" + TotalItem + " items)");
+            productId.clear();
+            Quantity.clear();
+            for (int i=0;  i<cartProductResponse.getProducts().size();i++){
+                productId.add(cartProductResponse.getProducts().get(i).getProductId().getId());
+                Quantity.add(Integer.parseInt(cartProductResponse.getProducts().get(i).getQuantity()));
+            }
+
+
 
 
         }
@@ -143,14 +154,14 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     @Override
     public void onGetSaveForLaterSuccess(SaveForLaterResponse saveForLaterResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            if (saveForLaterResponse.getProducts()!=null && saveForLaterResponse.getProducts().size()>0){
+            if (saveForLaterResponse.getProducts() != null && saveForLaterResponse.getProducts().size() > 0) {
                 SaveForLaterAdapter cartItemAdapter = new SaveForLaterAdapter(CartActivity.this, saveForLaterResponse, "Move To Cart", this);
                 RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 binding.SaveReyclerView.setLayoutManager(mLayoutManager1);
                 binding.SaveReyclerView.setItemAnimator(new DefaultItemAnimator());
                 binding.SaveReyclerView.setAdapter(cartItemAdapter);
                 binding.linearSave.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 binding.linearSave.setVisibility(View.GONE);
             }
 
@@ -188,15 +199,15 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     public void onSuggestionProductSuccess(ContinueYourHuntResponse SuggestionProductResponse, String message) {
         if (message.equalsIgnoreCase("ok")) {
 
-            if (SuggestionProductResponse.getProducts()!=null && SuggestionProductResponse.getProducts().size()>0){
-                SuggestionProductAdapter review_product_adapter = new SuggestionProductAdapter(getApplicationContext(),SuggestionProductResponse);
+            if (SuggestionProductResponse.getProducts() != null && SuggestionProductResponse.getProducts().size() > 0) {
+                SuggestionProductAdapter review_product_adapter = new SuggestionProductAdapter(getApplicationContext(), SuggestionProductResponse);
                 RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
                 binding.relatedProductRcycler.setLayoutManager(mLayoutManager1);
                 binding.relatedProductRcycler.setItemAnimator(new DefaultItemAnimator());
                 binding.relatedProductRcycler.setAdapter(review_product_adapter);
                 binding.relatedProductRcycler.setVisibility(View.VISIBLE);
                 binding.relativeRelated.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 binding.relatedProductRcycler.setVisibility(View.GONE);
                 binding.relativeRelated.setVisibility(View.GONE);
             }
@@ -241,7 +252,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
             presenter.DeleteCartProduct(CartActivity.this, ProductId);
 
         } else {
-           presenter.DeleteSaveForLaterProduct(CartActivity.this, ProductId);
+            presenter.DeleteSaveForLaterProduct(CartActivity.this, ProductId);
 
 
         }
@@ -251,8 +262,7 @@ public class CartActivity extends AppCompatActivity implements CartPresenter.Car
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_totalItem:
-                startActivity(new Intent(CartActivity.this, OrderSummary.class));
-                MyPreferences.getInstance(this).putString(PrefConf.BUYNOWTYPE,"true");
+                startActivity(new Intent(CartActivity.this, OrderSummary.class).putStringArrayListExtra("productId",productId).putIntegerArrayListExtra("Quantity",Quantity));
 
                 break;
         }

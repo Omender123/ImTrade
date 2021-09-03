@@ -206,8 +206,8 @@ public interface ApiService {
     @POST("CYH")
     Call<ResponseBody> ADDContinueYourHuntProduct(@Query("id") String ProductID);
 
-    @POST("order/buynow")
-    Call<BuyNowResponse> BuyNowOneOrder(@Body BuyNowRequest buyNowRequest);
+    @POST("order/checkout")
+    Call<BuyNowResponse> BuyNowOrder(@Body BuyNowRequest buyNowRequest);
 
     @POST("location/getCountry")
     Call<ResponseBody> GetCountry();
@@ -233,6 +233,6 @@ public interface ApiService {
     Call<AddressResponse> GetUserAddressById(@Query("id")String id);
 
     @PUT("user/address")
-    Call<AddressResponse> EditUserAddressById(@Query("id")String id ,@Body AddAddressBody addAddressBody);
+    Call<ResponseBody> EditUserAddressById(@Query("id")String id ,@Body AddAddressBody addAddressBody);
 
 }

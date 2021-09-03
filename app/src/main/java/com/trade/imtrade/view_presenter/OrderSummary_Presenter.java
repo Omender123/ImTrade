@@ -22,8 +22,8 @@ public class OrderSummary_Presenter {
         this.view = view;
     }
 
-    public void BuyNowOneProduct(Context context, BuyNowRequest buyNowRequest){
-        Call<BuyNowResponse> call = AppUtils.getApi(context).BuyNowOneOrder(buyNowRequest);
+    public void BuyNowOrderProduct(Context context, BuyNowRequest buyNowRequest){
+        Call<BuyNowResponse> call = AppUtils.getApi(context).BuyNowOrder(buyNowRequest);
         view.showHideProgress(true);
         call.enqueue(new Callback<BuyNowResponse>() {
             @Override

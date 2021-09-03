@@ -313,12 +313,12 @@ public class Fragment_Address extends Fragment implements Address_Presenter.Addr
     }
 
     @Override
-    public void onEditUserAddressById(AddressResponse addressResponse, String message) {
+    public void onEditUserAddressById(ResponseBody responseBody, String message) {
         if (message.equalsIgnoreCase("ok")) {
-            binding.textName.setText(addressResponse.getName());
-            binding.textPhoneNo.setText(addressResponse.getPhoneNo());
-            binding.textPincode.setText(addressResponse.getPinCode());
-            binding.textAddress.setText(addressResponse.getAddress());
+            binding.textName.setText(Name);
+            binding.textPhoneNo.setText(phone_no);
+            binding.textPincode.setText(pincode);
+            binding.textAddress.setText(address);
 
             Sneaker.with(getActivity())
                     .setTitle("Sucessfully Update Address")
